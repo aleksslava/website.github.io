@@ -1,0 +1,636 @@
+
+/* --- Переменные для цветов Telegram (TWA) --- */
+:root {
+    /* Основные цвета из Telegram Web Apps */
+    --tg-theme-bg-color: #ffffff; /* Фон */
+    --tg-theme-text-color: #000000; /* Основной текст */
+    --tg-theme-hint-color: #999999; /* Вспомогательный текст */
+    --tg-theme-link-color: #2481cc; /* Ссылки */
+    --tg-theme-button-color: #40a7e3; /* Основная кнопка */
+    --tg-theme-button-text-color: #ffffff; /* Текст на кнопке */
+    --tg-theme-secondary-bg-color: #efeff0; /* Второстепенный фон (карточки) */
+
+    /* Кастомные цвета для корзины и т.п. */
+    --color-success: #4caf50; /* Зеленый для "Добавить" */
+    --color-danger: #e74c3c; /* Красный для "Удалить" */
+    --color-warning: #ff9800; /* Оранжевый */
+    --color-border: #e0e0e0; /* Цвет границ */
+    --color-modal-overlay: rgba(0, 0, 0, 0.4); /* Оверлей модального окна */
+}
+
+/* --- Базовые стили сброса и адаптации --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    /* Размер шрифта по умолчанию в Telegram Web Apps */
+    font-size: 16px;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    /* Используем переменные Telegram */
+    background-color: var(--tg-theme-bg-color);
+    color: var(--tg-theme-text-color);
+    /* Отступы по бокам, как в TWA */
+    padding: 8px;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* --- Шапка сайта --- */
+.header {
+    /* Фон шапки как основной фон */
+    background-color: var(--tg-theme-bg-color);
+    /* Отступы сверху/снизу, по бокам уже есть от body */
+    padding: 12px 0;
+    /* Flexbox для выравнивания заголовка и кнопки корзины */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Нижняя граница вместо тени */
+    border-bottom: 1px solid var(--color-border);
+    /* Закрепляем сверху */
+    position: sticky;
+    top: 0;
+    /* Выше, чем у других элементов */
+    z-index: 100;
+    /* Убираем скругления, они не характерны */
+    border-radius: 0;
+}
+
+.header h1 {
+    font-size: 1.25rem; /* 20px */
+    font-weight: 700; /* Жирный заголовок */
+    margin: 0; /* Убираем стандартные отступы */
+    padding: 0 8px; /* Небольшие отступы слева/справа */
+}
+
+/* --- Кнопка корзины --- */
+.cart-button {
+    /* Используем цвета Telegram */
+    background-color: var(--tg-theme-button-color);
+    color: var(--tg-theme-button-text-color);
+    border: none;
+    /* Меньше скругление углов */
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 0.9rem; /* 14.4px */
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    /* Высота строки для вертикального центрирования */
+    line-height: 1.2;
+}
+
+.cart-button:hover {
+    /* Эффект наведения - прозрачность */
+    opacity: 0.85;
+}
+
+/* --- Основной контент --- */
+.main-content {
+    /* Отступ сверху, чтобы не прилипать к шапке */
+    padding: 16px 0 8px 0;
+}
+
+/* --- Сетка товаров --- */
+.product-grid {
+    display: grid;
+    /* Адаптивная сетка: 2 колонки на мобильных, больше на больших экранах */
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px; /* Расстояние между карточками */
+}
+
+/* --- Карточка товара --- */
+.product-card {
+    /* Фон карточки - второстепенный */
+    background-color: var(--tg-theme-secondary-bg-color);
+    /* Нет скругления углов */
+    border-radius: 0;
+    overflow: hidden;
+    /* Нет тени */
+    box-shadow: none;
+    transition: background-color 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    /* Граница вокруг карточки */
+    border: 1px solid var(--color-border);
+}
+
+.product-card:hover {
+    /* Эффект наведения - чуть другой фон */
+    background-color: #e8e8e9; /* чуть темнее secondary-bg-color */
+    /* Нет трансформации */
+    transform: none;
+}
+
+/* --- Изображение товара --- */
+.product-image {
+    width: 100%;
+    /* Фиксированная высота для_uniform_ вида */
+    height: 150px;
+    /* Изображение покрывает контейнер, обрезая края */
+    object-fit: cover;
+    display: block;
+    /* Нет скругления углов */
+    border-radius: 0;
+}
+
+/* --- Информация о товаре --- */
+.product-info {
+    padding: 12px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-name {
+    font-size: 0.95rem; /* ~15.2px */
+    font-weight: 500;
+    margin-bottom: 8px;
+    flex-grow: 1;
+    /* Перенос строк */
+    word-break: break-word;
+}
+
+.product-price {
+    font-size: 1.1rem; /* ~17.6px */
+    font-weight: 700; /* Жирный текст цены */
+    /* Цвет ссылки для выделения */
+    color: var(--tg-theme-link-color);
+    margin-bottom: 12px;
+}
+
+/* --- Кнопка "В корзину" --- */
+.add-to-cart-button {
+    /* Зеленый цвет успеха */
+    background-color: var(--color-success);
+    color: white;
+    border: none;
+    /* Нет скругления углов */
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 0.9rem; /* 14.4px */
+    font-weight: 500;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s ease;
+    width: 100%;
+    /* Высота строки */
+    line-height: 1.2;
+}
+
+.add-to-cart-button:hover {
+    /* Темнее при наведении */
+    background-color: #43a047;
+}
+
+.add-to-cart-button:disabled {
+    /* Серый цвет для неактивной кнопки */
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+
+/* --- Стили для модального окна корзины --- */
+
+/* Фон модального окна */
+.modal {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    /* Используем переменную для оверлея */
+    background-color: var(--color-modal-overlay);
+}
+
+/* Содержимое модального окна */
+.modal-content {
+    /* Фон из Telegram */
+    background-color: var(--tg-theme-bg-color);
+    margin: 5% auto;
+    padding: 20px;
+    /* Граница как в Telegram */
+    border: 1px solid var(--color-border);
+    /* Нет скругления */
+    border-radius: 0;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    /* Анимация открытия */
+    animation: modalopen 0.3s;
+    /* Текст тоже из Telegram */
+    color: var(--tg-theme-text-color);
+}
+
+/* Анимация открытия */
+@keyframes modalopen {
+    from {opacity: 0; transform: translateY(-60px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+/* Кнопка закрытия */
+.close-button {
+    /* Цвет подсказки из Telegram */
+    color: var(--tg-theme-hint-color);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+    /* Нет выделения текста */
+    user-select: none;
+}
+
+.close-button:hover,
+.close-button:focus {
+    /* Цвет текста при наведении */
+    color: var(--tg-theme-text-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.3rem; /* ~20.8px */
+    font-weight: 700;
+}
+
+/* Список товаров в корзине */
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    /* Граница снизу */
+    border-bottom: 1px solid var(--color-border);
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.item-info {
+    flex-grow: 1;
+    margin-right: 10px; /* Отступ от кнопок */
+}
+
+.item-name {
+    font-weight: 500;
+    font-size: 1rem; /* 16px */
+    margin-bottom: 4px;
+    word-break: break-word;
+}
+
+.item-price {
+    /* Цвет ссылки для цены */
+    color: var(--tg-theme-link-color);
+    font-weight: 500;
+    font-size: 0.95rem; /* ~15.2px */
+}
+
+.item-quantity {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.quantity-btn {
+    /* Фон второстепенный */
+    background: var(--tg-theme-secondary-bg-color);
+    /* Граница */
+    border: 1px solid var(--color-border);
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    /* Нет скругления */
+    border-radius: 0;
+    /* Цвет текста */
+    color: var(--tg-theme-text-color);
+    /* Нет выделения текста */
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity-btn:hover {
+    /* Эффект наведения */
+    background-color: #e0e0e0;
+}
+
+.quantity-value {
+    margin: 0 12px;
+    min-width: 20px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 1rem; /* 16px */
+}
+
+.remove-item {
+    background: none;
+    border: none;
+    /* Красный цвет удаления */
+    color: var(--color-danger);
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: normal;
+    /* Нет выделения текста */
+    user-select: none;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.remove-item:hover {
+    /* Темнее при наведении */
+    color: #c0392b;
+}
+
+/* Итоговая сумма */
+.cart-total {
+    font-size: 1.3rem; /* ~20.8px */
+    font-weight: 700; /* Жирный */
+    text-align: right;
+    margin-top: 20px;
+    padding-top: 15px;
+    /* Толстая граница сверху */
+    border-top: 2px solid var(--color-border);
+    /* Цвет из Telegram */
+    color: var(--tg-theme-text-color);
+}
+
+/* Кнопка оформления заказа */
+.checkout-button {
+    /* Цвет кнопки из Telegram */
+    background-color: var(--tg-theme-button-color);
+    color: var(--tg-theme-button-text-color);
+    border: none;
+    /* Нет скругления */
+    border-radius: 6px;
+    padding: 14px 16px;
+    font-size: 1.1rem; /* ~17.6px */
+    font-weight: 500;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+    transition: opacity 0.2s ease;
+    line-height: 1.2;
+}
+
+.checkout-button:hover {
+    /* Эффект наведения */
+    opacity: 0.85;
+}
+
+/* --- Адаптация под мобильные устройства --- */
+@media (max-width: 480px) {
+    .header {
+        padding: 10px 0;
+    }
+
+    .main-content {
+        padding: 12px 0 8px 0;
+    }
+
+    .product-grid {
+        /* Более плотная сетка на маленьких экранах */
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 10px;
+    }
+
+    .product-image {
+        height: 140px;
+    }
+
+    .product-info {
+        padding: 10px;
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+        padding: 15px;
+    }
+
+    .cart-item {
+        padding: 10px 0;
+    }
+
+     .item-name {
+        font-size: 0.9rem; /* ~14.4px */
+    }
+
+    .item-price {
+        font-size: 0.9rem; /* ~14.4px */
+    }
+
+    .quantity-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 16px;
+    }
+
+    .remove-item {
+        width: 28px;
+        height: 28px;
+        font-size: 20px;
+    }
+
+    .cart-total {
+        font-size: 1.2rem; /* ~19.2px */
+    }
+
+    .checkout-button {
+        padding: 12px 14px;
+        font-size: 1rem; /* 16px */
+    }
+}
+
+/* --- Дополнительные стили для лучшего соответствия TWA --- */
+/* Убираем стандартные стили для кнопок */
+button {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+/* Стили для ссылок (если будут) */
+a {
+    color: var(--tg-theme-link-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Стили для полей ввода (если добавятся) */
+input, textarea {
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 8px;
+    border: 1px solid var(--color-border);
+    border-radius: 0;
+    background-color: var(--tg-theme-secondary-bg-color);
+    color: var(--tg-theme-text-color);
+}
+
+/* --- Бейдж количества на кнопке товара --- */
+.cart-item-count {
+    display: none; /* Скрываем по умолчанию */
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: var(--color-danger); /* Красный фон */
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 0.7rem; /* Маленький шрифт */
+    font-weight: bold;
+    text-align: center;
+    line-height: 20px; /* Центрирование текста по вертикали */
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2); /* Легкая тень для выделения */
+    z-index: 10; /* Поверх кнопки */
+    pointer-events: none; /* Не перехватывает клики */
+}
+
+/* --- Контейнер для кнопки внутри карточки --- */
+.button-container {
+    width: 100%;
+    /* Центрируем содержимое по горизонтали, если необходимо */
+    text-align: center;
+}
+
+/* --- Элементы управления количеством внутри карточки --- */
+.quantity-control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.quantity-btn-small {
+    background: var(--tg-theme-secondary-bg-color);
+    border: 1px solid var(--color-border);
+    width: 36px; /* Может быть чуть больше, чем в корзине, для удобства */
+    height: 36px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 6px; /* Немного скругления для кнопок внутри карточки */
+    color: var(--tg-theme-text-color);
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0; /* Убираем внутренние отступы по умолчанию */
+}
+
+.quantity-btn-small:hover {
+    background-color: #e0e0e0;
+}
+
+.quantity-value-local {
+    margin: 0 10px; /* Отступы слева и справа от числа */
+    min-width: 20px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 1rem;
+    /* Выравнивание по высоте с кнопками */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- Стили для категорий --- */
+
+.categories-section {
+    margin-bottom: 20px;
+    padding: 0 8px; /* Отступы по бокам, как у основного контента */
+}
+
+.categories-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--tg-theme-text-color);
+}
+
+.categories-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Расстояние между кнопками категорий */
+}
+
+.category-button {
+    background-color: var(--tg-theme-secondary-bg-color);
+    color: var(--tg-theme-text-color);
+    border: 1px solid var(--color-border);
+    border-radius: 18px; /* Полукруглые кнопки, как в Telegram */
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap; /* Не переносить текст */
+}
+
+.category-button:hover {
+    background-color: #e0e0e0; /* Эффект наведения */
+    border-color: #d0d0d0;
+}
+
+.category-button.active {
+    /* Стиль для активной (выбранной) категории */
+    background-color: var(--tg-theme-button-color);
+    color: var(--tg-theme-button-text-color);
+    border-color: var(--tg-theme-button-color);
+}
+
+.category-button.active:hover {
+    opacity: 0.9; /* Легкий эффект при наведении на активную */
+}
+
+/* Адаптация под мобильные устройства для категорий */
+@media (max-width: 480px) {
+    .categories-section {
+        margin-bottom: 16px;
+        padding: 0 4px;
+    }
+
+    .categories-title {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+
+    .categories-list {
+        gap: 8px;
+    }
+
+    .category-button {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+        border-radius: 16px;
+    }
+}
