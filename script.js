@@ -1,24 +1,25 @@
 // --- Данные категорий ---
 const categories = [
     { id: 'all', name: 'Все товары' },
-    { id: 'electronics', name: 'Электроника' },
-    { id: 'clothing', name: 'Одежда' },
-    { id: 'books', name: 'Книги' },
-    { id: 'home', name: 'Дом' }
+    { id: 'relay', name: 'Блоки управления' },
+    { id: 'switch', name: 'Выключатели' },
+    { id: 'sensor', name: 'Датчики' },
+    { id: 'gateway', name: 'Сервер умного дома' },
+    ( id: 'other', name: 'Сопутствующие товары' }
 ];
 
 // --- Данные товаров с категориями ---
 const products = [
-    { id: 1, name: "Смартфон", price: 24999, image: "https://via.placeholder.com/200x200?text=Смартфон", category: 'electronics' },
-    { id: 2, name: "Ноутбук", price: 59999, image: "https://via.placeholder.com/200x200?text=Ноутбук", category: 'electronics' },
-    { id: 3, name: "Наушники", price: 3999, image: "https://via.placeholder.com/200x200?text=Наушники", category: 'electronics' },
-    { id: 4, name: "Часы", price: 12999, image: "https://via.placeholder.com/200x200?text=Часы", category: 'electronics' },
-    { id: 5, name: "Футболка", price: 1499, image: "https://via.placeholder.com/200x200?text=Футболка", category: 'clothing' },
-    { id: 6, name: "Джинсы", price: 2999, image: "https://via.placeholder.com/200x200?text=Джинсы", category: 'clothing' },
-    { id: 7, name: "Роман", price: 499, image: "https://via.placeholder.com/200x200?text=Роман", category: 'books' },
-    { id: 8, name: "Учебник", price: 1299, image: "https://via.placeholder.com/200x200?text=Учебник", category: 'books' },
-    { id: 9, name: "Лампа", price: 1999, image: "https://via.placeholder.com/200x200?text=Лампа", category: 'home' },
-    { id: 10, name: "Подушка", price: 799, image: "https://via.placeholder.com/200x200?text=Подушка", category: 'home' }
+    { id: 1, name: "Сервер умного дома", price: 9980, image: "https://via.placeholder.com/200x200?text=Смартфон", category: 'gateway' },
+    { id: 2, name: "Блок управления Relay-4M", price: 9980, image: "https://via.placeholder.com/200x200?text=Ноутбук", category: 'relay' },
+    { id: 3, name: "Блок управления Relay-1", price: 3080, image: "https://via.placeholder.com/200x200?text=Наушники", category: 'relay' },
+    { id: 4, name: "Радиовыключатель LE-1", price: 1480, image: "https://via.placeholder.com/200x200?text=Часы", category: 'switch' },
+    { id: 5, name: "Радиовыключатель LE-2", price: 1780, image: "https://via.placeholder.com/200x200?text=Футболка", category: 'switch' },
+    { id: 6, name: "Блок управления Relay-2", price: 4780, image: "https://via.placeholder.com/200x200?text=Джинсы", category: 'relay' },
+    { id: 7, name: "Блок управления Relay-16А", price: 3480, image: "https://via.placeholder.com/200x200?text=Роман", category: 'relay' },
+    { id: 8, name: "Радиовыключатель SN-R1", price: 2980, image: "https://via.placeholder.com/200x200?text=Учебник", category: 'switch' },
+    { id: 9, name: "Сервопривод электротермический Valtec", price: 2880, image: "https://via.placeholder.com/200x200?text=Лампа", category: 'other' },
+    { id: 10, name: "Контактор модульный КМ 63А 2NО (2 мод.) EKF PROxima", price: 3641, image: "https://via.placeholder.com/200x200?text=Подушка", category: 'other' }
 ];
 
 // --- Состояние ---
