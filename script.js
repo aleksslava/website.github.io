@@ -10,16 +10,16 @@ const categories = [
 
 // --- Данные товаров с категориями ---
 const products = [
-    { id: 1, name: "Сервер умного дома", price: 9980, image: "https://via.placeholder.com/200x200?text=Смартфон", category: 'gateway' },
-    { id: 2, name: "Блок управления Relay-4M", price: 9980, image: "https://via.placeholder.com/200x200?text=Ноутбук", category: 'relay' },
+    { id: 1, name: "Сервер умного дома", price: 9980, image: "https://www.hite-pro.ru/wp-content/uploads/2024/11/525AB693-2B9C-42E1-BBAA-7FE8F6E88F1B-1.webp", category: 'gateway' },
+    { id: 2, name: "Блок управления Relay-4M", price: 9980, image: "https://www.hite-pro.ru/wp-content/uploads/2021/11/product_14_2.webp", category: 'relay' },
     { id: 3, name: "Блок управления Relay-1", price: 3080, image: "https://www.hite-pro.ru/wp-content/uploads/2021/11/product_6_3.webp", category: 'relay' },
-    { id: 4, name: "Радиовыключатель LE-1", price: 1480, image: "https://via.placeholder.com/200x200?text=Часы", category: 'switch' },
-    { id: 5, name: "Радиовыключатель LE-2", price: 1780, image: "https://via.placeholder.com/200x200?text=Футболка", category: 'switch' },
+    { id: 4, name: "Радиовыключатель LE-1", price: 1480, image: "https://www.hite-pro.ru/wp-content/uploads/2021/11/product_38_1.webp", category: 'switch' },
+    { id: 5, name: "Радиовыключатель LE-2", price: 1780, image: "https://www.hite-pro.ru/wp-content/uploads/2021/11/product_35_1.webp", category: 'switch' },
     { id: 6, name: "Блок управления Relay-2", price: 4780, image: "https://www.hite-pro.ru/wp-content/uploads/2021/11/product_6_3.webp", category: 'relay' },
     { id: 7, name: "Блок управления Relay-16А", price: 3480, image: "https://www.hite-pro.ru/wp-content/uploads/2021/11/product_6_3.webp", category: 'relay' },
-    { id: 8, name: "Радиовыключатель SN-R1", price: 2980, image: "https://via.placeholder.com/200x200?text=Учебник", category: 'switch' },
-    { id: 9, name: "Сервопривод электротермический Valtec", price: 2880, image: "https://via.placeholder.com/200x200?text=Лампа", category: 'other' },
-    { id: 10, name: "Контактор модульный КМ 63А 2NО (2 мод.) EKF PROxima", price: 3641, image: "https://via.placeholder.com/200x200?text=Подушка", category: 'other' }
+    { id: 8, name: "Радиовыключатель SN-R1", price: 2980, image: "https://www.hite-pro.ru/wp-content/uploads/2021/11/product_33_v4_1.webp", category: 'switch' },
+    { id: 9, name: "Сервопривод электротермический Valtec", price: 2880, image: "https://www.hite-pro.ru/wp-content/uploads/2022/07/new_product_7_1.webp", category: 'other' },
+    { id: 10, name: "Контактор модульный КМ 63А 2NО (2 мод.) EKF PROxima", price: 3641, image: "https://www.hite-pro.ru/wp-content/uploads/2022/02/new_product_9_2.webp", category: 'other' }
 ];
 
 // --- Состояние ---
