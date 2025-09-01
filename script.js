@@ -5,7 +5,7 @@ const categories = [
     { id: 'switch', name: 'Выключатели' },
     { id: 'sensor', name: 'Датчики' },
     { id: 'gateway', name: 'Сервер умного дома' },
-    ( id: 'other', name: 'Сопутствующие товары' }
+    { id: 'other', name: 'Сопутствующие товары' }
 ];
 
 // --- Данные товаров с категориями ---
