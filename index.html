@@ -3,19 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Магазин HiTE PRO!</title>
+    <title>Мой Магазин</title>
+    <!-- Подключение Telegram Web App SDK -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header class="header">
-        <p>Привет, <span id="username"></span>!</p>
-        <h1>Магазин HiTE PRO!</h1>
+        <div>
+            <h1>Каталог товаров</h1>
+            <!-- Элемент для отображения бонусов -->
+            <div class="bonuses-display" id="bonusesDisplay">Ваши бонусы: <span id="bonusValue">0</span></div>
+        </div>
         <button class="cart-button" id="cartButton">
             Корзина (<span id="cartCount">0</span>)
         </button>
     </header>
-
     <main class="main-content">
         <!-- Секция категорий -->
         <section class="categories-section">
@@ -42,18 +45,101 @@
             <div class="cart-total">
                 Итого: <span id="cartTotalPrice">0</span> ₽
             </div>
-            <button class="checkout-button" id="checkoutButton">Оформить заказ</button>
+
+            <!-- --- Переключатель КП/Заказ и поля --- -->
+            <div class="cart-form-section">
+                <div class="toggle-switch-container">
+                    <span class="toggle-label" id="kpLabel">Сформировать КП</span>
+                    <label class="switch">
+                        <input type="checkbox" id="orderTypeToggle">
+                        <span class="slider"></span>
+                    </label>
+                    <span class="toggle-label" id="orderLabel">Оформить заказ</span>
+                </div>
+            </div>
+
+            <!-- Секция полей заказа (изначально скрыта) -->
+            <div id="orderFieldsSection" style="display: none;">
+                <div class="cart-form-section">
+                    <label for="recipientPhone">Телефон получателя:</label>
+                    <input type="tel" id="recipientPhone" class="cart-input" placeholder="+7 (___) ___-__-__">
+                </div>
+
+                <div class="cart-form-section">
+                    <label for="deliveryMethod">Способ доставки:</label>
+                    <select id="deliveryMethod" class="cart-select">
+                        <option value="">-- Выберите способ --</option>
+                        <option value="pickup">Самовывоз</option>
+                        <option value="courier">Курьер</option>
+                        <option value="pickup_point">Пункт выдачи Сдэк \ Я. Доставка</option>
+                    </select>
+                </div>
+
+                <!-- Поле адреса, изначально скрыто -->
+                <div class="cart-form-section" id="deliveryAddressSection" style="display: none;">
+                    <label for="deliveryAddress">Адрес доставки/Пункт выдачи:</label>
+                    <input type="text" id="deliveryAddress" class="cart-input" placeholder="Введите адрес">
+                    <div id="deliveryAddressNote" class="form-note"></div>
+                </div>
+
+                <!-- Адрес самовывоза, изначально скрыто -->
+                <div class="cart-form-section" id="pickupAddressSection" style="display: none;">
+                    <div class="form-note pickup-address-note">
+                        Адрес самовывоза: г. Москва, ул. Берзарина, д.36, стр.10
+                    </div>
+                </div>
+
+                <div class="cart-form-section">
+                    <label for="paymentMethod">Способ оплаты:</label>
+                    <select id="paymentMethod" class="cart-select">
+                        <option value="">-- Выберите способ --</option>
+                        <option value="sbp">Ссылка на оплату СБП</option>
+                        <option value="card">Ссылка на оплату картой</option>
+                        <option value="invoice">Счет на оплату</option>
+                    </select>
+                </div>
+
+                <!-- Уведомление о скидке, изначально скрыто -->
+                <div class="cart-form-section" id="cardPaymentNote" style="display: none;">
+                    <div class="form-note warning-note">
+                        Внимание: При оплате картой скидка будет меньше на 2%.
+                    </div>
+                </div>
+
+                <!-- Поля для юридического лица, изначально скрыты -->
+                <div class="cart-form-section" id="legalInfoSection" style="display: none;">
+                    <h3 style="margin-bottom: 10px; font-size: 1.1rem;">Данные организации для счета</h3>
+                    
+                    <label for="organizationInn">ИНН организации:</label>
+                    <input type="text" id="organizationInn" class="cart-input" placeholder="Введите ИНН">
+
+                    <label for="organizationAddress">Юридический адрес:</label>
+                    <input type="text" id="organizationAddress" class="cart-input" placeholder="Введите юридический адрес">
+
+                    <label for="organizationBik">БИК банка:</label>
+                    <input type="text" id="organizationBik" class="cart-input" placeholder="Введите БИК">
+
+                    <label for="organizationAccount">Расчетный счет:</label>
+                    <input type="text" id="organizationAccount" class="cart-input" placeholder="Введите расчетный счет">
+                </div>
+            </div> <!-- Конец секции полей заказа -->
+
+            <!-- Кнопка "Сформировать КП" (изначально видна) -->
+            <button class="checkout-button" id="generateKpButton" style="display: block;">Сформировать КП</button>
+            <!-- Кнопка "Оформить заказ" (изначально скрыта) -->
+            <button class="checkout-button" id="checkoutButton" style="display: none;">Оформить заказ</button>
         </div>
     </div>
-    <script>
-    Telegram.WebApp.ready();
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const bonus = urlParams.get('bonus');
-    if (bonus) {
-      document.getElementById("username").innerText = bonus;
-    }
-    </script>
+    <!-- Модальное окно с описанием товара -->
+    <div class="modal" id="detailsModal">
+        <div class="modal-content details-modal-content">
+            <span class="close-button" id="closeDetailsModal">&times;</span>
+            <img id="detailsModalImage" src="" alt="" class="details-modal-image">
+            <h2 id="detailsModalTitle"></h2>
+            <p id="detailsModalDescription"></p>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
