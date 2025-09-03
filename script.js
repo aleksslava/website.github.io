@@ -28,7 +28,7 @@ function sendToTelegramBot(data) {
             // Преобразуем объект данных в JSON строку
             const jsonData = JSON.stringify(data);
             console.log("Отправка данных в Telegram:", jsonData);
-            tg.sendData(jsonData);
+            Telegram.WebApp.sendData(jsonData);
             // alert("Данные отправлены в бот!"); // Для тестирования
         } catch (error) {
             console.error("Ошибка при отправке данных в Telegram:", error);
