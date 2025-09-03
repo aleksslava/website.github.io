@@ -48,9 +48,9 @@
     <script>
     Telegram.WebApp.ready();
 
-    const user = Telegram.WebApp.initDataUnsafe.user;
-    if (user) {
-      document.getElementById("username").innerText = user.first_name;
+    const bonus = Telegram.WebApp.initDataUnsafe.start_param;
+    if (bonus) {
+      document.getElementById("username").innerText = bonus;
     }
     </script>
 
