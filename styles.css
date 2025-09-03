@@ -1,4 +1,3 @@
-
 /* --- Переменные для цветов Telegram (TWA) --- */
 :root {
     /* Основные цвета из Telegram Web Apps */
@@ -96,6 +95,55 @@ body {
     /* Отступ сверху, чтобы не прилипать к шапке */
     padding: 16px 0 8px 0;
 }
+
+/* --- Секция категорий --- */
+.categories-section {
+    margin-bottom: 20px;
+    padding: 0 8px; /* Отступы по бокам, как у основного контента */
+}
+
+.categories-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--tg-theme-text-color);
+}
+
+.categories-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Расстояние между кнопками категорий */
+}
+
+.category-button {
+    background-color: var(--tg-theme-secondary-bg-color);
+    color: var(--tg-theme-text-color);
+    border: 1px solid var(--color-border);
+    border-radius: 18px; /* Полукруглые кнопки, как в Telegram */
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap; /* Не переносить текст */
+}
+
+.category-button:hover {
+    background-color: #e0e0e0; /* Эффект наведения */
+    border-color: #d0d0d0;
+}
+
+.category-button.active {
+    /* Стиль для активной (выбранной) категории */
+    background-color: var(--tg-theme-button-color);
+    color: var(--tg-theme-button-text-color);
+    border-color: var(--tg-theme-button-color);
+}
+
+.category-button.active:hover {
+    opacity: 0.9; /* Легкий эффект при наведении на активную */
+}
+
 
 /* --- Сетка товаров --- */
 .product-grid {
@@ -403,6 +451,303 @@ body {
     opacity: 0.85;
 }
 
+/* --- Стили для модификаций --- */
+
+.modifications-section {
+    margin-bottom: 12px;
+}
+
+.modification-label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--tg-theme-text-color);
+}
+
+.modification-select {
+    width: 100%;
+    padding: 8px;
+    font-size: 0.9rem;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background-color: var(--tg-theme-bg-color);
+    color: var(--tg-theme-text-color);
+    /* Убираем стандартные стрелки в Webkit */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 16px;
+}
+
+.modification-select:focus {
+    outline: none;
+    border-color: var(--tg-theme-link-color);
+}
+
+
+/* --- Бейдж количества на кнопке товара --- */
+.cart-item-count {
+    display: none; /* Скрываем по умолчанию */
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: var(--color-danger); /* Красный фон */
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 0.7rem; /* Маленький шрифт */
+    font-weight: bold;
+    text-align: center;
+    line-height: 20px; /* Центрирование текста по вертикали */
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2); /* Легкая тень для выделения */
+    z-index: 10; /* Поверх кнопки */
+    pointer-events: none; /* Не перехватывает клики */
+}
+
+
+/* --- Элементы управления количеством внутри карточки --- */
+.button-container {
+    width: 100%;
+    /* Центрируем содержимое по горизонтали, если необходимо */
+    text-align: center;
+}
+
+.quantity-control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.quantity-btn-small {
+    background: var(--tg-theme-secondary-bg-color);
+    border: 1px solid var(--color-border);
+    width: 36px; /* Может быть чуть больше, чем в корзине, для удобства */
+    height: 36px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 6px; /* Немного скругления для кнопок внутри карточки */
+    color: var(--tg-theme-text-color);
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0; /* Убираем внутренние отступы по умолчанию */
+}
+
+.quantity-btn-small:hover {
+    background-color: #e0e0e0;
+}
+
+.quantity-value-local {
+    margin: 0 10px; /* Отступы слева и справа от числа */
+    min-width: 20px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 1rem;
+    /* Выравнивание по высоте с кнопками */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* --- Стили для формы в корзине --- */
+
+.cart-form-section {
+    margin-top: 15px;
+    width: 100%;
+}
+
+.cart-form-section label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--tg-theme-text-color);
+}
+
+.cart-input, .cart-select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background-color: var(--tg-theme-bg-color);
+    color: var(--tg-theme-text-color);
+    box-sizing: border-box;
+}
+
+.cart-input:focus, .cart-select:focus {
+    outline: none;
+    border-color: var(--tg-theme-link-color);
+}
+
+.cart-select {
+    /* Кастомная стрелка для select */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 35px; /* Место для стрелки */
+}
+
+/* Стили для пояснений и уведомлений */
+.form-note {
+    margin-top: 5px;
+    font-size: 0.85rem;
+    color: var(--tg-theme-hint-color);
+    line-height: 1.4;
+}
+
+.form-note.warning-note {
+    color: var(--color-warning); /* Оранжевый для предупреждений */
+    font-weight: 500;
+}
+
+.form-note.pickup-address-note {
+    background-color: var(--tg-theme-secondary-bg-color);
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px dashed var(--color-border);
+}
+
+/* Стиль для заголовка секции юридических данных */
+#legalInfoSection h3 {
+    color: var(--tg-theme-text-color);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 5px;
+}
+
+
+/* --- Стили для кнопки "Подробнее" --- */
+.details-button {
+    background-color: var(--tg-theme-secondary-bg-color);
+    color: var(--tg-theme-text-color);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    margin-top: 8px; /* Отступ сверху от других элементов */
+    transition: background-color 0.2s ease;
+}
+
+.details-button:hover {
+    background-color: #e0e0e0;
+}
+
+/* --- Стили для модального окна описания --- */
+.details-modal-content {
+    max-width: 600px; /* Максимальная ширина может быть больше */
+    text-align: center; /* Центрируем содержимое */
+}
+
+.details-modal-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0;
+    margin-bottom: 15px; /* Отступ снизу от изображения */
+    border: 1px solid var(--color-border);
+}
+
+.details-modal-content h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.4rem; /* Немного больше заголовок */
+    text-align: center;
+}
+
+.details-modal-content p {
+    text-align: left; /* Описание выравниваем по левому краю */
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 0; /* Убираем нижний отступ у параграфа */
+}
+
+
+/* --- Стили для переключателя КП/Заказ --- */
+.toggle-switch-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px; /* Расстояние между элементами */
+    margin: 10px 0; /* Отступы сверху и снизу */
+}
+
+.toggle-label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--tg-theme-text-color);
+    user-select: none; /* Запрет выделения текста */
+    white-space: nowrap; /* Запрет переноса строк */
+}
+
+/* Контейнер переключателя */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+/* Скрываем оригинальный чекбокс */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Слайдер переключателя */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--tg-theme-secondary-bg-color); /* Серый фон */
+    transition: .3s;
+    border-radius: 24px; /* Закругление */
+    border: 1px solid var(--color-border);
+}
+
+/* Круглый ползунок */
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 2px;
+    background-color: white;
+    transition: .3s;
+    border-radius: 50%;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+/* При активации чекбокса */
+input:checked + .slider {
+    background-color: var(--tg-theme-button-color); /* Цвет из темы Telegram */
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px); /* Перемещение ползунка */
+}
+
+
 /* --- Адаптация под мобильные устройства --- */
 @media (max-width: 480px) {
     .header {
@@ -465,6 +810,113 @@ body {
         padding: 12px 14px;
         font-size: 1rem; /* 16px */
     }
+
+    /* --- Адаптация для категорий --- */
+    .categories-section {
+        margin-bottom: 16px;
+        padding: 0 4px;
+    }
+
+    .categories-title {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+
+    .categories-list {
+        gap: 8px;
+    }
+
+    .category-button {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+        border-radius: 16px;
+    }
+
+    /* --- Адаптация для модификаций --- */
+    .modifications-section {
+        margin-bottom: 10px;
+    }
+
+    .modification-label {
+        font-size: 0.85rem;
+        margin-bottom: 5px;
+    }
+
+    .modification-select {
+        padding: 6px;
+        font-size: 0.85rem;
+        background-position: right 6px center;
+        background-size: 14px;
+    }
+
+    /* --- Адаптация для формы в корзине --- */
+    .cart-form-section {
+        margin-top: 12px;
+    }
+
+    .cart-form-section label {
+        font-size: 0.9rem;
+        margin-bottom: 4px;
+    }
+
+    .cart-input, .cart-select {
+        padding: 8px;
+        font-size: 0.95rem;
+    }
+
+    .cart-select {
+        background-position: right 10px center;
+        background-size: 14px;
+        padding-right: 30px;
+    }
+
+    .form-note {
+        font-size: 0.8rem;
+    }
+
+    .form-note.pickup-address-note {
+        padding: 8px;
+    }
+
+    /* --- Адаптация модального окна описания под мобильные устройства --- */
+    .details-modal-content {
+        padding: 15px;
+    }
+
+    .details-modal-content h2 {
+        font-size: 1.2rem;
+        margin-bottom: 12px;
+    }
+
+    .details-modal-content p {
+        font-size: 0.95rem;
+    }
+    
+    /* --- Адаптация переключателя под мобильные устройства --- */
+    .toggle-switch-container {
+        gap: 10px;
+        margin: 8px 0;
+    }
+
+    .toggle-label {
+        font-size: 0.95rem;
+    }
+
+    .switch {
+        width: 45px;
+        height: 22px;
+    }
+
+    .slider:before {
+        height: 16px;
+        width: 16px;
+        left: 2px;
+        bottom: 2px;
+    }
+
+    input:checked + .slider:before {
+        transform: translateX(23px);
+    }
 }
 
 /* --- Дополнительные стили для лучшего соответствия TWA --- */
@@ -495,142 +947,17 @@ input, textarea {
     color: var(--tg-theme-text-color);
 }
 
-/* --- Бейдж количества на кнопке товара --- */
-.cart-item-count {
-    display: none; /* Скрываем по умолчанию */
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    background-color: var(--color-danger); /* Красный фон */
-    color: white;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    font-size: 0.7rem; /* Маленький шрифт */
-    font-weight: bold;
-    text-align: center;
-    line-height: 20px; /* Центрирование текста по вертикали */
-    box-shadow: 0 1px 2px rgba(0,0,0,0.2); /* Легкая тень для выделения */
-    z-index: 10; /* Поверх кнопки */
-    pointer-events: none; /* Не перехватывает клики */
-}
-
-/* --- Контейнер для кнопки внутри карточки --- */
-.button-container {
-    width: 100%;
-    /* Центрируем содержимое по горизонтали, если необходимо */
-    text-align: center;
-}
-
-/* --- Элементы управления количеством внутри карточки --- */
-.quantity-control {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-.quantity-btn-small {
-    background: var(--tg-theme-secondary-bg-color);
-    border: 1px solid var(--color-border);
-    width: 36px; /* Может быть чуть больше, чем в корзине, для удобства */
-    height: 36px;
-    font-size: 18px;
-    font-weight: 500;
-    cursor: pointer;
-    border-radius: 6px; /* Немного скругления для кнопок внутри карточки */
-    color: var(--tg-theme-text-color);
-    user-select: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0; /* Убираем внутренние отступы по умолчанию */
-}
-
-.quantity-btn-small:hover {
-    background-color: #e0e0e0;
-}
-
-.quantity-value-local {
-    margin: 0 10px; /* Отступы слева и справа от числа */
-    min-width: 20px;
-    text-align: center;
-    font-weight: 500;
-    font-size: 1rem;
-    /* Выравнивание по высоте с кнопками */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* --- Стили для категорий --- */
-
-.categories-section {
-    margin-bottom: 20px;
-    padding: 0 8px; /* Отступы по бокам, как у основного контента */
-}
-
-.categories-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 12px;
-    color: var(--tg-theme-text-color);
-}
-
-.categories-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px; /* Расстояние между кнопками категорий */
-}
-
-.category-button {
-    background-color: var(--tg-theme-secondary-bg-color);
-    color: var(--tg-theme-text-color);
-    border: 1px solid var(--color-border);
-    border-radius: 18px; /* Полукруглые кнопки, как в Telegram */
-    padding: 8px 16px;
+/* --- Стиль для отображения бонусов --- */
+.bonuses-display {
     font-size: 0.9rem;
     font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    white-space: nowrap; /* Не переносить текст */
+    color: var(--tg-theme-link-color); /* Используем цвет ссылки для выделения */
+    margin-top: 4px;
 }
 
-.category-button:hover {
-    background-color: #e0e0e0; /* Эффект наведения */
-    border-color: #d0d0d0;
-}
-
-.category-button.active {
-    /* Стиль для активной (выбранной) категории */
-    background-color: var(--tg-theme-button-color);
-    color: var(--tg-theme-button-text-color);
-    border-color: var(--tg-theme-button-color);
-}
-
-.category-button.active:hover {
-    opacity: 0.9; /* Легкий эффект при наведении на активную */
-}
-
-/* Адаптация под мобильные устройства для категорий */
+/* Адаптация под мобильные устройства для бонусов */
 @media (max-width: 480px) {
-    .categories-section {
-        margin-bottom: 16px;
-        padding: 0 4px;
-    }
-
-    .categories-title {
-        font-size: 1rem;
-        margin-bottom: 10px;
-    }
-
-    .categories-list {
-        gap: 8px;
-    }
-
-    .category-button {
-        padding: 6px 12px;
+    .bonuses-display {
         font-size: 0.85rem;
-        border-radius: 16px;
     }
 }
