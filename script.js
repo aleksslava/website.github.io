@@ -1,5 +1,5 @@
 // --- Инициализация Telegram Web App ---
-let tg = window.Telegram?.WebApp;
+let tg = window.Telegram.WebApp;
 let userBonuses = 0;
 
 if (tg) {
@@ -28,7 +28,7 @@ function sendToTelegramBot(data) {
             // Преобразуем объект данных в JSON строку
             const jsonData = JSON.stringify(data);
             console.log("Отправка данных в Telegram:", jsonData);
-            Telegram.WebApp.sendData(jsonData);
+            tg.sendData(jsonData);
             // alert("Данные отправлены в бот!"); // Для тестирования
         } catch (error) {
             console.error("Ошибка при отправке данных в Telegram:", error);
