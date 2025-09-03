@@ -1,5 +1,6 @@
 // --- Инициализация Telegram Web App ---
 let tg = window.Telegram.WebApp;
+tg.sendData('hello')
 let userBonuses = 0;
 
 if (tg) {
