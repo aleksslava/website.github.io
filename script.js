@@ -1,12 +1,9 @@
 // --- Инициализация Telegram Web App ---
-let tg = window.Telegram.WebApp;
-
-let userBonuses = 0;
+let tg = window.Telegram?.WebApp;
+let urlParams = { bonuses: 0, userId: null }; // Объект для хранения параметров из URL
 
 if (tg) {
-    // Расширяем webview до максимального размера
     tg.expand();
-    // Сообщаем Telegram, что приложение готово
     tg.ready();
     console.log("Telegram Web App SDK инициализирован.");
     console.log("TG Init Data:", tg.initData);
@@ -15,13 +12,17 @@ if (tg) {
     console.warn("Telegram Web App SDK не найден. Работаем в обычном режиме.");
 }
 
-// --- Получение бонусов из URL ---
-function getBonusFromUrl() {
+// --- Получение бонусов и ID из URL ---
+function getUrlParams() {
     const urlParams = new URLSearchParams(window.location.search);
     const bonusParam = urlParams.get('bonus');
-    return bonusParam ? parseInt(bonusParam, 10) : 0;
+    const idParam = urlParams.get('id');
+    
+    return {
+        bonuses: bonusParam ? parseInt(bonusParam, 10) : 0,
+        userId: idParam || null // ID будет строкой или null, если не задан
+    };
 }
-
 
 // --- Отправка данных в Telegram Bot ---
 function sendToTelegramBot(data) {
@@ -152,9 +153,10 @@ const detailsModalDescription = document.getElementById('detailsModalDescription
 
 // --- Инициализация ---
 document.addEventListener('DOMContentLoaded', () => {
-    // Получаем бонусы из URL
-    userBonuses = getBonusFromUrl();
-    bonusValue.textContent = userBonuses.toLocaleString('ru-RU');
+    // Получаем параметры из URL (бонусы и ID пользователя)
+    urlParams = getUrlParams();
+    // Отображаем бонусы из URL-параметров
+    bonusValue.textContent = urlParams.bonuses.toLocaleString('ru-RU');
 
     renderCategories();
     renderProducts();
@@ -721,7 +723,8 @@ function handleGenerateKp(e) {
     // Подготавливаем данные для отправки
     const kpPayload = {
         type: "commercial_offer", // Тип запроса
-        bonuses: userBonuses, // Бонусы из URL
+        bonuses: urlParams.bonuses, // Бонусы из URL
+        userId: urlParams.userId,   // ID пользователя из URL
         items: cart.map(item => ({
             productId: item.productId,
             modificationId: item.modificationId,
@@ -749,8 +752,11 @@ function handleGenerateKp(e) {
     });
     let kpSummary = `${itemsList}\n---\n`;
     kpSummary += `Итого: ${kpPayload.itemCount} товар(ов) на сумму ${kpPayload.total.toLocaleString('ru-RU')} ₽\n`;
-    kpSummary += `Ваши бонусы: ${kpPayload.bonuses.toLocaleString('ru-RU')}\n\n`;
-    kpSummary += "Коммерческое предложение сформировано и отправлено в бот!";
+    kpSummary += `Ваши бонусы: ${kpPayload.bonuses.toLocaleString('ru-RU')}\n`;
+    if (kpPayload.userId) {
+        kpSummary += `ID пользователя: ${kpPayload.userId}\n`;
+    }
+    kpSummary += "\nКоммерческое предложение сформировано и отправлено в бот!";
     alert(kpSummary);
 }
 
@@ -771,7 +777,8 @@ function handleCheckout(e) {
     // Подготавливаем данные заказа для отправки
     const orderPayload = {
         type: "order", // Тип запроса
-        bonuses: userBonuses, // Бонусы из URL
+        bonuses: urlParams.bonuses, // Бонусы из URL
+        userId: urlParams.userId,   // ID пользователя из URL
         items: cart.map(item => ({
             productId: item.productId,
             modificationId: item.modificationId,
@@ -810,8 +817,11 @@ function handleCheckout(e) {
     
     let orderSummary = `${itemsList}\n---\n`;
     orderSummary += `Итого: ${orderPayload.itemCount} товар(ов) на сумму ${orderPayload.total.toLocaleString('ru-RU')} ₽\n`;
-    orderSummary += `Ваши бонусы: ${orderPayload.bonuses.toLocaleString('ru-RU')}\n\n`;
-    orderSummary += `Телефон получателя: ${orderPayload.phone}\n`;
+    orderSummary += `Ваши бонусы: ${orderPayload.bonuses.toLocaleString('ru-RU')}\n`;
+    if (orderPayload.userId) {
+        orderSummary += `ID пользователя: ${orderPayload.userId}\n`;
+    }
+    orderSummary += `\nТелефон получателя: ${orderPayload.phone}\n`;
     orderSummary += `Способ доставки: ${orderPayload.deliveryMethod}\n`;
     if (orderPayload.deliveryAddress) {
         orderSummary += `Адрес: ${orderPayload.deliveryAddress}\n`;
