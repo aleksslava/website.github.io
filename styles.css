@@ -1056,3 +1056,22 @@ input, textarea {
         height: 9px;
     }
 }
+
+/* --- Стиль для изображения товара в корзине --- */
+.cart-item-image {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 12px;
+    border: 1px solid var(--color-border);
+}
+
+/* Адаптация под мобильные устройства для изображения в корзине */
+@media (max-width: 480px) {
+    .cart-item-image {
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+    }
+}
