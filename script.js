@@ -53,49 +53,49 @@ const categories = [
     { id: 'home', name: 'Дом' }
 ];
 
-// --- Данные товаров с модификациями (без остатков) и описанием ---
+// --- Данные товаров с модификациями (без остатков), описанием и изображениями для модификаций ---
 const products = [
     {
-        id: 1, name: "Смартфон", price: 24999, image: "https://via.placeholder.com/200x200?text=Смартфон", category: 'electronics',
+        id: 1, name: "Смартфон", price: 24999, image: "https://via.placeholder.com/200x200?text=Смартфон_Основной", category: 'electronics',
         description: "Мощный смартфон с отличной камерой и долгим временем автономной работы. Оснащен современным процессором и большим экраном AMOLED.",
         modifications: [
-            { id: '1-black', name: 'Черный', price: 24999 },
-            { id: '1-white', name: 'Белый', price: 25999 },
-            { id: '1-blue', name: 'Синий', price: 24999 }
+            { id: '1-black', name: 'Черный', price: 24999, image: "https://via.placeholder.com/200x200/000000/FFFFFF?text=Смартфон_Черный" },
+            { id: '1-white', name: 'Белый', price: 25999, image: "https://via.placeholder.com/200x200/FFFFFF/000000?text=Смартфон_Белый" },
+            { id: '1-blue', name: 'Синий', price: 24999, image: "https://via.placeholder.com/200x200/0000FF/FFFFFF?text=Смартфон_Синий" }
         ]
     },
     {
-        id: 2, name: "Ноутбук", price: 59999, image: "https://via.placeholder.com/200x200?text=Ноутбук", category: 'electronics',
+        id: 2, name: "Ноутбук", price: 59999, image: "https://via.placeholder.com/200x200?text=Ноутбук_Основной", category: 'electronics',
         description: "Производительный ноутбук для работы и игр. Отлично подходит для профессионалов и студентов. Большой объем памяти и высокая скорость работы.",
         modifications: [
-            { id: '2-basic', name: 'Базовая конфигурация', price: 59999 },
-            { id: '2-pro', name: 'Профессиональная', price: 74999 }
+            { id: '2-basic', name: 'Базовая конфигурация', price: 59999, image: "https://via.placeholder.com/200x200?text=Ноутбук_Базовый" },
+            { id: '2-pro', name: 'Профессиональная', price: 74999, image: "https://via.placeholder.com/200x200?text=Ноутбук_Про" }
         ]
     },
     {
-        id: 3, name: "Футболка", price: 1499, image: "https://via.placeholder.com/200x200?text=Футболка", category: 'clothing',
+        id: 3, name: "Футболка", price: 1499, image: "https://via.placeholder.com/200x200?text=Футболка_Основная", category: 'clothing',
         description: "Удобная и стильная футболка из натуральных материалов. Идеально подходит для повседневной носки. Доступна в различных цветах и размерах.",
         modifications: [
-            { id: '3-m-red', name: 'Красная (M)', price: 1499 },
-            { id: '3-m-blue', name: 'Синяя (M)', price: 1499 },
-            { id: '3-l-red', name: 'Красная (L)', price: 1499 },
-            { id: '3-l-blue', name: 'Синяя (L)', price: 1499 }
+            { id: '3-m-red', name: 'Красная (M)', price: 1499, image: "https://via.placeholder.com/200x200/FF0000/FFFFFF?text=Футболка_M_Красная" },
+            { id: '3-m-blue', name: 'Синяя (M)', price: 1499, image: "https://via.placeholder.com/200x200/0000FF/FFFFFF?text=Футболка_M_Синяя" },
+            { id: '3-l-red', name: 'Красная (L)', price: 1499, image: "https://via.placeholder.com/200x200/FF0000/FFFFFF?text=Футболка_L_Красная" },
+            { id: '3-l-blue', name: 'Синяя (L)', price: 1499, image: "https://via.placeholder.com/200x200/0000FF/FFFFFF?text=Футболка_L_Синяя" }
         ]
     },
     {
-        id: 4, name: "Часы", price: 12999, image: "https://via.placeholder.com/200x200?text=Часы", category: 'electronics',
+        id: 4, name: "Часы", price: 12999, image: "https://via.placeholder.com/200x200?text=Часы_Основные", category: 'electronics',
         description: "Элегантные и функциональные часы с множеством полезных функций. Точное время, изысканный дизайн и прочный корпус. Отличный аксессуар для делового образа.",
         modifications: [
-            { id: '4-silver', name: 'Серебристые', price: 12999 },
-            { id: '4-gold', name: 'Золотые', price: 13999 }
+            { id: '4-silver', name: 'Серебристые', price: 12999, image: "https://via.placeholder.com/200x200/C0C0C0/000000?text=Часы_Серебро" },
+            { id: '4-gold', name: 'Золотые', price: 13999, image: "https://via.placeholder.com/200x200/FFD700/000000?text=Часы_Золото" }
         ]
     },
     {
-        id: 5, name: "Роман", price: 499, image: "https://via.placeholder.com/200x200?text=Роман", category: 'books',
+        id: 5, name: "Роман", price: 499, image: "https://via.placeholder.com/200x200?text=Роман_Основной", category: 'books',
         description: "Увлекательный роман, который не отпустит до последней страницы. Интересный сюжет, глубокие персонажи и непредсказуемая развязка. Погрузитесь в мир приключений!",
         modifications: [
-            { id: '5-paper', name: 'Бумажная обложка', price: 499 },
-            { id: '5-hard', name: 'Твердая обложка', price: 699 }
+            { id: '5-paper', name: 'Бумажная обложка', price: 499, image: "https://via.placeholder.com/200x200/FFFFE0/000000?text=Роман_Бумага" },
+            { id: '5-hard', name: 'Твердая обложка', price: 699, image: "https://via.placeholder.com/200x200/A9A9A9/FFFFFF?text=Роман_Твердый_Переплет" }
         ]
     }
 ];
@@ -322,12 +322,21 @@ function renderProducts() {
             `;
         }
 
+        // Получаем изображение для первой модификации или основное изображение товара
+        const initialImageSrc = product.modifications && product.modifications.length > 0 
+            ? product.modifications[0].image 
+            : product.image;
+        const initialImageAlt = product.modifications && product.modifications.length > 0 
+            ? `${product.name} - ${product.modifications[0].name}` 
+            : product.name;
+
         const detailsButtonHtml = `<button class="details-button" data-id="${product.id}">Подробнее</button>`;
 
         productCard.innerHTML = `
-            <img src="${product.image}" alt="${product.name}" class="product-image">
+            <img src="${initialImageSrc}" alt="${initialImageAlt}" class="product-image">
             <div class="product-info">
                 <div class="product-name">${product.name}</div>
+                <!-- Цена будет обновляться скриптом -->
                 <div class="product-price" id="price-${product.id}">${product.price.toLocaleString('ru-RU')} ₽</div>
                 ${modificationsHtml}
                 <div class="button-container" id="button-container-${product.id}">
@@ -343,6 +352,7 @@ function renderProducts() {
                 updateProductPrice(product.id);
                 updateProductButton(product.id);
             });
+            // Инициализируем цену и изображение для первой модификации
             updateProductPrice(product.id);
         }
 
@@ -355,7 +365,7 @@ function renderProducts() {
     updateAllProductButtons();
 }
 
-// --- Обновление цены товара ---
+// --- Обновление цены и изображения товара в зависимости от модификации ---
 function updateProductPrice(productId) {
     const product = products.find(p => p.id == productId);
     if (!product || !product.modifications || product.modifications.length === 0) return;
@@ -366,9 +376,17 @@ function updateProductPrice(productId) {
     const selectedModId = selectElement.value;
     const selectedMod = product.modifications.find(mod => mod.id === selectedModId);
 
+    // Обновляем цену
     const priceElement = document.getElementById(`price-${productId}`);
     if (priceElement && selectedMod) {
         priceElement.textContent = `${selectedMod.price.toLocaleString('ru-RU')} ₽`;
+    }
+
+    // Обновляем изображение
+    const imageElement = document.querySelector(`.product-card[data-product-id="${productId}"] .product-image`);
+    if (imageElement && selectedMod) {
+        imageElement.src = selectedMod.image;
+        imageElement.alt = `${product.name} - ${selectedMod.name}`;
     }
 }
 
@@ -478,12 +496,16 @@ function addToCart(productId, modificationId = null) {
         cart[existingItemIndex].quantity += 1;
     } else {
         const selectedMod = modificationId ? product.modifications.find(m => m.id === modificationId) : null;
+        // Получаем изображение модификации или основное изображение товара
+        const itemImage = selectedMod ? selectedMod.image : product.image;
+        
+        // Создаем новый элемент корзины с информацией о модификации
         const newItem = {
             productId: product.id,
             modificationId: modificationId,
             name: product.name,
             price: selectedMod ? selectedMod.price : product.price,
-            image: product.image,
+            image: itemImage, // Используем изображение модификации
             quantity: 1,
             modificationName: selectedMod ? selectedMod.name : null
         };
@@ -561,6 +583,7 @@ function renderCartItems() {
         const cartItemElement = document.createElement('div');
         cartItemElement.className = 'cart-item';
         cartItemElement.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" class="cart-item-image">
             <div class="item-info">
                 <div class="item-name">${displayName}</div>
                 <div class="item-price">${item.price.toLocaleString('ru-RU')} ₽</div>
@@ -749,7 +772,8 @@ function handleGenerateKp(e) {
             modificationName: item.modificationName,
             price: item.price,
             quantity: item.quantity,
-            total: item.price * item.quantity
+            total: item.price * item.quantity,
+            image: item.image // Добавляем изображение
         })),
         total: getCartTotal(),
         itemCount: getCartItemCount()
@@ -805,7 +829,8 @@ function handleCheckout(e) {
             modificationName: item.modificationName,
             price: item.price,
             quantity: item.quantity,
-            total: item.price * item.quantity
+            total: item.price * item.quantity,
+            image: item.image // Добавляем изображение
         })),
         total: getCartTotal(),
         itemCount: getCartItemCount(),
