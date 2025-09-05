@@ -58,6 +58,28 @@
                 </div>
             </div>
 
+                        <!-- --- Выбор типа скидки --- -->
+            <div class="cart-form-section">
+                <label>Выберите тип скидки:</label>
+                <div class="radio-group" id="discountOptions">
+                    <label class="radio-label">
+                        <input type="radio" name="discountType" value="discount_only" checked>
+                        <span class="radio-custom"></span>
+                        Скидка на заказ
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="discountType" value="discount_and_spend_points">
+                        <span class="radio-custom"></span>
+                        Скидка + списать баллы с баланса
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="discountType" value="accumulate_points">
+                        <span class="radio-custom"></span>
+                        Накопить баллы (будет полный чек)
+                    </label>
+                </div>
+            </div>
+
             <!-- Секция полей заказа (изначально скрыта) -->
             <div id="orderFieldsSection" style="display: none;">
                 <div class="cart-form-section">
