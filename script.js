@@ -56,47 +56,223 @@ const categories = [
 // --- Данные товаров с модификациями (без остатков), описанием и изображениями для модификаций ---
 const products = [
     {
-        id: 1, name: "Смартфон", price: 24999, image: "https://via.placeholder.com/200x200?text=Смартфон_Основной", category: 'electronics',
-        description: "Мощный смартфон с отличной камерой и долгим временем автономной работы. Оснащен современным процессором и большим экраном AMOLED.",
-        modifications: [
-            { id: '1-black', name: 'Черный', price: 24999, image: "https://via.placeholder.com/200x200/000000/FFFFFF?text=Смартфон_Черный" },
-            { id: '1-white', name: 'Белый', price: 25999, image: "https://via.placeholder.com/200x200/FFFFFF/000000?text=Смартфон_Белый" },
-            { id: '1-blue', name: 'Синий', price: 24999, image: "https://via.placeholder.com/200x200/0000FF/FFFFFF?text=Смартфон_Синий" }
+        "id": 1,
+        "name": "Relay-4m",
+        "price": 9980.0,
+        "image": "https://static.tildacdn.com/tild6165-3763-4163-b039-306463646139/1.png",
+        "category": "relay",
+        "description": "Master-блок модульной системы – самостоятельное устройство.",
+        "modifications": []
+    },
+    {
+        "id": 2,
+        "name": "Relay-4S",
+        "price": 3080.0,
+        "image": "https://static.tildacdn.com/tild3038-6438-4332-b836-326335333465/HiTE_PRO_CASE-1_11.png",
+        "category": "relay",
+        "description": "Slave-блок модульной системы – зависимое устройство.",
+        "modifications": []
+    },
+    {
+        "id": 3,
+        "name": "Двухканальный сенсорный радиовыключатель SN-R2",
+        "price": 3380.0,
+        "image": "https://static.tildacdn.com/tild3033-3931-4635-b532-303335346366/sk-snr2.jpg",
+        "category": "switch",
+        "description": "Закругленные углы",
+        "modifications": [
+            {
+                "id": "3-1",
+                "name": "Бежевый",
+                "price": 3380.0,
+                "image": "https://static.tildacdn.com/tild3033-3931-4635-b532-303335346366/sk-snr2.jpg"
+            },
+            {
+                "id": "3-2",
+                "name": "Черный",
+                "price": 3380.0,
+                "image": "https://static.tildacdn.com/tild3262-3164-4534-a439-336336656434/1snr2.jpg"
+            },
+            {
+                "id": "3-3",
+                "name": "Белый",
+                "price": 3380.0,
+                "image": "https://static.tildacdn.com/tild6239-6235-4630-a330-623030613064/wh-snr2.jpg"
+            },
+            {
+                "id": "3-4",
+                "name": "Алюминиевый",
+                "price": 3380.0,
+                "image": "https://static.tildacdn.com/tild3832-3761-4662-b466-323463323433/al_snr2.jpg"
+            },
+            {
+                "id": "3-5",
+                "name": "Серый",
+                "price": 3380.0,
+                "image": "https://static.tildacdn.com/tild6133-3535-4135-a237-643861336265/ser_snr2.jpg"
+            },
+            {
+                "id": "3-6",
+                "name": "Графит",
+                "price": 3380.0,
+                "image": "https://static.tildacdn.com/tild6333-6436-4931-a534-653334646139/graf_snr2.jpg"
+            },
+            {
+                "id": "3-7",
+                "name": "Слоновая кость",
+                "price": 3380.0,
+                "image": "https://static.tildacdn.com/tild6262-6439-4761-b434-613564613363/slon_snr2.jpg"
+            },
+            {
+                "id": "3-8",
+                "name": "Светло-серый",
+                "price": 3380.0,
+                "image": "https://static.tildacdn.com/tild6165-3734-4630-a337-613236366265/svser_snr2.jpg"
+            },
+            {
+                "id": "3-9",
+                "name": "Серо-голубой",
+                "price": 3380.0,
+                "image": "https://static.tildacdn.com/tild3264-6461-4131-b066-316565653439/sergol_snr2.jpg"
+            },
+            {
+                "id": "3-10",
+                "name": "Светло-коричневый",
+                "price": 3380.0,
+                "image": "https://static.tildacdn.com/tild6364-3033-4637-b736-323735366237/svkor_snr2.jpg"
+            },
+            {
+                "id": "3-11",
+                "name": "Темно-коричневый",
+                "price": 3380.0,
+                "image": "https://static.tildacdn.com/tild3062-3861-4332-b161-613961393161/temnkor_snr2.jpg"
+            }
         ]
     },
     {
-        id: 2, name: "Ноутбук", price: 59999, image: "https://via.placeholder.com/200x200?text=Ноутбук_Основной", category: 'electronics',
-        description: "Производительный ноутбук для работы и игр. Отлично подходит для профессионалов и студентов. Большой объем памяти и высокая скорость работы.",
-        modifications: [
-            { id: '2-basic', name: 'Базовая конфигурация', price: 59999, image: "https://via.placeholder.com/200x200?text=Ноутбук_Базовый" },
-            { id: '2-pro', name: 'Профессиональная', price: 74999, image: "https://via.placeholder.com/200x200?text=Ноутбук_Про" }
+        "id": 4,
+        "name": "Одноканальный сенсорный радиовыключатель SN-R1",
+        "price": 2980.0,
+        "image": "https://static.tildacdn.com/tild3734-3963-4030-b061-373235646263/bl-snr1.jpg",
+        "category": "switch",
+        "description": "Закругленные углы",
+        "modifications": [
+            {
+                "id": "4-1",
+                "name": "Бежевый",
+                "price": 2980.0,
+                "image": "https://static.tildacdn.com/tild3430-6632-4437-b630-653565393064/sk-snr1.jpg"
+            },
+            {
+                "id": "4-2",
+                "name": "Черный",
+                "price": 2980.0,
+                "image": "https://static.tildacdn.com/tild3734-3963-4030-b061-373235646263/bl-snr1.jpg"
+            },
+            {
+                "id": "4-3",
+                "name": "Белый",
+                "price": 2980.0,
+                "image": "https://static.tildacdn.com/tild3933-6263-4530-b537-623737303932/wh-snr1.jpg"
+            },
+            {
+                "id": "4-4",
+                "name": "Алюминиевый",
+                "price": 2980.0,
+                "image": "https://static.tildacdn.com/tild6132-6138-4930-b431-663731656662/al_snr1.jpg"
+            },
+            {
+                "id": "4-5",
+                "name": "Серый",
+                "price": 2980.0,
+                "image": "https://static.tildacdn.com/tild6339-6339-4737-b534-353631336335/ser_snr1.jpg"
+            },
+            {
+                "id": "4-6",
+                "name": "Графит",
+                "price": 2980.0,
+                "image": "https://static.tildacdn.com/tild3963-6237-4234-b033-346535393032/graf_snr1.jpg"
+            },
+            {
+                "id": "4-7",
+                "name": "Слоновая кость",
+                "price": 2980.0,
+                "image": "https://static.tildacdn.com/tild3039-6664-4166-b864-326237353564/slon_snr1.jpg"
+            },
+            {
+                "id": "4-8",
+                "name": "Светло-серый",
+                "price": 2980.0,
+                "image": "https://static.tildacdn.com/tild6232-3238-4661-b435-333966323737/svser_snr1.jpg"
+            },
+            {
+                "id": "4-9",
+                "name": "Серо-голубой",
+                "price": 2980.0,
+                "image": "https://static.tildacdn.com/tild6131-3036-4666-a230-633064633439/svgol_snr1.jpg"
+            },
+            {
+                "id": "4-10",
+                "name": "Светло-коричневый",
+                "price": 2980.0,
+                "image": "https://static.tildacdn.com/tild3335-6431-4431-b362-353736666666/svkor_snr1.jpg"
+            },
+            {
+                "id": "4-11",
+                "name": "Темно-коричневый",
+                "price": 2980.0,
+                "image": "https://static.tildacdn.com/tild3961-6462-4664-b563-356262636238/temnkor_snr1.jpg"
+            }
         ]
     },
     {
-        id: 3, name: "Футболка", price: 1499, image: "https://via.placeholder.com/200x200?text=Футболка_Основная", category: 'clothing',
-        description: "Удобная и стильная футболка из натуральных материалов. Идеально подходит для повседневной носки. Доступна в различных цветах и размерах.",
-        modifications: [
-            { id: '3-m-red', name: 'Красная (M)', price: 1499, image: "https://via.placeholder.com/200x200/FF0000/FFFFFF?text=Футболка_M_Красная" },
-            { id: '3-m-blue', name: 'Синяя (M)', price: 1499, image: "https://via.placeholder.com/200x200/0000FF/FFFFFF?text=Футболка_M_Синяя" },
-            { id: '3-l-red', name: 'Красная (L)', price: 1499, image: "https://via.placeholder.com/200x200/FF0000/FFFFFF?text=Футболка_L_Красная" },
-            { id: '3-l-blue', name: 'Синяя (L)', price: 1499, image: "https://via.placeholder.com/200x200/0000FF/FFFFFF?text=Футболка_L_Синяя" }
+        "id": 5,
+        "name": "Сервер умного дома Gateway",
+        "price": 9980.0,
+        "image": "https://static.tildacdn.com/stor3461-3031-4532-b539-366236666236/68601724.png",
+        "category": "server",
+        "description": "Используется для беспроводного управления электроприборами через приложение HiTE PRO",
+        "modifications": []
+    },
+    {
+        "id": 6,
+        "name": "Умная розетка Smart Socket",
+        "price": 3080.0,
+        "image": "https://static.tildacdn.com/stor3730-3161-4563-b162-346536643032/49671049.jpg",
+        "category": "relay",
+        "description": "Может использоваться в составе умного дома HiTE PRO или отдельно, в связке с выключателями и пультами",
+        "modifications": [
+            {
+                "id": "6-1",
+                "name": "Белый",
+                "price": 3080.0,
+                "image": "https://static.tildacdn.com/stor3730-3161-4563-b162-346536643032/49671049.jpg"
+            },
+            {
+                "id": "6-2",
+                "name": "Черный",
+                "price": 3080.0,
+                "image": "https://static.tildacdn.com/stor3730-3161-4563-b162-346536643032/49671049.jpg"
+            }
         ]
     },
     {
-        id: 4, name: "Часы", price: 12999, image: "https://via.placeholder.com/200x200?text=Часы_Основные", category: 'electronics',
-        description: "Элегантные и функциональные часы с множеством полезных функций. Точное время, изысканный дизайн и прочный корпус. Отличный аксессуар для делового образа.",
-        modifications: [
-            { id: '4-silver', name: 'Серебристые', price: 12999, image: "https://via.placeholder.com/200x200/C0C0C0/000000?text=Часы_Серебро" },
-            { id: '4-gold', name: 'Золотые', price: 13999, image: "https://via.placeholder.com/200x200/FFD700/000000?text=Часы_Золото" }
-        ]
+        "id": 7,
+        "name": "Одноканальное радиореле Relay-F1",
+        "price": 3480.0,
+        "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+        "category": "relay",
+        "description": "Подключается в разрыв фазы и к существующему обычному выключателю",
+        "modifications": []
     },
     {
-        id: 5, name: "Роман", price: 499, image: "https://via.placeholder.com/200x200?text=Роман_Основной", category: 'books',
-        description: "Увлекательный роман, который не отпустит до последней страницы. Интересный сюжет, глубокие персонажи и непредсказуемая развязка. Погрузитесь в мир приключений!",
-        modifications: [
-            { id: '5-paper', name: 'Бумажная обложка', price: 499, image: "https://via.placeholder.com/200x200/FFFFE0/000000?text=Роман_Бумага" },
-            { id: '5-hard', name: 'Твердая обложка', price: 699, image: "https://via.placeholder.com/200x200/A9A9A9/FFFFFF?text=Роман_Твердый_Переплет" }
-        ]
+        "id": 8,
+        "name": "Двухканальное радиореле Relay-F2",
+        "price": 4980.0,
+        "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+        "category": "relay",
+        "description": "Подключается в разрыв фазы и к существующему обычному выключателю",
+        "modifications": []
     }
 ];
 
