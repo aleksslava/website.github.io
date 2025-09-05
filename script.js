@@ -22,12 +22,6 @@ function getBonusFromUrl() {
     return bonusParam ? parseInt(bonusParam, 10) : 0;
 }
 
-// --- Получение id из URL ---
-function getIdFromUrl() {
-    const idParams = new URLSearchParams(window.location.search);
-    const idParam = urlParams.get('id');
-    return idParam ? parseInt(idParam, 10) : 0;
-}
 
 // --- Отправка данных в Telegram Bot ---
 function sendToTelegramBot(data) {
