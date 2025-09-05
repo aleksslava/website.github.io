@@ -22,6 +22,13 @@ function getBonusFromUrl() {
     return bonusParam ? parseInt(bonusParam, 10) : 0;
 }
 
+// --- Получение id из URL ---
+function getIdFromUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const idParam = urlParams.get('id');
+    return idParam ? parseInt(idParam, 10) : 0;
+}
+
 // --- Отправка данных в Telegram Bot ---
 function sendToTelegramBot(data) {
     if (tg && tg.sendData) {
@@ -153,6 +160,7 @@ const detailsModalDescription = document.getElementById('detailsModalDescription
 document.addEventListener('DOMContentLoaded', () => {
     // Получаем бонусы из URL
     userBonuses = getBonusFromUrl();
+    userId = getIdFromUrl()
     bonusValue.textContent = userBonuses.toLocaleString('ru-RU');
 
     renderCategories();
@@ -721,6 +729,7 @@ function handleGenerateKp(e) {
     const kpPayload = {
         type: "commercial_offer", // Тип запроса
         bonuses: userBonuses, // Бонусы из URL
+        user: userId
         items: cart.map(item => ({
             productId: item.productId,
             modificationId: item.modificationId,
@@ -771,6 +780,7 @@ function handleCheckout(e) {
     const orderPayload = {
         type: "order", // Тип запроса
         bonuses: userBonuses, // Бонусы из URL
+        user: userId
         items: cart.map(item => ({
             productId: item.productId,
             modificationId: item.modificationId,
