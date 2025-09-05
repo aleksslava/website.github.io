@@ -47,55 +47,56 @@ function sendToTelegramBot(data) {
 // --- Данные категорий ---
 const categories = [
     { id: 'all', name: 'Все товары' },
-    { id: 'electronics', name: 'Электроника' },
-    { id: 'clothing', name: 'Одежда' },
-    { id: 'books', name: 'Книги' },
-    { id: 'home', name: 'Дом' }
+    { id: 'relay', name: 'Блоки управления' },
+    { id: 'switch', name: 'Радиовыключатели' },
+    { id: 'server', name: 'Сервер умного дома' },
+    { id: 'other', name: 'Сопутствующие' }
 ];
 
 // --- Данные товаров с модификациями (без остатков) и описанием ---
 const products = [
     {
-        id: 1, name: "Смартфон", price: 24999, image: "https://via.placeholder.com/200x200?text=Смартфон", category: 'electronics',
-        description: "Мощный смартфон с отличной камерой и долгим временем автономной работы. Оснащен современным процессором и большим экраном AMOLED.",
+        id: 1, name: "Сервер умного дома Gateway", price: 9980, image: "https://www.hite-pro.ru/wp-content/uploads/2024/11/525AB693-2B9C-42E1-BBAA-7FE8F6E88F1B-1-140x140.webp", category: 'server',
+        description: "Сервер умного дома используется для беспроводного управления через приложение HiTE PRO или голосовых помощников Алиса, Siri, Маруся, Салют и Google Assistant. Все блоки управления и датчики HiTE PRO можно связать с сервером Gateway.",
         modifications: [
-            { id: '1-black', name: 'Черный', price: 24999 },
-            { id: '1-white', name: 'Белый', price: 25999 },
-            { id: '1-blue', name: 'Синий', price: 24999 }
+            { id: '1-server', name: 'Сервер умного дома Gateway', price: 9980 },
         ]
     },
     {
-        id: 2, name: "Ноутбук", price: 59999, image: "https://via.placeholder.com/200x200?text=Ноутбук", category: 'electronics',
-        description: "Производительный ноутбук для работы и игр. Отлично подходит для профессионалов и студентов. Большой объем памяти и высокая скорость работы.",
+        id: 2, name: "Блок управления Relay-4M", price: 9980, image: "https://www.hite-pro.ru/wp-content/uploads/2023/03/004-htpr-1-140x140.webp", category: 'relay',
+        description: "Мастер-устройство модульной системы. Блок радиореле используется для беспроводного управления 4-мя линиями электрической цепи и имеет шину данных для подключения ведомых устройств HiTE PRO Relay-S. Получая сигнал от передатчиков блок замыкает/размыкает электрическую цепь. Монтируется на DIN-рейку в распределительном щите.",
         modifications: [
-            { id: '2-basic', name: 'Базовая конфигурация', price: 59999 },
-            { id: '2-pro', name: 'Профессиональная', price: 74999 }
+            { id: '2-relay4m', name: 'Блок управления Relay-4M', price: 9980 }
         ]
     },
     {
-        id: 3, name: "Футболка", price: 1499, image: "https://via.placeholder.com/200x200?text=Футболка", category: 'clothing',
-        description: "Удобная и стильная футболка из натуральных материалов. Идеально подходит для повседневной носки. Доступна в различных цветах и размерах.",
+        id: 3, name: "Блок управления Relay-1", price: 3080, image: "https://www.hite-pro.ru/wp-content/uploads/2021/11/001-htpr-1-2-1-140x140.webp", category: 'relay',
+        description: "Компактный одноканальный блок радиореле Relay-1 подключается к светильнику или другому электроприбору, которым нужно управлять с помощью передатчиков или сервера умного дома HiTE PRO. Получая от них сигнал блок Relay-1 замыкает/размыкает электрическую цепь.",
         modifications: [
-            { id: '3-m-red', name: 'Красная (M)', price: 1499 },
-            { id: '3-m-blue', name: 'Синяя (M)', price: 1499 },
-            { id: '3-l-red', name: 'Красная (L)', price: 1499 },
-            { id: '3-l-blue', name: 'Синяя (L)', price: 1499 }
+            { id: '3-220V', name: '220 В', price: 3080 },
+            { id: '3-220VC', name: '12 В', price: 3080 },
+            { id: '3-12V', name: '220 В сухой контакт', price: 3080 },
+            { id: '3-12VC', name: '12 В сухой контакт', price: 3080 }
         ]
     },
     {
-        id: 4, name: "Часы", price: 12999, image: "https://via.placeholder.com/200x200?text=Часы", category: 'electronics',
-        description: "Элегантные и функциональные часы с множеством полезных функций. Точное время, изысканный дизайн и прочный корпус. Отличный аксессуар для делового образа.",
+        id: 4, name: "Радиовыключатель Base-1", price: 1880, image: "https://www.hite-pro.ru/wp-content/uploads/2023/07/21-800x800.jpg", category: 'switch',
+        description: "Одноканальный беспроводной выключатель без фиксации клавиши (звонкового типа).",
         modifications: [
-            { id: '4-silver', name: 'Серебристые', price: 12999 },
-            { id: '4-gold', name: 'Золотые', price: 13999 }
+            { id: '4-white', name: 'Белый', price: 1880 },
+            { id: '4-yellow', name: 'Бежевый', price: 1880 },
+            { id: '4-grey', name: 'Серый', price: 2380 },
+            { id: '4-black', name: 'Черный', price: 2380 }
         ]
     },
     {
-        id: 5, name: "Роман", price: 499, image: "https://via.placeholder.com/200x200?text=Роман", category: 'books',
-        description: "Увлекательный роман, который не отпустит до последней страницы. Интересный сюжет, глубокие персонажи и непредсказуемая развязка. Погрузитесь в мир приключений!",
+        id: 5, name: "Радиовыключатель Base-2", price: 2280, image: "https://www.hite-pro.ru/wp-content/uploads/2023/07/18-800x800.jpg", category: 'switch',
+        description: "Двухканальный беспроводной выключатель без фиксации клавиши (звонкового типа).",
         modifications: [
-            { id: '5-paper', name: 'Бумажная обложка', price: 499 },
-            { id: '5-hard', name: 'Твердая обложка', price: 699 }
+            { id: '5-white', name: 'Белый', price: 2280 },
+            { id: '5-yellow', name: 'Бежевый', price: 2280 },
+            { id: '5-grey', name: 'Серый', price: 2780 },
+            { id: '5-black', name: 'Черный', price: 2780 }
         ]
     }
 ];
