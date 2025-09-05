@@ -961,3 +961,98 @@ input, textarea {
         font-size: 0.85rem;
     }
 }
+
+/* --- Стили для группы радио-кнопок --- */
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Расстояние между опциями */
+    margin-top: 8px;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--tg-theme-text-color);
+    position: relative;
+    padding-left: 30px; /* Место для кастомной радио-кнопки */
+    user-select: none; /* Запрет выделения текста */
+}
+
+/* Скрываем оригинальную радио-кнопку */
+.radio-label input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Кастомный радио-кружок */
+.radio-custom {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 20px;
+    width: 20px;
+    background-color: var(--tg-theme-bg-color);
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+/* Внутренний кружок при выборе */
+.radio-custom::after {
+    content: "";
+    position: absolute;
+    display: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--tg-theme-button-color);
+}
+
+/* При наведении */
+.radio-label:hover input ~ .radio-custom {
+    border-color: var(--tg-theme-link-color);
+}
+
+/* При выборе */
+.radio-label input:checked ~ .radio-custom {
+    border-color: var(--tg-theme-button-color);
+    background-color: var(--tg-theme-bg-color);
+}
+
+.radio-label input:checked ~ .radio-custom::after {
+    display: block;
+}
+
+/* Адаптация под мобильные устройства для радио-кнопок */
+@media (max-width: 480px) {
+    .radio-group {
+        gap: 8px;
+        margin-top: 6px;
+    }
+
+    .radio-label {
+        font-size: 0.9rem;
+        padding-left: 28px;
+    }
+
+    .radio-custom {
+        height: 18px;
+        width: 18px;
+    }
+
+    .radio-custom::after {
+        width: 9px;
+        height: 9px;
+    }
+}
