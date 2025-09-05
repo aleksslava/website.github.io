@@ -160,7 +160,6 @@ const detailsModalDescription = document.getElementById('detailsModalDescription
 document.addEventListener('DOMContentLoaded', () => {
     // Получаем бонусы из URL
     userBonuses = getBonusFromUrl();
-    userId = getIdFromUrl();
     bonusValue.textContent = userBonuses.toLocaleString('ru-RU');
 
     renderCategories();
@@ -729,7 +728,6 @@ function handleGenerateKp(e) {
     const kpPayload = {
         type: "commercial_offer", // Тип запроса
         bonuses: userBonuses, // Бонусы из URL
-        user: userId,
         items: cart.map(item => ({
             productId: item.productId,
             modificationId: item.modificationId,
@@ -780,7 +778,6 @@ function handleCheckout(e) {
     const orderPayload = {
         type: "order", // Тип запроса
         bonuses: userBonuses, // Бонусы из URL
-        user: userId,
         items: cart.map(item => ({
             productId: item.productId,
             modificationId: item.modificationId,
