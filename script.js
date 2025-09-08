@@ -1787,7 +1787,7 @@ const products = [
     {
         "id": 75,
         "name": "Взломостойкий умный замок KEYWAY SL300",
-        "price": 0.0,
+        "price": 23850,
         "image": "https://static.tildacdn.com/stor6166-3234-4233-b464-366337636437/99455674.jpg",
         "category": "lock",
         "description": "Получите персональный промокод на скидку 30%",
@@ -1796,7 +1796,7 @@ const products = [
     {
         "id": 76,
         "name": "Умный замок премиум-класса KEYWAY SL500",
-        "price": 0.0,
+        "price": 47700,
         "image": "https://static.tildacdn.com/stor3466-6330-4939-a461-353530623633/88944724.jpg",
         "category": "lock",
         "description": "Получите персональный промокод на скидку 30%",
