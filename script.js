@@ -65,173 +65,39 @@ const categories = [
 const products = [
     {
         "id": 1,
-        "name": "Relay-4m",
-        "price": 9980.0,
-        "image": "https://static.tildacdn.com/tild6165-3763-4163-b039-306463646139/1.png",
-        "category": "relay",
-        "description": "Master-блок модульной системы – самостоятельное устройство.",
+        "name": "Стартовый набор партнера ЛАЙТ",
+        "price": 2980.0,
+        "image": "https://static.tildacdn.com/stor3462-3864-4161-b464-316331383064/10193371.jpg",
+        "category": "komplekt",
+        "description": "Выключатель и реле – протестируйте Хайт Про у себя дома",
         "modifications": []
     },
     {
         "id": 2,
-        "name": "Relay-4S",
-        "price": 3080.0,
-        "image": "https://static.tildacdn.com/tild3038-6438-4332-b836-326335333465/HiTE_PRO_CASE-1_11.png",
-        "category": "relay",
-        "description": "Slave-блок модульной системы – зависимое устройство.",
+        "name": "Стартовый набор партнера БЕЙЗ",
+        "price": 9980.0,
+        "image": "https://static.tildacdn.com/stor3962-3036-4835-a135-313733316161/41887660.png",
+        "category": "komplekt",
+        "description": "Комплект для первого знакомства с устройствами HiTE PRO",
         "modifications": []
     },
     {
         "id": 3,
-        "name": "Двухканальный сенсорный радиовыключатель SN-R2",
-        "price": 3380.0,
-        "image": "https://static.tildacdn.com/tild3033-3931-4635-b532-303335346366/sk-snr2.jpg",
-        "category": "switch",
-        "description": "Закругленные углы",
-        "modifications": [
-            {
-                "id": "3-1",
-                "name": "Бежевый",
-                "price": 3380.0,
-                "image": "https://static.tildacdn.com/tild3033-3931-4635-b532-303335346366/sk-snr2.jpg"
-            },
-            {
-                "id": "3-2",
-                "name": "Черный",
-                "price": 3380.0,
-                "image": "https://static.tildacdn.com/tild3262-3164-4534-a439-336336656434/1snr2.jpg"
-            },
-            {
-                "id": "3-3",
-                "name": "Белый",
-                "price": 3380.0,
-                "image": "https://static.tildacdn.com/tild6239-6235-4630-a330-623030613064/wh-snr2.jpg"
-            },
-            {
-                "id": "3-4",
-                "name": "Алюминиевый",
-                "price": 3380.0,
-                "image": "https://static.tildacdn.com/tild3832-3761-4662-b466-323463323433/al_snr2.jpg"
-            },
-            {
-                "id": "3-5",
-                "name": "Серый",
-                "price": 3380.0,
-                "image": "https://static.tildacdn.com/tild6133-3535-4135-a237-643861336265/ser_snr2.jpg"
-            },
-            {
-                "id": "3-6",
-                "name": "Графит",
-                "price": 3380.0,
-                "image": "https://static.tildacdn.com/tild6333-6436-4931-a534-653334646139/graf_snr2.jpg"
-            },
-            {
-                "id": "3-7",
-                "name": "Слоновая кость",
-                "price": 3380.0,
-                "image": "https://static.tildacdn.com/tild6262-6439-4761-b434-613564613363/slon_snr2.jpg"
-            },
-            {
-                "id": "3-8",
-                "name": "Светло-серый",
-                "price": 3380.0,
-                "image": "https://static.tildacdn.com/tild6165-3734-4630-a337-613236366265/svser_snr2.jpg"
-            },
-            {
-                "id": "3-9",
-                "name": "Серо-голубой",
-                "price": 3380.0,
-                "image": "https://static.tildacdn.com/tild3264-6461-4131-b066-316565653439/sergol_snr2.jpg"
-            },
-            {
-                "id": "3-10",
-                "name": "Светло-коричневый",
-                "price": 3380.0,
-                "image": "https://static.tildacdn.com/tild6364-3033-4637-b736-323735366237/svkor_snr2.jpg"
-            },
-            {
-                "id": "3-11",
-                "name": "Темно-коричневый",
-                "price": 3380.0,
-                "image": "https://static.tildacdn.com/tild3062-3861-4332-b161-613961393161/temnkor_snr2.jpg"
-            }
-        ]
+        "name": "Билет на живое обучение в шоуруме HiTE PRO 27 сентября",
+        "price": 6000.0,
+        "image": "https://static.tildacdn.com/stor3832-3263-4465-a262-303764333265/35976172.png",
+        "category": "other",
+        "description": "Осталось 10 мест. Оффлайн-интенсив за 1 день. Идеально подойдёт тем, у кого ещё нет или совсем мало опыта в работе с HiTE PRO.",
+        "modifications": []
     },
     {
         "id": 4,
-        "name": "Одноканальный сенсорный радиовыключатель SN-R1",
-        "price": 2980.0,
-        "image": "https://static.tildacdn.com/tild3734-3963-4030-b061-373235646263/bl-snr1.jpg",
-        "category": "switch",
-        "description": "Закругленные углы",
-        "modifications": [
-            {
-                "id": "4-1",
-                "name": "Бежевый",
-                "price": 2980.0,
-                "image": "https://static.tildacdn.com/tild3430-6632-4437-b630-653565393064/sk-snr1.jpg"
-            },
-            {
-                "id": "4-2",
-                "name": "Черный",
-                "price": 2980.0,
-                "image": "https://static.tildacdn.com/tild3734-3963-4030-b061-373235646263/bl-snr1.jpg"
-            },
-            {
-                "id": "4-3",
-                "name": "Белый",
-                "price": 2980.0,
-                "image": "https://static.tildacdn.com/tild3933-6263-4530-b537-623737303932/wh-snr1.jpg"
-            },
-            {
-                "id": "4-4",
-                "name": "Алюминиевый",
-                "price": 2980.0,
-                "image": "https://static.tildacdn.com/tild6132-6138-4930-b431-663731656662/al_snr1.jpg"
-            },
-            {
-                "id": "4-5",
-                "name": "Серый",
-                "price": 2980.0,
-                "image": "https://static.tildacdn.com/tild6339-6339-4737-b534-353631336335/ser_snr1.jpg"
-            },
-            {
-                "id": "4-6",
-                "name": "Графит",
-                "price": 2980.0,
-                "image": "https://static.tildacdn.com/tild3963-6237-4234-b033-346535393032/graf_snr1.jpg"
-            },
-            {
-                "id": "4-7",
-                "name": "Слоновая кость",
-                "price": 2980.0,
-                "image": "https://static.tildacdn.com/tild3039-6664-4166-b864-326237353564/slon_snr1.jpg"
-            },
-            {
-                "id": "4-8",
-                "name": "Светло-серый",
-                "price": 2980.0,
-                "image": "https://static.tildacdn.com/tild6232-3238-4661-b435-333966323737/svser_snr1.jpg"
-            },
-            {
-                "id": "4-9",
-                "name": "Серо-голубой",
-                "price": 2980.0,
-                "image": "https://static.tildacdn.com/tild6131-3036-4666-a230-633064633439/svgol_snr1.jpg"
-            },
-            {
-                "id": "4-10",
-                "name": "Светло-коричневый",
-                "price": 2980.0,
-                "image": "https://static.tildacdn.com/tild3335-6431-4431-b362-353736666666/svkor_snr1.jpg"
-            },
-            {
-                "id": "4-11",
-                "name": "Темно-коричневый",
-                "price": 2980.0,
-                "image": "https://static.tildacdn.com/tild3961-6462-4664-b563-356262636238/temnkor_snr1.jpg"
-            }
-        ]
+        "name": "Каталог HiTE PRO",
+        "price": 1.0,
+        "image": "https://static.tildacdn.com/stor3335-3962-4232-a163-353032383535/78693873.jpg",
+        "category": "komplekt",
+        "description": "Печатный каталог альбомной ориентации. Дарим 1 каталог за каждые 5000 руб суммы заказа.",
+        "modifications": []
     },
     {
         "id": 5,
@@ -292,25 +158,25 @@ const products = [
         "modifications": [
             {
                 "id": "9-1",
-                "name": "Одноканальное радиореле Relay-1 | 220 В",
+                "name": "220 В",
                 "price": 3080.0,
                 "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
             },
             {
                 "id": "9-2",
-                "name": "Одноканальное радиореле Relay-1 | 12 В",
+                "name": "12 В",
                 "price": 3080.0,
                 "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
             },
             {
                 "id": "9-3",
-                "name": "Одноканальное радиореле Relay-1 | 12 В (сухой контакт)",
+                "name": "12 В (сухой контакт)",
                 "price": 3080.0,
                 "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
             },
             {
                 "id": "9-4",
-                "name": "Одноканальное радиореле Relay-1 (сухой контакт)",
+                "name": "220 В (сухой контакт)",
                 "price": 3080.0,
                 "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
             }
@@ -326,13 +192,13 @@ const products = [
         "modifications": [
             {
                 "id": "10-1",
-                "name": "Двухканальное радиореле Relay-2",
+                "name": "220 В",
                 "price": 4780.0,
                 "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
             },
             {
                 "id": "10-2",
-                "name": "Двухканальное радиореле Relay-2 (сухой контакт)",
+                "name": "220 В (сухой контакт)",
                 "price": 4780.0,
                 "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
             }
@@ -384,25 +250,25 @@ const products = [
         "modifications": [
             {
                 "id": "15-1",
-                "name": "Одноканальное радиореле Relay-DRIVE 220В",
+                "name": "220В",
                 "price": 3980.0,
                 "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
             },
             {
                 "id": "15-2",
-                "name": "Одноканальное радиореле Relay-DRIVE 12В",
+                "name": "12В",
                 "price": 3980.0,
                 "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
             },
             {
                 "id": "15-3",
-                "name": "Одноканальное радиореле Relay-DRIVE 220В (сухой контакт)",
+                "name": "220В (сухой контакт)",
                 "price": 3980.0,
                 "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
             },
             {
                 "id": "15-4",
-                "name": "Одноканальное радиореле Relay-DRIVE 12В (сухой контакт)",
+                "name": "12В (сухой контакт)",
                 "price": 3980.0,
                 "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
             }
@@ -445,13 +311,13 @@ const products = [
         "modifications": [
             {
                 "id": "19-1",
-                "name": "Одноклавишный радиовыключатель звонкового типа LE-1 - Слоновая кость",
+                "name": "Слоновая кость",
                 "price": 1480.0,
                 "image": "https://static.tildacdn.com/tild3962-6133-4966-b731-656337656262/2le-1.jpg"
             },
             {
                 "id": "19-2",
-                "name": "Одноклавишный радиовыключатель звонкового типа LE-1 - Белый",
+                "name": "Белый",
                 "price": 1480.0,
                 "image": "https://static.tildacdn.com/tild3232-6365-4663-a162-393230323539/1le-1.jpg"
             }
@@ -467,13 +333,13 @@ const products = [
         "modifications": [
             {
                 "id": "20-1",
-                "name": "Двухклавишный радиовыключатель звонкового типа LE-2 - Слоновая кость",
+                "name": "Слоновая кость",
                 "price": 1780.0,
                 "image": "https://static.tildacdn.com/tild6562-3535-4637-b562-313032663962/le-22.jpg"
             },
             {
                 "id": "20-2",
-                "name": "Двухклавишный радиовыключатель звонкового типа LE-2 - Белый",
+                "name": "Белый",
                 "price": 1780.0,
                 "image": "https://static.tildacdn.com/tild6637-3537-4232-b866-343238343761/1le-2.jpg"
             }
@@ -561,19 +427,19 @@ const products = [
         "modifications": [
             {
                 "id": "29-1",
-                "name": "Шаровой кран с электроприводом Bugatti Pro 220В - 1/2",
+                "name": " Bugatti Pro 220В - 1/2",
                 "price": 8361.0,
                 "image": "https://static.tildacdn.com/tild3539-3032-4536-b632-643838323039/1.png"
             },
             {
                 "id": "29-2",
-                "name": "Шаровой кран с электроприводом Bugatti Pro 220В - 3/4",
+                "name": "Bugatti Pro 220В - 3/4",
                 "price": 8991.0,
                 "image": "https://static.tildacdn.com/tild3539-3032-4536-b632-643838323039/1.png"
             },
             {
                 "id": "29-3",
-                "name": "Шаровой кран с электроприводом Bugatti Pro 220В - 1",
+                "name": "Bugatti Pro 220В - 1",
                 "price": 11961.0,
                 "image": "https://static.tildacdn.com/tild3539-3032-4536-b632-643838323039/1.png"
             }
@@ -589,19 +455,19 @@ const products = [
         "modifications": [
             {
                 "id": "30-1",
-                "name": "Шаровой кран с электроприводом Bugatti Pro 12В - 1/2",
+                "name": " Bugatti Pro 12В - 1/2",
                 "price": 8991.0,
                 "image": "https://static.tildacdn.com/tild6234-6135-4731-b334-393033633335/2.png"
             },
             {
                 "id": "30-2",
-                "name": "Шаровой кран с электроприводом Bugatti Pro 12В - 3/4",
+                "name": "Bugatti Pro 12В - 3/4",
                 "price": 9531.0,
                 "image": "https://static.tildacdn.com/tild6234-6135-4731-b334-393033633335/2.png"
             },
             {
                 "id": "30-3",
-                "name": "Шаровой кран с электроприводом Bugatti Pro 12В - 1",
+                "name": "Bugatti Pro 12В - 1",
                 "price": 10791.0,
                 "image": "https://static.tildacdn.com/tild6234-6135-4731-b334-393033633335/2.png"
             }
@@ -617,25 +483,25 @@ const products = [
         "modifications": [
             {
                 "id": "31-1",
-                "name": "Шаровой кран с электроприводом PROFI 220В - 1/2",
+                "name": "PROFI 220В - 1/2",
                 "price": 7641.0,
                 "image": "https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png"
             },
             {
                 "id": "31-2",
-                "name": "Шаровой кран с электроприводом PROFI 220В - 3/4",
+                "name": "PROFI 220В - 3/4",
                 "price": 8451.0,
                 "image": "https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png"
             },
             {
                 "id": "31-3",
-                "name": "Шаровой кран с электроприводом PROFI 220В - 1",
+                "name": "PROFI 220В - 1",
                 "price": 9531.0,
                 "image": "https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png"
             },
             {
                 "id": "31-4",
-                "name": "Шаровой кран с электроприводом PROFI 220В - 1 1/4",
+                "name": "PROFI 220В - 1 1/4",
                 "price": 10161.0,
                 "image": "https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png"
             }
@@ -651,25 +517,25 @@ const products = [
         "modifications": [
             {
                 "id": "32-1",
-                "name": "Шаровой кран с электроприводом PROFI 12В - 1/2",
+                "name": "PROFI 12В - 1/2",
                 "price": 7191.0,
                 "image": "https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png"
             },
             {
                 "id": "32-2",
-                "name": "Шаровой кран с электроприводом PROFI 12В - 3/4",
+                "name": "PROFI 12В - 3/4",
                 "price": 7641.0,
                 "image": "https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png"
             },
             {
                 "id": "32-3",
-                "name": "Шаровой кран с электроприводом PROFI 12В - 1",
+                "name": "PROFI 12В - 1",
                 "price": 9531.0,
                 "image": "https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png"
             },
             {
                 "id": "32-4",
-                "name": "Шаровой кран с электроприводом PROFI 12В - 1 1/4",
+                "name": "PROFI 12В - 1 1/4",
                 "price": 10161.0,
                 "image": "https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png"
             }
@@ -685,19 +551,19 @@ const products = [
         "modifications": [
             {
                 "id": "33-1",
-                "name": "Шаровой кран с электроприводом MK 220В - 1/2",
+                "name": "MK 220В - 1/2",
                 "price": 5481.0,
                 "image": "https://static.tildacdn.com/tild6135-6133-4166-b563-363938353635/---65-455x455.png"
             },
             {
                 "id": "33-2",
-                "name": "Шаровой кран с электроприводом MK 220В - 3/4",
+                "name": "MK 220В - 3/4",
                 "price": 5931.0,
                 "image": "https://static.tildacdn.com/tild6135-6133-4166-b563-363938353635/---65-455x455.png"
             },
             {
                 "id": "33-3",
-                "name": "Шаровой кран с электроприводом MK 220В - 1",
+                "name": "MK 220В - 1",
                 "price": 7191.0,
                 "image": "https://static.tildacdn.com/tild6135-6133-4166-b563-363938353635/---65-455x455.png"
             }
@@ -713,13 +579,13 @@ const products = [
         "modifications": [
             {
                 "id": "34-1",
-                "name": "Шаровой кран с электроприводом MK 12В - 1/2",
+                "name": "MK 12В - 1/2",
                 "price": 5481.0,
                 "image": "https://static.tildacdn.com/tild6135-6133-4166-b563-363938353635/---65-455x455.png"
             },
             {
                 "id": "34-2",
-                "name": "Шаровой кран с электроприводом MK 12В - 3/4",
+                "name": "MK 12В - 3/4",
                 "price": 5931.0,
                 "image": "https://static.tildacdn.com/tild6135-6133-4166-b563-363938353635/---65-455x455.png"
             }
@@ -753,37 +619,37 @@ const products = [
         "modifications": [
             {
                 "id": "37-1",
-                "name": "Раздвижной карниз с электроприводом Novo N21 - 1 м",
+                "name": "Novo N21 - 1 м",
                 "price": 0.0,
                 "image": "https://static.tildacdn.com/tild6366-3363-4532-a439-623965646531/N21_1.png"
             },
             {
                 "id": "37-2",
-                "name": "Раздвижной карниз с электроприводом Novo N21 - 2 м",
+                "name": "Novo N21 - 2 м",
                 "price": 0.0,
                 "image": "https://static.tildacdn.com/tild6366-3363-4532-a439-623965646531/N21_1.png"
             },
             {
                 "id": "37-3",
-                "name": "Раздвижной карниз с электроприводом Novo N21 - 3 м",
+                "name": "Novo N21 - 3 м",
                 "price": 0.0,
                 "image": "https://static.tildacdn.com/tild6366-3363-4532-a439-623965646531/N21_1.png"
             },
             {
                 "id": "37-4",
-                "name": "Раздвижной карниз с электроприводом Novo N21 - 4 м",
+                "name": "Novo N21 - 4 м",
                 "price": 0.0,
                 "image": "https://static.tildacdn.com/tild6366-3363-4532-a439-623965646531/N21_1.png"
             },
             {
                 "id": "37-5",
-                "name": "Раздвижной карниз с электроприводом Novo N21 - 5 м",
+                "name": "Novo N21 - 5 м",
                 "price": 0.0,
                 "image": "https://static.tildacdn.com/tild6366-3363-4532-a439-623965646531/N21_1.png"
             },
             {
                 "id": "37-6",
-                "name": "Раздвижной карниз с электроприводом Novo N21 - 6 м",
+                "name": "Novo N21 - 6 м",
                 "price": 0.0,
                 "image": "https://static.tildacdn.com/tild6366-3363-4532-a439-623965646531/N21_1.png"
             }
@@ -826,19 +692,19 @@ const products = [
         "modifications": [
             {
                 "id": "41-1",
-                "name": "Одноканальный сенсорный радиовыключатель SN-C - Черный",
+                "name": "Черный",
                 "price": 2980.0,
                 "image": "https://static.tildacdn.com/tild3761-6534-4132-b134-333731313636/---36-455x455.png"
             },
             {
                 "id": "41-2",
-                "name": "Одноканальный сенсорный радиовыключатель SN-C - Белый",
+                "name": "Белый",
                 "price": 2980.0,
                 "image": "https://static.tildacdn.com/tild3632-6366-4637-a262-663161323231/---33-455x455.png"
             },
             {
                 "id": "41-3",
-                "name": "Одноканальный сенсорный радиовыключатель SN-C - Алюминиевый",
+                "name": "Алюминиевый",
                 "price": 2980.0,
                 "image": "https://static.tildacdn.com/tild6233-3335-4939-a434-613164666465/---34-455x455.png"
             }
@@ -863,25 +729,25 @@ const products = [
         "modifications": [
             {
                 "id": "43-1",
-                "name": "Сервопривод электротермический Valtec - 220 В - Нормально-Закрытый",
+                "name": "220 В - Нормально-Закрытый",
                 "price": 1800.0,
                 "image": "https://static.tildacdn.com/tild3662-3837-4733-b664-376162326139/VTTE30430_2.jpg"
             },
             {
                 "id": "43-2",
-                "name": "Сервопривод электротермический Valtec - 24 В - Нормально-Закрытый",
+                "name": "24 В - Нормально-Закрытый",
                 "price": 1800.0,
                 "image": "https://static.tildacdn.com/tild3662-3837-4733-b664-376162326139/VTTE30430_2.jpg"
             },
             {
                 "id": "43-3",
-                "name": "Сервопривод электротермический Valtec - 220 В - Нормально-Открытый",
+                "name": "220 В - Нормально-Открытый",
                 "price": 1800.0,
                 "image": "https://static.tildacdn.com/tild3662-3837-4733-b664-376162326139/VTTE30430_2.jpg"
             },
             {
                 "id": "43-4",
-                "name": "Сервопривод электротермический Valtec - 24 В - Нормально-Открытый",
+                "name": "24 В - Нормально-Открытый",
                 "price": 1800.0,
                 "image": "https://static.tildacdn.com/tild3662-3837-4733-b664-376162326139/VTTE30430_2.jpg"
             }
@@ -897,25 +763,25 @@ const products = [
         "modifications": [
             {
                 "id": "44-1",
-                "name": "Клапан термостатический Valtec - Прямой - 1/2",
+                "name": "Прямой - 1/2",
                 "price": 1148.0,
                 "image": "https://static.tildacdn.com/tild3938-6564-4634-b231-323335333535/VT031NR_0.jpg"
             },
             {
                 "id": "44-2",
-                "name": "Клапан термостатический Valtec - Угловой - 1/2",
+                "name": "Угловой - 1/2",
                 "price": 1127.0,
                 "image": "https://static.tildacdn.com/tild3938-6564-4634-b231-323335333535/VT031NR_0.jpg"
             },
             {
                 "id": "44-3",
-                "name": "Клапан термостатический Valtec - Прямой - 3/4",
+                "name": "Прямой - 3/4",
                 "price": 1470.0,
                 "image": "https://static.tildacdn.com/tild3938-6564-4634-b231-323335333535/VT031NR_0.jpg"
             },
             {
                 "id": "44-4",
-                "name": "Клапан термостатический Valtec - Угловой - 3/4",
+                "name": "Угловой - 3/4",
                 "price": 1807.0,
                 "image": "https://static.tildacdn.com/tild3938-6564-4634-b231-323335333535/VT031NR_0.jpg"
             }
@@ -941,21 +807,88 @@ const products = [
     },
     {
         "id": 47,
-        "name": "Стартовый набор партнера ЛАЙТ",
-        "price": 2980.0,
-        "image": "https://static.tildacdn.com/stor3462-3864-4161-b464-316331383064/10193371.jpg",
-        "category": "komplekt",
-        "description": "Выключатель и реле – протестируйте Хайт Про у себя дома",
+        "name": "Relay-4m",
+        "price": 9980.0,
+        "image": "https://static.tildacdn.com/tild6165-3763-4163-b039-306463646139/1.png",
+        "category": "relay",
+        "description": "Master-блок модульной системы – самостоятельное устройство.",
         "modifications": []
     },
     {
         "id": 48,
-        "name": "Каталог HiTE PRO",
-        "price": 200.0,
-        "image": "https://static.tildacdn.com/stor3335-3962-4232-a163-353032383535/78693873.jpg",
-        "category": "komplekt",
-        "description": "Печатный каталог альбомной ориентации",
-        "modifications": []
+        "name": "Одноканальный сенсорный радиовыключатель SN-R1",
+        "price": 2980.0,
+        "image": "https://static.tildacdn.com/tild3734-3963-4030-b061-373235646263/bl-snr1.jpg",
+        "category": "switch",
+        "description": "Закругленные углы",
+        "modifications": [
+            {
+                "id": "48-1",
+                "name": "Бежевый",
+                "price": 2980.0,
+                "image": "https://static.tildacdn.com/tild3430-6632-4437-b630-653565393064/sk-snr1.jpg"
+            },
+            {
+                "id": "48-2",
+                "name": "Черный",
+                "price": 2980.0,
+                "image": "https://static.tildacdn.com/tild3734-3963-4030-b061-373235646263/bl-snr1.jpg"
+            },
+            {
+                "id": "48-3",
+                "name": "Белый",
+                "price": 2980.0,
+                "image": "https://static.tildacdn.com/tild3933-6263-4530-b537-623737303932/wh-snr1.jpg"
+            },
+            {
+                "id": "48-4",
+                "name": "Алюминиевый",
+                "price": 2980.0,
+                "image": "https://static.tildacdn.com/tild6132-6138-4930-b431-663731656662/al_snr1.jpg"
+            },
+            {
+                "id": "48-5",
+                "name": "Серый",
+                "price": 2980.0,
+                "image": "https://static.tildacdn.com/tild6339-6339-4737-b534-353631336335/ser_snr1.jpg"
+            },
+            {
+                "id": "48-6",
+                "name": "Графит",
+                "price": 2980.0,
+                "image": "https://static.tildacdn.com/tild3963-6237-4234-b033-346535393032/graf_snr1.jpg"
+            },
+            {
+                "id": "48-7",
+                "name": "Слоновая кость",
+                "price": 2980.0,
+                "image": "https://static.tildacdn.com/tild3039-6664-4166-b864-326237353564/slon_snr1.jpg"
+            },
+            {
+                "id": "48-8",
+                "name": "Светло-серый",
+                "price": 2980.0,
+                "image": "https://static.tildacdn.com/tild6232-3238-4661-b435-333966323737/svser_snr1.jpg"
+            },
+            {
+                "id": "48-9",
+                "name": "Серо-голубой",
+                "price": 2980.0,
+                "image": "https://static.tildacdn.com/tild6131-3036-4666-a230-633064633439/svgol_snr1.jpg"
+            },
+            {
+                "id": "48-10",
+                "name": "Светло-коричневый",
+                "price": 2980.0,
+                "image": "https://static.tildacdn.com/tild3335-6431-4431-b362-353736666666/svkor_snr1.jpg"
+            },
+            {
+                "id": "48-11",
+                "name": "Темно-коричневый",
+                "price": 2980.0,
+                "image": "https://static.tildacdn.com/tild3961-6462-4664-b563-356262636238/temnkor_snr1.jpg"
+            }
+        ]
     },
     {
         "id": 49,
@@ -994,25 +927,25 @@ const products = [
         "modifications": [
             {
                 "id": "52-1",
-                "name": "Одноклавишный радиовыключатель с клавишей без фиксации Base-1 - Белый",
+                "name": "Белый",
                 "price": 1780.0,
                 "image": "https://static.tildacdn.com/stor3865-3435-4331-a331-633732333863/24952004.png"
             },
             {
                 "id": "52-2",
-                "name": "Одноклавишный радиовыключатель с клавишей без фиксации Base-1 - Бежевый",
+                "name": "Бежевый",
                 "price": 1780.0,
                 "image": "https://static.tildacdn.com/stor3863-6463-4066-a361-396535343664/11513905.png"
             },
             {
                 "id": "52-3",
-                "name": "Одноклавишный радиовыключатель с клавишей без фиксации Base-1 - Серый (грифель)",
+                "name": "Серый (грифель)",
                 "price": 2180.0,
                 "image": "https://static.tildacdn.com/stor3433-3338-4739-a539-656435383164/91248115.png"
             },
             {
                 "id": "52-4",
-                "name": "Одноклавишный радиовыключатель с клавишей без фиксации Base-1 - Черный (карбон)",
+                "name": "Черный (карбон)",
                 "price": 2180.0,
                 "image": "https://static.tildacdn.com/stor6238-6232-4561-b666-336332626430/88521061.png"
             }
@@ -1028,25 +961,25 @@ const products = [
         "modifications": [
             {
                 "id": "53-1",
-                "name": "Двухклавишный радиовыключатель с клавишами без фиксации Base-2 - Белый",
+                "name": "Белый",
                 "price": 2180.0,
                 "image": "https://static.tildacdn.com/stor3963-3065-4539-b033-336563363133/22799452.png"
             },
             {
                 "id": "53-2",
-                "name": "Двухклавишный радиовыключатель с клавишами без фиксации Base-2 - Бежевый",
+                "name": "Бежевый",
                 "price": 2180.0,
                 "image": "https://static.tildacdn.com/stor3963-3065-4539-b033-336563363133/22799452.png"
             },
             {
                 "id": "53-3",
-                "name": "Двухклавишный радиовыключатель с клавишами без фиксации Base-2 - Серый (грифель)",
+                "name": "Серый (грифель)",
                 "price": 2580.0,
                 "image": "https://static.tildacdn.com/stor3963-3065-4539-b033-336563363133/22799452.png"
             },
             {
                 "id": "53-4",
-                "name": "Двухклавишный радиовыключатель с клавишами без фиксации Base-2 - Черный (карбон)",
+                "name": "Черный (карбон)",
                 "price": 2580.0,
                 "image": "https://static.tildacdn.com/stor3963-3065-4539-b033-336563363133/22799452.png"
             }
@@ -1062,25 +995,25 @@ const products = [
         "modifications": [
             {
                 "id": "54-1",
-                "name": "Одноклавишный радиовыключатель с фиксацией клавиши Base-1F - Белый",
+                "name": "Белый",
                 "price": 1780.0,
                 "image": "https://static.tildacdn.com/stor3865-3435-4331-a331-633732333863/24952004.png"
             },
             {
                 "id": "54-2",
-                "name": "Одноклавишный радиовыключатель с фиксацией клавиши Base-1F - Бежевый",
+                "name": "Бежевый",
                 "price": 1780.0,
                 "image": "https://static.tildacdn.com/stor3863-6463-4066-a361-396535343664/11513905.png"
             },
             {
                 "id": "54-3",
-                "name": "Одноклавишный радиовыключатель с фиксацией клавиши Base-1F - Серый (грифель)",
+                "name": "Серый (грифель)",
                 "price": 2180.0,
                 "image": "https://static.tildacdn.com/stor3433-3338-4739-a539-656435383164/91248115.png"
             },
             {
                 "id": "54-4",
-                "name": "Одноклавишный радиовыключатель с фиксацией клавиши Base-1F - Черный (карбон)",
+                "name": "Черный (карбон)",
                 "price": 2180.0,
                 "image": "https://static.tildacdn.com/stor6238-6232-4561-b666-336332626430/88521061.png"
             }
@@ -1096,25 +1029,25 @@ const products = [
         "modifications": [
             {
                 "id": "55-1",
-                "name": "Двухклавишный радиовыключатель с фиксацией клавиш Base-2F - Белый",
+                "name": "Белый",
                 "price": 2180.0,
                 "image": "https://static.tildacdn.com/stor6462-6661-4165-b961-313961343935/48504921.png"
             },
             {
                 "id": "55-2",
-                "name": "Двухклавишный радиовыключатель с фиксацией клавиш Base-2F - Бежевый",
+                "name": "Бежевый",
                 "price": 2180.0,
                 "image": "https://static.tildacdn.com/stor6462-6661-4165-b961-313961343935/48504921.png"
             },
             {
                 "id": "55-3",
-                "name": "Двухклавишный радиовыключатель с фиксацией клавиш Base-2F - Серый (грифель)",
+                "name": "Серый (грифель)",
                 "price": 2580.0,
                 "image": "https://static.tildacdn.com/stor6462-6661-4165-b961-313961343935/48504921.png"
             },
             {
                 "id": "55-4",
-                "name": "Двухклавишный радиовыключатель с фиксацией клавиш Base-2F - Черный (карбон)",
+                "name": "Черный (карбон)",
                 "price": 2580.0,
                 "image": "https://static.tildacdn.com/stor6462-6661-4165-b961-313961343935/48504921.png"
             }
@@ -1140,11 +1073,11 @@ const products = [
     },
     {
         "id": 58,
-        "name": "Стартовый набор партнера БЕЙЗ",
-        "price": 9980.0,
-        "image": "https://static.tildacdn.com/stor3962-3036-4835-a135-313733316161/41887660.png",
-        "category": "komplekt",
-        "description": "Комплект для первого знакомства с устройствами HiTE PRO",
+        "name": "Relay-4S",
+        "price": 3080.0,
+        "image": "https://static.tildacdn.com/tild3038-6438-4332-b836-326335333465/HiTE_PRO_CASE-1_11.png",
+        "category": "relay",
+        "description": "Slave-блок модульной системы – зависимое устройство.",
         "modifications": []
     },
     {
@@ -1481,14 +1414,14 @@ const products = [
         "modifications": [
             {
                 "id": "64-1",
-                "name": "Терморегулятор Caleo С927 - Белый",
-                "price": 10392,
+                "name": "Белый",
+                "price": 10392.0,
                 "image": "https://static.tildacdn.com/stor3431-3131-4235-b936-636435313332/49049039.png"
             },
             {
                 "id": "64-2",
-                "name": "Терморегулятор Caleo С927 - Черный",
-                "price": 10392,
+                "name": "Черный",
+                "price": 10392.0,
                 "image": "https://static.tildacdn.com/stor3836-3361-4466-b837-656433306263/40479136.png"
             }
         ]
@@ -1711,13 +1644,13 @@ const products = [
         "modifications": [
             {
                 "id": "66-1",
-                "name": "Терморегулятор Caleo С430 - Белый",
+                "name": "Белый",
                 "price": 1813.0,
                 "image": "https://static.tildacdn.com/stor6433-3931-4063-b931-663539353731/26813793.jpg"
             },
             {
                 "id": "66-2",
-                "name": "Терморегулятор Caleo С430 - Черный",
+                "name": "Черный",
                 "price": 1813.0,
                 "image": "https://static.tildacdn.com/stor3936-3130-4264-b362-356466663833/39881704.jpg"
             }
@@ -1812,31 +1745,31 @@ const products = [
         "modifications": [
             {
                 "id": "73-1",
-                "name": "Футболка HiTE PRO темно-синяя - S",
+                "name": "темно-синяя - S",
                 "price": 1600.0,
                 "image": "https://static.tildacdn.com/stor3933-6134-4531-b262-343332666463/42512992.png"
             },
             {
                 "id": "73-2",
-                "name": "Футболка HiTE PRO темно-синяя - M",
+                "name": "темно-синяя - M",
                 "price": 1600.0,
                 "image": "https://static.tildacdn.com/stor3933-6134-4531-b262-343332666463/42512992.png"
             },
             {
                 "id": "73-3",
-                "name": "Футболка HiTE PRO темно-синяя - L",
+                "name": "темно-синяя - L",
                 "price": 1600.0,
                 "image": "https://static.tildacdn.com/stor3933-6134-4531-b262-343332666463/42512992.png"
             },
             {
                 "id": "73-4",
-                "name": "Футболка HiTE PRO темно-синяя - XL",
+                "name": "темно-синяя - XL",
                 "price": 1600.0,
                 "image": "https://static.tildacdn.com/stor3933-6134-4531-b262-343332666463/42512992.png"
             },
             {
                 "id": "73-5",
-                "name": "Футболка HiTE PRO темно-синяя - XXL",
+                "name": "темно-синяя - XXL",
                 "price": 1600.0,
                 "image": "https://static.tildacdn.com/stor3933-6134-4531-b262-343332666463/42512992.png"
             }
@@ -1871,12 +1804,79 @@ const products = [
     },
     {
         "id": 77,
-        "name": "Билет на живое обучение в шоуруме HiTE PRO 27 сентября",
-        "price": 6000.0,
-        "image": "https://static.tildacdn.com/stor3832-3263-4465-a262-303764333265/35976172.png",
-        "category": "other",
-        "description": "Осталось 10 мест. Оффлайн-интенсив за 1 день. Идеально подойдёт тем, у кого ещё нет или совсем мало опыта в работе с HiTE PRO.",
-        "modifications": []
+        "name": "Двухканальный сенсорный радиовыключатель SN-R2",
+        "price": 3380.0,
+        "image": "https://static.tildacdn.com/tild3033-3931-4635-b532-303335346366/sk-snr2.jpg",
+        "category": "switch",
+        "description": "Закругленные углы",
+        "modifications": [
+            {
+                "id": "77-1",
+                "name": "Бежевый",
+                "price": 3380.0,
+                "image": "https://static.tildacdn.com/tild3033-3931-4635-b532-303335346366/sk-snr2.jpg"
+            },
+            {
+                "id": "77-2",
+                "name": "Черный",
+                "price": 3380.0,
+                "image": "https://static.tildacdn.com/tild3262-3164-4534-a439-336336656434/1snr2.jpg"
+            },
+            {
+                "id": "77-3",
+                "name": "Белый",
+                "price": 3380.0,
+                "image": "https://static.tildacdn.com/tild6239-6235-4630-a330-623030613064/wh-snr2.jpg"
+            },
+            {
+                "id": "77-4",
+                "name": "Алюминиевый",
+                "price": 3380.0,
+                "image": "https://static.tildacdn.com/tild3832-3761-4662-b466-323463323433/al_snr2.jpg"
+            },
+            {
+                "id": "77-5",
+                "name": "Серый",
+                "price": 3380.0,
+                "image": "https://static.tildacdn.com/tild6133-3535-4135-a237-643861336265/ser_snr2.jpg"
+            },
+            {
+                "id": "77-6",
+                "name": "Графит",
+                "price": 3380.0,
+                "image": "https://static.tildacdn.com/tild6333-6436-4931-a534-653334646139/graf_snr2.jpg"
+            },
+            {
+                "id": "77-7",
+                "name": "Слоновая кость",
+                "price": 3380.0,
+                "image": "https://static.tildacdn.com/tild6262-6439-4761-b434-613564613363/slon_snr2.jpg"
+            },
+            {
+                "id": "77-8",
+                "name": "Светло-серый",
+                "price": 3380.0,
+                "image": "https://static.tildacdn.com/tild6165-3734-4630-a337-613236366265/svser_snr2.jpg"
+            },
+            {
+                "id": "77-9",
+                "name": "Серо-голубой",
+                "price": 3380.0,
+                "image": "https://static.tildacdn.com/tild3264-6461-4131-b066-316565653439/sergol_snr2.jpg"
+            },
+            {
+                "id": "77-10",
+                "name": "Светло-коричневый",
+                "price": 3380.0,
+                "image": "https://static.tildacdn.com/tild6364-3033-4637-b736-323735366237/svkor_snr2.jpg"
+            },
+            {
+                "id": "77-11",
+                "name": "Темно-коричневый",
+                "price": 3380.0,
+                "image": "https://static.tildacdn.com/tild3062-3861-4332-b161-613961393161/temnkor_snr2.jpg"
+            }
+        ]
     }
 ];
 
