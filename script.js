@@ -1482,13 +1482,13 @@ const products = [
             {
                 "id": "64-1",
                 "name": "Терморегулятор Caleo С927 - Белый",
-                "price": NaN,
+                "price": 10392,
                 "image": "https://static.tildacdn.com/stor3431-3131-4235-b936-636435313332/49049039.png"
             },
             {
                 "id": "64-2",
                 "name": "Терморегулятор Caleo С927 - Черный",
-                "price": NaN,
+                "price": 10392,
                 "image": "https://static.tildacdn.com/stor3836-3361-4466-b837-656433306263/40479136.png"
             }
         ]
