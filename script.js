@@ -415,32 +415,7 @@ const products = [
         "image": "https://static.tildacdn.com/tild6463-6231-4164-b366-643964316661/smartm.jpg",
         "category": "datchiki",
         "description": "Предоставляет информацию об уровне освещенности и движениях людей в помещении",
-        "modifications": [
-            {
-                "id": "15-1",
-                "name": "Одноканальное радиореле Relay-DRIVE 220В",
-                "price": 3980.0,
-                "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
-            },
-            {
-                "id": "15-2",
-                "name": "Одноканальное радиореле Relay-DRIVE 12В",
-                "price": 3980.0,
-                "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
-            },
-            {
-                "id": "15-3",
-                "name": "Одноканальное радиореле Relay-DRIVE 220В (сухой контакт)",
-                "price": 3980.0,
-                "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
-            },
-            {
-                "id": "15-4",
-                "name": "Одноканальное радиореле Relay-DRIVE 12В (сухой контакт)",
-                "price": 3980.0,
-                "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
-            }
-        ]
+        "modifications": []
     },
     {
         "id": 17,
@@ -449,32 +424,7 @@ const products = [
         "image": "https://static.tildacdn.com/tild6266-3938-4565-b863-656632393366/sma.jpg",
         "category": "datchiki",
         "description": "Предоставляет информацию о температуре и влажности помещения<br /><br />",
-        "modifications": [
-            {
-                "id": "15-1",
-                "name": "Одноканальное радиореле Relay-DRIVE 220В",
-                "price": 3980.0,
-                "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
-            },
-            {
-                "id": "15-2",
-                "name": "Одноканальное радиореле Relay-DRIVE 12В",
-                "price": 3980.0,
-                "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
-            },
-            {
-                "id": "15-3",
-                "name": "Одноканальное радиореле Relay-DRIVE 220В (сухой контакт)",
-                "price": 3980.0,
-                "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
-            },
-            {
-                "id": "15-4",
-                "name": "Одноканальное радиореле Relay-DRIVE 12В (сухой контакт)",
-                "price": 3980.0,
-                "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
-            }
-        ]
+        "modifications": []
     },
     {
         "id": 18,
@@ -483,32 +433,7 @@ const products = [
         "image": "https://static.tildacdn.com/tild6164-6332-4233-b461-373132663764/check.jpg",
         "category": "datchiki",
         "description": "Позволяет контролировать положение (открыто или закрыто) подвижных элементов",
-        "modifications": [
-            {
-                "id": "15-1",
-                "name": "Одноканальное радиореле Relay-DRIVE 220В",
-                "price": 3980.0,
-                "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
-            },
-            {
-                "id": "15-2",
-                "name": "Одноканальное радиореле Relay-DRIVE 12В",
-                "price": 3980.0,
-                "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
-            },
-            {
-                "id": "15-3",
-                "name": "Одноканальное радиореле Relay-DRIVE 220В (сухой контакт)",
-                "price": 3980.0,
-                "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
-            },
-            {
-                "id": "15-4",
-                "name": "Одноканальное радиореле Relay-DRIVE 12В (сухой контакт)",
-                "price": 3980.0,
-                "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
-            }
-        ]
+        "modifications": []
     },
     {
         "id": 19,
