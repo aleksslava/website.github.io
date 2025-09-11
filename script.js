@@ -1074,7 +1074,7 @@ const products = [
     {
         "id": 58,
         "name": "Relay-4S",
-        "price": 3080.0,
+        "price": 8980.0,
         "image": "https://static.tildacdn.com/tild3038-6438-4332-b836-326335333465/HiTE_PRO_CASE-1_11.png",
         "category": "relay",
         "description": "Slave-блок модульной системы – зависимое устройство.",
