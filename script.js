@@ -1996,7 +1996,7 @@ function handleDeliveryMethodChange() {
     if (selectedMethod === 'courier' || selectedMethod === 'pickup_point') {
         deliveryAddressSection.style.display = 'block';
         if (selectedMethod === 'pickup_point') {
-            deliveryAddressNote.textContent = 'Выберите пункт выдачи СДЭК или Яндекс на карте.';
+            deliveryAddressNote.textContent = 'Введите адрес пункта выдачи СДЭК или Яндекс.';
         } else {
             deliveryAddressNote.textContent = '';
         }
