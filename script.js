@@ -82,15 +82,6 @@ const products = [
         "modifications": []
     },
     {
-        "id": 3,
-        "name": "Билет на живое обучение в шоуруме HiTE PRO 27 сентября",
-        "price": 6000.0,
-        "image": "https://static.tildacdn.com/stor3832-3263-4465-a262-303764333265/35976172.png",
-        "category": "other",
-        "description": "Осталось 3 места. Оффлайн-интенсив за 1 день. Идеально подойдёт тем, у кого ещё нет или совсем мало опыта в работе с HiTE PRO.",
-        "modifications": []
-    },
-    {
         "id": 4,
         "name": "Каталог HiTE PRO",
         "price": 1.0,
