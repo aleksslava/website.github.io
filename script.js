@@ -17,10 +17,12 @@ function getUrlParams() {
     const urlParams = new URLSearchParams(window.location.search);
     const bonusParam = urlParams.get('bonus');
     const idParam = urlParams.get('id');
+    const discontParam = urlParams.get('discont'); // Новый параметр
     
     return {
         bonuses: bonusParam ? parseInt(bonusParam, 10) : 0,
-        userId: idParam || null // ID будет строкой или null, если не задан
+        userId: idParam || null, // ID будет строкой или null, если не задан
+         discont: discontParam ? parseFloat(discontParam) : 0 // Парсим как число с плавающей точкой
     };
 }
 
@@ -48,1824 +50,4907 @@ function sendToTelegramBot(data) {
 const categories = [
     { id: 'all', name: 'Все товары' },
     { id: 'relay', name: 'Блоки управления' },
-    { id: 'switch', name: 'Радиовыключатели' },
-    { id: 'server', name: 'Сервер умного дома' },
-    { id: 'datchiki', name: 'Датчики' },
-    { id: 'antenna', name: 'Антенны' },
+    { id: 'switch', name: 'Выключатели' },
     { id: 'komplekt', name: 'Комплекты' },
-    { id: 'kran', name: 'Шаровые краны' },
-    { id: 'karniz', name: 'Электрокарнизы' },
+    { id: 'datchiki', name: 'Датчики' },
+    { id: 'server', name: 'Сервер умного дома' },
     { id: 'warm_floor', name: 'Теплый пол' },
-    { id: 'lock', name: 'Умный замок' },
-    { id: 'other', name: 'Сопутствующие товары' }
-    
+    { id: 'lock', name: 'Умные замки' },
+    { id: 'kran', name: 'Шаровые краны' },
+    { id: 'other', name: 'Сопутствующее' },
 ];
 
-// --- Данные товаров с модификациями (без остатков), описанием и изображениями для модификаций ---
+// --- Данные товаров с модификациями (без остатков), описанием, изображениями и деталями для модификаций ---
 const products = [
     {
-        "id": 1,
-        "name": "Стартовый набор партнера ЛАЙТ",
-        "price": 2980.0,
-        "image": "https://static.tildacdn.com/stor3462-3864-4161-b464-316331383064/10193371.jpg",
-        "category": "komplekt",
-        "description": "Выключатель и реле – протестируйте Хайт Про у себя дома",
-        "modifications": []
-    },
-    {
-        "id": 2,
-        "name": "Стартовый набор партнера БЕЙЗ",
-        "price": 9980.0,
-        "image": "https://static.tildacdn.com/stor3962-3036-4835-a135-313733316161/41887660.png",
-        "category": "komplekt",
-        "description": "Комплект для первого знакомства с устройствами HiTE PRO",
-        "modifications": []
-    },
-    {
-        "id": 4,
-        "name": "Каталог HiTE PRO",
-        "price": 1.0,
-        "image": "https://static.tildacdn.com/stor3335-3962-4232-a163-353032383535/78693873.jpg",
-        "category": "komplekt",
-        "description": "Печатный каталог альбомной ориентации. Дарим 1 каталог за каждые 5000 руб суммы заказа.",
-        "modifications": []
-    },
-    {
-        "id": 5,
-        "name": "Сервер умного дома Gateway",
-        "price": 9980.0,
-        "image": "https://static.tildacdn.com/stor3461-3031-4532-b539-366236666236/68601724.png",
-        "category": "server",
-        "description": "Используется для беспроводного управления электроприборами через приложение HiTE PRO",
-        "modifications": []
-    },
-    {
-        "id": 6,
-        "name": "Умная розетка Smart Socket",
-        "price": 3080.0,
-        "image": "https://static.tildacdn.com/stor3730-3161-4563-b162-346536643032/49671049.jpg",
-        "category": "relay",
-        "description": "Может использоваться в составе умного дома HiTE PRO или отдельно, в связке с выключателями и пультами",
-        "modifications": [
+        "id":3,
+        "name":"Билет на живое обучение в шоуруме HiTE PRO 27 сентября",
+        "price":6000.0,
+        "image":"https://static.tildacdn.com/stor3832-3263-4465-a262-303764333265/35976172.png",
+        "category":"other",
+        "description":"Осталось 10 мест. Оффлайн-интенсив за 1 день. Идеально подойдёт тем, у кого ещё нет или совсем мало опыта в работе с HiTE PRO.",
+        "modifications":[
             {
-                "id": "6-1",
-                "name": "Белый",
-                "price": 3080.0,
-                "image": "https://static.tildacdn.com/stor3730-3161-4563-b162-346536643032/49671049.jpg"
-            },
-            {
-                "id": "6-2",
-                "name": "Черный",
-                "price": 3080.0,
-                "image": "https://static.tildacdn.com/stor3730-3161-4563-b162-346536643032/49671049.jpg"
+                "id":"300012",
+                "name":"Билет на живое обучение в шоуруме HiTE PRO 27 сентября",
+                "price":6000.0,
+                "image":"https://static.tildacdn.com/stor3832-3263-4465-a262-303764333265/35976172.png",
+                "specifications":{
+                    "Дата":"27 сентября"
+                },
+                "description":"Программа\n- Повторение базовой теории;\n- Подбор оборудования;\n- Монтаж и базовая настройка блоков управления;\n- Подключение выключателей и датчиков;\n- Регистрация сервера, добавление устройств и подключение к Алисе.\n\nФормат\nЛабораторная работа с учебным стендом, методичкой и опытным наставником. Группа до 10 человек (по 2 на стенд).\n\nДля кого данное обучение?\nИдеально для тех, у кого нет или совсем мало опыта работы с устройствами HiTE PRO. Покрутите в руках все устройства, настроите их под присмотром сотрудника HiTE PRO.",
+                "instructions":{}
             }
         ]
     },
     {
-        "id": 7,
-        "name": "Одноканальное радиореле Relay-F1",
-        "price": 3480.0,
-        "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
-        "category": "relay",
-        "description": "Подключается в разрыв фазы и к существующему обычному выключателю",
-        "modifications": []
-    },
-    {
-        "id": 8,
-        "name": "Двухканальное радиореле Relay-F2",
-        "price": 4980.0,
-        "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
-        "category": "relay",
-        "description": "Подключается в разрыв фазы и к существующему обычному выключателю",
-        "modifications": []
-    },
-    {
-        "id": 9,
-        "name": "Одноканальное радиореле Relay-1",
-        "price": 3080.0,
-        "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
-        "category": "relay",
-        "description": "Подключается к светильнику или другому прибору, которым нужно управлять",
-        "modifications": [
+        "id":1,
+        "name":"Стартовый набор партнера ЛАЙТ",
+        "price":2980.0,
+        "image":"https://static.tildacdn.com/stor3462-3864-4161-b464-316331383064/10193371.jpg",
+        "category":"komplekt",
+        "description":"Выключатель и реле – протестируйте Хайт Про у себя дома",
+        "modifications":[
             {
-                "id": "9-1",
-                "name": "220 В",
-                "price": 3080.0,
-                "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
+                "id":"296594",
+                "name":"Белый",
+                "price":2980.0,
+                "image":"https://static.tildacdn.com/stor3462-3864-4161-b464-316331383064/10193371.jpg",
+                "specifications":{
+                    "Блок управления":"Relay-1",
+                    "Выключатель":"Base-1 (белый)"
+                },
+                "description":"Протестируйте устройства HiTE PRO у себя дома!\n1. Установите блок управления;\n2. Свяжите радиовыключатель с блоком управления;\n3. Управляйте светом с помощью беспроводного выключателя.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/shop/goods/blok-upravleniya-relay-1-2",
+                    "video":"https://vk.com/video-140176277_456239585?list=ln-zCmQvFQGm9f2f4pwOI"
+                }
             },
             {
-                "id": "9-2",
-                "name": "12 В",
-                "price": 3080.0,
-                "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
+                "id":"296596",
+                "name":"Бежевый",
+                "price":2980.0,
+                "image":"https://static.tildacdn.com/stor3462-3864-4161-b464-316331383064/10193371.jpg",
+                "specifications":{
+                    "Блок управления":"Relay-1",
+                    "Выключатель":"Base-1 (бежевый)"
+                },
+                "description":"Протестируйте устройства HiTE PRO у себя дома!\n1. Установите блок управления;\n2. Свяжите радиовыключатель с блоком управления;\n3. Управляйте светом с помощью беспроводного выключателя.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/shop/goods/blok-upravleniya-relay-1-2",
+                    "video":"https://vk.com/video-140176277_456239585?list=ln-zCmQvFQGm9f2f4pwOI"
+                }
             },
             {
-                "id": "9-3",
-                "name": "12 В (сухой контакт)",
-                "price": 3080.0,
-                "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
+                "id":"296598",
+                "name":"Белый с Relay-F",
+                "price":2980.0,
+                "image":"https://static.tildacdn.com/stor3462-3864-4161-b464-316331383064/10193371.jpg",
+                "specifications":{
+                    "Блок управления":"Relay-F1",
+                    "Выключатель":"Base-1 (белый)"
+                },
+                "description":"Протестируйте устройства HiTE PRO у себя дома!\n1. Установите блок управления;\n2. Свяжите радиовыключатель с блоком управления;\n3. Управляйте светом с помощью беспроводного выключателя.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/shop/goods/blok-upravleniya-relay-f1",
+                    "video":"https://vk.com/video-140176277_456239585?list=ln-zCmQvFQGm9f2f4pwOI"
+                }
             },
             {
-                "id": "9-4",
-                "name": "220 В (сухой контакт)",
-                "price": 3080.0,
-                "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
+                "id":"296600",
+                "name":"Бежевый с Relay-F",
+                "price":2980.0,
+                "image":"https://static.tildacdn.com/stor3462-3864-4161-b464-316331383064/10193371.jpg",
+                "specifications":{
+                    "Блок управления":"Relay-F1",
+                    "Выключатель":"Base-1 (бежевый)"
+                },
+                "description":"Протестируйте устройства HiTE PRO у себя дома!\n1. Установите блок управления;\n2. Свяжите радиовыключатель с блоком управления;\n3. Управляйте светом с помощью беспроводного выключателя.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/shop/goods/blok-upravleniya-relay-f1",
+                    "video":"https://vk.com/video-140176277_456239585?list=ln-zCmQvFQGm9f2f4pwOI"
+                }
             }
         ]
     },
     {
-        "id": 10,
-        "name": "Двухканальное радиореле Relay-2",
-        "price": 4780.0,
-        "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
-        "category": "relay",
-        "description": "Подключается к светильнику или другому прибору, которым нужно управлять",
-        "modifications": [
+        "id":2,
+        "name":"Стартовый набор партнера БЕЙЗ",
+        "price":9980.0,
+        "image":"https://static.tildacdn.com/stor3962-3036-4835-a135-313733316161/41887660.png",
+        "category":"komplekt",
+        "description":"Комплект для первого знакомства с устройствами HiTE PRO",
+        "modifications":[
             {
-                "id": "10-1",
-                "name": "220 В",
-                "price": 4780.0,
-                "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
+                "id":"296440",
+                "name":"Белый с датчиком Smart Water",
+                "price":9980.0,
+                "image":"https://static.tildacdn.com/stor3962-3036-4835-a135-313733316161/41887660.png",
+                "specifications":{
+                    "Датчик":"Smart Water",
+                    "Выключатель":"Base-2 (белый)"
+                },
+                "description":"Протестируйте устройства HiTE PRO у себя дома!\n\nПорядок подключения набора:\n1. Установите Relay-F2 за проводной выключатель;\n2. Свяжите радиовыключатель Base-2 и радиомодуль UNI с блоком Relay-F2;\n3. Подключите сервер умного дома, создайте учетную запись;\n4. Добавьте в сервер выключатель, реле, радиомодуль и датчик.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/shop/goods/server-umnogo-doma-gateway",
+                    "video":"https://vk.com/video-140176277_456239585?list=ln-zCmQvFQGm9f2f4pwOI"
+                }
             },
             {
-                "id": "10-2",
-                "name": "220 В (сухой контакт)",
-                "price": 4780.0,
-                "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
+                "id":"296442",
+                "name":"Бежевый с датчиком Smart Water",
+                "price":9980.0,
+                "image":"https://static.tildacdn.com/stor3962-3036-4835-a135-313733316161/41887660.png",
+                "specifications":{
+                    "Датчик":"Smart Water",
+                    "Выключатель":"Base-2 (бежевый)"
+                },
+                "description":"Протестируйте устройства HiTE PRO у себя дома!\n\nПорядок подключения набора:\n1. Установите Relay-F2 за проводной выключатель;\n2. Свяжите радиовыключатель Base-2 и радиомодуль UNI с блоком Relay-F2;\n3. Подключите сервер умного дома, создайте учетную запись;\n4. Добавьте в сервер выключатель, реле, радиомодуль и датчик.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/shop/goods/server-umnogo-doma-gateway",
+                    "video":"https://vk.com/video-140176277_456239585?list=ln-zCmQvFQGm9f2f4pwOI"
+                }
+            },
+            {
+                "id":"296720",
+                "name":"Белый с датчиком Smart Air",
+                "price":9980.0,
+                "image":"https://static.tildacdn.com/stor3962-3036-4835-a135-313733316161/41887660.png",
+                "specifications":{
+                    "Датчик":"Smart Air",
+                    "Выключатель":"Base-2 (белый)"
+                },
+                "description":"Протестируйте устройства HiTE PRO у себя дома!\n\nПорядок подключения набора:\n1. Установите Relay-F2 за проводной выключатель;\n2. Свяжите радиовыключатель Base-2 и радиомодуль UNI с блоком Relay-F2;\n3. Подключите сервер умного дома, создайте учетную запись;\n4. Добавьте в сервер выключатель, реле, радиомодуль и датчик.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/shop/goods/server-umnogo-doma-gateway",
+                    "video":"https://vk.com/video-140176277_456239585?list=ln-zCmQvFQGm9f2f4pwOI"
+                }
+            },
+            {
+                "id":"296714",
+                "name":"Бежевый с датчиком Smart Air",
+                "price":9980.0,
+                "image":"https://static.tildacdn.com/stor3962-3036-4835-a135-313733316161/41887660.png",
+                "specifications":{
+                    "Датчик":"Smart Air",
+                    "Выключатель":"Base-2 (бежевый)"
+                },
+                "description":"Протестируйте устройства HiTE PRO у себя дома!\n\nПорядок подключения набора:\n1. Установите Relay-F2 за проводной выключатель;\n2. Свяжите радиовыключатель Base-2 и радиомодуль UNI с блоком Relay-F2;\n3. Подключите сервер умного дома, создайте учетную запись;\n4. Добавьте в сервер выключатель, реле, радиомодуль и датчик.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/shop/goods/server-umnogo-doma-gateway",
+                    "video":"https://vk.com/video-140176277_456239585?list=ln-zCmQvFQGm9f2f4pwOI"
+                }
+            },
+            {
+                "id":"296724",
+                "name":"Белый с датчиком Smart Checker",
+                "price":9980.0,
+                "image":"https://static.tildacdn.com/stor3962-3036-4835-a135-313733316161/41887660.png",
+                "specifications":{
+                    "Датчик":"Smart Checker",
+                    "Выключатель":"Base-2 (белый)"
+                },
+                "description":"Протестируйте устройства HiTE PRO у себя дома!\n\nПорядок подключения набора:\n1. Установите Relay-F2 за проводной выключатель;\n2. Свяжите радиовыключатель Base-2 и радиомодуль UNI с блоком Relay-F2;\n3. Подключите сервер умного дома, создайте учетную запись;\n4. Добавьте в сервер выключатель, реле, радиомодуль и датчик.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/shop/goods/server-umnogo-doma-gateway",
+                    "video":"https://vk.com/video-140176277_456239585?list=ln-zCmQvFQGm9f2f4pwOI"
+                }
+            },
+            {
+                "id":"296718",
+                "name":"Бежевый с датчиком Smart Checker",
+                "price":9980.0,
+                "image":"https://static.tildacdn.com/stor3962-3036-4835-a135-313733316161/41887660.png",
+                "specifications":{
+                    "Датчик":"Smart Checker",
+                    "Выключатель":"Base-2 (бежевый)"
+                },
+                "description":"Протестируйте устройства HiTE PRO у себя дома!\n\nПорядок подключения набора:\n1. Установите Relay-F2 за проводной выключатель;\n2. Свяжите радиовыключатель Base-2 и радиомодуль UNI с блоком Relay-F2;\n3. Подключите сервер умного дома, создайте учетную запись;\n4. Добавьте в сервер выключатель, реле, радиомодуль и датчик.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/shop/goods/server-umnogo-doma-gateway",
+                    "video":"https://vk.com/video-140176277_456239585?list=ln-zCmQvFQGm9f2f4pwOI"
+                }
+            },
+            {
+                "id":"296722",
+                "name":"Белый с датчиком Smart Motion",
+                "price":9980.0,
+                "image":"https://static.tildacdn.com/stor3962-3036-4835-a135-313733316161/41887660.png",
+                "specifications":{
+                    "Датчик":"Smart Motion",
+                    "Выключатель":"Base-2 (белый)"
+                },
+                "description":"Протестируйте устройства HiTE PRO у себя дома!\n\nПорядок подключения набора:\n1. Установите Relay-F2 за проводной выключатель;\n2. Свяжите радиовыключатель Base-2 и радиомодуль UNI с блоком Relay-F2;\n3. Подключите сервер умного дома, создайте учетную запись;\n4. Добавьте в сервер выключатель, реле, радиомодуль и датчик.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/shop/goods/server-umnogo-doma-gateway",
+                    "video":"https://vk.com/video-140176277_456239585?list=ln-zCmQvFQGm9f2f4pwOI"
+                }
+            },
+            {
+                "id":"296716",
+                "name":"Бежевый с датчиком Smart Motion",
+                "price":9980.0,
+                "image":"https://static.tildacdn.com/stor3962-3036-4835-a135-313733316161/41887660.png",
+                "specifications":{
+                    "Датчик":"Smart Motion",
+                    "Выключатель":"Base-2 (бежевый)"
+                },
+                "description":"Протестируйте устройства HiTE PRO у себя дома!\n\nПорядок подключения набора:\n1. Установите Relay-F2 за проводной выключатель;\n2. Свяжите радиовыключатель Base-2 и радиомодуль UNI с блоком Relay-F2;\n3. Подключите сервер умного дома, создайте учетную запись;\n4. Добавьте в сервер выключатель, реле, радиомодуль и датчик.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/shop/goods/server-umnogo-doma-gateway",
+                    "video":"https://vk.com/video-140176277_456239585?list=ln-zCmQvFQGm9f2f4pwOI"
+                }
             }
         ]
     },
     {
-        "id": 11,
-        "name": "Пульт ДУ DST-1",
-        "price": 1480.0,
-        "image": "https://static.tildacdn.com/tild3530-6662-4763-a233-653838303239/015-HTPR.png",
-        "category": "switch",
-        "description": "Предназначен для дистанционного управления радиореле HiTE PRO<br /><br />",
-        "modifications": []
-    },
-    {
-        "id": 12,
-        "name": "Пульт ДУ DST-4",
-        "price": 1980.0,
-        "image": "https://static.tildacdn.com/tild3031-6261-4265-b335-393135636437/016-HTPR_1.png",
-        "category": "switch",
-        "description": "Предназначен для дистанционного управления радиореле HiTE PRO<br /><br />",
-        "modifications": []
-    },
-    {
-        "id": 13,
-        "name": "Трехканальный радиомодуль UNI",
-        "price": 1980.0,
-        "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
-        "category": "switch",
-        "description": "Подключается к традиционному выключателю и делает его беспроводным",
-        "modifications": []
-    },
-    {
-        "id": 14,
-        "name": "Датчик питания Smart Power",
-        "price": 2480.0,
-        "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
-        "category": "datchiki",
-        "description": "Отправляет радиосигнал при подаче и при снятии напряжения с его клемм<br /><br />",
-        "modifications": []
-    },
-    {
-        "id": 15,
-        "name": "Одноканальное радиореле Relay-DRIVE",
-        "price": 3980.0,
-        "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
-        "category": "relay",
-        "description": "Relay-Drive 220В - Используется для беспроводного управления электроприводами переменного тока.\nRelay-Drive 12В - Используется для беспроводного управления электроприводами постоянного тока.\n",
-        "modifications": [
+        "id":75,
+        "name":"Взломостойкий умный замок KEYWAY SL300",
+        "price":23850.0,
+        "image":"https://static.tildacdn.com/stor6166-3234-4233-b464-366337636437/99455674.jpg",
+        "category":"lock",
+        "description":"Получите персональный промокод на скидку 30%",
+        "modifications":[
             {
-                "id": "15-1",
-                "name": "220В",
-                "price": 3980.0,
-                "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
-            },
-            {
-                "id": "15-2",
-                "name": "12В",
-                "price": 3980.0,
-                "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
-            },
-            {
-                "id": "15-3",
-                "name": "220В (сухой контакт)",
-                "price": 3980.0,
-                "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
-            },
-            {
-                "id": "15-4",
-                "name": "12В (сухой контакт)",
-                "price": 3980.0,
-                "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg"
+                "id":"306210",
+                "name":"KEYWAY SL300",
+                "price":23850.0,
+                "image":"https://static.tildacdn.com/stor6166-3234-4233-b464-366337636437/99455674.jpg",
+                "specifications":{},
+                "description":"Имеет пять способов разблокировки: по отпечатку пальца, с помощью ключ-карты, ввода пароля, механического ключа или через мобильное приложение.\n\nОснащен полупроводниковым датчиком отпечатка пальца со скоростью срабатывания менее 0,5 секунды. Специальная антивандальная конструкция делает замок взломостойким даже при сносе лицевой панели, а предохранительный ригель обеспечивает дополнительную защиту.\n\nКомплектация\n- Наружная панель замка\n- Внутренняя панель замка\n- Врезной замок\n- Личинка\n- Ответная планка\n- Механический ключ (2 шт.)\n- Ключ-карта (2 шт.)\n- Комплект креплений\n- Схема монтажных отверстий\n- Инструкция",
+                "instructions":{
+                    "pdf":"https://drive.google.com/file/d/1I2OxV8hd3vXxrodRGgrLQvby_q5lMIG8/view?usp=drive_link",
+                    "video":"https://keyway.online/"
+                }
             }
         ]
     },
     {
-        "id": 16,
-        "name": "Датчик движения и освещенности Smart Motion",
-        "price": 3280.0,
-        "image": "https://static.tildacdn.com/tild6463-6231-4164-b366-643964316661/smartm.jpg",
-        "category": "datchiki",
-        "description": "Предоставляет информацию об уровне освещенности и движениях людей в помещении",
-        "modifications": []
-    },
-    {
-        "id": 17,
-        "name": "Датчик температуры и влажности Smart Air",
-        "price": 2980.0,
-        "image": "https://static.tildacdn.com/tild6266-3938-4565-b863-656632393366/sma.jpg",
-        "category": "datchiki",
-        "description": "Предоставляет информацию о температуре и влажности помещения<br /><br />",
-        "modifications": []
-    },
-    {
-        "id": 18,
-        "name": "Датчик открытия Smart Checker",
-        "price": 1980.0,
-        "image": "https://static.tildacdn.com/tild6164-6332-4233-b461-373132663764/check.jpg",
-        "category": "datchiki",
-        "description": "Позволяет контролировать положение (открыто или закрыто) подвижных элементов",
-        "modifications": []
-    },
-    {
-        "id": 19,
-        "name": "Одноклавишный радиовыключатель звонкового типа LE-1",
-        "price": 1480.0,
-        "image": "https://static.tildacdn.com/tild3232-6365-4663-a162-393230323539/1le-1.jpg",
-        "category": "switch",
-        "description": "Совместим с рамками Legrand серии Etika",
-        "modifications": [
+        "id":76,
+        "name":"Умный замок премиум-класса KEYWAY SL500",
+        "price":47700.0,
+        "image":"https://static.tildacdn.com/stor3466-6330-4939-a461-353530623633/88944724.jpg",
+        "category":"lock",
+        "description":"Получите персональный промокод на скидку 30%",
+        "modifications":[
             {
-                "id": "19-1",
-                "name": "Слоновая кость",
-                "price": 1480.0,
-                "image": "https://static.tildacdn.com/tild3962-6133-4966-b731-656337656262/2le-1.jpg"
-            },
-            {
-                "id": "19-2",
-                "name": "Белый",
-                "price": 1480.0,
-                "image": "https://static.tildacdn.com/tild3232-6365-4663-a162-393230323539/1le-1.jpg"
+                "id":"306212",
+                "name":"KEYWAY SL500",
+                "price":47700.0,
+                "image":"https://static.tildacdn.com/stor3466-6330-4939-a461-353530623633/88944724.jpg",
+                "specifications":{},
+                "description":"Имеет семь способов разблокировки: распознавание по лицу, ладони и отпечатку пальца, а также ввод пароля, считывание ключ-карты, механический ключ и дистанционное управление через мобильное приложение.\n\nОснащен 4х-дюймовым HD-экраном, высокоточной системой сканирования лица и полупроводниковым датчиком отпечатка пальцев. С помощью приложения вы можете отслеживать и контролировать состояние двери в любое время и в любом месте.\n\nКомплектация\n- Наружная панель замка\n- Внутренняя панель замка\n- Врезной замок\n- Личинка\n- Ответная планка\n- Механический ключ (2 шт.)\n- Ключ-карта (2 шт.)\n- Комплект креплений\n- Схема монтажных отверстий\n- Инструкция",
+                "instructions":{
+                    "pdf":"https://drive.google.com/file/d/1jgRz6uyu0KIlZzOpJ6t6kyWb4RJk2tUm/view",
+                    "video":"https://keyway.online/"
+                }
             }
         ]
     },
     {
-        "id": 20,
-        "name": "Двухклавишный радиовыключатель звонкового типа LE-2",
-        "price": 1780.0,
-        "image": "https://static.tildacdn.com/tild6562-3535-4637-b562-313032663962/le-22.jpg",
-        "category": "switch",
-        "description": "Совместим с рамками Legrand серии Etika",
-        "modifications": [
+        "id":5,
+        "name":"Сервер умного дома Gateway",
+        "price":9980.0,
+        "image":"https://static.tildacdn.com/stor3461-3031-4532-b539-366236666236/68601724.png",
+        "category":"server",
+        "description":"Сервер умного дома используется для беспроводного управления через приложение HiTE PRO или голосовых помощников Алиса, Siri, Маруся, Салют и Google Assistant. Все блоки управления и датчики HiTE PRO можно связать с сервером Gateway.\n\nВ приложении HiTE PRO вы можете:\n\nуправлять отдельными устройствами, комнатами или зонами\nвидеть состояние всех устройств, а также график показаний данных с датчиков\nсоздавать автоматические сценарии управления светом, климатом, электроприводами и другими электроприборами – по времени, датчикам или событию\nполучать push-уведомления о запуске сценария или изменении состояния устройств, например, датчиков\nпросматривать видео с камер в онлайн-режиме\nПродается в комплекте с блоком питания.",
+        "modifications":[
             {
-                "id": "20-1",
-                "name": "Слоновая кость",
-                "price": 1780.0,
-                "image": "https://static.tildacdn.com/tild6562-3535-4637-b562-313032663962/le-22.jpg"
-            },
-            {
-                "id": "20-2",
-                "name": "Белый",
-                "price": 1780.0,
-                "image": "https://static.tildacdn.com/tild6637-3537-4232-b866-343238343761/1le-2.jpg"
+                "id":"207338",
+                "name":"Gateway",
+                "price":9980.0,
+                "image":"https://static.tildacdn.com/stor3461-3031-4532-b539-366236666236/68601724.png",
+                "specifications":{
+                    "Варианты подключения к интернету":"WiFi 2.4, RJ-45, USB 3G/4G hilink",
+                    "Питание":"5 В (type-c)",
+                    "Вес":"70 г",
+                    "Габариты":"71 х 73 х 27 мм"
+                },
+                "description":"Используется для беспроводного управления системой умного дома через приложение HiTE PRO или голосовые помощники Алиса, Маруся, Салют, Siri или Google Assistant.\n\nВсе блоки управления HiTE PRO можно связать с сервером.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/shop/goods/server-umnogo-doma-gateway",
+                    "video":"https://vk.com/video/@hite_pro?z=video-140176277_456239543%2Fclub140176277"
+                }
             }
         ]
     },
     {
-        "id": 21,
-        "name": "Антенна для Relay-4M",
-        "price": 980.0,
-        "image": "https://static.tildacdn.com/tild3134-6363-4436-b562-303038303564/JCXP_3m_RG174_SMA750.jpg",
-        "category": "relay",
-        "description": "Дополнительная внешняя антенна для блока Relay-4M<br /><br />",
-        "modifications": []
-    },
-    {
-        "id": 22,
-        "name": "Одноканальное радиореле Relay-LED",
-        "price": 3480.0,
-        "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
-        "category": "relay",
-        "description": "Блок с функцией диммирования для светодиодных лент 12/24В",
-        "modifications": []
-    },
-    {
-        "id": 23,
-        "name": "Датчик протечки воды Smart Water",
-        "price": 2980.0,
-        "image": "https://static.tildacdn.com/tild6134-3834-4832-b163-323039653438/Smart_Water1.png",
-        "category": "datchiki",
-        "description": "Беспроводной передатчик, позволяющий определять наличие и отсутствие протечки воды.",
-        "modifications": []
-    },
-    {
-        "id": 24,
-        "name": "Антенна HYBRID BOX",
-        "price": 8140.0,
-        "image": "https://static.tildacdn.com/tild3662-3564-4163-a631-616664323864/hybrid-box.jpg",
-        "category": "antenna",
-        "description": "nan",
-        "modifications": []
-    },
-    {
-        "id": 25,
-        "name": "Антенна DUO BOX",
-        "price": 10340.0,
-        "image": "https://static.tildacdn.com/tild3336-3461-4630-a664-643939333437/duo-box.jpg",
-        "category": "antenna",
-        "description": "nan",
-        "modifications": []
-    },
-    {
-        "id": 26,
-        "name": "Кабельная сборка SMA-SMA",
-        "price": 1100.0,
-        "image": "https://static.tildacdn.com/tild6461-6566-4131-a533-653932303664/cabel-sma-sma.jpg",
-        "category": "antenna",
-        "description": "nan",
-        "modifications": []
-    },
-    {
-        "id": 27,
-        "name": "Пигтейл CRC9/TS9",
-        "price": 400.0,
-        "image": "https://static.tildacdn.com/tild3733-6439-4735-b031-323238626664/pigtail.jpg",
-        "category": "antenna",
-        "description": "nan",
-        "modifications": []
-    },
-    {
-        "id": 28,
-        "name": "USB-удлинитель на 5 метров",
-        "price": 490.0,
-        "image": "https://static.tildacdn.com/tild3339-6633-4939-b539-373261656265/usb-udlin-10m.jpg",
-        "category": "antenna",
-        "description": "nan",
-        "modifications": []
-    },
-    {
-        "id": 29,
-        "name": "Шаровой кран с электроприводом Bugatti Pro 220В",
-        "price": 8361.0,
-        "image": "https://static.tildacdn.com/tild3539-3032-4536-b632-643838323039/1.png",
-        "category": "kran",
-        "description": "Шаровой кран марки Neptun с электроприводом серии Buggati PRO для блокировки водоснабжения",
-        "modifications": [
+        "id":71,
+        "name":"Крепление для Gateway в розетку",
+        "price":750.0,
+        "image":"https://static.tildacdn.com/stor6231-6230-4530-b363-616634393065/96510516.jpg",
+        "category":"server",
+        "description":"Сервер умного дома HiTE PRO и его блок питания можно удобно установить в любую розетку с помощью крепления. \n\nТакже у крепления есть фиксатор-усилитель для розетки, чтобы можно было установить его в любом положении.\n\nИзготовлено методом 3D-печати из черного PETG пластика.",
+        "modifications":[
             {
-                "id": "29-1",
-                "name": " Bugatti Pro 220В - 1/2",
-                "price": 8361.0,
-                "image": "https://static.tildacdn.com/tild3539-3032-4536-b632-643838323039/1.png"
-            },
-            {
-                "id": "29-2",
-                "name": "Bugatti Pro 220В - 3/4",
-                "price": 8991.0,
-                "image": "https://static.tildacdn.com/tild3539-3032-4536-b632-643838323039/1.png"
-            },
-            {
-                "id": "29-3",
-                "name": "Bugatti Pro 220В - 1",
-                "price": 11961.0,
-                "image": "https://static.tildacdn.com/tild3539-3032-4536-b632-643838323039/1.png"
+                "id":"299132",
+                "name":"Крепление для Gateway в розетку",
+                "price":750.0,
+                "image":"https://static.tildacdn.com/stor6231-6230-4530-b363-616634393065/96510516.jpg",
+                "specifications":{
+                    "Вес":"30 г"
+                },
+                "description":"Чтобы аккуратно разместить сервер умного дома HiTE PRO.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/Gateway_Bracket_1.2.zip"
+                }
             }
         ]
     },
     {
-        "id": 30,
-        "name": "Шаровой кран с электроприводом Bugatti Pro 12В",
-        "price": 8991.0,
-        "image": "https://static.tildacdn.com/tild6234-6135-4731-b334-393033633335/2.png",
-        "category": "kran",
-        "description": "Шаровой кран марки Neptun с электроприводом серии Buggati PRO для блокировки водоснабжения",
-        "modifications": [
+        "id":9,
+        "name":"Relay-1",
+        "price":3080.0,
+        "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+        "category":"relay",
+        "description":"Компактный одноканальный блок радиореле Relay-1 подключается к светильнику или другому электроприбору, которым нужно управлять с помощью передатчиков или сервера умного дома HiTE PRO. Получая от них сигнал блок Relay-1 замыкает/размыкает электрическую цепь.\n\nДоступна модификация с «сухим контактом», который не имеет непосредственной связи с источником питания и заземлением, т.е. у блока управления свой провод питания, а у нагрузки свой.",
+        "modifications":[
             {
-                "id": "30-1",
-                "name": " Bugatti Pro 12В - 1/2",
-                "price": 8991.0,
-                "image": "https://static.tildacdn.com/tild6234-6135-4731-b334-393033633335/2.png"
+                "id":"206748",
+                "name":"220 В",
+                "price":3080.0,
+                "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Питание":"230 В",
+                    "Максимальная нагрузка на 1 канал":"1000 Вт (5 А)",
+                    "Вес":"43 г",
+                    "Габариты":"47 × 17 × 37 мм"
+                },
+                "description":"Блок управления, подключается в разрыв фазного и нулевого проводов. Питание 220 В.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/Relay1-2_220%D0%92_web.pdf",
+                    "video":"https://clck.ru/3CTajv"
+                }
             },
             {
-                "id": "30-2",
-                "name": "Bugatti Pro 12В - 3/4",
-                "price": 9531.0,
-                "image": "https://static.tildacdn.com/tild6234-6135-4731-b334-393033633335/2.png"
+                "id":"208984",
+                "name":"12 В",
+                "price":3080.0,
+                "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Питание":"12 В",
+                    "Максимальная нагрузка на 1 канал":"60 Вт (5 А)",
+                    "Вес":"43 г",
+                    "Габариты":"47 × 17 × 37 мм"
+                },
+                "description":"Блок Relay-1, но с питанием 12 В.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/Relay1-2_12%D0%92_web.pdf",
+                    "video":"https://clck.ru/3CTajv"
+                }
             },
             {
-                "id": "30-3",
-                "name": "Bugatti Pro 12В - 1",
-                "price": 10791.0,
-                "image": "https://static.tildacdn.com/tild6234-6135-4731-b334-393033633335/2.png"
+                "id":"208972",
+                "name":"12 В (сухой контакт)",
+                "price":3080.0,
+                "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Питание":"12 В",
+                    "Максимальная нагрузка на 1 канал":"60 Вт (5 А)",
+                    "Вес":"43 г",
+                    "Габариты":"47 × 17 × 37 мм"
+                },
+                "description":"Блок Relay-1, но с питанием 12 В и выходом \"сухой\" контакт.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/Relay1-2_12%D0%92_Dry_web.pdf",
+                    "video":"https://clck.ru/3CTajv"
+                }
+            },
+            {
+                "id":"206940",
+                "name":"220 В (сухой контакт)",
+                "price":3080.0,
+                "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Питание":"230 В",
+                    "Максимальная нагрузка на 1 канал":"1000 Вт (5 А)",
+                    "Вес":"43 г",
+                    "Габариты":"47 × 17 × 37 мм"
+                },
+                "description":"Блок Relay-1, но с выходом \"сухой\" контакт.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/Relay1-2_220%D0%92_Dry_web.pdf",
+                    "video":"https://clck.ru/3CTajv"
+                }
             }
         ]
     },
     {
-        "id": 31,
-        "name": "Шаровой кран с электроприводом PROFI 220В",
-        "price": 7641.0,
-        "image": "https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
-        "category": "kran",
-        "description": "Шаровой кран марки Neptun с электроприводом серии PROFI для блокировки водоснабжения",
-        "modifications": [
+        "id":10,
+        "name":"Relay-2",
+        "price":4780.0,
+        "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+        "category":"relay",
+        "description":"Компактный двухканальный блок радиореле Relay-2 подключается к светильнику или другому электроприбору, которым нужно управлять с помощью передатчиков или сервера умного дома HiTE PRO. Получая от них сигнал блок Relay-2 замыкает/размыкает электрическую цепь.\n\nДоступна модификация с «сухим контактом», который не имеет непосредственной связи с источником питания и заземлением, т.е. у блока управления свой провод питания, а у нагрузки свой.",
+        "modifications":[
             {
-                "id": "31-1",
-                "name": "PROFI 220В - 1/2",
-                "price": 7641.0,
-                "image": "https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png"
+                "id":"206750",
+                "name":"220 В",
+                "price":4780.0,
+                "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+                "specifications":{
+                    "Кол-во каналов":"2",
+                    "Питание":"230 В",
+                    "Максимальная нагрузка на 1 канал":"1000 Вт (5 А)",
+                    "Вес":"43 г",
+                    "Габариты":"47 × 17 × 37 мм"
+                },
+                "description":"Блок управления, подключается в разрыв фазного и нулевого проводов. Питание 220 В.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/Relay1-2_220%D0%92_web.pdf",
+                    "video":"https://clck.ru/3CTakL"
+                }
             },
             {
-                "id": "31-2",
-                "name": "PROFI 220В - 3/4",
-                "price": 8451.0,
-                "image": "https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png"
-            },
-            {
-                "id": "31-3",
-                "name": "PROFI 220В - 1",
-                "price": 9531.0,
-                "image": "https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png"
-            },
-            {
-                "id": "31-4",
-                "name": "PROFI 220В - 1 1/4",
-                "price": 10161.0,
-                "image": "https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png"
+                "id":"206942",
+                "name":"220 В (сухой контакт)",
+                "price":4780.0,
+                "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+                "specifications":{
+                    "Кол-во каналов":"2",
+                    "Питание":"230 В",
+                    "Максимальная нагрузка на 1 канал":"1000 Вт (5 А)",
+                    "Вес":"43 г",
+                    "Габариты":"47 × 17 × 37 мм"
+                },
+                "description":"Блок Relay-2, но с выходом \"сухой\" контакт.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/Relay1-2_220%D0%92_Dry_web.pdf",
+                    "video":"https://clck.ru/3CTakL"
+                }
             }
         ]
     },
     {
-        "id": 32,
-        "name": "Шаровой кран с электроприводом PROFI 12В",
-        "price": 7191.0,
-        "image": "https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
-        "category": "kran",
-        "description": "Шаровой кран марки Neptun с электроприводом серии PROFI для блокировки водоснабжения",
-        "modifications": [
+        "id":7,
+        "name":"Relay-F1",
+        "price":3480.0,
+        "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+        "category":"relay",
+        "description":"Блок приема сигнала Relay-F1 подключается «в разрыв» фазного провода перед светильником или другим электроприбором, которым нужно управлять. Замыкает / размыкает цепь питания при получении сигнала от передатчиков, с которыми связан. Может быть также подключен к проводному выключателю, что позволяет совместить проводное и беспроводное управление освещением (например, в ситуациях, когда беспроводной выключатель устанавливается в дополнение к проводному). ",
+        "modifications":[
             {
-                "id": "32-1",
-                "name": "PROFI 12В - 1/2",
-                "price": 7191.0,
-                "image": "https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png"
-            },
-            {
-                "id": "32-2",
-                "name": "PROFI 12В - 3/4",
-                "price": 7641.0,
-                "image": "https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png"
-            },
-            {
-                "id": "32-3",
-                "name": "PROFI 12В - 1",
-                "price": 9531.0,
-                "image": "https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png"
-            },
-            {
-                "id": "32-4",
-                "name": "PROFI 12В - 1 1/4",
-                "price": 10161.0,
-                "image": "https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png"
+                "id":"206954",
+                "name":"Relay-F1",
+                "price":3480.0,
+                "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Питание":"230 В",
+                    "Максимальная нагрузка на блок":"440 Вт (2 А)",
+                    "Минимальная нагрузка на канал":"10 Вт",
+                    "Вес":"43 г",
+                    "Габариты":"47 × 17 × 37 мм"
+                },
+                "description":"Блок управления подключается «в разрыв» фазного провода. То есть нулевой провод не требуется. Удобно установить за проводной выключатель.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/Relay-F1-2_web.pdf",
+                    "video":"https://clck.ru/3CTaks"
+                }
             }
         ]
     },
     {
-        "id": 33,
-        "name": "Шаровой кран с электроприводом MK 220В",
-        "price": 5481.0,
-        "image": "https://static.tildacdn.com/tild6135-6133-4166-b563-363938353635/---65-455x455.png",
-        "category": "kran",
-        "description": "Шаровой кран марки Neptun с электроприводом серии МК для блокировки водоснабжения",
-        "modifications": [
+        "id":8,
+        "name":"Relay-F2",
+        "price":4980.0,
+        "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+        "category":"relay",
+        "description":"Блок приема сигнала Relay-F2 подключается «в разрыв» фазного провода перед светильником или другим электроприбором, которым нужно управлять. Замыкает / размыкает цепь питания при получении сигнала от передатчиков, с которыми связан. Может быть также подключен к проводному выключателю, что позволяет совместить проводное и беспроводное управление освещением (например, в ситуациях, когда беспроводной выключатель устанавливается в дополнение к проводному).",
+        "modifications":[
             {
-                "id": "33-1",
-                "name": "MK 220В - 1/2",
-                "price": 5481.0,
-                "image": "https://static.tildacdn.com/tild6135-6133-4166-b563-363938353635/---65-455x455.png"
-            },
-            {
-                "id": "33-2",
-                "name": "MK 220В - 3/4",
-                "price": 5931.0,
-                "image": "https://static.tildacdn.com/tild6135-6133-4166-b563-363938353635/---65-455x455.png"
-            },
-            {
-                "id": "33-3",
-                "name": "MK 220В - 1",
-                "price": 7191.0,
-                "image": "https://static.tildacdn.com/tild6135-6133-4166-b563-363938353635/---65-455x455.png"
+                "id":"207042",
+                "name":"Relay-F2",
+                "price":4980.0,
+                "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+                "specifications":{
+                    "Кол-во каналов":"2",
+                    "Питание":"230 В",
+                    "Максимальная нагрузка на блок":"440 Вт (2 А)",
+                    "Минимальная нагрузка на канал":"10 Вт",
+                    "Вес":"43 г",
+                    "Габариты":"47 × 17 × 37 мм"
+                },
+                "description":"Блок управления подключается «в разрыв» фазного провода. То есть нулевой провод не требуется. Удобно установить за проводной выключатель.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/Relay-F1-2_web.pdf",
+                    "video":"https://clck.ru/3CTaks"
+                }
             }
         ]
     },
     {
-        "id": 34,
-        "name": "Шаровой кран с электроприводом MK 12В",
-        "price": 5481.0,
-        "image": "https://static.tildacdn.com/tild6135-6133-4166-b563-363938353635/---65-455x455.png",
-        "category": "kran",
-        "description": "Шаровой кран марки Neptun с электроприводом серии МК для блокировки водоснабжения",
-        "modifications": [
+        "id":69,
+        "name":"Relay-1Q",
+        "price":3080.0,
+        "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+        "category":"relay",
+        "description":"Бесшумный блок на симисторных ключах (\"твердотельных реле\"), устанавливаемый в разрыв фазного и нулевого провода, с 1 каналом управления.",
+        "modifications":[
             {
-                "id": "34-1",
-                "name": "MK 12В - 1/2",
-                "price": 5481.0,
-                "image": "https://static.tildacdn.com/tild6135-6133-4166-b563-363938353635/---65-455x455.png"
-            },
-            {
-                "id": "34-2",
-                "name": "MK 12В - 3/4",
-                "price": 5931.0,
-                "image": "https://static.tildacdn.com/tild6135-6133-4166-b563-363938353635/---65-455x455.png"
+                "id":"298768",
+                "name":"Relay-1Q",
+                "price":3080.0,
+                "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Питание":"85—265 В",
+                    "Максимальная нагрузка на 1 канал":"300 Вт (1,5 А)",
+                    "Вес":"43 г",
+                    "Габариты":"47 × 17 × 37 мм"
+                },
+                "description":"Бесшумный блок Relay-1 на симисторных ключах (\"твердотельных реле\"), устанавливаемый в разрыв фазного и нулевого провода.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/Relay1-2Q_220%D0%92_web.pdf"
+                }
             }
         ]
     },
     {
-        "id": 35,
-        "name": "Демонстрационный набор",
-        "price": 10880.0,
-        "image": "https://static.tildacdn.com/stor3162-3465-4830-b330-366230666235/93883933.png",
-        "category": "komplekt",
-        "description": "Отлично подходит для презентации выключателей HiTE PRO!",
-        "modifications": []
-    },
-    {
-        "id": 36,
-        "name": "Демонстрационный стенд",
-        "price": 48180.0,
-        "image": "https://static.tildacdn.com/stor3861-3766-4238-b135-386335383633/36501679.png",
-        "category": "komplekt",
-        "description": "Собранный и настроенный экспонат для демонстрации работы устройств HiTE PRO",
-        "modifications": []
-    },
-    {
-        "id": 37,
-        "name": "Раздвижной карниз с электроприводом Novo N21",
-        "price": 0.0,
-        "image": "https://static.tildacdn.com/tild6366-3363-4532-a439-623965646531/N21_1.png",
-        "category": "karniz",
-        "description": "Цену уточняйте с менеджером",
-        "modifications": [
+        "id":70,
+        "name":"Relay-2Q",
+        "price":4780.0,
+        "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+        "category":"relay",
+        "description":"Бесшумный блок на симисторных ключах (\"твердотельных реле\"), устанавливаемый в разрыв фазного и нулевого провода, с 2 каналами управления.",
+        "modifications":[
             {
-                "id": "37-1",
-                "name": "Novo N21 - 1 м",
-                "price": 0.0,
-                "image": "https://static.tildacdn.com/tild6366-3363-4532-a439-623965646531/N21_1.png"
-            },
-            {
-                "id": "37-2",
-                "name": "Novo N21 - 2 м",
-                "price": 0.0,
-                "image": "https://static.tildacdn.com/tild6366-3363-4532-a439-623965646531/N21_1.png"
-            },
-            {
-                "id": "37-3",
-                "name": "Novo N21 - 3 м",
-                "price": 0.0,
-                "image": "https://static.tildacdn.com/tild6366-3363-4532-a439-623965646531/N21_1.png"
-            },
-            {
-                "id": "37-4",
-                "name": "Novo N21 - 4 м",
-                "price": 0.0,
-                "image": "https://static.tildacdn.com/tild6366-3363-4532-a439-623965646531/N21_1.png"
-            },
-            {
-                "id": "37-5",
-                "name": "Novo N21 - 5 м",
-                "price": 0.0,
-                "image": "https://static.tildacdn.com/tild6366-3363-4532-a439-623965646531/N21_1.png"
-            },
-            {
-                "id": "37-6",
-                "name": "Novo N21 - 6 м",
-                "price": 0.0,
-                "image": "https://static.tildacdn.com/tild6366-3363-4532-a439-623965646531/N21_1.png"
+                "id":"298770",
+                "name":"Relay-2Q",
+                "price":4780.0,
+                "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+                "specifications":{
+                    "Кол-во каналов":"2",
+                    "Питание":"85—265 В",
+                    "Максимальная нагрузка на 1 канал":"300 Вт (1,5 А)",
+                    "Вес":"43 г",
+                    "Габариты":"47 × 17 × 37 мм"
+                },
+                "description":"Бесшумный блок Relay-2 на симисторных ключах (\"твердотельных реле\"), устанавливаемый в разрыв фазного и нулевого провода.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/Relay1-2Q_220%D0%92_web.pdf"
+                }
             }
         ]
     },
     {
-        "id": 38,
-        "name": "Внутривальный электропривод для рулонных штор Novo K35-TP-6-28",
-        "price": 0.0,
-        "image": "https://static.tildacdn.com/tild3236-6365-4932-b331-376534386130/5ad95401d809d.jpg",
-        "category": "karniz",
-        "description": "Цену уточняйте с менеджером",
-        "modifications": []
-    },
-    {
-        "id": 39,
-        "name": "Одноканальное радиореле Relay-DIM",
-        "price": 3480.0,
-        "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
-        "category": "relay",
-        "description": "Блок с функцией диммирования для светодиодных ламп 220В.",
-        "modifications": []
-    },
-    {
-        "id": 40,
-        "name": "Трёхканальный блок радиореле Relay-LED3S",
-        "price": 8980.0,
-        "image": "https://static.tildacdn.com/tild3038-6438-4332-b836-326335333465/HiTE_PRO_CASE-1_11.png",
-        "category": "relay",
-        "description": "Slave-блок модульной системы – зависимое устройство.",
-        "modifications": []
-    },
-    {
-        "id": 41,
-        "name": "Одноканальный сенсорный радиовыключатель SN-C",
-        "price": 2980.0,
-        "image": "https://static.tildacdn.com/tild3761-6534-4132-b134-333731313636/---36-455x455.png",
-        "category": "switch",
-        "description": "Круглый и компактный выключатель",
-        "modifications": [
+        "id":67,
+        "name":"Relay-0/1-10V",
+        "price":3480.0,
+        "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+        "category":"relay",
+        "description":"Компактный одноканальный блок для управления источниками света с аналоговым сигналом 0/1-10 В. Например, диммирования светодиодных лент или ламп, а также управления вентиляторами и другими устройствами, которые поддерживают управление по данному протоколу. Напряжение питания 85 - 265 В Потребляемая мощность 0.17 Вт",
+        "modifications":[
             {
-                "id": "41-1",
-                "name": "Черный",
-                "price": 2980.0,
-                "image": "https://static.tildacdn.com/tild3761-6534-4132-b134-333731313636/---36-455x455.png"
-            },
-            {
-                "id": "41-2",
-                "name": "Белый",
-                "price": 2980.0,
-                "image": "https://static.tildacdn.com/tild3632-6366-4637-a262-663161323231/---33-455x455.png"
-            },
-            {
-                "id": "41-3",
-                "name": "Алюминиевый",
-                "price": 2980.0,
-                "image": "https://static.tildacdn.com/tild6233-3335-4939-a434-613164666465/---34-455x455.png"
+                "id":"297600",
+                "name":"Relay-0/1-10V",
+                "price":3480.0,
+                "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Питание":"85—265 В",
+                    "Вес":"43 г",
+                    "Габариты":"47 × 17 × 37 мм"
+                },
+                "description":"Блок для управления по аналоговым протоколам 0-10 и 1-10 Вольт. Например, диммирования светодиодных лент или ламп, а также управления вентиляторами и другими устройствами, которые поддерживают управление по данному протоколу.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/2024/10/Relay-0-10V_Web.pdf"
+                }
             }
         ]
     },
     {
-        "id": 42,
-        "name": "Контактор модульный КМ 63А 2NО",
-        "price": 3277.0,
-        "image": "https://static.tildacdn.com/tild6539-3532-4363-a166-656566656465/A25DE53A5D1ABF6D4182.jpg",
-        "category": "other",
-        "description": "Двухмодульный контактор",
-        "modifications": []
-    },
-    {
-        "id": 43,
-        "name": "Сервопривод электротермический Valtec",
-        "price": 1800.0,
-        "image": "https://static.tildacdn.com/tild3662-3837-4733-b664-376162326139/VTTE30430_2.jpg",
-        "category": "other",
-        "description": "nan",
-        "modifications": [
+        "id":56,
+        "name":"Relay-16A",
+        "price":3480.0,
+        "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+        "category":"relay",
+        "description":"Компактный блок на 16 Ампер, подходит для теплого пола. Клеммники 2,5 мм2",
+        "modifications":[
             {
-                "id": "43-1",
-                "name": "220 В - Нормально-Закрытый",
-                "price": 1800.0,
-                "image": "https://static.tildacdn.com/tild3662-3837-4733-b664-376162326139/VTTE30430_2.jpg"
-            },
-            {
-                "id": "43-2",
-                "name": "24 В - Нормально-Закрытый",
-                "price": 1800.0,
-                "image": "https://static.tildacdn.com/tild3662-3837-4733-b664-376162326139/VTTE30430_2.jpg"
-            },
-            {
-                "id": "43-3",
-                "name": "220 В - Нормально-Открытый",
-                "price": 1800.0,
-                "image": "https://static.tildacdn.com/tild3662-3837-4733-b664-376162326139/VTTE30430_2.jpg"
-            },
-            {
-                "id": "43-4",
-                "name": "24 В - Нормально-Открытый",
-                "price": 1800.0,
-                "image": "https://static.tildacdn.com/tild3662-3837-4733-b664-376162326139/VTTE30430_2.jpg"
+                "id":"296298",
+                "name":"Relay-16A",
+                "price":3480.0,
+                "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Питание":"85—265 В",
+                    "Максимальная нагрузка":"4 000 Вт (16 А)",
+                    "Вес":"43 г",
+                    "Габариты":"47 × 17 × 37 мм"
+                },
+                "description":"Блок управления, подключается в разрыв фазного и нулевого проводов. Можно подключить проводной датчик температуры, а также проводной выключатель. Чаще всего используется для управления электрическим теплым полом.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/Relay16A_220%D0%92_web.pdf",
+                    "video":"https://clck.ru/3CTaoj"
+                }
             }
         ]
     },
     {
-        "id": 44,
-        "name": "Клапан термостатический Valtec",
-        "price": 1148.0,
-        "image": "https://static.tildacdn.com/tild3938-6564-4634-b231-323335333535/VT031NR_0.jpg",
-        "category": "other",
-        "description": "nan",
-        "modifications": [
+        "id":57,
+        "name":"Проводной датчик температуры для Relay-16A",
+        "price":500.0,
+        "image":"https://static.tildacdn.com/stor3435-3430-4563-a365-396663306532/24429073.jpg",
+        "category":"other",
+        "description":"Блок приема сигнала, устанавливаемый в разрыв фазного и нулевого провода, с 1 каналом управления – Включение / Выключение нагрузки. К нему подходит проводной датчик температуры.",
+        "modifications":[
             {
-                "id": "44-1",
-                "name": "Прямой - 1/2",
-                "price": 1148.0,
-                "image": "https://static.tildacdn.com/tild3938-6564-4634-b231-323335333535/VT031NR_0.jpg"
-            },
-            {
-                "id": "44-2",
-                "name": "Угловой - 1/2",
-                "price": 1127.0,
-                "image": "https://static.tildacdn.com/tild3938-6564-4634-b231-323335333535/VT031NR_0.jpg"
-            },
-            {
-                "id": "44-3",
-                "name": "Прямой - 3/4",
-                "price": 1470.0,
-                "image": "https://static.tildacdn.com/tild3938-6564-4634-b231-323335333535/VT031NR_0.jpg"
-            },
-            {
-                "id": "44-4",
-                "name": "Угловой - 3/4",
-                "price": 1807.0,
-                "image": "https://static.tildacdn.com/tild3938-6564-4634-b231-323335333535/VT031NR_0.jpg"
+                "id":"296300",
+                "name":"Relay-16A",
+                "price":500.0,
+                "image":"https://static.tildacdn.com/stor3435-3430-4563-a365-396663306532/24429073.jpg",
+                "specifications":{
+                    "Длина":"3 м",
+                    "Толщина":"5 мм",
+                    "Сопротивление":"10 кОм"
+                },
+                "description":"Проводной датчик температуры пола от производителя Rexant — подключается к блоку HiTE PRO Relay-16A — при наличии сервера умного дома Gateway это позволяет настраивать сценарии климатического управления.",
+                "instructions":{}
             }
         ]
     },
     {
-        "id": 45,
-        "name": "Влагозащищённый одноклавишный радиовыключатель IP65-1",
-        "price": 3780.0,
-        "image": "https://static.tildacdn.com/tild3366-3034-4462-b563-313665666636/65-1-1.png",
-        "category": "switch",
-        "description": "Уровень влагозащиты IP-65. Корпус от ЭРА",
-        "modifications": []
-    },
-    {
-        "id": 46,
-        "name": "Влагозащищённый двухклавишный радиовыключатель IP65-2",
-        "price": 3980.0,
-        "image": "https://static.tildacdn.com/tild6462-6139-4535-a432-616238373764/65-2-1.png",
-        "category": "switch",
-        "description": "Уровень влагозащиты IP-65. Корпус от ЭРА",
-        "modifications": []
-    },
-    {
-        "id": 47,
-        "name": "Relay-4m",
-        "price": 9980.0,
-        "image": "https://static.tildacdn.com/tild6165-3763-4163-b039-306463646139/1.png",
-        "category": "relay",
-        "description": "Master-блок модульной системы – самостоятельное устройство.",
-        "modifications": []
-    },
-    {
-        "id": 48,
-        "name": "Одноканальный сенсорный радиовыключатель SN-R1",
-        "price": 2980.0,
-        "image": "https://static.tildacdn.com/tild3734-3963-4030-b061-373235646263/bl-snr1.jpg",
-        "category": "switch",
-        "description": "Закругленные углы",
-        "modifications": [
+        "id":22,
+        "name":"Relay-LED",
+        "price":3480.0,
+        "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+        "category":"relay",
+        "description":"HiTE PRO Relay-LED – это блок приема сигнала с функцией диммирования (светорегулирования) для светодиодных ламп и лент. Получая сигнал от передатчиков HiTE PRO, блок замыкает/размыкает/диммирует электрическую цепь.\n\nОсобенности блока:\nТепловая защита. При срабатывании светодиод блока начинает мигать, а сервер умного дома отображает ошибку на плитке устройства;\nЗащита по току. Аналогичные события происходят при превышении тока 10 А;\nПодключение внешней кнопки с возможностью смены типа: клавишная/кнопочная. С кнопочной можно регулировать свечение. \nВы можете настроить: плавный пуск или мгновенное включение; скорость изменения яркости при управлении с пульта/выключателя; минимальную и максимальную яркость свечения",
+        "modifications":[
             {
-                "id": "48-1",
-                "name": "Бежевый",
-                "price": 2980.0,
-                "image": "https://static.tildacdn.com/tild3430-6632-4437-b630-653565393064/sk-snr1.jpg"
-            },
-            {
-                "id": "48-2",
-                "name": "Черный",
-                "price": 2980.0,
-                "image": "https://static.tildacdn.com/tild3734-3963-4030-b061-373235646263/bl-snr1.jpg"
-            },
-            {
-                "id": "48-3",
-                "name": "Белый",
-                "price": 2980.0,
-                "image": "https://static.tildacdn.com/tild3933-6263-4530-b537-623737303932/wh-snr1.jpg"
-            },
-            {
-                "id": "48-4",
-                "name": "Алюминиевый",
-                "price": 2980.0,
-                "image": "https://static.tildacdn.com/tild6132-6138-4930-b431-663731656662/al_snr1.jpg"
-            },
-            {
-                "id": "48-5",
-                "name": "Серый",
-                "price": 2980.0,
-                "image": "https://static.tildacdn.com/tild6339-6339-4737-b534-353631336335/ser_snr1.jpg"
-            },
-            {
-                "id": "48-6",
-                "name": "Графит",
-                "price": 2980.0,
-                "image": "https://static.tildacdn.com/tild3963-6237-4234-b033-346535393032/graf_snr1.jpg"
-            },
-            {
-                "id": "48-7",
-                "name": "Слоновая кость",
-                "price": 2980.0,
-                "image": "https://static.tildacdn.com/tild3039-6664-4166-b864-326237353564/slon_snr1.jpg"
-            },
-            {
-                "id": "48-8",
-                "name": "Светло-серый",
-                "price": 2980.0,
-                "image": "https://static.tildacdn.com/tild6232-3238-4661-b435-333966323737/svser_snr1.jpg"
-            },
-            {
-                "id": "48-9",
-                "name": "Серо-голубой",
-                "price": 2980.0,
-                "image": "https://static.tildacdn.com/tild6131-3036-4666-a230-633064633439/svgol_snr1.jpg"
-            },
-            {
-                "id": "48-10",
-                "name": "Светло-коричневый",
-                "price": 2980.0,
-                "image": "https://static.tildacdn.com/tild3335-6431-4431-b362-353736666666/svkor_snr1.jpg"
-            },
-            {
-                "id": "48-11",
-                "name": "Темно-коричневый",
-                "price": 2980.0,
-                "image": "https://static.tildacdn.com/tild3961-6462-4664-b563-356262636238/temnkor_snr1.jpg"
+                "id":"210526",
+                "name":"Relay-LED",
+                "price":3480.0,
+                "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Питание":"10—48 В",
+                    "Максимальная нагрузка на блок":"8 А",
+                    "Вес":"43 г",
+                    "Габариты":"47 × 17 × 37 мм"
+                },
+                "description":"Блок управления для диммирования светодиодных лент и ламп.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/Relay-LED_Web.pdf",
+                    "video":"https://clck.ru/3CTamq"
+                }
             }
         ]
     },
     {
-        "id": 49,
-        "name": "Брошюра HiTE PRO",
-        "price": 10.0,
-        "image": "https://static.tildacdn.com/stor6637-3664-4366-a136-363733363839/52026992.jpg",
-        "category": "komplekt",
-        "description": "Печатная брошюра для клиентов, в которой можно указать свои контакты",
-        "modifications": []
-    },
-    {
-        "id": 50,
-        "name": "Четырёхканальный блок радиореле Relay-4M(P)",
-        "price": 12980.0,
-        "image": "https://static.tildacdn.com/tild6165-3763-4163-b039-306463646139/1.png",
-        "category": "relay",
-        "description": "Модификация блока 4M с измерением потребляемой мощности",
-        "modifications": []
-    },
-    {
-        "id": 51,
-        "name": "Четырёхканальный блок радиореле Relay-4S(P)",
-        "price": 11980.0,
-        "image": "https://static.tildacdn.com/tild3038-6438-4332-b836-326335333465/HiTE_PRO_CASE-1_11.png",
-        "category": "relay",
-        "description": "Модификация блока 4S с измерением потребляемой мощности",
-        "modifications": []
-    },
-    {
-        "id": 52,
-        "name": "Одноклавишный радиовыключатель с клавишей без фиксации Base-1",
-        "price": 1780.0,
-        "image": "https://static.tildacdn.com/stor3865-3435-4331-a331-633732333863/24952004.png",
-        "category": "switch",
-        "description": "Одноканальный беспроводной выключатель без фиксации клавиши (звонкового типа).<br /><br />Работает от одной батарейки более 7 лет. Частота 868 МГц, на которой работает выключатель, позволяет управлять освещением на расстоянии до 250 м.<br /><br />При выборе выключателя с рамкой используется рамка Schneider Atlas. Рамки IEK Brite приобретаются только отдельно.<br /><br />Устанавливается на любую поверхность с помощью двустороннего скотча или саморезов.<br /><br />Для работы выключателя обязательно необходим блок управления. Радиовыключатель является передатчиком, который передает сигнал блоку управления на замыкание и размыкание электрической цепи.<br /><br /><br />Технический паспорт:<br /><a href=\"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf\" target=\"_blank\" rel=\"noreferrer noopener\">https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf</a>",
-        "modifications": [
+        "id":39,
+        "name":"Relay-DIM",
+        "price":3480.0,
+        "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+        "category":"relay",
+        "description":"HiTE PRO Relay-DIM – это одноканальное радиореле с функцией диммирования. По сути является модификацией блока HiTE PRO Relay-1. Подключается к светильнику (или другому прибору), которыми нужно управлять с помощью беспроводных выключателей или ДУ пультов HiTE PRO. Получая сигнал от передатчиков, блок замыкает/размыкает/диммирует электрическую цепь. Работает с диодными лампами с регулировкой яркости, а аткже с лампами накаливания - но на лампах накаливания максимальная мощность 100 Вт. Беспроводное управление электроприборами возможно посредством радиовыключателей, пультов, приложения HiTE PRO для умного дома и голосовых команд “Алисе”.Отличия от старой версии (2020 г.):- защита от пусковых токов и короткого замыкания - работа от нуля и фазы, теперь блок берет себе питание из сети и как следствие не будет никаких миганий / морганий ламп, с этим связанных - подобран профиль управления для диммирования светодиодных ламп (установлен по умолчанию), с ним лампы диммируются равномерно и красиво",
+        "modifications":[
             {
-                "id": "52-1",
-                "name": "Белый",
-                "price": 1780.0,
-                "image": "https://static.tildacdn.com/stor3865-3435-4331-a331-633732333863/24952004.png"
-            },
-            {
-                "id": "52-2",
-                "name": "Бежевый",
-                "price": 1780.0,
-                "image": "https://static.tildacdn.com/stor3863-6463-4066-a361-396535343664/11513905.png"
-            },
-            {
-                "id": "52-3",
-                "name": "Серый (грифель)",
-                "price": 2180.0,
-                "image": "https://static.tildacdn.com/stor3433-3338-4739-a539-656435383164/91248115.png"
-            },
-            {
-                "id": "52-4",
-                "name": "Черный (карбон)",
-                "price": 2180.0,
-                "image": "https://static.tildacdn.com/stor6238-6232-4561-b666-336332626430/88521061.png"
+                "id":"206924",
+                "name":"Relay-DIM",
+                "price":3480.0,
+                "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Питание":"85—265 В",
+                    "Максимальная нагрузка на блок":"300 Вт",
+                    "Вес":"43 г",
+                    "Габариты":"47 × 17 × 37 мм"
+                },
+                "description":"Блок управления для управления питанием диодных ламп и ламп накаливания. ",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/Relay-DIM_115x105mm.pdf",
+                    "video":"https://clck.ru/3CTaoD"
+                }
             }
         ]
     },
     {
-        "id": 53,
-        "name": "Двухклавишный радиовыключатель с клавишами без фиксации Base-2",
-        "price": 2180.0,
-        "image": "https://static.tildacdn.com/stor3963-3065-4539-b033-336563363133/22799452.png",
-        "category": "switch",
-        "description": "Двухканальный беспроводной выключатель без фиксации клавиши (звонкового типа).<br /><br />Работает от одной батарейки более 7 лет. Частота 868 МГц, на которой работает выключатель, позволяет управлять освещением на расстоянии до 250 м.<br /><br />При выборе выключателя с рамкой используется рамка Schneider Atlas. Рамки IEK Brite приобретаются только отдельно.<br /><br />Устанавливается на любую поверхность с помощью двустороннего скотча или саморезов.<br /><br />Для работы выключателя обязательно необходим блок управления. Радиовыключатель является передатчиком, который передает сигнал блоку управления на замыкание и размыкание электрической цепи.<br /><br /><br />Технический паспорт:<br /><a href=\"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf\" target=\"_blank\" rel=\"noreferrer noopener\">https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf</a>",
-        "modifications": [
+        "id":59,
+        "name":"Relay-RGBW",
+        "price":3480.0,
+        "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+        "category":"relay",
+        "description":"Компактный одноканальный блок приема сигнала с функцией диммирования — регулировки яркости света, а также смены цвета и управления цветовой температурой для RGB и RGBW светодиодных лент.<br /><br />Получая сигнал от передатчиков HiTE PRO, блок замыкает/размыкает электрическую цепь и диммирует/меняет цвет.<br /><ul><li data-list=\"bullet\">Тепловая защита. При срабатывании блок прекращает работу, светодиод блока начинает мигать, а сервер умного дома отображает ошибку на плитке устройства в приложении.</li><li data-list=\"bullet\">Защита от короткого замыкания. При срабатывании блок прекращает работу, светодиод блока горит красным цветом, а сервер умного дома отображает ошибку на плитке устройства в приложении.</li><li data-list=\"bullet\">Подключение внешней кнопки с возможностью смены типа: клавишная/кнопочная. С кнопочной можно регулировать свечение.</li></ul><br />Вы можете настроить:<br /><ul><li data-list=\"bullet\">плавный пуск или мгновенное включение</li><li data-list=\"bullet\">скорость изменения яркости и цвета при управлении с пульта/выключателя</li><li data-list=\"bullet\">минимальную и максимальную яркость свечения</li></ul><br />Технический паспорт и видеообзор:<br /><a href=\"https://www.hite-pro.ru/shop/goods/blok-upravleniya-relay-rgbw\" target=\"_blank\" rel=\"noreferrer noopener\">https://www.hite-pro.ru/shop/goods/blok-upravleniya-relay-rgbw</a>",
+        "modifications":[
             {
-                "id": "53-1",
-                "name": "Белый",
-                "price": 2180.0,
-                "image": "https://static.tildacdn.com/stor3963-3065-4539-b033-336563363133/22799452.png"
-            },
-            {
-                "id": "53-2",
-                "name": "Бежевый",
-                "price": 2180.0,
-                "image": "https://static.tildacdn.com/stor3963-3065-4539-b033-336563363133/22799452.png"
-            },
-            {
-                "id": "53-3",
-                "name": "Серый (грифель)",
-                "price": 2580.0,
-                "image": "https://static.tildacdn.com/stor3963-3065-4539-b033-336563363133/22799452.png"
-            },
-            {
-                "id": "53-4",
-                "name": "Черный (карбон)",
-                "price": 2580.0,
-                "image": "https://static.tildacdn.com/stor3963-3065-4539-b033-336563363133/22799452.png"
+                "id":"296568",
+                "name":"Relay-RGBW",
+                "price":3480.0,
+                "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Питание":"10—48 В",
+                    "Максимальная нагрузка на блок":"15 А",
+                    "Вес":"43 г",
+                    "Габариты":"47 × 17 × 37 мм"
+                },
+                "description":"Блок для регулировки яркости света, а также смены цвета и управления цветовой температурой для RGB и RGBW светодиодных лент.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/Relay-RGBW_Web_v2.pdf",
+                    "video":"https://clck.ru/3CWRWe"
+                }
             }
         ]
     },
     {
-        "id": 54,
-        "name": "Одноклавишный радиовыключатель с фиксацией клавиши Base-1F",
-        "price": 1780.0,
-        "image": "https://static.tildacdn.com/stor3863-6463-4066-a361-396535343664/11513905.png",
-        "category": "switch",
-        "description": "Одноканальный беспроводной выключатель с фиксацией клавиши. <br /><u>НЕ ПОДХОДИТ ДЛЯ ДИММИРОВАНИЯ</u><br /><br />Работает от одной батарейки более 7 лет. Частота 868 МГц, на которой работает выключатель, позволяет управлять освещением на расстоянии до 250 м.<br /><br />При выборе выключателя с рамкой используется рамка Schneider Atlas. Рамки IEK Brite приобретаются только отдельно.<br /><br />Устанавливается на любую поверхность с помощью двустороннего скотча или саморезов.<br /><br />Для работы выключателя обязательно необходим блок управления. Радиовыключатель является передатчиком, который передает сигнал блоку управления на замыкание и размыкание электрической цепи.<br /><br /><br />Технический паспорт:<br /><a href=\"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf\" target=\"_blank\" rel=\"noreferrer noopener\">https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf</a>",
-        "modifications": [
+        "id":68,
+        "name":"Крепление на DIN-рейку для компактных блоков ",
+        "price":250.0,
+        "image":"https://static.tildacdn.com/stor6438-3865-4134-a239-393034333538/46878414.jpg",
+        "category":"relay",
+        "description":"Цена окончательная, скидка уже применена. Любой компактный блок HiTE PRO можно установить на DIN-рейку или плоскость с помощью этого крепления. Корпус крепления выполнен из качественного пластика. Вы можете распечатать крепление самостоятельно на 3D-принтере.",
+        "modifications":[
             {
-                "id": "54-1",
-                "name": "Белый",
-                "price": 1780.0,
-                "image": "https://static.tildacdn.com/stor3865-3435-4331-a331-633732333863/24952004.png"
-            },
-            {
-                "id": "54-2",
-                "name": "Бежевый",
-                "price": 1780.0,
-                "image": "https://static.tildacdn.com/stor3863-6463-4066-a361-396535343664/11513905.png"
-            },
-            {
-                "id": "54-3",
-                "name": "Серый (грифель)",
-                "price": 2180.0,
-                "image": "https://static.tildacdn.com/stor3433-3338-4739-a539-656435383164/91248115.png"
-            },
-            {
-                "id": "54-4",
-                "name": "Черный (карбон)",
-                "price": 2180.0,
-                "image": "https://static.tildacdn.com/stor6238-6232-4561-b666-336332626430/88521061.png"
+                "id":"298034",
+                "name":"Крепление для компактных блоков на DIN-рейку или плоскость",
+                "price":250.0,
+                "image":"https://static.tildacdn.com/stor6438-3865-4134-a239-393034333538/46878414.jpg",
+                "specifications":{
+                    "Вес":"20 г",
+                    "Габариты":"67 × 56 × 23 мм"
+                },
+                "description":"Любой компактный блок HiTE PRO можно установить на DIN-рейку или плоскость с помощью этого крепления.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/Relay-mount.STL"
+                }
             }
         ]
     },
     {
-        "id": 55,
-        "name": "Двухклавишный радиовыключатель с фиксацией клавиш Base-2F",
-        "price": 2180.0,
-        "image": "https://static.tildacdn.com/stor6462-6661-4165-b961-313961343935/48504921.png",
-        "category": "switch",
-        "description": "Двухканальный беспроводной выключатель с фиксацией клавиши. <br /><u>НЕ ПОДХОДИТ ДЛЯ ДИММИРОВАНИЯ</u><br /><br />Работает от одной батарейки более 7 лет. Частота 868 МГц, на которой работает выключатель, позволяет управлять освещением на расстоянии до 250 м.<br /><br />При выборе выключателя с рамкой используется рамка Schneider Atlas. Рамки IEK Brite приобретаются только отдельно.<br /><br />Устанавливается на любую поверхность с помощью двустороннего скотча или саморезов.<br /><br />Для работы выключателя обязательно необходим блок управления. Радиовыключатель является передатчиком, который передает сигнал блоку управления на замыкание и размыкание электрической цепи.<br /><br /><br />Технический паспорт:<br /><a href=\"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf\" target=\"_blank\" rel=\"noreferrer noopener\">https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf</a>",
-        "modifications": [
+        "id":47,
+        "name":"Relay-4M",
+        "price":9980.0,
+        "image":"https://static.tildacdn.com/tild6165-3763-4163-b039-306463646139/1.png",
+        "category":"relay",
+        "description":"HiTE PRO Relay-4M – это четырехканальное радиореле, является мастер устройством модульной системы. Используется для беспроводного управления 4-мя линиями электрической цепи и имеет шину данных для подключения ведомых устройств (HiTE PRO Relay-S). Получая сигнал от передатчиков, блок замыкает/размыкает электрическую цепь. Передатчиками являются другие устройства HiTE PRO: беспроводные выключатели, пульты ДУ, датчики, сервер умного дома. Блок монтируется на DIN рейку в распределительном щите. ",
+        "modifications":[
             {
-                "id": "55-1",
-                "name": "Белый",
-                "price": 2180.0,
-                "image": "https://static.tildacdn.com/stor6462-6661-4165-b961-313961343935/48504921.png"
-            },
-            {
-                "id": "55-2",
-                "name": "Бежевый",
-                "price": 2180.0,
-                "image": "https://static.tildacdn.com/stor6462-6661-4165-b961-313961343935/48504921.png"
-            },
-            {
-                "id": "55-3",
-                "name": "Серый (грифель)",
-                "price": 2580.0,
-                "image": "https://static.tildacdn.com/stor6462-6661-4165-b961-313961343935/48504921.png"
-            },
-            {
-                "id": "55-4",
-                "name": "Черный (карбон)",
-                "price": 2580.0,
-                "image": "https://static.tildacdn.com/stor6462-6661-4165-b961-313961343935/48504921.png"
+                "id":"206944",
+                "name":"Relay-4m",
+                "price":9980.0,
+                "image":"https://static.tildacdn.com/tild6165-3763-4163-b039-306463646139/1.png",
+                "specifications":{
+                    "MAX нагрузка на канал":"3 500 Вт (16 A / 250 В)",
+                    "Кол-во каналов":"4",
+                    "Рабочая частота":"868 МГц",
+                    "Питание":"85—265 В, 50 Гц",
+                    "Вес":"150 г",
+                    "Длина":"90 мм",
+                    "Ширина":"36 мм",
+                    "Высота":"61 мм"
+                },
+                "description":"Четырехканальный блок управления, является мастер-блоком модульной системы. Используется для управления 4-мя линиями электрической цепи и имеет шину данных для подключения зависимых блоков.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/Relay-4M%2074x105mm.pdf",
+                    "video":"https://clck.ru/3CTamb"
+                }
             }
         ]
     },
     {
-        "id": 56,
-        "name": "Одноканальное радиореле Relay-16A",
-        "price": 3480.0,
-        "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
-        "category": "relay",
-        "description": "Компактный блок на 16 Ампер, подходит для теплого пола. Клеммники 2,5 мм2",
-        "modifications": []
-    },
-    {
-        "id": 57,
-        "name": "Датчик температуры пола для Relay-16A",
-        "price": 500.0,
-        "image": "https://static.tildacdn.com/stor3435-3430-4563-a365-396663306532/24429073.jpg",
-        "category": "other",
-        "description": "Проводной датчик Rexant для Relay-16A",
-        "modifications": []
-    },
-    {
-        "id": 58,
-        "name": "Relay-4S",
-        "price": 8980.0,
-        "image": "https://static.tildacdn.com/tild3038-6438-4332-b836-326335333465/HiTE_PRO_CASE-1_11.png",
-        "category": "relay",
-        "description": "Slave-блок модульной системы – зависимое устройство.",
-        "modifications": []
-    },
-    {
-        "id": 59,
-        "name": "Одноканальное радиореле Relay-RGBW",
-        "price": 3480.0,
-        "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
-        "category": "relay",
-        "description": "Компактный блок для диммирования RGB и RGBW",
-        "modifications": []
-    },
-    {
-        "id": 60,
-        "name": "Демонстрационный стенд Мини",
-        "price": 21990.0,
-        "image": "https://static.tildacdn.com/stor3364-3036-4362-a562-386163633165/31780867.jpg",
-        "category": "komplekt",
-        "description": "Компактный стенд, который удобно брать с собой на встречи с заказчиками",
-        "modifications": []
-    },
-    {
-        "id": 61,
-        "name": "Caleo Supermat",
-        "price": 5078.0,
-        "image": "https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg",
-        "category": "warm_floor",
-        "description": "Кабельный теплый пол под плитку и керамогранит (нагревательный мат)",
-        "modifications": [
+        "id":50,
+        "name":"Relay-4M(P)",
+        "price":12980.0,
+        "image":"https://static.tildacdn.com/tild6165-3763-4163-b039-306463646139/1.png",
+        "category":"relay",
+        "description":"В отличие от модели Relay-4M, проводит измерение текущей потребляемой мощности всех 4 каналов. Эта информация передается на сервер умного дома Gateway и отражается в приложении рядом с иконкой подключенного устройства.<br /><br /><strong>Значения потребляемой мощности видны в мобильном приложении. Поэтому Gateway обязателен!</strong><br /><br />Периодичность отметок потребления зависит от мощности:<br /><br /><ul><li data-list=\"bullet\">0-50 ватт,</li></ul>повторная отправка только в случае изменения мощности более чем на 20%<br /><br /><ul><li data-list=\"bullet\">50-250 ватт – 10%</li></ul><br /><ul><li data-list=\"bullet\">250-500 ватт – 5%</li></ul><br /><ul><li data-list=\"bullet\">больше 500 – 1%</li></ul><br />Технический паспорт:<br /><a href=\"https://www.hite-pro.ru/shop/goods/blok-upravleniya-relay-4mp\" target=\"_blank\" rel=\"noreferrer noopener\">https://www.hite-pro.ru/shop/goods/blok-upravleniya-relay-4mp</a>",
+        "modifications":[
             {
-                "id": "61-1",
-                "name": "Caleo Supermat - 130 - 0,7",
-                "price": 5078.0,
-                "image": "https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg"
-            },
-            {
-                "id": "61-2",
-                "name": "Caleo Supermat - 130 - 1,2",
-                "price": 7946.0,
-                "image": "https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg"
-            },
-            {
-                "id": "61-3",
-                "name": "Caleo Supermat - 130 - 1,8",
-                "price": 8602.0,
-                "image": "https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg"
-            },
-            {
-                "id": "61-4",
-                "name": "Caleo Supermat - 130 - 2,4",
-                "price": 10754.0,
-                "image": "https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg"
-            },
-            {
-                "id": "61-5",
-                "name": "Caleo Supermat - 130 - 3",
-                "price": 11503.0,
-                "image": "https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg"
-            },
-            {
-                "id": "61-6",
-                "name": "Caleo Supermat - 130 - 3,6",
-                "price": 13375.0,
-                "image": "https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg"
-            },
-            {
-                "id": "61-7",
-                "name": "Caleo Supermat - 130 - 4,2",
-                "price": 15622.0,
-                "image": "https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg"
-            },
-            {
-                "id": "61-8",
-                "name": "Caleo Supermat - 130 - 5",
-                "price": 16745.0,
-                "image": "https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg"
-            },
-            {
-                "id": "61-9",
-                "name": "Caleo Supermat - 130 - 6",
-                "price": 18710.0,
-                "image": "https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg"
-            },
-            {
-                "id": "61-10",
-                "name": "Caleo Supermat - 130 - 7",
-                "price": 21425.0,
-                "image": "https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg"
-            },
-            {
-                "id": "61-11",
-                "name": "Caleo Supermat - 130 - 8",
-                "price": 23858.0,
-                "image": "https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg"
-            },
-            {
-                "id": "61-12",
-                "name": "Caleo Supermat - 130 - 10",
-                "price": 30598.0,
-                "image": "https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg"
-            },
-            {
-                "id": "61-13",
-                "name": "Caleo Supermat - 130 - 12",
-                "price": 37056.0,
-                "image": "https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg"
-            },
-            {
-                "id": "61-14",
-                "name": "Caleo Supermat - 200 - 0,7",
-                "price": 5840.0,
-                "image": "https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg"
-            },
-            {
-                "id": "61-15",
-                "name": "Caleo Supermat - 200 - 1,2",
-                "price": 9138.0,
-                "image": "https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg"
-            },
-            {
-                "id": "61-16",
-                "name": "Caleo Supermat - 200 - 1,8",
-                "price": 9892.0,
-                "image": "https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg"
-            },
-            {
-                "id": "61-17",
-                "name": "Caleo Supermat - 200 - 2,4",
-                "price": 12368.0,
-                "image": "https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg"
-            },
-            {
-                "id": "61-18",
-                "name": "Caleo Supermat - 200 - 3",
-                "price": 13229.0,
-                "image": "https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg"
-            },
-            {
-                "id": "61-19",
-                "name": "Caleo Supermat - 200 - 3,6",
-                "price": 15382.0,
-                "image": "https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg"
-            },
-            {
-                "id": "61-20",
-                "name": "Caleo Supermat - 200 - 4,2",
-                "price": 17965.0,
-                "image": "https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg"
-            },
-            {
-                "id": "61-21",
-                "name": "Caleo Supermat - 200 - 5",
-                "price": 19257.0,
-                "image": "https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg"
-            },
-            {
-                "id": "61-22",
-                "name": "Caleo Supermat - 200 - 6",
-                "price": 21518.0,
-                "image": "https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg"
-            },
-            {
-                "id": "61-23",
-                "name": "Caleo Supermat - 200 - 7",
-                "price": 24638.0,
-                "image": "https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg"
-            },
-            {
-                "id": "61-24",
-                "name": "Caleo Supermat - 200 - 8",
-                "price": 27438.0,
-                "image": "https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg"
-            },
-            {
-                "id": "61-25",
-                "name": "Caleo Supermat - 200 - 10",
-                "price": 35187.0,
-                "image": "https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg"
-            },
-            {
-                "id": "61-26",
-                "name": "Caleo Supermat - 200 - 12",
-                "price": 42614.0,
-                "image": "https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg"
+                "id":"290030",
+                "name":"Relay-4M(P)",
+                "price":12980.0,
+                "image":"https://static.tildacdn.com/tild6165-3763-4163-b039-306463646139/1.png",
+                "specifications":{
+                    "MAX нагрузка на канал":"3 500 Вт (16 A / 250 В)",
+                    "Кол-во каналов":"4",
+                    "Рабочая частота":"868 МГц",
+                    "Питание":"85—265 В, 50 Гц",
+                    "Вес":"150 г",
+                    "Длина":"90 мм",
+                    "Ширина":"36 мм",
+                    "Высота":"61 мм"
+                },
+                "description":"Блок Relay-4M с измерением потребляемой мощности.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/Relay-4M%2074x105mm.pdf",
+                    "video":"https://clck.ru/3CTamb"
+                }
             }
         ]
     },
     {
-        "id": 62,
-        "name": "Caleo Platinum",
-        "price": 5695.0,
-        "image": "https://static.tildacdn.com/stor3632-6232-4361-a131-656634393063/79914832.jpg",
-        "category": "warm_floor",
-        "description": "Саморегулируемый инфракрасный пленочный теплый пол под ламинат, паркет, линолеум и ковролин (термопленка)",
-        "modifications": [
+        "id":21,
+        "name":"Антенна для Relay-4M",
+        "price":980.0,
+        "image":"https://static.tildacdn.com/tild3134-6363-4436-b562-303038303564/JCXP_3m_RG174_SMA750.jpg",
+        "category":"relay",
+        "description":"Цена окончательная, скидка уже применена. \nПри установке блока Relay-4 в металлические распределительные щиты может наблюдаться уменьшение дальности приема сигнала блоком от пульта из-за экранирования радиосигнала. Антенна с кабелем длиной 3 метра может быть вынесена за пределы распределительного щита, что позволит значительно увеличить дальность приема сигнала. Крепление антенны осуществляется на двусторонний скотч.\nВысота: 290 мм. Диаметр: 29 мм. Длина кабеля: 3 м",
+        "modifications":[
             {
-                "id": "62-1",
-                "name": "Caleo Platinum - 230 - 1",
-                "price": 5695.0,
-                "image": "https://static.tildacdn.com/stor3632-6232-4361-a131-656634393063/79914832.jpg"
-            },
-            {
-                "id": "62-2",
-                "name": "Caleo Platinum - 230 - 1,5",
-                "price": 8324.0,
-                "image": "https://static.tildacdn.com/stor3632-6232-4361-a131-656634393063/79914832.jpg"
-            },
-            {
-                "id": "62-3",
-                "name": "Caleo Platinum - 230 - 2",
-                "price": 11102.0,
-                "image": "https://static.tildacdn.com/stor3632-6232-4361-a131-656634393063/79914832.jpg"
-            },
-            {
-                "id": "62-4",
-                "name": "Caleo Platinum - 230 - 2,5",
-                "price": 13879.0,
-                "image": "https://static.tildacdn.com/stor3632-6232-4361-a131-656634393063/79914832.jpg"
-            },
-            {
-                "id": "62-5",
-                "name": "Caleo Platinum - 230 - 3",
-                "price": 16657.0,
-                "image": "https://static.tildacdn.com/stor3632-6232-4361-a131-656634393063/79914832.jpg"
-            },
-            {
-                "id": "62-6",
-                "name": "Caleo Platinum - 230 - 3,5",
-                "price": 19435.0,
-                "image": "https://static.tildacdn.com/stor3632-6232-4361-a131-656634393063/79914832.jpg"
-            },
-            {
-                "id": "62-7",
-                "name": "Caleo Platinum - 230 - 4",
-                "price": 22302.0,
-                "image": "https://static.tildacdn.com/stor3632-6232-4361-a131-656634393063/79914832.jpg"
-            },
-            {
-                "id": "62-8",
-                "name": "Caleo Platinum - 230 - 5",
-                "price": 27767.0,
-                "image": "https://static.tildacdn.com/stor3632-6232-4361-a131-656634393063/79914832.jpg"
-            },
-            {
-                "id": "62-9",
-                "name": "Caleo Platinum - 230 - 6",
-                "price": 33412.0,
-                "image": "https://static.tildacdn.com/stor3632-6232-4361-a131-656634393063/79914832.jpg"
+                "id":"207088",
+                "name":"Антенна для Relay-4M",
+                "price":980.0,
+                "image":"https://static.tildacdn.com/tild3134-6363-4436-b562-303038303564/JCXP_3m_RG174_SMA750.jpg",
+                "specifications":{},
+                "description":"Дополнительная внешняя антенна для блока управления Relay-4M. Обычно используется, если блок установлен в металлическом электрощите, который экранирует радиосигнал — тогда антенну выносят из щита.",
+                "instructions":{}
             }
         ]
     },
     {
-        "id": 63,
-        "name": "Caleo Supercable",
-        "price": 4994.0,
-        "image": "https://static.tildacdn.com/stor3435-6333-4866-a231-323166666561/87021772.jpg",
-        "category": "warm_floor",
-        "description": "Сверхтонкий кабельный теплый пол в бухте на основе двухжильного экранированного резистивного кабеля повышенной надежности",
-        "modifications": [
+        "id":58,
+        "name":"Relay-4S",
+        "price":8980.0,
+        "image":"https://static.tildacdn.com/tild3038-6438-4332-b836-326335333465/HiTE_PRO_CASE-1_11.png",
+        "category":"relay",
+        "description":"HiTE PRO Relay-4S – это четырехканальное реле, является управляемым устройством модульной системы. Внимание! Работает только с Relay-4M! Используется для беспроводного управления 4-мя линиями электрической цепи и имеет шину данных для подключения к радиопередающему устройству (HiTE PRO Relay-M). Получая сигнал от передатчиков, блок замыкает/размыкает электрическую цепь. Передатчиками являются другие устройства HiTE PRO: беспроводные выключатели, пульты ДУ, датчики, сервер умного дома. Блок монтируется на DIN рейку в распределительном щите. ",
+        "modifications":[
             {
-                "id": "63-1",
-                "name": "Caleo Supercable - 10 - 180",
-                "price": 4994.0,
-                "image": "https://static.tildacdn.com/stor3435-6333-4866-a231-323166666561/87021772.jpg"
-            },
-            {
-                "id": "63-2",
-                "name": "Caleo Supercable - 20 - 360",
-                "price": 7170.0,
-                "image": "https://static.tildacdn.com/stor3435-6333-4866-a231-323166666561/87021772.jpg"
-            },
-            {
-                "id": "63-3",
-                "name": "Caleo Supercable - 30 - 540",
-                "price": 10434.0,
-                "image": "https://static.tildacdn.com/stor3435-6333-4866-a231-323166666561/87021772.jpg"
-            },
-            {
-                "id": "63-4",
-                "name": "Caleo Supercable - 40 - 720",
-                "price": 13698.0,
-                "image": "https://static.tildacdn.com/stor3435-6333-4866-a231-323166666561/87021772.jpg"
-            },
-            {
-                "id": "63-5",
-                "name": "Caleo Supercable - 50 - 900",
-                "price": 15547.0,
-                "image": "https://static.tildacdn.com/stor3435-6333-4866-a231-323166666561/87021772.jpg"
-            },
-            {
-                "id": "63-6",
-                "name": "Caleo Supercable - 60 - 1080",
-                "price": 16962.0,
-                "image": "https://static.tildacdn.com/stor3435-6333-4866-a231-323166666561/87021772.jpg"
-            },
-            {
-                "id": "63-7",
-                "name": "Caleo Supercable - 70 - 1260",
-                "price": 19355.0,
-                "image": "https://static.tildacdn.com/stor3435-6333-4866-a231-323166666561/87021772.jpg"
-            },
-            {
-                "id": "63-8",
-                "name": "Caleo Supercable - 80 - 1440",
-                "price": 23272.0,
-                "image": "https://static.tildacdn.com/stor3435-6333-4866-a231-323166666561/87021772.jpg"
-            },
-            {
-                "id": "63-9",
-                "name": "Caleo Supercable - 90 - 1620",
-                "price": 26536.0,
-                "image": "https://static.tildacdn.com/stor3435-6333-4866-a231-323166666561/87021772.jpg"
-            },
-            {
-                "id": "63-10",
-                "name": "Caleo Supercable - 100 - 1800",
-                "price": 27842.0,
-                "image": "https://static.tildacdn.com/stor3435-6333-4866-a231-323166666561/87021772.jpg"
-            },
-            {
-                "id": "63-11",
-                "name": "Caleo Supercable - 120 - 2160",
-                "price": 35349.0,
-                "image": "https://static.tildacdn.com/stor3435-6333-4866-a231-323166666561/87021772.jpg"
+                "id":"206946",
+                "name":"Relay-4S",
+                "price":8980.0,
+                "image":"https://static.tildacdn.com/tild3038-6438-4332-b836-326335333465/HiTE_PRO_CASE-1_11.png",
+                "specifications":{
+                    "MAX нагрузка на канал":"3 500 Вт (16 A / 250 В)",
+                    "Кол-во каналов":"4",
+                    "Рабочая частота":"868 МГц",
+                    "Питание":"12 В",
+                    "Вес":"150 г",
+                    "Длина":"90 мм",
+                    "Ширина":"36 мм",
+                    "Высота":"61 мм"
+                },
+                "description":"Четырехканальный зависимый блок модульной системы. Используется для управления 4-мя линиями электрической цепи.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/Relay-4S%2074x105mm.pdf",
+                    "video":"https://clck.ru/3CTamb"
+                }
             }
         ]
     },
     {
-        "id": 64,
-        "name": "Терморегулятор Caleo С927",
-        "price": 10392.0,
-        "image": "https://static.tildacdn.com/stor3138-3266-4264-b464-653536363464/67235715.jpg",
-        "category": "warm_floor",
-        "description": "Wi-Fi встраиваемый, цифровой, программируемый, 3,5 кВт",
-        "modifications": [
+        "id":51,
+        "name":"Relay-4S(P)",
+        "price":11980.0,
+        "image":"https://static.tildacdn.com/tild3038-6438-4332-b836-326335333465/HiTE_PRO_CASE-1_11.png",
+        "category":"relay",
+        "description":"В отличие от модели Relay-4S, проводит измерение текущей потребляемой мощности всех 4 каналов. Эта информация передается на сервер умного дома Gateway и отражается в приложении рядом с иконкой подключенного устройства. Значения потребляемой мощности видны в мобильном приложении. Поэтому Gateway обязателен! Периодичность отметок потребления зависит от мощности: 0-50 ватт, повторная отправка только в случае изменения мощности более чем на 20%, 50-250 ватт – 10%, 250-500 ватт – 5%, больше 500 – 1%.",
+        "modifications":[
             {
-                "id": "64-1",
-                "name": "Белый",
-                "price": 10392.0,
-                "image": "https://static.tildacdn.com/stor3431-3131-4235-b936-636435313332/49049039.png"
-            },
-            {
-                "id": "64-2",
-                "name": "Черный",
-                "price": 10392.0,
-                "image": "https://static.tildacdn.com/stor3836-3361-4466-b837-656433306263/40479136.png"
+                "id":"290032",
+                "name":"Relay-4S(P)",
+                "price":11980.0,
+                "image":"https://static.tildacdn.com/tild3038-6438-4332-b836-326335333465/HiTE_PRO_CASE-1_11.png",
+                "specifications":{
+                    "MAX нагрузка на канал":"3 500 Вт (16 A / 250 В)",
+                    "Кол-во каналов":"4",
+                    "Рабочая частота":"868 МГц",
+                    "Питание":"12 В",
+                    "Вес":"150 г",
+                    "Длина":"90 мм",
+                    "Ширина":"36 мм",
+                    "Высота":"61 мм"
+                },
+                "description":"Блок Relay-4S с измерением потребляемой мощности.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/Relay-4S%2074x105mm.pdf",
+                    "video":"https://clck.ru/3CTamb"
+                }
             }
         ]
     },
     {
-        "id": 65,
-        "name": "Caleo Easymat",
-        "price": 3211.0,
-        "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
-        "category": "warm_floor",
-        "description": "Кабельный теплый пол под плитку и керамогранит (нагревательный мат)",
-        "modifications": [
+        "id":40,
+        "name":"Relay-LED3S",
+        "price":8980.0,
+        "image":"https://static.tildacdn.com/tild3038-6438-4332-b836-326335333465/HiTE_PRO_CASE-1_11.png",
+        "category":"relay",
+        "description":"HiTE PRO Relay-LED3S – это трехканальное реле является частью#nbsp;модульной системы, используется для беспроводного управления 3-мя линиями электрической цепи (3 одноцветных светодиодных ленты или 1 RGB-лента) и имеет шину данных для подключения к радиопередающему устройству – HiTE PRO Relay-M Внимание! Работает только с Relay-4M!\nС помощью этого блока можно не только включать/выключать, но и регулировать яркость светодиодной/RGB-ленты. \nПередатчиками являются другие устройства HiTE PRO: беспроводные выключатели, пульты ДУ, датчики, сервер умного дома.",
+        "modifications":[
             {
-                "id": "65-1",
-                "name": "Caleo Easymat - 140 - 0,5",
-                "price": 3211.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-2",
-                "name": "Caleo Easymat - 140 - 0,7",
-                "price": 3504.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-3",
-                "name": "Caleo Easymat - 140 - 1",
-                "price": 3699.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-4",
-                "name": "Caleo Easymat - 140 - 1,2",
-                "price": 3797.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-5",
-                "name": "Caleo Easymat - 140 - 1,5",
-                "price": 4382.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-6",
-                "name": "Caleo Easymat - 140 - 1,8",
-                "price": 5066.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-7",
-                "name": "Caleo Easymat - 140 - 2",
-                "price": 5261.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-8",
-                "name": "Caleo Easymat - 140 - 2,4",
-                "price": 5846.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-9",
-                "name": "Caleo Easymat - 140 - 3",
-                "price": 7115.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-10",
-                "name": "Caleo Easymat - 140 - 3,6",
-                "price": 8091.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-11",
-                "name": "Caleo Easymat - 140 - 4",
-                "price": 8872.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-12",
-                "name": "Caleo Easymat - 140 - 4,2",
-                "price": 9165.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-13",
-                "name": "Caleo Easymat - 140 - 5",
-                "price": 10824.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-14",
-                "name": "Caleo Easymat - 140 - 6",
-                "price": 12386.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-15",
-                "name": "Caleo Easymat - 140 - 7",
-                "price": 13557.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-16",
-                "name": "Caleo Easymat - 140 - 8",
-                "price": 15021.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-17",
-                "name": "Caleo Easymat - 140 - 10",
-                "price": 20193.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-18",
-                "name": "Caleo Easymat - 140 - 12",
-                "price": 24000.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-19",
-                "name": "Caleo Easymat - 180 - 0,5",
-                "price": 3686.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-20",
-                "name": "Caleo Easymat - 180 - 1",
-                "price": 4241.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-21",
-                "name": "Caleo Easymat - 180 - 1,5",
-                "price": 5045.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-22",
-                "name": "Caleo Easymat - 180 - 2",
-                "price": 6074.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-23",
-                "name": "Caleo Easymat - 180 - 2,5",
-                "price": 6730.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-24",
-                "name": "Caleo Easymat - 180 - 3",
-                "price": 8157.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-25",
-                "name": "Caleo Easymat - 180 - 3,5",
-                "price": 9270.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-26",
-                "name": "Caleo Easymat - 180 - 4",
-                "price": 10193.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-27",
-                "name": "Caleo Easymat - 180 - 5",
-                "price": 12439.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-28",
-                "name": "Caleo Easymat - 180 - 6",
-                "price": 14189.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-29",
-                "name": "Caleo Easymat - 180 - 7",
-                "price": 15622.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-30",
-                "name": "Caleo Easymat - 180 - 8",
-                "price": 17306.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-31",
-                "name": "Caleo Easymat - 180 - 10",
-                "price": 23297.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-32",
-                "name": "Caleo Easymat - 180 - 12",
-                "price": 27696.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
-            },
-            {
-                "id": "65-33",
-                "name": "Caleo Easymat - 180 - 15",
-                "price": 33967.0,
-                "image": "https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg"
+                "id":"276780",
+                "name":"Relay-LED3S",
+                "price":8980.0,
+                "image":"https://static.tildacdn.com/tild3038-6438-4332-b836-326335333465/HiTE_PRO_CASE-1_11.png",
+                "specifications":{
+                    "Кол-во каналов":"1 RGB или 3 LED",
+                    "Питание":"12 В",
+                    "Максимальная нагрузка на блок":"12/24 В, 25 А",
+                    "Максимальная нагрузка на 1 канал":"16 А",
+                    "Вес":"43 г",
+                    "Габариты":"90 × 36 × 61 мм"
+                },
+                "description":"Зависимый блок управления модульной системы, используется для управления 3-мя линиями электрической цепи (3 LED-ленты или 1 RGB-лента). Подключается по CAN-шине к мастер-блоку  HiTE PRO Relay-4M. Без 4M работать не будет!",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/Relay-Led3S%2074x105mm.pdf",
+                    "video":"https://clck.ru/3CTan7"
+                }
             }
         ]
     },
     {
-        "id": 66,
-        "name": "Терморегулятор Caleo С430",
-        "price": 1813.0,
-        "image": "https://static.tildacdn.com/stor6433-3931-4063-b931-663539353731/26813793.jpg",
-        "category": "warm_floor",
-        "description": "Аналоговый, встраиваемый, 3,5 кВт",
-        "modifications": [
+        "id":6,
+        "name":"Умная розетка Smart Socket",
+        "price":3080.0,
+        "image":"https://static.tildacdn.com/stor3730-3161-4563-b162-346536643032/49671049.jpg",
+        "category":"relay",
+        "description":"Блок приема сигнала в виде модуля с розеткой с 1 каналом управления – Включение / Выключение нагрузки. Блок приема устанавливается и подключается к нагрузке, которой надо управлять. Замыкает / размыкает цепь питания при получении сигнала от передатчиков, с которыми связан.",
+        "modifications":[
             {
-                "id": "66-1",
-                "name": "Белый",
-                "price": 1813.0,
-                "image": "https://static.tildacdn.com/stor6433-3931-4063-b931-663539353731/26813793.jpg"
+                "id":"207098",
+                "name":"Белый",
+                "price":3080.0,
+                "image":"https://static.tildacdn.com/stor3730-3161-4563-b162-346536643032/49671049.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Питание":"230 В",
+                    "Максимальная нагрузка":"4000 Вт (16 А)",
+                    "Вес":"100 г",
+                    "Габариты":"47 × 17 × 37 мм"
+                },
+                "description":"Блок управления в виде накладной розетки.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/Socket_web.pdf",
+                    "video":"https://www.hite-pro.ru/shop/goods/umnaya-rozetka-smart-socket"
+                }
             },
             {
-                "id": "66-2",
-                "name": "Черный",
-                "price": 1813.0,
-                "image": "https://static.tildacdn.com/stor3936-3130-4264-b362-356466663833/39881704.jpg"
+                "id":"296964",
+                "name":"Черный",
+                "price":3080.0,
+                "image":"https://static.tildacdn.com/stor3730-3161-4563-b162-346536643032/49671049.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Питание":"230 В",
+                    "Максимальная нагрузка":"4000 Вт (16 А)",
+                    "Вес":"100 г",
+                    "Габариты":"47 × 17 × 37 мм"
+                },
+                "description":"Блок управления в виде накладной розетки.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/Socket_web.pdf",
+                    "video":"https://www.hite-pro.ru/shop/goods/umnaya-rozetka-smart-socket"
+                }
             }
         ]
     },
     {
-        "id": 67,
-        "name": "Одноканальное радиореле Relay-0/1-10V",
-        "price": 3480.0,
-        "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
-        "category": "relay",
-        "description": "Компактный блок для управления 0/1-10 В.",
-        "modifications": []
-    },
-    {
-        "id": 68,
-        "name": "Крепление для компактных блоков на DIN-рейку или плоскость",
-        "price": 250.0,
-        "image": "https://static.tildacdn.com/stor6438-3865-4134-a239-393034333538/46878414.jpg",
-        "category": "relay",
-        "description": "Любой компактный блок HiTE PRO можно установить на DIN-рейку или плоскость",
-        "modifications": []
-    },
-    {
-        "id": 69,
-        "name": "Одноканальное радиореле Relay-1Q",
-        "price": 3080.0,
-        "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
-        "category": "relay",
-        "description": "Бесшумный блок – 1 канал – 1,5А • 230В",
-        "modifications": []
-    },
-    {
-        "id": 70,
-        "name": "Двухканальное радиореле Relay-2Q",
-        "price": 4780.0,
-        "image": "https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
-        "category": "relay",
-        "description": "Бесшумный блок – 2 канала – каждый 1,5А • 230В",
-        "modifications": []
-    },
-    {
-        "id": 71,
-        "name": "Крепление для Gateway в розетку",
-        "price": 750.0,
-        "image": "https://static.tildacdn.com/stor6231-6230-4530-b363-616634393065/96510516.jpg",
-        "category": "server",
-        "description": "Аккуратно разместите сервер умного дома",
-        "modifications": []
-    },
-    {
-        "id": 72,
-        "name": "Комплект для защиты от протечек HiTE PRO на трубу 1/2",
-        "price": 25540.0,
-        "image": "https://static.tildacdn.com/stor6431-3834-4162-b133-653538656133/55102437.jpg",
-        "category": "kran",
-        "description": "Сборный комплект устройств: 1-2 шаровых крана, блок управления, датчик протечки",
-        "modifications": [
+        "id":11,
+        "name":"Пульт DST-1",
+        "price":1480.0,
+        "image":"https://static.tildacdn.com/tild3530-6662-4763-a233-653838303239/015-HTPR.png",
+        "category":"switch",
+        "description":"Предназначен для дистанционного управления радиореле HiTE PRO",
+        "modifications":[
             {
-                "id": "72-1",
-                "name": "Комплект для защиты от протечек HiTE PRO на трубу 1/2 - Bugatti - 2",
-                "price": 25540.0,
-                "image": "https://static.tildacdn.com/stor6431-3834-4162-b133-653538656133/55102437.jpg"
-            },
-            {
-                "id": "72-2",
-                "name": "Комплект для защиты от протечек HiTE PRO на трубу 1/2 - Profi - 2",
-                "price": 23940.0,
-                "image": "https://static.tildacdn.com/stor6530-6464-4333-b036-643565356237/70060083.jpg"
-            },
-            {
-                "id": "72-3",
-                "name": "Комплект для защиты от протечек HiTE PRO на трубу 1/2 - Bugatti - 1",
-                "price": 16250.0,
-                "image": "https://static.tildacdn.com/stor6431-3834-4162-b133-653538656133/55102437.jpg"
-            },
-            {
-                "id": "72-4",
-                "name": "Комплект для защиты от протечек HiTE PRO на трубу 1/2 - Profi - 1",
-                "price": 15450.0,
-                "image": "https://static.tildacdn.com/stor6530-6464-4333-b036-643565356237/70060083.jpg"
+                "id":"276676",
+                "name":"DST-1",
+                "price":1480.0,
+                "image":"https://static.tildacdn.com/tild3530-6662-4763-a233-653838303239/015-HTPR.png",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Макс дальность на открытом пространстве":"250 м",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 10 лет",
+                    "Вес":"20 г",
+                    "Габариты":"59 × 30 × 13 мм"
+                },
+                "description":"Пульт-брелок для дистанционного управления блоками HiTE PRO.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://clck.ru/3CTawn"
+                }
             }
         ]
     },
     {
-        "id": 73,
-        "name": "Футболка HiTE PRO темно-синяя",
-        "price": 1600.0,
-        "image": "https://static.tildacdn.com/stor3933-6134-4531-b262-343332666463/42512992.png",
-        "category": "other",
-        "description": "Хлопковая футболка в стиле oversize",
-        "modifications": [
+        "id":12,
+        "name":"Пульт DST-4",
+        "price":1980.0,
+        "image":"https://static.tildacdn.com/tild3031-6261-4265-b335-393135636437/016-HTPR_1.png",
+        "category":"switch",
+        "description":"Предназначен для дистанционного управления радиореле HiTE PRO",
+        "modifications":[
             {
-                "id": "73-1",
-                "name": "темно-синяя - S",
-                "price": 1600.0,
-                "image": "https://static.tildacdn.com/stor3933-6134-4531-b262-343332666463/42512992.png"
-            },
-            {
-                "id": "73-2",
-                "name": "темно-синяя - M",
-                "price": 1600.0,
-                "image": "https://static.tildacdn.com/stor3933-6134-4531-b262-343332666463/42512992.png"
-            },
-            {
-                "id": "73-3",
-                "name": "темно-синяя - L",
-                "price": 1600.0,
-                "image": "https://static.tildacdn.com/stor3933-6134-4531-b262-343332666463/42512992.png"
-            },
-            {
-                "id": "73-4",
-                "name": "темно-синяя - XL",
-                "price": 1600.0,
-                "image": "https://static.tildacdn.com/stor3933-6134-4531-b262-343332666463/42512992.png"
-            },
-            {
-                "id": "73-5",
-                "name": "темно-синяя - XXL",
-                "price": 1600.0,
-                "image": "https://static.tildacdn.com/stor3933-6134-4531-b262-343332666463/42512992.png"
+                "id":"274770",
+                "name":"DST-4",
+                "price":1980.0,
+                "image":"https://static.tildacdn.com/tild3031-6261-4265-b335-393135636437/016-HTPR_1.png",
+                "specifications":{
+                    "Кол-во каналов":"4",
+                    "Макс дальность на открытом пространстве":"250 м",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 10 лет",
+                    "Вес":"20 г",
+                    "Габариты":"59 × 30 × 13 мм"
+                },
+                "description":"Пульт-брелок для дистанционного управления блоками HiTE PRO.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://clck.ru/3CTawn"
+                }
             }
         ]
     },
     {
-        "id": 74,
-        "name": "Кепка HiTE PRO темно-синяя",
-        "price": 1600.0,
-        "image": "https://static.tildacdn.com/stor6436-3830-4866-a562-663532633337/28196858.jpg",
-        "category": "other",
-        "description": "Кепка регулируемая onesize",
-        "modifications": []
+        "id":15,
+        "name":"Relay-DRIVE",
+        "price":3980.0,
+        "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+        "category":"relay",
+        "description":"HiTE PRO Relay-DRIVE используется для беспроводного управления электроприводами: например, электрокарнизами, жалюзи, рольставнями, воротами и другими.\n\nПодключается «в разрыв» цепи питания перед электроприводом, которым нужно управлять с помощью беспроводных выключателей, пультов или сервера умного дома HiTE PRO. \n\nУ блока есть модификации на 220 и 12 В, а также с «сухим контактом», который не имеет непосредственной связи с источником питания и заземлением, т.е. у блока управления свой провод питания, а у нагрузки свой.",
+        "modifications":[
+            {
+                "id":"207052",
+                "name":"220В",
+                "price":3980.0,
+                "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Питание":"230 В",
+                    "Максимальная нагрузка на блок":"500 Вт (2 А)",
+                    "Вес":"43 г",
+                    "Габариты":"47 × 17 × 37 мм"
+                },
+                "description":"Блок для беспроводного управления фазными электроприводами: электрокарнизы, шаровые краны, ворота и т.д.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/RelayDrive_220%D0%92_115x105mm.pdf",
+                    "video":"https://clck.ru/3CTaoS"
+                }
+            },
+            {
+                "id":"207140",
+                "name":"12В",
+                "price":3980.0,
+                "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Питание":"12 В",
+                    "Максимальная нагрузка на блок":"60 Вт (5 А)",
+                    "Вес":"43 г",
+                    "Габариты":"47 × 17 × 37 мм"
+                },
+                "description":"Блок Relay-Drive, но с питанием 12 В.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/RelayDrive_12%D0%92_115x105mm.pdf",
+                    "video":"https://clck.ru/3CTaoS"
+                }
+            },
+            {
+                "id":"208982",
+                "name":"220В (сухой контакт)",
+                "price":3980.0,
+                "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Питание":"230 В",
+                    "Максимальная нагрузка на блок":"500 Вт (2 А)",
+                    "Вес":"43 г",
+                    "Габариты":"47 × 17 × 37 мм"
+                },
+                "description":"Блок Relay-Drive, но с выходом \"сухой\" контакт.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/RelayDrive_220%D0%92_115x105mm.pdf",
+                    "video":"https://clck.ru/3CTaoS"
+                }
+            },
+            {
+                "id":"208980",
+                "name":"12В (сухой контакт)",
+                "price":3980.0,
+                "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Питание":"12 В",
+                    "Максимальная нагрузка на блок":"60 Вт (5 А)",
+                    "Вес":"43 г",
+                    "Габариты":"47 × 17 × 37 мм"
+                },
+                "description":"Блок Relay-Drive, но с питанием 12 В  и выходом \"сухой\" контакт.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/RelayDrive_12%D0%92_115x105mm.pdf",
+                    "video":"https://clck.ru/3CTaoS"
+                }
+            }
+        ]
     },
     {
-        "id": 75,
-        "name": "Взломостойкий умный замок KEYWAY SL300",
-        "price": 23850,
-        "image": "https://static.tildacdn.com/stor6166-3234-4233-b464-366337636437/99455674.jpg",
-        "category": "lock",
-        "description": "Получите персональный промокод на скидку 30%",
-        "modifications": []
+        "id":19,
+        "name":"LE-1",
+        "price":1480.0,
+        "image":"https://static.tildacdn.com/tild3232-6365-4663-a162-393230323539/1le-1.jpg",
+        "category":"switch",
+        "description":"Кнопочный одноканальный беспроводной выключатель с рамкой серии Legrand Etika. Работает от одной батарейки более 7 лет. Частота 868 МГц, на которой работает выключатель, позволяет управлять освещением на расстоянии до 250 м. Имеет квадратную кнопку и представлен в двух цветах: белый и слоновая кость.",
+        "modifications":[
+            {
+                "id":"207090",
+                "name":"Слоновая кость",
+                "price":1480.0,
+                "image":"https://static.tildacdn.com/tild3962-6133-4966-b731-656337656262/2le-1.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 10 лет",
+                    "Вес":"90 г",
+                    "Габариты":"85 × 85 × 13 мм"
+                },
+                "description":"Радиовыключатель кнопочный звонкового типа, совместим с рамками Legrand Etika",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf"
+                }
+            },
+            {
+                "id":"207044",
+                "name":"Белый",
+                "price":1480.0,
+                "image":"https://static.tildacdn.com/tild3232-6365-4663-a162-393230323539/1le-1.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 10 лет",
+                    "Вес":"90 г",
+                    "Габариты":"85 × 85 × 13 мм"
+                },
+                "description":"Радиовыключатель кнопочный звонкового типа, совместим с рамками Legrand Etika",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf"
+                }
+            }
+        ]
     },
     {
-        "id": 76,
-        "name": "Умный замок премиум-класса KEYWAY SL500",
-        "price": 47700,
-        "image": "https://static.tildacdn.com/stor3466-6330-4939-a461-353530623633/88944724.jpg",
-        "category": "lock",
-        "description": "Получите персональный промокод на скидку 30%",
-        "modifications": []
+        "id":20,
+        "name":"LE-2",
+        "price":1780.0,
+        "image":"https://static.tildacdn.com/tild6562-3535-4637-b562-313032663962/le-22.jpg",
+        "category":"switch",
+        "description":"Кнопочный двухканальный беспроводной выключатель с рамкой серии Legrand Etika. Работает от одной батарейки более 7 лет. Частота 868 МГц, на которой работает выключатель, позволяет управлять освещением на расстоянии до 250 м. Имеет квадратную кнопку и представлен в двух цветах: белый и слоновая кость.",
+        "modifications":[
+            {
+                "id":"207050",
+                "name":"Слоновая кость",
+                "price":1780.0,
+                "image":"https://static.tildacdn.com/tild6562-3535-4637-b562-313032663962/le-22.jpg",
+                "specifications":{
+                    "Кол-во каналов":"2",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 10 лет",
+                    "Вес":"90 г",
+                    "Габариты":"85 × 85 × 13 мм"
+                },
+                "description":"Радиовыключатель, совместим с рамками Legrand Etika",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf"
+                }
+            },
+            {
+                "id":"207092",
+                "name":"Белый",
+                "price":1780.0,
+                "image":"https://static.tildacdn.com/tild6637-3537-4232-b866-343238343761/1le-2.jpg",
+                "specifications":{
+                    "Кол-во каналов":"2",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 10 лет",
+                    "Вес":"90 г",
+                    "Габариты":"85 × 85 × 13 мм"
+                },
+                "description":"Радиовыключатель, совместим с рамками Legrand Etika",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf"
+                }
+            }
+        ]
     },
     {
-        "id": 77,
-        "name": "Двухканальный сенсорный радиовыключатель SN-R2",
-        "price": 3380.0,
-        "image": "https://static.tildacdn.com/tild3033-3931-4635-b532-303335346366/sk-snr2.jpg",
-        "category": "switch",
-        "description": "Закругленные углы",
-        "modifications": [
+        "id":52,
+        "name":"Base-1 (без фиксации)",
+        "price":1780.0,
+        "image":"https://static.tildacdn.com/stor3865-3435-4331-a331-633732333863/24952004.png",
+        "category":"switch",
+        "description":"Одноканальный беспроводной выключатель без фиксации клавиши (звонкового типа).Работает от одной батарейки более 7 лет. Частота 868 МГц, на которой работает выключатель, позволяет управлять освещением на расстоянии до 250 м.При выборе выключателя с рамкой используется рамка Schneider Atlas. Рамки IEK Brite приобретаются только отдельно. Устанавливается на любую поверхность с помощью двустороннего скотча или саморезов. Для работы выключателя обязательно необходим блок управления. Радиовыключатель является передатчиком, который передает сигнал блоку управления на замыкание и размыкание электрической цепи.",
+        "modifications":[
             {
-                "id": "77-1",
-                "name": "Бежевый",
-                "price": 3380.0,
-                "image": "https://static.tildacdn.com/tild3033-3931-4635-b532-303335346366/sk-snr2.jpg"
+                "id":"293048",
+                "name":"Белый",
+                "price":1780.0,
+                "image":"https://static.tildacdn.com/stor3865-3435-4331-a331-633732333863/24952004.png",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 10 лет",
+                    "Вес":"90 г",
+                    "Габариты":"85 × 85 × 13 мм"
+                },
+                "description":"Радиовыключатель клавишный звонкового типа (без фиксации клавиш), совместим с рамками Schneider Atlas и IEK Brite.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://vkvideo.ru/video-140176277_456239295"
+                }
             },
             {
-                "id": "77-2",
-                "name": "Черный",
-                "price": 3380.0,
-                "image": "https://static.tildacdn.com/tild3262-3164-4534-a439-336336656434/1snr2.jpg"
+                "id":"293050",
+                "name":"Бежевый",
+                "price":1780.0,
+                "image":"https://static.tildacdn.com/stor3863-6463-4066-a361-396535343664/11513905.png",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 10 лет",
+                    "Вес":"90 г",
+                    "Габариты":"85 × 85 × 13 мм"
+                },
+                "description":"Радиовыключатель клавишный звонкового типа (без фиксации клавиш), совместим с рамками Schneider Atlas и IEK Brite.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://vkvideo.ru/video-140176277_456239296"
+                }
             },
             {
-                "id": "77-3",
-                "name": "Белый",
-                "price": 3380.0,
-                "image": "https://static.tildacdn.com/tild6239-6235-4630-a330-623030613064/wh-snr2.jpg"
+                "id":"293052",
+                "name":"Серый (грифель)",
+                "price":2180.0,
+                "image":"https://static.tildacdn.com/stor3433-3338-4739-a539-656435383164/91248115.png",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 10 лет",
+                    "Вес":"90 г",
+                    "Габариты":"85 × 85 × 13 мм"
+                },
+                "description":"Радиовыключатель клавишный звонкового типа (без фиксации клавиш), совместим с рамками Schneider Atlas и IEK Brite.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://vkvideo.ru/video-140176277_456239297"
+                }
             },
             {
-                "id": "77-4",
-                "name": "Алюминиевый",
-                "price": 3380.0,
-                "image": "https://static.tildacdn.com/tild3832-3761-4662-b466-323463323433/al_snr2.jpg"
+                "id":"293054",
+                "name":"Черный (карбон)",
+                "price":2180.0,
+                "image":"https://static.tildacdn.com/stor6238-6232-4561-b666-336332626430/88521061.png",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 10 лет",
+                    "Вес":"90 г",
+                    "Габариты":"85 × 85 × 13 мм"
+                },
+                "description":"Радиовыключатель клавишный звонкового типа (без фиксации клавиш), совместим с рамками Schneider Atlas и IEK Brite.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://vkvideo.ru/video-140176277_456239298"
+                }
+            }
+        ]
+    },
+    {
+        "id":53,
+        "name":"Base-2 (без фиксации)",
+        "price":2180.0,
+        "image":"https://static.tildacdn.com/stor3963-3065-4539-b033-336563363133/22799452.png",
+        "category":"switch",
+        "description":"Двухканальный беспроводной выключатель без фиксации клавиши (звонкового типа). Работает от одной батарейки более 7 лет. Частота 868 МГц, на которой работает выключатель, позволяет управлять освещением на расстоянии до 250 м. При выборе выключателя с рамкой используется рамка Schneider Atlas. Рамки IEK Brite приобретаются только отдельно. Устанавливается на любую поверхность с помощью двустороннего скотча или саморезов. Для работы выключателя обязательно необходим блок управления. Радиовыключатель является передатчиком, который передает сигнал блоку управления на замыкание и размыкание электрической цепи. ",
+        "modifications":[
+            {
+                "id":"293064",
+                "name":"Белый",
+                "price":2180.0,
+                "image":"https://static.tildacdn.com/stor3963-3065-4539-b033-336563363133/22799452.png",
+                "specifications":{
+                    "Кол-во каналов":"2",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 10 лет",
+                    "Вес":"90 г",
+                    "Габариты":"85 × 85 × 13 мм"
+                },
+                "description":"Радиовыключатель клавишный звонкового типа (без фиксации клавиш), совместим с рамками Schneider Atlas и IEK Brite.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://vkvideo.ru/video-140176277_456239295"
+                }
             },
             {
-                "id": "77-5",
-                "name": "Серый",
-                "price": 3380.0,
-                "image": "https://static.tildacdn.com/tild6133-3535-4135-a237-643861336265/ser_snr2.jpg"
+                "id":"293066",
+                "name":"Бежевый",
+                "price":2180.0,
+                "image":"https://static.tildacdn.com/stor3963-3065-4539-b033-336563363133/22799452.png",
+                "specifications":{
+                    "Кол-во каналов":"2",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 10 лет",
+                    "Вес":"90 г",
+                    "Габариты":"85 × 85 × 13 мм"
+                },
+                "description":"Радиовыключатель клавишный звонкового типа (без фиксации клавиш), совместим с рамками Schneider Atlas и IEK Brite.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://vkvideo.ru/video-140176277_456239296"
+                }
             },
             {
-                "id": "77-6",
-                "name": "Графит",
-                "price": 3380.0,
-                "image": "https://static.tildacdn.com/tild6333-6436-4931-a534-653334646139/graf_snr2.jpg"
+                "id":"293068",
+                "name":"Серый (грифель)",
+                "price":2580.0,
+                "image":"https://static.tildacdn.com/stor3963-3065-4539-b033-336563363133/22799452.png",
+                "specifications":{
+                    "Кол-во каналов":"2",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 10 лет",
+                    "Вес":"90 г",
+                    "Габариты":"85 × 85 × 13 мм"
+                },
+                "description":"Радиовыключатель клавишный звонкового типа (без фиксации клавиш), совместим с рамками Schneider Atlas и IEK Brite.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://vkvideo.ru/video-140176277_456239297"
+                }
             },
             {
-                "id": "77-7",
-                "name": "Слоновая кость",
-                "price": 3380.0,
-                "image": "https://static.tildacdn.com/tild6262-6439-4761-b434-613564613363/slon_snr2.jpg"
+                "id":"293070",
+                "name":"Черный (карбон)",
+                "price":2580.0,
+                "image":"https://static.tildacdn.com/stor3963-3065-4539-b033-336563363133/22799452.png",
+                "specifications":{
+                    "Кол-во каналов":"2",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 10 лет",
+                    "Вес":"90 г",
+                    "Габариты":"85 × 85 × 13 мм"
+                },
+                "description":"Радиовыключатель клавишный звонкового типа (без фиксации клавиш), совместим с рамками Schneider Atlas и IEK Brite.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://vkvideo.ru/video-140176277_456239298"
+                }
+            }
+        ]
+    },
+    {
+        "id":54,
+        "name":"Base-1F (с фиксацией)",
+        "price":1780.0,
+        "image":"https://static.tildacdn.com/stor3863-6463-4066-a361-396535343664/11513905.png",
+        "category":"switch",
+        "description":"Одноканальный беспроводной выключатель с фиксацией клавиши. НЕ ПОДХОДИТ ДЛЯ ДИММИРОВАНИЯ. Работает от одной батарейки более 7 лет. Частота 868 МГц, на которой работает выключатель, позволяет управлять освещением на расстоянии до 250 м. При выборе выключателя с рамкой используется рамка Schneider Atlas. Рамки IEK Brite приобретаются только отдельно. Устанавливается на любую поверхность с помощью двустороннего скотча или саморезов. Для работы выключателя обязательно необходим блок управления. Радиовыключатель является передатчиком, который передает сигнал блоку управления на замыкание и размыкание электрической цепи.",
+        "modifications":[
+            {
+                "id":"293056",
+                "name":"Белый",
+                "price":1780.0,
+                "image":"https://static.tildacdn.com/stor3865-3435-4331-a331-633732333863/24952004.png",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 10 лет",
+                    "Вес":"90 г",
+                    "Габариты":"85 × 85 × 13 мм"
+                },
+                "description":"Радиовыключатель клавишный перекидного типа (с фиксацией клавиш), совместим с рамками Schneider Atlas и IEK Brite.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://vkvideo.ru/video-140176277_456239295"
+                }
             },
             {
-                "id": "77-8",
-                "name": "Светло-серый",
-                "price": 3380.0,
-                "image": "https://static.tildacdn.com/tild6165-3734-4630-a337-613236366265/svser_snr2.jpg"
+                "id":"293058",
+                "name":"Бежевый",
+                "price":1780.0,
+                "image":"https://static.tildacdn.com/stor3863-6463-4066-a361-396535343664/11513905.png",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 10 лет",
+                    "Вес":"90 г",
+                    "Габариты":"85 × 85 × 13 мм"
+                },
+                "description":"Радиовыключатель клавишный перекидного типа (с фиксацией клавиш), совместим с рамками Schneider Atlas и IEK Brite.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://vkvideo.ru/video-140176277_456239296"
+                }
             },
             {
-                "id": "77-9",
-                "name": "Серо-голубой",
-                "price": 3380.0,
-                "image": "https://static.tildacdn.com/tild3264-6461-4131-b066-316565653439/sergol_snr2.jpg"
+                "id":"293060",
+                "name":"Серый (грифель)",
+                "price":2180.0,
+                "image":"https://static.tildacdn.com/stor3433-3338-4739-a539-656435383164/91248115.png",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 10 лет",
+                    "Вес":"90 г",
+                    "Габариты":"85 × 85 × 13 мм"
+                },
+                "description":"Радиовыключатель клавишный перекидного типа (с фиксацией клавиш), совместим с рамками Schneider Atlas и IEK Brite.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://vkvideo.ru/video-140176277_456239297"
+                }
             },
             {
-                "id": "77-10",
-                "name": "Светло-коричневый",
-                "price": 3380.0,
-                "image": "https://static.tildacdn.com/tild6364-3033-4637-b736-323735366237/svkor_snr2.jpg"
+                "id":"293062",
+                "name":"Черный (карбон)",
+                "price":2180.0,
+                "image":"https://static.tildacdn.com/stor6238-6232-4561-b666-336332626430/88521061.png",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 10 лет",
+                    "Вес":"90 г",
+                    "Габариты":"85 × 85 × 13 мм"
+                },
+                "description":"Радиовыключатель клавишный перекидного типа (с фиксацией клавиш), совместим с рамками Schneider Atlas и IEK Brite.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://vkvideo.ru/video-140176277_456239298"
+                }
+            }
+        ]
+    },
+    {
+        "id":55,
+        "name":"Base-2F (с фиксацией)",
+        "price":2180.0,
+        "image":"https://static.tildacdn.com/stor6462-6661-4165-b961-313961343935/48504921.png",
+        "category":"switch",
+        "description":"Двухканальный беспроводной выключатель с фиксацией клавиши. НЕ ПОДХОДИТ ДЛЯ ДИММИРОВАНИЯ. Работает от одной батарейки более 7 лет. Частота 868 МГц, на которой работает выключатель, позволяет управлять освещением на расстоянии до 250 м. При выборе выключателя с рамкой используется рамка Schneider Atlas. Рамки IEK Brite приобретаются только отдельно. Устанавливается на любую поверхность с помощью двустороннего скотча или саморезов. Для работы выключателя обязательно необходим блок управления. Радиовыключатель является передатчиком, который передает сигнал блоку управления на замыкание и размыкание электрической цепи.",
+        "modifications":[
+            {
+                "id":"293072",
+                "name":"Белый",
+                "price":2180.0,
+                "image":"https://static.tildacdn.com/stor6462-6661-4165-b961-313961343935/48504921.png",
+                "specifications":{
+                    "Кол-во каналов":"2",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 10 лет",
+                    "Вес":"90 г",
+                    "Габариты":"85 × 85 × 13 мм"
+                },
+                "description":"Радиовыключатель клавишный перекидного типа (с фиксацией клавиш), совместим с рамками Schneider Atlas и IEK Brite.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://vkvideo.ru/video-140176277_456239295"
+                }
             },
             {
-                "id": "77-11",
-                "name": "Темно-коричневый",
-                "price": 3380.0,
-                "image": "https://static.tildacdn.com/tild3062-3861-4332-b161-613961393161/temnkor_snr2.jpg"
+                "id":"293074",
+                "name":"Бежевый",
+                "price":2180.0,
+                "image":"https://static.tildacdn.com/stor6462-6661-4165-b961-313961343935/48504921.png",
+                "specifications":{
+                    "Кол-во каналов":"2",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 10 лет",
+                    "Вес":"90 г",
+                    "Габариты":"85 × 85 × 13 мм"
+                },
+                "description":"Радиовыключатель клавишный перекидного типа (с фиксацией клавиш), совместим с рамками Schneider Atlas и IEK Brite.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://vkvideo.ru/video-140176277_456239296"
+                }
+            },
+            {
+                "id":"293076",
+                "name":"Серый (грифель)",
+                "price":2580.0,
+                "image":"https://static.tildacdn.com/stor6462-6661-4165-b961-313961343935/48504921.png",
+                "specifications":{
+                    "Кол-во каналов":"2",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 10 лет",
+                    "Вес":"90 г",
+                    "Габариты":"85 × 85 × 13 мм"
+                },
+                "description":"Радиовыключатель клавишный перекидного типа (с фиксацией клавиш), совместим с рамками Schneider Atlas и IEK Brite.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://vkvideo.ru/video-140176277_456239297"
+                }
+            },
+            {
+                "id":"293078",
+                "name":"Черный (карбон)",
+                "price":2580.0,
+                "image":"https://static.tildacdn.com/stor6462-6661-4165-b961-313961343935/48504921.png",
+                "specifications":{
+                    "Кол-во каналов":"2",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 10 лет",
+                    "Вес":"90 г",
+                    "Габариты":"85 × 85 × 13 мм"
+                },
+                "description":"Радиовыключатель клавишный перекидного типа (с фиксацией клавиш), совместим с рамками Schneider Atlas и IEK Brite.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://vkvideo.ru/video-140176277_456239298"
+                }
+            }
+        ]
+    },
+    {
+        "id":41,
+        "name":"SN-C",
+        "price":2980.0,
+        "image":"https://static.tildacdn.com/tild3761-6534-4132-b134-333731313636/---36-455x455.png",
+        "category":"switch",
+        "description":"Беспроводной сенсорный мебельный выключатель* HiTE PRO SN. Имеет одну сенсорную кнопку и встраивается в мебель в подготовленное отверстие 35х12 мм. Работа от одной батарейки — более 7 лет. Частота 868 МГц, на которой работает выключатель, позволяет управлять освещением на расстоянии до 250 м.",
+        "modifications":[
+            {
+                "id":"276786",
+                "name":"Черный",
+                "price":2980.0,
+                "image":"https://static.tildacdn.com/tild3761-6534-4132-b134-333731313636/---36-455x455.png",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Макс дальность на открытом пространстве":"250 м",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 7 лет",
+                    "Вес":"20 г",
+                    "Габариты":"41 × 41 × 15 мм"
+                },
+                "description":"Радиовыключатель сенсорный из закаленного стекла в оригинальном дизайне HiTE PRO. Встраивается в мебель в подготовленное отверстие 35х12 мм (диаметр*глубина). В комплекте идёт специальный магнит с отверстием в центре и саморез, чтобы было удобно крепить выключатель и просто менять батарейку. Глубина отверстия указана с учётом магнита.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://clck.ru/3CTawN"
+                }
+            },
+            {
+                "id":"276784",
+                "name":"Белый",
+                "price":2980.0,
+                "image":"https://static.tildacdn.com/tild3632-6366-4637-a262-663161323231/---33-455x455.png",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Макс дальность на открытом пространстве":"250 м",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 7 лет",
+                    "Вес":"20 г",
+                    "Габариты":"41 × 41 × 15 мм"
+                },
+                "description":"Радиовыключатель сенсорный из закаленного стекла в оригинальном дизайне HiTE PRO. Встраивается в мебель в подготовленное отверстие 35х12 мм (диаметр*глубина). В комплекте идёт специальный магнит с отверстием в центре и саморез, чтобы было удобно крепить выключатель и просто менять батарейку. Глубина отверстия указана с учётом магнита.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://clck.ru/3CTawN"
+                }
+            },
+            {
+                "id":"276782",
+                "name":"Алюминиевый",
+                "price":2980.0,
+                "image":"https://static.tildacdn.com/tild6233-3335-4939-a434-613164666465/---34-455x455.png",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Макс дальность на открытом пространстве":"250 м",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 7 лет",
+                    "Вес":"20 г",
+                    "Габариты":"41 × 41 × 15 мм"
+                },
+                "description":"Радиовыключатель сенсорный из закаленного стекла в оригинальном дизайне HiTE PRO. Встраивается в мебель в подготовленное отверстие 35х12 мм (диаметр*глубина). В комплекте идёт специальный магнит с отверстием в центре и саморез, чтобы было удобно крепить выключатель и просто менять батарейку. Глубина отверстия указана с учётом магнита.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://clck.ru/3CTawN"
+                }
+            }
+        ]
+    },
+    {
+        "id":48,
+        "name":"SN-R1",
+        "price":2980.0,
+        "image":"https://static.tildacdn.com/tild3734-3963-4030-b061-373235646263/bl-snr1.jpg",
+        "category":"switch",
+        "description":"Сенсорный одноканальный беспроводной выключатель. Выполнен из закаленного стекла в лаконичном современном дизайне. При нажатии издает звук. Работа от одной батарейки более 7 лет. Частота 868 МГц, на которой работает выключатель, позволяет управлять освещением на расстоянии до 250 м. Представлен в 11 цветах.",
+        "modifications":[
+            {
+                "id":"206964",
+                "name":"Бежевый",
+                "price":2980.0,
+                "image":"https://static.tildacdn.com/tild3430-6632-4437-b630-653565393064/sk-snr1.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Макс дальность на открытом пространстве":"250 м",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 7 лет",
+                    "Вес":"90 г",
+                    "Габариты":"81 × 81 × 13 мм"
+                },
+                "description":"Радиовыключатель сенсорный из закаленного стекла в оригинальном дизайне HiTE PRO.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://clck.ru/3CTavx"
+                }
+            },
+            {
+                "id":"207032",
+                "name":"Черный",
+                "price":2980.0,
+                "image":"https://static.tildacdn.com/tild3734-3963-4030-b061-373235646263/bl-snr1.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Макс дальность на открытом пространстве":"250 м",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 7 лет",
+                    "Вес":"90 г",
+                    "Габариты":"81 × 81 × 13 мм"
+                },
+                "description":"Радиовыключатель сенсорный из закаленного стекла в оригинальном дизайне HiTE PRO.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://clck.ru/3CTavx"
+                }
+            },
+            {
+                "id":"207034",
+                "name":"Белый",
+                "price":2980.0,
+                "image":"https://static.tildacdn.com/tild3933-6263-4530-b537-623737303932/wh-snr1.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Макс дальность на открытом пространстве":"250 м",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 7 лет",
+                    "Вес":"90 г",
+                    "Габариты":"81 × 81 × 13 мм"
+                },
+                "description":"Радиовыключатель сенсорный из закаленного стекла в оригинальном дизайне HiTE PRO.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://clck.ru/3CTavx"
+                }
+            },
+            {
+                "id":"207108",
+                "name":"Алюминиевый",
+                "price":2980.0,
+                "image":"https://static.tildacdn.com/tild6132-6138-4930-b431-663731656662/al_snr1.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Макс дальность на открытом пространстве":"250 м",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 7 лет",
+                    "Вес":"90 г",
+                    "Габариты":"81 × 81 × 13 мм"
+                },
+                "description":"Радиовыключатель сенсорный из закаленного стекла в оригинальном дизайне HiTE PRO.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://clck.ru/3CTavx"
+                }
+            },
+            {
+                "id":"207068",
+                "name":"Серый",
+                "price":2980.0,
+                "image":"https://static.tildacdn.com/tild6339-6339-4737-b534-353631336335/ser_snr1.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Макс дальность на открытом пространстве":"250 м",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 7 лет",
+                    "Вес":"90 г",
+                    "Габариты":"81 × 81 × 13 мм"
+                },
+                "description":"Радиовыключатель сенсорный из закаленного стекла в оригинальном дизайне HiTE PRO.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://clck.ru/3CTavx"
+                }
+            },
+            {
+                "id":"207076",
+                "name":"Графит",
+                "price":2980.0,
+                "image":"https://static.tildacdn.com/tild3963-6237-4234-b033-346535393032/graf_snr1.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Макс дальность на открытом пространстве":"250 м",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 7 лет",
+                    "Вес":"90 г",
+                    "Габариты":"81 × 81 × 13 мм"
+                },
+                "description":"Радиовыключатель сенсорный из закаленного стекла в оригинальном дизайне HiTE PRO.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://clck.ru/3CTavx"
+                }
+            },
+            {
+                "id":"207064",
+                "name":"Слоновая кость",
+                "price":2980.0,
+                "image":"https://static.tildacdn.com/tild3039-6664-4166-b864-326237353564/slon_snr1.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Макс дальность на открытом пространстве":"250 м",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 7 лет",
+                    "Вес":"90 г",
+                    "Габариты":"81 × 81 × 13 мм"
+                },
+                "description":"Радиовыключатель сенсорный из закаленного стекла в оригинальном дизайне HiTE PRO.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://clck.ru/3CTavx"
+                }
+            },
+            {
+                "id":"206968",
+                "name":"Светло-серый",
+                "price":2980.0,
+                "image":"https://static.tildacdn.com/tild6232-3238-4661-b435-333966323737/svser_snr1.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Макс дальность на открытом пространстве":"250 м",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 7 лет",
+                    "Вес":"90 г",
+                    "Габариты":"81 × 81 × 13 мм"
+                },
+                "description":"Радиовыключатель сенсорный из закаленного стекла в оригинальном дизайне HiTE PRO.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://clck.ru/3CTavx"
+                }
+            },
+            {
+                "id":"207072",
+                "name":"Серо-голубой",
+                "price":2980.0,
+                "image":"https://static.tildacdn.com/tild6131-3036-4666-a230-633064633439/svgol_snr1.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Макс дальность на открытом пространстве":"250 м",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 7 лет",
+                    "Вес":"90 г",
+                    "Габариты":"81 × 81 × 13 мм"
+                },
+                "description":"Радиовыключатель сенсорный из закаленного стекла в оригинальном дизайне HiTE PRO.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://clck.ru/3CTavx"
+                }
+            },
+            {
+                "id":"207112",
+                "name":"Светло-коричневый",
+                "price":2980.0,
+                "image":"https://static.tildacdn.com/tild3335-6431-4431-b362-353736666666/svkor_snr1.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Макс дальность на открытом пространстве":"250 м",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 7 лет",
+                    "Вес":"90 г",
+                    "Габариты":"81 × 81 × 13 мм"
+                },
+                "description":"Радиовыключатель сенсорный из закаленного стекла в оригинальном дизайне HiTE PRO.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://clck.ru/3CTavx"
+                }
+            },
+            {
+                "id":"207116",
+                "name":"Темно-коричневый",
+                "price":2980.0,
+                "image":"https://static.tildacdn.com/tild3961-6462-4664-b563-356262636238/temnkor_snr1.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Макс дальность на открытом пространстве":"250 м",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 7 лет",
+                    "Вес":"90 г",
+                    "Габариты":"81 × 81 × 13 мм"
+                },
+                "description":"Радиовыключатель сенсорный из закаленного стекла в оригинальном дизайне HiTE PRO.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://clck.ru/3CTavx"
+                }
+            }
+        ]
+    },
+    {
+        "id":77,
+        "name":"SN-R2",
+        "price":3380.0,
+        "image":"https://static.tildacdn.com/tild3033-3931-4635-b532-303335346366/sk-snr2.jpg",
+        "category":"switch",
+        "description":"Сенсорный двухканальный беспроводной выключатель. Выполнен из закаленного стекла в лаконичном современном дизайне. При нажатии издает звук. Работа от одной батарейки более 7 лет. Частота 868 МГц, на которой работает выключатель, позволяет управлять освещением на расстоянии до 250 м. Представлен в 11 цветах.",
+        "modifications":[
+            {
+                "id":"206972",
+                "name":"Бежевый",
+                "price":3380.0,
+                "image":"https://static.tildacdn.com/tild3033-3931-4635-b532-303335346366/sk-snr2.jpg",
+                "specifications":{
+                    "Кол-во каналов":"2",
+                    "Макс дальность на открытом пространстве":"250 м",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 7 лет",
+                    "Вес":"90 г",
+                    "Габариты":"81 × 81 × 13 мм"
+                },
+                "description":"Радиовыключатель сенсорный из закаленного стекла в оригинальном дизайне HiTE PRO.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://clck.ru/3CTavx"
+                }
+            },
+            {
+                "id":"207030",
+                "name":"Черный",
+                "price":3380.0,
+                "image":"https://static.tildacdn.com/tild3262-3164-4534-a439-336336656434/1snr2.jpg",
+                "specifications":{
+                    "Кол-во каналов":"2",
+                    "Макс дальность на открытом пространстве":"250 м",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 7 лет",
+                    "Вес":"90 г",
+                    "Габариты":"81 × 81 × 13 мм"
+                },
+                "description":"Радиовыключатель сенсорный из закаленного стекла в оригинальном дизайне HiTE PRO.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://clck.ru/3CTavx"
+                }
+            },
+            {
+                "id":"207028",
+                "name":"Белый",
+                "price":3380.0,
+                "image":"https://static.tildacdn.com/tild6239-6235-4630-a330-623030613064/wh-snr2.jpg",
+                "specifications":{
+                    "Кол-во каналов":"2",
+                    "Макс дальность на открытом пространстве":"250 м",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 7 лет",
+                    "Вес":"90 г",
+                    "Габариты":"81 × 81 × 13 мм"
+                },
+                "description":"Радиовыключатель сенсорный из закаленного стекла в оригинальном дизайне HiTE PRO.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://clck.ru/3CTavx"
+                }
+            },
+            {
+                "id":"207110",
+                "name":"Алюминиевый",
+                "price":3380.0,
+                "image":"https://static.tildacdn.com/tild3832-3761-4662-b466-323463323433/al_snr2.jpg",
+                "specifications":{
+                    "Кол-во каналов":"2",
+                    "Макс дальность на открытом пространстве":"250 м",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 7 лет",
+                    "Вес":"90 г",
+                    "Габариты":"81 × 81 × 13 мм"
+                },
+                "description":"Радиовыключатель сенсорный из закаленного стекла в оригинальном дизайне HiTE PRO.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://clck.ru/3CTavx"
+                }
+            },
+            {
+                "id":"207070",
+                "name":"Серый",
+                "price":3380.0,
+                "image":"https://static.tildacdn.com/tild6133-3535-4135-a237-643861336265/ser_snr2.jpg",
+                "specifications":{
+                    "Кол-во каналов":"2",
+                    "Макс дальность на открытом пространстве":"250 м",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 7 лет",
+                    "Вес":"90 г",
+                    "Габариты":"81 × 81 × 13 мм"
+                },
+                "description":"Радиовыключатель сенсорный из закаленного стекла в оригинальном дизайне HiTE PRO.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://clck.ru/3CTavx"
+                }
+            },
+            {
+                "id":"207118",
+                "name":"Графит",
+                "price":3380.0,
+                "image":"https://static.tildacdn.com/tild6333-6436-4931-a534-653334646139/graf_snr2.jpg",
+                "specifications":{
+                    "Кол-во каналов":"2",
+                    "Макс дальность на открытом пространстве":"250 м",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 7 лет",
+                    "Вес":"90 г",
+                    "Габариты":"81 × 81 × 13 мм"
+                },
+                "description":"Радиовыключатель сенсорный из закаленного стекла в оригинальном дизайне HiTE PRO.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://clck.ru/3CTavx"
+                }
+            },
+            {
+                "id":"207106",
+                "name":"Слоновая кость",
+                "price":3380.0,
+                "image":"https://static.tildacdn.com/tild6262-6439-4761-b434-613564613363/slon_snr2.jpg",
+                "specifications":{
+                    "Кол-во каналов":"2",
+                    "Макс дальность на открытом пространстве":"250 м",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 7 лет",
+                    "Вес":"90 г",
+                    "Габариты":"81 × 81 × 13 мм"
+                },
+                "description":"Радиовыключатель сенсорный из закаленного стекла в оригинальном дизайне HiTE PRO.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://clck.ru/3CTavx"
+                }
+            },
+            {
+                "id":"207066",
+                "name":"Светло-серый",
+                "price":3380.0,
+                "image":"https://static.tildacdn.com/tild6165-3734-4630-a337-613236366265/svser_snr2.jpg",
+                "specifications":{
+                    "Кол-во каналов":"2",
+                    "Макс дальность на открытом пространстве":"250 м",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 7 лет",
+                    "Вес":"90 г",
+                    "Габариты":"81 × 81 × 13 мм"
+                },
+                "description":"Радиовыключатель сенсорный из закаленного стекла в оригинальном дизайне HiTE PRO.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://clck.ru/3CTavx"
+                }
+            },
+            {
+                "id":"206978",
+                "name":"Серо-голубой",
+                "price":3380.0,
+                "image":"https://static.tildacdn.com/tild3264-6461-4131-b066-316565653439/sergol_snr2.jpg",
+                "specifications":{
+                    "Кол-во каналов":"2",
+                    "Макс дальность на открытом пространстве":"250 м",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 7 лет",
+                    "Вес":"90 г",
+                    "Габариты":"81 × 81 × 13 мм"
+                },
+                "description":"Радиовыключатель сенсорный из закаленного стекла в оригинальном дизайне HiTE PRO.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://clck.ru/3CTavx"
+                }
+            },
+            {
+                "id":"207114",
+                "name":"Светло-коричневый",
+                "price":3380.0,
+                "image":"https://static.tildacdn.com/tild6364-3033-4637-b736-323735366237/svkor_snr2.jpg",
+                "specifications":{
+                    "Кол-во каналов":"2",
+                    "Макс дальность на открытом пространстве":"250 м",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 7 лет",
+                    "Вес":"90 г",
+                    "Габариты":"81 × 81 × 13 мм"
+                },
+                "description":"Радиовыключатель сенсорный из закаленного стекла в оригинальном дизайне HiTE PRO.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://clck.ru/3CTavx"
+                }
+            },
+            {
+                "id":"207074",
+                "name":"Темно-коричневый",
+                "price":3380.0,
+                "image":"https://static.tildacdn.com/tild3062-3861-4332-b161-613961393161/temnkor_snr2.jpg",
+                "specifications":{
+                    "Кол-во каналов":"2",
+                    "Макс дальность на открытом пространстве":"250 м",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 7 лет",
+                    "Вес":"90 г",
+                    "Габариты":"81 × 81 × 13 мм"
+                },
+                "description":"Радиовыключатель сенсорный из закаленного стекла в оригинальном дизайне HiTE PRO.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://clck.ru/3CTavx"
+                }
+            }
+        ]
+    },
+    {
+        "id":13,
+        "name":"Радиомодуль UNI",
+        "price":1980.0,
+        "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+        "category":"switch",
+        "description":"Подключается к традиционному выключателю и делает его беспроводным",
+        "modifications":[
+            {
+                "id":"207094",
+                "name":"UNI",
+                "price":1980.0,
+                "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+                "specifications":{
+                    "Кол-во каналов":"3",
+                    "Макс дальность на открытом пространстве":"250 м",
+                    "Питание":"3 В (CR2450)",
+                    "Расчетное время службы батарейки":"до 10 лет",
+                    "Вес":"28 г",
+                    "Габариты":"47 × 37 × 17 мм"
+                },
+                "description":"Трехканальный радиомодуль подключается к проводным выключателям, делая их беспроводными.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf",
+                    "video":"https://clck.ru/3CTaw8"
+                }
+            }
+        ]
+    },
+    {
+        "id":45,
+        "name":"Влагозащищённый IP65-1",
+        "price":3780.0,
+        "image":"https://static.tildacdn.com/tild3366-3034-4462-b563-313665666636/65-1-1.png",
+        "category":"switch",
+        "description":"Клавишный одноканальный выключатель IP65-1 продается в комплекте с радиомодулем HiTE PRO Uni, что делает его беспроводным.\n\nУ выключателя высокий класс влагозащиты. Выключатель полностью непроницаем для пыли и струй воды под давлением.\n\nРадиомодуль HiTE PRO Uni работает от одной батарейки более 7 лет. Частота, на которой работает радиомодуль 868 МГц позволяет управлять освещением на расстоянии до 250 м. Имеет квадратную кнопку.\n\nДля работы выключателя обязательно необходим блок управления. Радиовыключатель является передатчиком, который передает сигнал блоку управления на замыкание и размыкание электрической цепи.",
+        "modifications":[
+            {
+                "id":"279722",
+                "name":"IP65-1",
+                "price":3780.0,
+                "image":"https://static.tildacdn.com/tild3366-3034-4462-b563-313665666636/65-1-1.png",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 10 лет",
+                    "Вес":"90 г",
+                    "Габариты":"90 × 80 × 60 мм"
+                },
+                "description":"Кнопочный одноканальный выключатель ЭРА продается в комплекте с радиомодулем HiTE PRO Uni внутри, что делает его беспроводным.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf"
+                }
+            }
+        ]
+    },
+    {
+        "id":46,
+        "name":"Влагозащищённый IP65-2",
+        "price":3980.0,
+        "image":"https://static.tildacdn.com/tild6462-6139-4535-a432-616238373764/65-2-1.png",
+        "category":"switch",
+        "description":"Клавишный двухканальный выключатель IP65-2 продается в комплекте с радиомодулем HiTE PRO Uni, что делает его беспроводным.\n\nУ выключателя высокий класс влагозащиты. Выключатель полностью непроницаем для пыли и струй воды под давлением.\n\nРадиомодуль HiTE PRO Uni работает от одной батарейки более 7 лет. Частота, на которой работает радиомодуль 868 МГц позволяет управлять освещением на расстоянии до 250 м. Имеет квадратную кнопку.\n\nДля работы выключателя обязательно необходим блок управления. Радиовыключатель является передатчиком, который передает сигнал блоку управления на замыкание и размыкание электрической цепи.",
+        "modifications":[
+            {
+                "id":"279724",
+                "name":"IP65-2",
+                "price":3980.0,
+                "image":"https://static.tildacdn.com/tild6462-6139-4535-a432-616238373764/65-2-1.png",
+                "specifications":{
+                    "Кол-во каналов":"2",
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 10 лет",
+                    "Вес":"90 г",
+                    "Габариты":"90 × 80 × 60 мм"
+                },
+                "description":"Кнопочный двухканальный выключатель ЭРА продается в комплекте с радиомодулем HiTE PRO Uni внутри, что делает его беспроводным.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/AT115x105mm.pdf"
+                }
+            }
+        ]
+    },
+    {
+        "id":23,
+        "name":"Датчик протечки Smart Water",
+        "price":2980.0,
+        "image":"https://static.tildacdn.com/tild6134-3834-4832-b163-323039653438/Smart_Water1.png",
+        "category":"datchiki",
+        "description":"Позволяет определять наличие и отсутствие протечки воды.\n\nПри отсутствии протечки датчик отправляет радиосигнал, подтверждающий, что он находится в рабочем состоянии, 1 раз в 2 часа. Если обнаружена протечка воды, датчик начинает отправлять радиосигнал 1 раз в минуту.",
+        "modifications":[
+            {
+                "id":"210496",
+                "name":"Smart Water",
+                "price":2980.0,
+                "image":"https://static.tildacdn.com/tild6134-3834-4832-b163-323039653438/Smart_Water1.png",
+                "specifications":{
+                    "Питание":"3 В (CR2450)",
+                    "Расчетное время службы батарейки":"до 5 лет",
+                    "Вес":"50 г",
+                    "Габариты":"60 × 60 × 25 мм"
+                },
+                "description":"Датчик протечки.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/SmartPower_Checker_Water_115x105mm.pdf",
+                    "video":"https://clck.ru/3CTaqW"
+                }
+            }
+        ]
+    },
+    {
+        "id":16,
+        "name":"Датчик движения и освещенности Smart Motion",
+        "price":3280.0,
+        "image":"https://static.tildacdn.com/tild6463-6231-4164-b366-643964316661/smartm.jpg",
+        "category":"datchiki",
+        "description":"Предоставляет информацию об уровне освещенности и движениях людей в помещении",
+        "modifications":[
+            {
+                "id":"207054",
+                "name":"Smart Motion",
+                "price":3280.0,
+                "image":"https://static.tildacdn.com/tild6463-6231-4164-b366-643964316661/smartm.jpg",
+                "specifications":{
+                    "Дальность детектирования движения":"до 5 м",
+                    "Угол детектирования":"180°",
+                    "Питание":"3 В (CR2450)",
+                    "Расчетное время службы батарейки":"до 3 лет",
+                    "Вес":"50 г",
+                    "Габариты":"60 × 60 × 20 мм"
+                },
+                "description":"Датчик движения и освещенности — то есть 2 датчика в одном корпусе.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/Smart_Motion_115x105mm.pdf",
+                    "video":"https://clck.ru/3CTapp"
+                }
+            }
+        ]
+    },
+    {
+        "id":17,
+        "name":"Датчик температуры и влажности Smart Air",
+        "price":2980.0,
+        "image":"https://static.tildacdn.com/tild6266-3938-4565-b863-656632393366/sma.jpg",
+        "category":"datchiki",
+        "description":"Предоставляет информацию о температуре и влажности помещения",
+        "modifications":[
+            {
+                "id":"207056",
+                "name":"Smart Air",
+                "price":2980.0,
+                "image":"https://static.tildacdn.com/tild6266-3938-4565-b863-656632393366/sma.jpg",
+                "specifications":{
+                    "Рабочая оотносительная влажность":"10...90%",
+                    "Рабочая температура":"0...50 °С",
+                    "Питание":"3 В (CR2450)",
+                    "Расчетное время службы батарейки":"до 5 лет",
+                    "Вес":"50 г",
+                    "Габариты":"60 × 60 × 20 мм"
+                },
+                "description":"Датчик температуры и влажности — то есть 2 датчика в одном корпусе.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/Smart_Air_115x105mm.pdf",
+                    "video":"https://clck.ru/3CTapD"
+                }
+            }
+        ]
+    },
+    {
+        "id":18,
+        "name":"Датчик открытия Smart Checker",
+        "price":1980.0,
+        "image":"https://static.tildacdn.com/tild6164-6332-4233-b461-373132663764/check.jpg",
+        "category":"datchiki",
+        "description":"Позволяет контролировать положение (открыто или закрыто) подвижных элементов",
+        "modifications":[
+            {
+                "id":"206966",
+                "name":"Smart Checker",
+                "price":1980.0,
+                "image":"https://static.tildacdn.com/tild6164-6332-4233-b461-373132663764/check.jpg",
+                "specifications":{
+                    "Питание":"3 В (CR2032)",
+                    "Расчетное время службы батарейки":"до 5 лет",
+                    "Вес":"20 г",
+                    "Габариты":"45 × 39 × 14 мм"
+                },
+                "description":"Датчик открытия и закрытия. Обычно ставится на двери и окна. Состоит из 2 частей: радиомодуль и магнит.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/SmartPower_Checker_Water_115x105mm.pdf",
+                    "video":"https://clck.ru/3CTaqq"
+                }
+            }
+        ]
+    },
+    {
+        "id":14,
+        "name":"Датчик питания Smart Power",
+        "price":2480.0,
+        "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+        "category":"datchiki",
+        "description":"Отправляет радиосигнал при подаче и при снятии напряжения с его клемм",
+        "modifications":[
+            {
+                "id":"209170",
+                "name":"Smart Power",
+                "price":2480.0,
+                "image":"https://static.tildacdn.com/tild6438-6333-4963-b638-396166323438/drive.jpg",
+                "specifications":{
+                    "Кол-во каналов":"1",
+                    "Макс дальность на открытом пространстве":"250 м",
+                    "Питание":"85 — 265 В",
+                    "Вес":"28 г",
+                    "Габариты":"47 × 37 × 17 мм"
+                },
+                "description":"Передает радиосигнал при подаче питания на клеммы и при снятии питания с клемм.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/SmartPower_Checker_Water_115x105mm.pdf",
+                    "video":"https://clck.ru/3CTar2"
+                }
+            }
+        ]
+    },
+    {
+        "id":35,
+        "name":"Демонстрационный набор",
+        "price":10880.0,
+        "image":"https://static.tildacdn.com/stor3162-3465-4830-b330-366230666235/93883933.png",
+        "category":"komplekt",
+        "description":"Отлично подходит для презентации выключателей HiTE PRO!",
+        "modifications":[
+            {
+                "id":"225982",
+                "name":"Демонстрационный набор",
+                "price":10880.0,
+                "image":"https://static.tildacdn.com/stor3162-3465-4830-b330-366230666235/93883933.png",
+                "specifications":{
+                    "Вес":"2 кг",
+                    "Габариты":"330 × 330 × 45 мм"
+                },
+                "description":"Набор представляет из себя квадратную коробку из плотного картона с полноцветной печатью и двумя ярусами с ложементами внутри.",
+                "instructions":{
+                    "pdf":"https://docs.google.com/document/d/1rVhhGuBSO0MmJJ6l0jYfie66rmnOWRn1PIeJ0Gitmc0/edit?usp=sharing",
+                    "video":"https://youtube.com/shorts/K8rSB94tIsQ"
+                }
+            }
+        ]
+    },
+    {
+        "id":36,
+        "name":"Демонстрационный стенд",
+        "price":48180.0,
+        "image":"https://static.tildacdn.com/stor3861-3766-4238-b135-386335383633/36501679.png",
+        "category":"komplekt",
+        "description":"Собранный и настроенный экспонат для демонстрации работы устройств HiTE PRO",
+        "modifications":[
+            {
+                "id":"209812",
+                "name":"Демонстрационный стенд",
+                "price":48180.0,
+                "image":"https://static.tildacdn.com/stor3861-3766-4238-b135-386335383633/36501679.png",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Вес":"7 кг",
+                    "Габариты":"1800 × 800 × 50 мм"
+                },
+                "description":"Стенд демонстрирует возможности беспроводного умного дома HiTE PRO на примере управления освещением.",
+                "instructions":{
+                    "pdf":"https://docs.google.com/document/d/1m3lzjZX2YSZhvoF5PQrRbdxze5fcHxvP6g8Oa8cw_Ok/edit?usp=sharing",
+                    "video":"https://vk.com/video-140176277_456239586?list=ln-DTnKNvNZKwWSUxKPWN"
+                }
+            }
+        ]
+    },
+    {
+        "id":60,
+        "name":"Демонстрационный стенд Мини",
+        "price":21990.0,
+        "image":"https://static.tildacdn.com/stor3364-3036-4362-a562-386163633165/31780867.jpg",
+        "category":"komplekt",
+        "description":"Компактный стенд, который удобно брать с собой на встречи с заказчиками",
+        "modifications":[
+            {
+                "id":"296638",
+                "name":"Демонстрационный стенд Мини",
+                "price":21990.0,
+                "image":"https://static.tildacdn.com/stor3364-3036-4362-a562-386163633165/31780867.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Вес":"3 кг",
+                    "Габариты":"600 × 650 × 50 мм"
+                },
+                "description":"Стенд демонстрирует возможности беспроводного умного дома HiTE PRO на примере управления освещением.",
+                "instructions":{
+                    "pdf":"https://docs.google.com/document/d/1-adKDy0VsckmE6VM7MfrthgszGm-HtgjHNBf5P012sA/edit?usp=sharing",
+                    "video":"https://youtu.be/Q49lzaVRzHs"
+                }
+            }
+        ]
+    },
+    {
+        "id":49,
+        "name":"Брошюра HiTE PRO",
+        "price":10.0,
+        "image":"https://static.tildacdn.com/stor6637-3664-4366-a136-363733363839/52026992.jpg",
+        "category":"komplekt",
+        "description":"Печатная брошюра для клиентов, в которой можно указать свои контакты",
+        "modifications":[
+            {
+                "id":"286416",
+                "name":"Брошюра HiTE PRO",
+                "price":10.0,
+                "image":"https://static.tildacdn.com/stor6637-3664-4366-a136-363733363839/52026992.jpg",
+                "specifications":{},
+                "description":"Печатная брошюра, в которой можно указать свои контакты.",
+                "instructions":{}
+            }
+        ]
+    },
+    {
+        "id":4,
+        "name":"Каталог HiTE PRO",
+        "price":1.0,
+        "image":"https://static.tildacdn.com/stor3335-3962-4232-a163-353032383535/78693873.jpg",
+        "category":"komplekt",
+        "description":"Печатный каталог альбомной ориентации. Дарим 1 каталог за каждые 5000 руб суммы заказа.",
+        "modifications":[
+            {
+                "id":"286248",
+                "name":"Каталог HiTE PRO",
+                "price":1.0,
+                "image":"https://static.tildacdn.com/stor3335-3962-4232-a163-353032383535/78693873.jpg",
+                "specifications":{
+                    "Акция":"Дарим 1 каталог за каждые 5000 руб суммы заказа!"
+                },
+                "description":"Печатный каталог альбомной ориентации с описанием продукции HiTE PRO.\nКрасивый, приятный на ощупь, идеально подходит для презентации продукции клиентам. \n\nПодарите клиентам каталог HiTE PRO и обязательно оставьте визитку или брошюру, в которой указаны ваши контакты, – когда клиенты будут листать каталог уютным пятничным вечером, укутавшись в плед и попивая горячий чай, они непременно захотят управлять всем домом через мобильное приложение или с помощью голосового помощника, не покидая своего кресла.\n\nВот тут они и увидят ваши контакты – позвонят вам и запланируют встречу, чтобы наконец запустить проект умного дома!\n\nПоэтому не пренебрегайте каталогом, добавляйте его в каждый заказ! Ведь у каждого клиента есть знакомые, которые только планируют сделать ремонт! Они тоже захотят умный дом и обратятся к вам – по рекомендации ;-)",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/katalog"
+                }
+            }
+        ]
+    },
+    {
+        "id":73,
+        "name":"Футболка HiTE PRO темно-синяя",
+        "price":1600.0,
+        "image":"https://static.tildacdn.com/stor3933-6134-4531-b262-343332666463/42512992.png",
+        "category":"other",
+        "description":"Хлопковая футболка в стиле oversize",
+        "modifications":[
+            {
+                "id":"301122",
+                "name":"темно-синяя - S",
+                "price":1600.0,
+                "image":"https://static.tildacdn.com/stor3933-6134-4531-b262-343332666463/42512992.png",
+                "specifications":{},
+                "description":"Хлопковая футболка в стиле oversize с логотипами HiTE PRO.",
+                "instructions":{}
+            },
+            {
+                "id":"301124",
+                "name":"темно-синяя - M",
+                "price":1600.0,
+                "image":"https://static.tildacdn.com/stor3933-6134-4531-b262-343332666463/42512992.png",
+                "specifications":{},
+                "description":"Хлопковая футболка в стиле oversize с логотипами HiTE PRO.",
+                "instructions":{}
+            },
+            {
+                "id":"301126",
+                "name":"темно-синяя - L",
+                "price":1600.0,
+                "image":"https://static.tildacdn.com/stor3933-6134-4531-b262-343332666463/42512992.png",
+                "specifications":{},
+                "description":"Хлопковая футболка в стиле oversize с логотипами HiTE PRO.",
+                "instructions":{}
+            },
+            {
+                "id":"301128",
+                "name":"темно-синяя - XL",
+                "price":1600.0,
+                "image":"https://static.tildacdn.com/stor3933-6134-4531-b262-343332666463/42512992.png",
+                "specifications":{},
+                "description":"Хлопковая футболка в стиле oversize с логотипами HiTE PRO.",
+                "instructions":{}
+            },
+            {
+                "id":"301130",
+                "name":"темно-синяя - XXL",
+                "price":1600.0,
+                "image":"https://static.tildacdn.com/stor3933-6134-4531-b262-343332666463/42512992.png",
+                "specifications":{},
+                "description":"Хлопковая футболка в стиле oversize с логотипами HiTE PRO.",
+                "instructions":{}
+            }
+        ]
+    },
+    {
+        "id":74,
+        "name":"Кепка HiTE PRO темно-синяя",
+        "price":1600.0,
+        "image":"https://static.tildacdn.com/stor6436-3830-4866-a562-663532633337/28196858.jpg",
+        "category":"other",
+        "description":"Кепка регулируемая onesize",
+        "modifications":[
+            {
+                "id":"301948",
+                "name":"Кепка HiTE PRO темно-синяя",
+                "price":1600.0,
+                "image":"https://static.tildacdn.com/stor6436-3830-4866-a562-663532633337/28196858.jpg",
+                "specifications":{},
+                "description":"Кепка, регулируемая по размеру и с логотипом HiTE PRO.",
+                "instructions":{}
+            }
+        ]
+    },
+    {
+        "id":72,
+        "name":"Комплект для защиты от протечек HiTE PRO на трубу 1/2",
+        "price":25540.0,
+        "image":"https://static.tildacdn.com/stor6431-3834-4162-b133-653538656133/55102437.jpg",
+        "category":"kran",
+        "description":"Сборный комплект устройств: 1-2 шаровых крана, блок управления, датчик протечки",
+        "modifications":[
+            {
+                "id":"301066",
+                "name":"Комплект для защиты от протечек HiTE PRO на трубу 1/2 - Bugatti - 2",
+                "price":25540.0,
+                "image":"https://static.tildacdn.com/stor6431-3834-4162-b133-653538656133/55102437.jpg",
+                "specifications":{},
+                "description":"2 крана Bugatti Pro 220 1/2\n1 датчик протечки Smart Water\n1 блок Relay-Drive",
+                "instructions":{}
+            },
+            {
+                "id":"301068",
+                "name":"Комплект для защиты от протечек HiTE PRO на трубу 1/2 - Profi - 2",
+                "price":23940.0,
+                "image":"https://static.tildacdn.com/stor6530-6464-4333-b036-643565356237/70060083.jpg",
+                "specifications":{},
+                "description":"2 крана Profi 220 1/2\n1 датчик протечки Smart Water\n1 блок Relay-Drive",
+                "instructions":{}
+            },
+            {
+                "id":"301062",
+                "name":"Комплект для защиты от протечек HiTE PRO на трубу 1/2 - Bugatti - 1",
+                "price":16250.0,
+                "image":"https://static.tildacdn.com/stor6431-3834-4162-b133-653538656133/55102437.jpg",
+                "specifications":{},
+                "description":"1 кран Bugatti Pro 220 1/2\n1 датчик протечки Smart Water\n1 блок Relay-Drive",
+                "instructions":{}
+            },
+            {
+                "id":"301064",
+                "name":"Комплект для защиты от протечек HiTE PRO на трубу 1/2 - Profi - 1",
+                "price":15450.0,
+                "image":"https://static.tildacdn.com/stor6530-6464-4333-b036-643565356237/70060083.jpg",
+                "specifications":{},
+                "description":"1 кран Profi 220 1/2\n1 датчик протечки Smart Water\n1 блок Relay-Drive",
+                "instructions":{}
+            }
+        ]
+    },
+    {
+        "id":29,
+        "name":"Шаровой кран с электроприводом Bugatti Pro 220В",
+        "price":8361.0,
+        "image":"https://static.tildacdn.com/tild3539-3032-4536-b632-643838323039/1.png",
+        "category":"kran",
+        "description":"Шаровой кран марки Neptun с электроприводом серии Buggati PRO для блокировки водоснабжения",
+        "modifications":[
+            {
+                "id":"224584",
+                "name":"Bugatti Pro 220В - 1/2",
+                "price":8361.0,
+                "image":"https://static.tildacdn.com/tild3539-3032-4536-b632-643838323039/1.png",
+                "specifications":{
+                    "Питание":"230 В, 50 Гц",
+                    "Крутящий момент":"9 Н*м",
+                    "Время закрытия":"21 сек",
+                    "Материал крана":"Латунь CW617N",
+                    "MAX температура раб. среды":"120 °C",
+                    "Потребляемая мощность":"1,4 Вт",
+                    "Степень пылевлагозащиты":"IP64",
+                    "Ресурс изделия":"100 000 циклов",
+                    "Гарантия":"6 лет"
+                },
+                "description":"Шаровой кран Neptun с электроприводом серии Buggati PRO для блокировки водоснабжения. ",
+                "instructions":{}
+            },
+            {
+                "id":"224586",
+                "name":"Bugatti Pro 220В - 3/4",
+                "price":8991.0,
+                "image":"https://static.tildacdn.com/tild3539-3032-4536-b632-643838323039/1.png",
+                "specifications":{
+                    "Питание":"230 В, 50 Гц",
+                    "Крутящий момент":"9 Н*м",
+                    "Время закрытия":"21 сек",
+                    "Материал крана":"Латунь CW617N",
+                    "MAX температура раб. среды":"120 °C",
+                    "Потребляемая мощность":"1,4 Вт",
+                    "Степень пылевлагозащиты":"IP64",
+                    "Ресурс изделия":"100 000 циклов",
+                    "Гарантия":"6 лет"
+                },
+                "description":"Шаровой кран Neptun с электроприводом серии Buggati PRO для блокировки водоснабжения. ",
+                "instructions":{}
+            },
+            {
+                "id":"224598",
+                "name":"Bugatti Pro 220В - 1",
+                "price":11961.0,
+                "image":"https://static.tildacdn.com/tild3539-3032-4536-b632-643838323039/1.png",
+                "specifications":{
+                    "Питание":"230 В, 50 Гц",
+                    "Крутящий момент":"9 Н*м",
+                    "Время закрытия":"21 сек",
+                    "Материал крана":"Латунь CW617N",
+                    "MAX температура раб. среды":"120 °C",
+                    "Потребляемая мощность":"1,4 Вт",
+                    "Степень пылевлагозащиты":"IP64",
+                    "Ресурс изделия":"100 000 циклов",
+                    "Гарантия":"6 лет"
+                },
+                "description":"Шаровой кран Neptun с электроприводом серии Buggati PRO для блокировки водоснабжения. ",
+                "instructions":{}
+            }
+        ]
+    },
+    {
+        "id":30,
+        "name":"Шаровой кран с электроприводом Bugatti Pro 12В",
+        "price":8991.0,
+        "image":"https://static.tildacdn.com/tild6234-6135-4731-b334-393033633335/2.png",
+        "category":"kran",
+        "description":"Шаровой кран марки Neptun с электроприводом серии Buggati PRO для блокировки водоснабжения",
+        "modifications":[
+            {
+                "id":"224594",
+                "name":"Bugatti Pro 12В - 1/2",
+                "price":8991.0,
+                "image":"https://static.tildacdn.com/tild6234-6135-4731-b334-393033633335/2.png",
+                "specifications":{
+                    "Питание":"12 В, 50 Гц",
+                    "Крутящий момент":"9 Н*м",
+                    "Время закрытия":"21 сек",
+                    "Материал крана":"Латунь CW617N",
+                    "MAX температура раб. среды":"120 °C",
+                    "Потребляемая мощность":"1,4 Вт",
+                    "Степень пылевлагозащиты":"IP64",
+                    "Ресурс изделия":"100 000 циклов",
+                    "Гарантия":"6 лет"
+                },
+                "description":"Шаровой кран Neptun с электроприводом серии Buggati PRO для блокировки водоснабжения. ",
+                "instructions":{}
+            },
+            {
+                "id":"224586",
+                "name":"Bugatti Pro 12В - 3/4",
+                "price":9531.0,
+                "image":"https://static.tildacdn.com/tild6234-6135-4731-b334-393033633335/2.png",
+                "specifications":{
+                    "Питание":"12 В, 50 Гц",
+                    "Крутящий момент":"9 Н*м",
+                    "Время закрытия":"21 сек",
+                    "Материал крана":"Латунь CW617N",
+                    "MAX температура раб. среды":"120 °C",
+                    "Потребляемая мощность":"1,4 Вт",
+                    "Степень пылевлагозащиты":"IP64",
+                    "Ресурс изделия":"100 000 циклов",
+                    "Гарантия":"6 лет"
+                },
+                "description":"Шаровой кран Neptun с электроприводом серии Buggati PRO для блокировки водоснабжения. ",
+                "instructions":{}
+            },
+            {
+                "id":"224596",
+                "name":"Bugatti Pro 12В - 1",
+                "price":10791.0,
+                "image":"https://static.tildacdn.com/tild6234-6135-4731-b334-393033633335/2.png",
+                "specifications":{
+                    "Питание":"12 В, 50 Гц",
+                    "Крутящий момент":"9 Н*м",
+                    "Время закрытия":"21 сек",
+                    "Материал крана":"Латунь CW617N",
+                    "MAX температура раб. среды":"120 °C",
+                    "Потребляемая мощность":"1,4 Вт",
+                    "Степень пылевлагозащиты":"IP64",
+                    "Ресурс изделия":"100 000 циклов",
+                    "Гарантия":"6 лет"
+                },
+                "description":"Шаровой кран Neptun с электроприводом серии Buggati PRO для блокировки водоснабжения. ",
+                "instructions":{}
+            }
+        ]
+    },
+    {
+        "id":31,
+        "name":"Шаровой кран с электроприводом PROFI 220В",
+        "price":7641.0,
+        "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
+        "category":"kran",
+        "description":"Шаровой кран марки Neptun с электроприводом серии PROFI для блокировки водоснабжения",
+        "modifications":[
+            {
+                "id":"224608",
+                "name":"PROFI 220В - 1/2",
+                "price":7641.0,
+                "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
+                "specifications":{
+                    "Питание":"230 В, 50 Гц",
+                    "Крутящий момент":"9 Н*м",
+                    "Время закрытия":"21 сек",
+                    "Материал крана":"Нержавеющая сталь AISI304",
+                    "MAX температура раб. среды":"120 °C",
+                    "Потребляемая мощность":"10 Вт",
+                    "Степень пылевлагозащиты":"IP64",
+                    "Ресурс изделия":"100 000 циклов",
+                    "Гарантия":"10 лет"
+                },
+                "description":"Шаровой кран Neptun с электроприводом серии PROFI для блокировки водоснабжения.",
+                "instructions":{}
+            },
+            {
+                "id":"224606",
+                "name":"PROFI 220В - 3/4",
+                "price":8451.0,
+                "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
+                "specifications":{
+                    "Питание":"230 В, 50 Гц",
+                    "Крутящий момент":"9 Н*м",
+                    "Время закрытия":"21 сек",
+                    "Материал крана":"Нержавеющая сталь AISI304",
+                    "MAX температура раб. среды":"120 °C",
+                    "Потребляемая мощность":"10 Вт",
+                    "Степень пылевлагозащиты":"IP64",
+                    "Ресурс изделия":"100 000 циклов",
+                    "Гарантия":"10 лет"
+                },
+                "description":"Шаровой кран Neptun с электроприводом серии PROFI для блокировки водоснабжения.",
+                "instructions":{}
+            },
+            {
+                "id":"224592",
+                "name":"PROFI 220В - 1",
+                "price":9531.0,
+                "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
+                "specifications":{
+                    "Питание":"230 В, 50 Гц",
+                    "Крутящий момент":"9 Н*м",
+                    "Время закрытия":"21 сек",
+                    "Материал крана":"Нержавеющая сталь AISI304",
+                    "MAX температура раб. среды":"120 °C",
+                    "Потребляемая мощность":"10 Вт",
+                    "Степень пылевлагозащиты":"IP64",
+                    "Ресурс изделия":"100 000 циклов",
+                    "Гарантия":"10 лет"
+                },
+                "description":"Шаровой кран Neptun с электроприводом серии PROFI для блокировки водоснабжения.",
+                "instructions":{}
+            },
+            {
+                "id":"224612",
+                "name":"PROFI 220В - 1 1/4",
+                "price":10161.0,
+                "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
+                "specifications":{
+                    "Питание":"230 В, 50 Гц",
+                    "Крутящий момент":"9 Н*м",
+                    "Время закрытия":"21 сек",
+                    "Материал крана":"Нержавеющая сталь AISI304",
+                    "MAX температура раб. среды":"120 °C",
+                    "Потребляемая мощность":"10 Вт",
+                    "Степень пылевлагозащиты":"IP64",
+                    "Ресурс изделия":"100 000 циклов",
+                    "Гарантия":"10 лет"
+                },
+                "description":"Шаровой кран Neptun с электроприводом серии PROFI для блокировки водоснабжения.",
+                "instructions":{}
+            }
+        ]
+    },
+    {
+        "id":32,
+        "name":"Шаровой кран с электроприводом PROFI 12В",
+        "price":7191.0,
+        "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
+        "category":"kran",
+        "description":"Шаровой кран марки Neptun с электроприводом серии PROFI для блокировки водоснабжения",
+        "modifications":[
+            {
+                "id":"224616",
+                "name":"PROFI 12В - 1/2",
+                "price":7191.0,
+                "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
+                "specifications":{
+                    "Питание":"12 В, 50 Гц",
+                    "Крутящий момент":"9 Н*м",
+                    "Время закрытия":"21 сек",
+                    "Материал крана":"Нержавеющая сталь AISI304",
+                    "MAX температура раб. среды":"120 °C",
+                    "Потребляемая мощность":"10 Вт",
+                    "Степень пылевлагозащиты":"IP64",
+                    "Ресурс изделия":"100 000 циклов",
+                    "Гарантия":"10 лет"
+                },
+                "description":"Шаровой кран Neptun с электроприводом серии PROFI для блокировки водоснабжения.",
+                "instructions":{}
+            },
+            {
+                "id":"224590",
+                "name":"PROFI 12В - 3/4",
+                "price":7641.0,
+                "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
+                "specifications":{
+                    "Питание":"12 В, 50 Гц",
+                    "Крутящий момент":"9 Н*м",
+                    "Время закрытия":"21 сек",
+                    "Материал крана":"Нержавеющая сталь AISI304",
+                    "MAX температура раб. среды":"120 °C",
+                    "Потребляемая мощность":"10 Вт",
+                    "Степень пылевлагозащиты":"IP64",
+                    "Ресурс изделия":"100 000 циклов",
+                    "Гарантия":"10 лет"
+                },
+                "description":"Шаровой кран Neptun с электроприводом серии PROFI для блокировки водоснабжения.",
+                "instructions":{}
+            },
+            {
+                "id":"224614",
+                "name":"PROFI 12В - 1",
+                "price":9531.0,
+                "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
+                "specifications":{
+                    "Питание":"12 В, 50 Гц",
+                    "Крутящий момент":"9 Н*м",
+                    "Время закрытия":"21 сек",
+                    "Материал крана":"Нержавеющая сталь AISI304",
+                    "MAX температура раб. среды":"120 °C",
+                    "Потребляемая мощность":"10 Вт",
+                    "Степень пылевлагозащиты":"IP64",
+                    "Ресурс изделия":"100 000 циклов",
+                    "Гарантия":"10 лет"
+                },
+                "description":"Шаровой кран Neptun с электроприводом серии PROFI для блокировки водоснабжения.",
+                "instructions":{}
+            },
+            {
+                "id":"224600",
+                "name":"PROFI 12В - 1 1/4",
+                "price":10161.0,
+                "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
+                "specifications":{
+                    "Питание":"12 В, 50 Гц",
+                    "Крутящий момент":"9 Н*м",
+                    "Время закрытия":"21 сек",
+                    "Материал крана":"Нержавеющая сталь AISI304",
+                    "MAX температура раб. среды":"120 °C",
+                    "Потребляемая мощность":"10 Вт",
+                    "Степень пылевлагозащиты":"IP64",
+                    "Ресурс изделия":"100 000 циклов",
+                    "Гарантия":"10 лет"
+                },
+                "description":"Шаровой кран Neptun с электроприводом серии PROFI для блокировки водоснабжения.",
+                "instructions":{}
+            }
+        ]
+    },
+    {
+        "id":33,
+        "name":"Шаровой кран с электроприводом MK 220В",
+        "price":5481.0,
+        "image":"https://static.tildacdn.com/tild6135-6133-4166-b563-363938353635/---65-455x455.png",
+        "category":"kran",
+        "description":"Шаровой кран марки Neptun с электроприводом серии МК для блокировки водоснабжения",
+        "modifications":[
+            {
+                "id":"224604",
+                "name":"MK 220В - 1/2",
+                "price":5481.0,
+                "image":"https://static.tildacdn.com/tild6135-6133-4166-b563-363938353635/---65-455x455.png",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Крутящий момент":"15 Н*м",
+                    "Время закрытия":"15 сек",
+                    "Материал крана":"Латунь CW617N",
+                    "MAX температура раб. среды":"90 °C",
+                    "Потребляемая мощность":"10 Вт",
+                    "Степень пылевлагозащиты":"IP64",
+                    "Ресурс изделия":"100 000 циклов",
+                    "Гарантия":"4 года"
+                },
+                "description":"Шаровой кран Neptun с электроприводом серии PROFI для блокировки водоснабжения.",
+                "instructions":{}
+            },
+            {
+                "id":"224588",
+                "name":"MK 220В - 3/4",
+                "price":5931.0,
+                "image":"https://static.tildacdn.com/tild6135-6133-4166-b563-363938353635/---65-455x455.png",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Крутящий момент":"15 Н*м",
+                    "Время закрытия":"15 сек",
+                    "Материал крана":"Латунь CW617N",
+                    "MAX температура раб. среды":"90 °C",
+                    "Потребляемая мощность":"10 Вт",
+                    "Степень пылевлагозащиты":"IP64",
+                    "Ресурс изделия":"100 000 циклов",
+                    "Гарантия":"4 года"
+                },
+                "description":"Шаровой кран Neptun с электроприводом серии PROFI для блокировки водоснабжения.",
+                "instructions":{}
+            },
+            {
+                "id":"224610",
+                "name":"MK 220В - 1",
+                "price":7191.0,
+                "image":"https://static.tildacdn.com/tild6135-6133-4166-b563-363938353635/---65-455x455.png",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Крутящий момент":"15 Н*м",
+                    "Время закрытия":"15 сек",
+                    "Материал крана":"Латунь CW617N",
+                    "MAX температура раб. среды":"90 °C",
+                    "Потребляемая мощность":"10 Вт",
+                    "Степень пылевлагозащиты":"IP64",
+                    "Ресурс изделия":"100 000 циклов",
+                    "Гарантия":"4 года"
+                },
+                "description":"Шаровой кран Neptun с электроприводом серии PROFI для блокировки водоснабжения.",
+                "instructions":{}
+            }
+        ]
+    },
+    {
+        "id":34,
+        "name":"Шаровой кран с электроприводом MK 12В",
+        "price":5481.0,
+        "image":"https://static.tildacdn.com/tild6135-6133-4166-b563-363938353635/---65-455x455.png",
+        "category":"kran",
+        "description":"Шаровой кран марки Neptun с электроприводом серии МК для блокировки водоснабжения",
+        "modifications":[
+            {
+                "id":"224618",
+                "name":"MK 12В - 1/2",
+                "price":5481.0,
+                "image":"https://static.tildacdn.com/tild6135-6133-4166-b563-363938353635/---65-455x455.png",
+                "specifications":{
+                    "Питание":"12 В",
+                    "Крутящий момент":"15 Н*м",
+                    "Время закрытия":"15 сек",
+                    "Материал крана":"Латунь CW617N",
+                    "MAX температура раб. среды":"90 °C",
+                    "Потребляемая мощность":"10 Вт",
+                    "Степень пылевлагозащиты":"IP64",
+                    "Ресурс изделия":"100 000 циклов",
+                    "Гарантия":"4 года"
+                },
+                "description":"Шаровой кран Neptun с электроприводом серии PROFI для блокировки водоснабжения.",
+                "instructions":{}
+            },
+            {
+                "id":"224620",
+                "name":"MK 12В - 3/4",
+                "price":5931.0,
+                "image":"https://static.tildacdn.com/tild6135-6133-4166-b563-363938353635/---65-455x455.png",
+                "specifications":{
+                    "Питание":"12 В",
+                    "Крутящий момент":"15 Н*м",
+                    "Время закрытия":"15 сек",
+                    "Материал крана":"Латунь CW617N",
+                    "MAX температура раб. среды":"90 °C",
+                    "Потребляемая мощность":"10 Вт",
+                    "Степень пылевлагозащиты":"IP64",
+                    "Ресурс изделия":"100 000 циклов",
+                    "Гарантия":"4 года"
+                },
+                "description":"Шаровой кран Neptun с электроприводом серии PROFI для блокировки водоснабжения.",
+                "instructions":{}
+            }
+        ]
+    },
+    {
+        "id":37,
+        "name":"Раздвижной карниз с электроприводом Novo N21",
+        "price":0.0,
+        "image":"https://static.tildacdn.com/tild6366-3363-4532-a439-623965646531/N21_1.png",
+        "category":"karniz",
+        "description":"Цену уточняйте с менеджером",
+        "modifications":[
+            {
+                "id":"266210",
+                "name":"Novo N21 - 1 м",
+                "price":0.0,
+                "image":"https://static.tildacdn.com/tild6366-3363-4532-a439-623965646531/N21_1.png",
+                "specifications":{
+                    "Крутящий момент":"1,2 Нм",
+                    "Потребляемая мощность":"36 Вт",
+                    "Гарантия":"5 лет",
+                    "Степень защиты":"IP 44",
+                    "Весовая нагрузка":"60 кг",
+                    "Скорость перемещения":"10 – 20 см/сек",
+                    "Напряжение питания":"100 – 240 В",
+                    "Частота":"868 МГц"
+                },
+                "description":"Одна из лучших систем горизонтальной раздвижки штор. Бесшумная работа, высокая мощность.",
+                "instructions":{
+                    "pdf":"https://docs.google.com/document/d/1yVLFqcXi-Hg4ocpcBsVipUecIO1gsPKRZNM-A9A2VAc/edit?usp=sharing"
+                }
+            },
+            {
+                "id":"266210",
+                "name":"Novo N21 - 2 м",
+                "price":0.0,
+                "image":"https://static.tildacdn.com/tild6366-3363-4532-a439-623965646531/N21_1.png",
+                "specifications":{
+                    "Крутящий момент":"1,2 Нм",
+                    "Потребляемая мощность":"36 Вт",
+                    "Гарантия":"5 лет",
+                    "Степень защиты":"IP 44",
+                    "Весовая нагрузка":"60 кг",
+                    "Скорость перемещения":"10 – 20 см/сек",
+                    "Напряжение питания":"100 – 240 В",
+                    "Частота":"868 МГц"
+                },
+                "description":"Одна из лучших систем горизонтальной раздвижки штор. Бесшумная работа, высокая мощность.",
+                "instructions":{
+                    "pdf":"https://docs.google.com/document/d/1yVLFqcXi-Hg4ocpcBsVipUecIO1gsPKRZNM-A9A2VAc/edit?usp=sharing"
+                }
+            },
+            {
+                "id":"266210",
+                "name":"Novo N21 - 3 м",
+                "price":0.0,
+                "image":"https://static.tildacdn.com/tild6366-3363-4532-a439-623965646531/N21_1.png",
+                "specifications":{
+                    "Крутящий момент":"1,2 Нм",
+                    "Потребляемая мощность":"36 Вт",
+                    "Гарантия":"5 лет",
+                    "Степень защиты":"IP 44",
+                    "Весовая нагрузка":"60 кг",
+                    "Скорость перемещения":"10 – 20 см/сек",
+                    "Напряжение питания":"100 – 240 В",
+                    "Частота":"868 МГц"
+                },
+                "description":"Одна из лучших систем горизонтальной раздвижки штор. Бесшумная работа, высокая мощность.",
+                "instructions":{
+                    "pdf":"https://docs.google.com/document/d/1yVLFqcXi-Hg4ocpcBsVipUecIO1gsPKRZNM-A9A2VAc/edit?usp=sharing"
+                }
+            },
+            {
+                "id":"266210",
+                "name":"Novo N21 - 4 м",
+                "price":0.0,
+                "image":"https://static.tildacdn.com/tild6366-3363-4532-a439-623965646531/N21_1.png",
+                "specifications":{
+                    "Крутящий момент":"1,2 Нм",
+                    "Потребляемая мощность":"36 Вт",
+                    "Гарантия":"5 лет",
+                    "Степень защиты":"IP 44",
+                    "Весовая нагрузка":"60 кг",
+                    "Скорость перемещения":"10 – 20 см/сек",
+                    "Напряжение питания":"100 – 240 В",
+                    "Частота":"868 МГц"
+                },
+                "description":"Одна из лучших систем горизонтальной раздвижки штор. Бесшумная работа, высокая мощность.",
+                "instructions":{
+                    "pdf":"https://docs.google.com/document/d/1yVLFqcXi-Hg4ocpcBsVipUecIO1gsPKRZNM-A9A2VAc/edit?usp=sharing"
+                }
+            },
+            {
+                "id":"266210",
+                "name":"Novo N21 - 5 м",
+                "price":0.0,
+                "image":"https://static.tildacdn.com/tild6366-3363-4532-a439-623965646531/N21_1.png",
+                "specifications":{
+                    "Крутящий момент":"1,2 Нм",
+                    "Потребляемая мощность":"36 Вт",
+                    "Гарантия":"5 лет",
+                    "Степень защиты":"IP 44",
+                    "Весовая нагрузка":"60 кг",
+                    "Скорость перемещения":"10 – 20 см/сек",
+                    "Напряжение питания":"100 – 240 В",
+                    "Частота":"868 МГц"
+                },
+                "description":"Одна из лучших систем горизонтальной раздвижки штор. Бесшумная работа, высокая мощность.",
+                "instructions":{
+                    "pdf":"https://docs.google.com/document/d/1yVLFqcXi-Hg4ocpcBsVipUecIO1gsPKRZNM-A9A2VAc/edit?usp=sharing"
+                }
+            },
+            {
+                "id":"266210",
+                "name":"Novo N21 - 6 м",
+                "price":0.0,
+                "image":"https://static.tildacdn.com/tild6366-3363-4532-a439-623965646531/N21_1.png",
+                "specifications":{
+                    "Крутящий момент":"1,2 Нм",
+                    "Потребляемая мощность":"36 Вт",
+                    "Гарантия":"5 лет",
+                    "Степень защиты":"IP 44",
+                    "Весовая нагрузка":"60 кг",
+                    "Скорость перемещения":"10 – 20 см/сек",
+                    "Напряжение питания":"100 – 240 В",
+                    "Частота":"868 МГц"
+                },
+                "description":"Одна из лучших систем горизонтальной раздвижки штор. Бесшумная работа, высокая мощность.",
+                "instructions":{
+                    "pdf":"https://docs.google.com/document/d/1yVLFqcXi-Hg4ocpcBsVipUecIO1gsPKRZNM-A9A2VAc/edit?usp=sharing"
+                }
+            }
+        ]
+    },
+    {
+        "id":38,
+        "name":"Рулонный карниз Novo K35-TP-6-28",
+        "price":0.0,
+        "image":"https://static.tildacdn.com/tild3236-6365-4932-b331-376534386130/5ad95401d809d.jpg",
+        "category":"karniz",
+        "description":"Цену уточняйте с менеджером",
+        "modifications":[
+            {
+                "id":"299196",
+                "name":"Внутривальный электропривод для рулонных штор Novo K35-TP-6-28",
+                "price":0.0,
+                "image":"https://static.tildacdn.com/tild3236-6365-4932-b331-376534386130/5ad95401d809d.jpg",
+                "specifications":{
+                    "Крутящий момент":"6 Нм",
+                    "Потребляемая мощность":"120 Вт",
+                    "Степень защиты":"IP 44",
+                    "Уровень шума":"28 дБ",
+                    "Напряжение питания":"230 В",
+                    "Скорость вращения":"28 об/мин",
+                    "Диаметр вала":"35 мм"
+                },
+                "description":"Одна из лучших систем вертикальной раздвижки штор. Бесшумная работа, высокая мощность. Цену уточняйте с менеджером.",
+                "instructions":{
+                    "pdf":"https://docs.google.com/document/d/1yVLFqcXi-Hg4ocpcBsVipUecIO1gsPKRZNM-A9A2VAc/edit?usp=sharing"
+                }
+            }
+        ]
+    },
+    {
+        "id":43,
+        "name":"Сервопривод электротермический Valtec",
+        "price":1800.0,
+        "image":"https://static.tildacdn.com/tild3662-3837-4733-b664-376162326139/VTTE30430_2.jpg",
+        "category":"other",
+        "description":"Электротермический двухпозиционный сервопривод VT.TE3043 применяется для автоматического управления радиаторным или коллекторным термостатическим клапаном систем водяного отопления (в том числе теплого пола) и охлаждения зданий. Действие привода основано на расширении заполняющего сильфон армированного парафина при протекании электрического тока через встроенный нагревательный элемент по сигналу от комнатного термостата или контроллера.",
+        "modifications":[
+            {
+                "id":"276876",
+                "name":"220 В - Нормально-Закрытый",
+                "price":1800.0,
+                "image":"https://static.tildacdn.com/tild3662-3837-4733-b664-376162326139/VTTE30430_2.jpg",
+                "specifications":{
+                    "MAX коммутируемый ток":"300 мА",
+                    "Напряжение питания":"220 В",
+                    "Время открытия / закрытия клапана":"180 сек",
+                    "Длина подсоеднияемого кабеля":"1 м",
+                    "Развиваемое усиле на штоке":"80 Н",
+                    "Вес":"50 г",
+                    "Длина":"47",
+                    "Ширина":"47",
+                    "Высота":"58"
+                },
+                "description":"Нормально-ЗАКРЫТЫЙ – клапан закрыт при отсутствии напряжения.",
+                "instructions":{
+                    "pdf":"https://valtec.ru/document/technical/VT.TE3043-0220.pdf"
+                }
+            },
+            {
+                "id":"276878",
+                "name":"24 В - Нормально-Закрытый",
+                "price":1800.0,
+                "image":"https://static.tildacdn.com/tild3662-3837-4733-b664-376162326139/VTTE30430_2.jpg",
+                "specifications":{
+                    "MAX коммутируемый ток":"500 мА",
+                    "Напряжение питания":"24 В",
+                    "Время открытия / закрытия клапана":"180 сек",
+                    "Длина подсоеднияемого кабеля":"1 м",
+                    "Развиваемое усиле на штоке":"80 Н",
+                    "Вес":"50 г",
+                    "Длина":"47",
+                    "Ширина":"47",
+                    "Высота":"58"
+                },
+                "description":"Нормально-ЗАКРЫТЫЙ – клапан закрыт при отсутствии напряжения.",
+                "instructions":{
+                    "pdf":"https://valtec.ru/document/technical/VT.TE3043-0220.pdf"
+                }
+            },
+            {
+                "id":"276874",
+                "name":"220 В - Нормально-Открытый",
+                "price":1800.0,
+                "image":"https://static.tildacdn.com/tild3662-3837-4733-b664-376162326139/VTTE30430_2.jpg",
+                "specifications":{
+                    "MAX коммутируемый ток":"300 мА",
+                    "Напряжение питания":"220 В",
+                    "Время открытия / закрытия клапана":"180 сек",
+                    "Длина подсоеднияемого кабеля":"1 м",
+                    "Развиваемое усиле на штоке":"80 Н",
+                    "Вес":"50 г",
+                    "Длина":"47",
+                    "Ширина":"47",
+                    "Высота":"58"
+                },
+                "description":"Нормально-ОТКРЫТЫЙ – клапан открыт при отсутствии напряжения.",
+                "instructions":{
+                    "pdf":"https://valtec.ru/document/technical/VT.TE3043-0220.pdf"
+                }
+            },
+            {
+                "id":"276880",
+                "name":"24 В - Нормально-Открытый",
+                "price":1800.0,
+                "image":"https://static.tildacdn.com/tild3662-3837-4733-b664-376162326139/VTTE30430_2.jpg",
+                "specifications":{
+                    "MAX коммутируемый ток":"500 мА",
+                    "Напряжение питания":"24 В",
+                    "Время открытия / закрытия клапана":"180 сек",
+                    "Длина подсоеднияемого кабеля":"1 м",
+                    "Развиваемое усиле на штоке":"80 Н",
+                    "Вес":"50 г",
+                    "Длина":"47",
+                    "Ширина":"47",
+                    "Высота":"58"
+                },
+                "description":"Нормально-ОТКРЫТЫЙ – клапан открыт при отсутствии напряжения.",
+                "instructions":{
+                    "pdf":"https://valtec.ru/document/technical/VT.TE3043-0220.pdf"
+                }
+            }
+        ]
+    },
+    {
+        "id":44,
+        "name":"Клапан термостатический Valtec",
+        "price":1148.0,
+        "image":"https://static.tildacdn.com/tild3938-6564-4634-b231-323335333535/VT031NR_0.jpg",
+        "category":"other",
+        "description":"Прямой клапан для ручного или автоматического регулирования расхода теплоносителя через отопительный прибор. Во втором случае комплектуется термостатической головкой или сервоприводом, управляемым комнатным термостатом или контроллером.\n\nИспользование регулирующих клапанов VALTEC c термостатической головкой позволяет автоматически поддерживать заданную температуру в помещении с точностью до 1 °С.",
+        "modifications":[
+            {
+                "id":"276892",
+                "name":"Прямой - 1/2",
+                "price":1148.0,
+                "image":"https://static.tildacdn.com/tild3938-6564-4634-b231-323335333535/VT031NR_0.jpg",
+                "specifications":{},
+                "description":"Клапан для ручного или автоматического регулирования расхода теплоносителя через отопительный прибор.",
+                "instructions":{}
+            },
+            {
+                "id":"276886",
+                "name":"Угловой - 1/2",
+                "price":1127.0,
+                "image":"https://static.tildacdn.com/tild3938-6564-4634-b231-323335333535/VT031NR_0.jpg",
+                "specifications":{},
+                "description":"Клапан для ручного или автоматического регулирования расхода теплоносителя через отопительный прибор.",
+                "instructions":{}
+            },
+            {
+                "id":"276890",
+                "name":"Прямой - 3/4",
+                "price":1470.0,
+                "image":"https://static.tildacdn.com/tild3938-6564-4634-b231-323335333535/VT031NR_0.jpg",
+                "specifications":{},
+                "description":"Клапан для ручного или автоматического регулирования расхода теплоносителя через отопительный прибор.",
+                "instructions":{}
+            },
+            {
+                "id":"276888",
+                "name":"Угловой - 3/4",
+                "price":1807.0,
+                "image":"https://static.tildacdn.com/tild3938-6564-4634-b231-323335333535/VT031NR_0.jpg",
+                "specifications":{},
+                "description":"Клапан для ручного или автоматического регулирования расхода теплоносителя через отопительный прибор.",
+                "instructions":{}
+            }
+        ]
+    },
+    {
+        "id":24,
+        "name":"Антенна HYBRID BOX",
+        "price":8140.0,
+        "image":"https://static.tildacdn.com/tild3662-3564-4163-a631-616664323864/hybrid-box.jpg",
+        "category":"antenna",
+        "description":"",
+        "modifications":[
+            {
+                "id":"206754",
+                "name":"TS-9",
+                "price":8140.0,
+                "image":"https://static.tildacdn.com/tild3662-3564-4163-a631-616664323864/hybrid-box.jpg",
+                "specifications":{
+                    "Коэффициент усиления 4G":"2х16 дБи (на 2600 МГц), 2х13 дБи (на 1800 МГц), 2х8 дБи (на 800 МГц)",
+                    "Коэффициент усиления 3G":"2х14 дБи (на 2100 МГц)",
+                    "КСВ":"не более 1,5",
+                    "Ширина ДН":"H – 26°, V – 26°",
+                    "Температурный диапазон":"от -30 до +50 °С",
+                    "Рабочие диапазоны частот":"790-960 МГц, 1750-2170 МГц, 2500-2700 МГц",
+                    "Интерфейс подключения":"CRC9/TS9",
+                    "Технология MIMO":"2х2",
+                    "Вес":"1300",
+                    "Длина":"250",
+                    "Ширина":"250",
+                    "Высота":"70"
+                },
+                "description":"Антенны серии HiTE PRO HYBRID предназначены для усиления сигнала беспроводного\nИнтернета. Они имеют поддержку двух технологий передачи данных: 3G и 4G. Если в\nместе установки еще нет 4G-сигнала, с помощью антенны можно усилить 3G. При\nпоявлении 4G-покрытия антенна автоматически переключится на него.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/2022/03/hybrid.pdf",
+                    "video":"https://vkvideo.ru/video-140176277_456239050"
+                }
+            },
+            {
+                "id":"279368",
+                "name":"CRC-9",
+                "price":8140.0,
+                "image":"https://static.tildacdn.com/tild3662-3564-4163-a631-616664323864/hybrid-box.jpg",
+                "specifications":{
+                    "Коэффициент усиления 4G":"2х16 дБи (на 2600 МГц), 2х13 дБи (на 1800 МГц), 2х8 дБи (на 800 МГц)",
+                    "Коэффициент усиления 3G":"2х14 дБи (на 2100 МГц)",
+                    "КСВ":"не более 1,5",
+                    "Ширина ДН":"H – 26°, V – 26°",
+                    "Температурный диапазон":"от -30 до +50 °С",
+                    "Рабочие диапазоны частот":"790-960 МГц, 1750-2170 МГц, 2500-2700 МГц",
+                    "Интерфейс подключения":"CRC9/TS9",
+                    "Технология MIMO":"2х2",
+                    "Вес":"1300",
+                    "Длина":"250",
+                    "Ширина":"250",
+                    "Высота":"70"
+                },
+                "description":"Антенны серии HiTE PRO HYBRID предназначены для усиления сигнала беспроводного\nИнтернета. Они имеют поддержку двух технологий передачи данных: 3G и 4G. Если в\nместе установки еще нет 4G-сигнала, с помощью антенны можно усилить 3G. При\nпоявлении 4G-покрытия антенна автоматически переключится на него.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/2022/03/hybrid.pdf",
+                    "video":"https://vkvideo.ru/video-140176277_456239050"
+                }
+            }
+        ]
+    },
+    {
+        "id":25,
+        "name":"Антенна DUO BOX",
+        "price":10340.0,
+        "image":"https://static.tildacdn.com/tild3336-3461-4630-a664-643939333437/duo-box.jpg",
+        "category":"antenna",
+        "description":"",
+        "modifications":[
+            {
+                "id":"279366",
+                "name":"CRC-9",
+                "price":10340.0,
+                "image":"https://static.tildacdn.com/tild3336-3461-4630-a664-643939333437/duo-box.jpg",
+                "specifications":{
+                    "Коэффициент усиления 4G":"2х20 дБи (на 2600 МГц), 2х16 дБи (на 1800 МГц), 2х12 дБи (на 800 МГц)",
+                    "Коэффициент усиления 3G":"2х18 дБи (на 2100 МГц)",
+                    "КСВ":"не более 1,5",
+                    "Ширина ДН":"H – 13°, V – 13°",
+                    "Температурный диапазон":"от -30 до +50 °С",
+                    "Рабочие диапазоны частот":"790-960 МГц, 1750-2170 МГц, 2500-2700 МГц",
+                    "Интерфейс подключения":"CRC9/TS9",
+                    "Технология MIMO":"2х2",
+                    "Вес":"2900",
+                    "Длина":"410",
+                    "Ширина":"410",
+                    "Высота":"30"
+                },
+                "description":"Антенны серии HiTE PRO DUO предназначены для усиления беспроводного Интернета. Они работают в трех диапазонах LTE(4G) 800/1800/2600 МГц и двух диапазонах UMTS(3G) – 900/2100 МГц.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/2022/03/duo.pdf",
+                    "video":"https://vkvideo.ru/video-140176277_456239050"
+                }
+            },
+            {
+                "id":"206928",
+                "name":"TS-9",
+                "price":10340.0,
+                "image":"https://static.tildacdn.com/tild3336-3461-4630-a664-643939333437/duo-box.jpg",
+                "specifications":{
+                    "Коэффициент усиления 4G":"2х20 дБи (на 2600 МГц), 2х16 дБи (на 1800 МГц), 2х12 дБи (на 800 МГц)",
+                    "Коэффициент усиления 3G":"2х18 дБи (на 2100 МГц)",
+                    "КСВ":"не более 1,5",
+                    "Ширина ДН":"H – 13°, V – 13°",
+                    "Температурный диапазон":"от -30 до +50 °С",
+                    "Рабочие диапазоны частот":"790-960 МГц, 1750-2170 МГц, 2500-2700 МГц",
+                    "Интерфейс подключения":"CRC9/TS9",
+                    "Технология MIMO":"2х2",
+                    "Вес":"2900",
+                    "Длина":"410",
+                    "Ширина":"410",
+                    "Высота":"30"
+                },
+                "description":"Антенны серии HiTE PRO DUO предназначены для усиления беспроводного Интернета. Они работают в трех диапазонах LTE(4G) 800/1800/2600 МГц и двух диапазонах UMTS(3G) – 900/2100 МГц.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/2022/03/duo.pdf",
+                    "video":"https://vkvideo.ru/video-140176277_456239050"
+                }
+            }
+        ]
+    },
+    {
+        "id":26,
+        "name":"Кабельная сборка SMA-SMA",
+        "price":1100.0,
+        "image":"https://static.tildacdn.com/tild6461-6566-4131-a533-653932303664/cabel-sma-sma.jpg",
+        "category":"antenna",
+        "description":"",
+        "modifications":[
+            {
+                "id":"207704",
+                "name":"5D-FB SMA (male) - SMA (female) 10 метров",
+                "price":2600.0,
+                "image":"https://static.tildacdn.com/tild6461-6566-4131-a533-653932303664/cabel-sma-sma.jpg",
+                "specifications":{
+                    "Тип кабеля":"5D-FB",
+                    "Длина кабеля":"10 м",
+                    "Разъемы":"Male-Female"
+                },
+                "description":"Кабель для антенн усиления сигнала 3G/4G.",
+                "instructions":{}
+            },
+            {
+                "id":"207694",
+                "name":"5D-FB SMA (male) - SMA (female) 5 метров",
+                "price":1500.0,
+                "image":"https://static.tildacdn.com/tild6461-6566-4131-a533-653932303664/cabel-sma-sma.jpg",
+                "specifications":{
+                    "Тип кабеля":"5D-FB",
+                    "Длина кабеля":"5 м",
+                    "Разъемы":"Male-Female"
+                },
+                "description":"Кабель для антенн усиления сигнала 3G/4G.",
+                "instructions":{}
+            },
+            {
+                "id":"207692",
+                "name":"5D-FB SMA (male) - SMA (male) 5 метров",
+                "price":1500.0,
+                "image":"https://static.tildacdn.com/tild6461-6566-4131-a533-653932303664/cabel-sma-sma.jpg",
+                "specifications":{
+                    "Тип кабеля":"5D-FB",
+                    "Длина кабеля":"5 м",
+                    "Разъемы":"Male-Male"
+                },
+                "description":"Кабель для антенн усиления сигнала 3G/4G.",
+                "instructions":{}
+            },
+            {
+                "id":"210476",
+                "name":"Кабель RG-58 SMA (male) - SMA (male) 10 метров",
+                "price":1850.0,
+                "image":"https://static.tildacdn.com/tild6461-6566-4131-a533-653932303664/cabel-sma-sma.jpg",
+                "specifications":{
+                    "Тип кабеля":"RG-58",
+                    "Длина кабеля":"10 м",
+                    "Разъемы":"Male-Male"
+                },
+                "description":"Кабель для антенн усиления сигнала 3G/4G.",
+                "instructions":{}
+            },
+            {
+                "id":"210478",
+                "name":"Кабель RG-58 с разъемами SMA (male) - SMA (male) 5 метров",
+                "price":1100.0,
+                "image":"https://static.tildacdn.com/tild6461-6566-4131-a533-653932303664/cabel-sma-sma.jpg",
+                "specifications":{
+                    "Тип кабеля":"RG-58",
+                    "Длина кабеля":"5 м",
+                    "Разъемы":"Male-Male"
+                },
+                "description":"Кабель для антенн усиления сигнала 3G/4G.",
+                "instructions":{}
+            },
+            {
+                "id":"210472",
+                "name":"Кабель RG-58 с разъемами SMA (male) - SMA (female) 10 метров",
+                "price":1850.0,
+                "image":"https://static.tildacdn.com/tild6461-6566-4131-a533-653932303664/cabel-sma-sma.jpg",
+                "specifications":{
+                    "Тип кабеля":"RG-58",
+                    "Длина кабеля":"10 м",
+                    "Разъемы":"Male-Female"
+                },
+                "description":"Кабель для антенн усиления сигнала 3G/4G.",
+                "instructions":{}
+            },
+            {
+                "id":"210474",
+                "name":"Кабель RG-58 с разъемами SMA (male) - SMA (female) 5 метров",
+                "price":1100.0,
+                "image":"https://static.tildacdn.com/tild6461-6566-4131-a533-653932303664/cabel-sma-sma.jpg",
+                "specifications":{
+                    "Тип кабеля":"RG-58",
+                    "Длина кабеля":"5 м",
+                    "Разъемы":"Male-Female"
+                },
+                "description":"Кабель для антенн усиления сигнала 3G/4G.",
+                "instructions":{}
+            }
+        ]
+    },
+    {
+        "id":27,
+        "name":"Пигтейл CRC9/TS9",
+        "price":400.0,
+        "image":"https://static.tildacdn.com/tild3733-6439-4735-b031-323238626664/pigtail.jpg",
+        "category":"antenna",
+        "description":"",
+        "modifications":[
+            {
+                "id":"207428",
+                "name":"CRC-9",
+                "price":400.0,
+                "image":"https://static.tildacdn.com/tild3733-6439-4735-b031-323238626664/pigtail.jpg",
+                "specifications":{},
+                "description":"Пигтейл для подключения модема к антенне усиления сигнала 3G/4G.",
+                "instructions":{}
+            },
+            {
+                "id":"277678",
+                "name":"TS-9",
+                "price":400.0,
+                "image":"https://static.tildacdn.com/tild3733-6439-4735-b031-323238626664/pigtail.jpg",
+                "specifications":{},
+                "description":"Пигтейл для подключения модема к антенне усиления сигнала 3G/4G.",
+                "instructions":{}
+            }
+        ]
+    },
+    {
+        "id":28,
+        "name":"USB-удлинитель на 5 метров",
+        "price":490.0,
+        "image":"https://static.tildacdn.com/tild3339-6633-4939-b539-373261656265/usb-udlin-10m.jpg",
+        "category":"antenna",
+        "description":"",
+        "modifications":[
+            {
+                "id":"207542",
+                "name":"USB-удлинитель на 5 метров",
+                "price":490.0,
+                "image":"https://static.tildacdn.com/tild3339-6633-4939-b539-373261656265/usb-udlin-10m.jpg",
+                "specifications":{
+                    "Длина кабеля":"5 м",
+                    "Интерфейс подключения":"USB 2.0"
+                },
+                "description":"Кабель для антенн усиления сигнала 3G/4G.",
+                "instructions":{}
+            }
+        ]
+    },
+    {
+        "id":64,
+        "name":"Терморегулятор Caleo С927",
+        "price":10392.0,
+        "image":"https://static.tildacdn.com/stor3138-3266-4264-b464-653536363464/67235715.jpg",
+        "category":"warm_floor",
+        "description":"Wi-Fi встраиваемый, цифровой, программируемый, 3,5 кВт",
+        "modifications":[
+            {
+                "id":"297070",
+                "name":"Белый",
+                "price":10392.0,
+                "image":"https://static.tildacdn.com/stor3431-3131-4235-b936-636435313332/49049039.png",
+                "specifications":{
+                    "Вес":"40 г",
+                    "Длина":"86",
+                    "Ширина":"86",
+                    "Высота":"47"
+                },
+                "description":"Состав комплекта:\n1) Терморегулятор Caleo C927 – 1 шт.;\n2) Проводной датчик температуры SU 7*20 (NTC 10 кОм), 3 м – 1 шт.;\n3) Инструкция и гарантийный талон – 1 шт.",
+                "instructions":{
+                    "pdf":"https://caleo.ru/upload/iblock/395/s0l3alulxa6d1zna557odmsu0mohl9zp.pdf"
+                }
+            },
+            {
+                "id":"297090",
+                "name":"Черный",
+                "price":10392.0,
+                "image":"https://static.tildacdn.com/stor3836-3361-4466-b837-656433306263/40479136.png",
+                "specifications":{
+                    "Вес":"40 г",
+                    "Длина":"86",
+                    "Ширина":"86",
+                    "Высота":"47"
+                },
+                "description":"Состав комплекта:\n1) Терморегулятор Caleo C927 – 1 шт.;\n2) Проводной датчик температуры SU 7*20 (NTC 10 кОм), 3 м – 1 шт.;\n3) Инструкция и гарантийный талон – 1 шт.",
+                "instructions":{
+                    "pdf":"https://caleo.ru/upload/iblock/3d6/fpe0gthwemq65uwx82e4et9x2wou20ej.pdf"
+                }
+            }
+        ]
+    },
+    {
+        "id":66,
+        "name":"Терморегулятор Caleo С430",
+        "price":1813.0,
+        "image":"https://static.tildacdn.com/stor6433-3931-4063-b931-663539353731/26813793.jpg",
+        "category":"warm_floor",
+        "description":"Аналоговый, встраиваемый, 3,5 кВт",
+        "modifications":[
+            {
+                "id":"297092",
+                "name":"Белый",
+                "price":1813.0,
+                "image":"https://static.tildacdn.com/stor6433-3931-4063-b931-663539353731/26813793.jpg",
+                "specifications":{
+                    "Вес":"30 г",
+                    "Длина":"86",
+                    "Ширина":"86",
+                    "Высота":"40"
+                },
+                "description":"Состав комплекта:\n1) Терморегулятор Caleo C927 – 1 шт.;\n2) Проводной датчик температуры SU 7*20 (NTC 10 кОм), 3 м – 1 шт.;\n3) Инструкция и гарантийный талон – 1 шт.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/upload/iblock/395/s0l3alulxa6d1zna557odmsu0mohl9zp.pdf"
+                }
+            },
+            {
+                "id":"297094",
+                "name":"Черный",
+                "price":1813.0,
+                "image":"https://static.tildacdn.com/stor3936-3130-4264-b362-356466663833/39881704.jpg",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            }
+        ]
+    },
+    {
+        "id":62,
+        "name":"Caleo Platinum",
+        "price":5695.0,
+        "image":"https://static.tildacdn.com/stor3632-6232-4361-a131-656634393063/79914832.jpg",
+        "category":"warm_floor",
+        "description":"Саморегулируемый инфракрасный пленочный теплый пол под ламинат, паркет, линолеум и ковролин (термопленка)",
+        "modifications":[
+            {
+                "id":"296892",
+                "name":"Caleo Platinum - 230 - 1",
+                "price":5695.0,
+                "image":"https://static.tildacdn.com/stor3632-6232-4361-a131-656634393063/79914832.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Удельная мощность":"18 Вт/м2"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. ",
+                "instructions":{
+                    "pdf":"https://caleo.ru/pdf/instr%20caleo%20platinum%20A3%20color%20web.pdf",
+                    "video":"https://youtu.be/a54qofdB5-k"
+                }
+            },
+            {
+                "id":"296894",
+                "name":"Caleo Platinum - 230 - 1,5",
+                "price":8324.0,
+                "image":"https://static.tildacdn.com/stor3632-6232-4361-a131-656634393063/79914832.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Удельная мощность":"18 Вт/м2"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. ",
+                "instructions":{
+                    "pdf":"https://caleo.ru/pdf/instr%20caleo%20platinum%20A3%20color%20web.pdf",
+                    "video":"https://youtu.be/a54qofdB5-k"
+                }
+            },
+            {
+                "id":"296896",
+                "name":"Caleo Platinum - 230 - 2",
+                "price":11102.0,
+                "image":"https://static.tildacdn.com/stor3632-6232-4361-a131-656634393063/79914832.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Удельная мощность":"18 Вт/м2"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. ",
+                "instructions":{
+                    "pdf":"https://caleo.ru/pdf/instr%20caleo%20platinum%20A3%20color%20web.pdf",
+                    "video":"https://youtu.be/a54qofdB5-k"
+                }
+            },
+            {
+                "id":"296898",
+                "name":"Caleo Platinum - 230 - 2,5",
+                "price":13879.0,
+                "image":"https://static.tildacdn.com/stor3632-6232-4361-a131-656634393063/79914832.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Удельная мощность":"18 Вт/м2"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. ",
+                "instructions":{
+                    "pdf":"https://caleo.ru/pdf/instr%20caleo%20platinum%20A3%20color%20web.pdf",
+                    "video":"https://youtu.be/a54qofdB5-k"
+                }
+            },
+            {
+                "id":"296900",
+                "name":"Caleo Platinum - 230 - 3",
+                "price":16657.0,
+                "image":"https://static.tildacdn.com/stor3632-6232-4361-a131-656634393063/79914832.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Удельная мощность":"18 Вт/м2"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. ",
+                "instructions":{
+                    "pdf":"https://caleo.ru/pdf/instr%20caleo%20platinum%20A3%20color%20web.pdf",
+                    "video":"https://youtu.be/a54qofdB5-k"
+                }
+            },
+            {
+                "id":"296902",
+                "name":"Caleo Platinum - 230 - 3,5",
+                "price":19435.0,
+                "image":"https://static.tildacdn.com/stor3632-6232-4361-a131-656634393063/79914832.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Удельная мощность":"18 Вт/м2"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. ",
+                "instructions":{
+                    "pdf":"https://caleo.ru/pdf/instr%20caleo%20platinum%20A3%20color%20web.pdf",
+                    "video":"https://youtu.be/a54qofdB5-k"
+                }
+            },
+            {
+                "id":"296904",
+                "name":"Caleo Platinum - 230 - 4",
+                "price":22302.0,
+                "image":"https://static.tildacdn.com/stor3632-6232-4361-a131-656634393063/79914832.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Удельная мощность":"18 Вт/м2"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. ",
+                "instructions":{
+                    "pdf":"https://caleo.ru/pdf/instr%20caleo%20platinum%20A3%20color%20web.pdf",
+                    "video":"https://youtu.be/a54qofdB5-k"
+                }
+            },
+            {
+                "id":"296906",
+                "name":"Caleo Platinum - 230 - 5",
+                "price":27767.0,
+                "image":"https://static.tildacdn.com/stor3632-6232-4361-a131-656634393063/79914832.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Удельная мощность":"18 Вт/м2"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. ",
+                "instructions":{
+                    "pdf":"https://caleo.ru/pdf/instr%20caleo%20platinum%20A3%20color%20web.pdf",
+                    "video":"https://youtu.be/a54qofdB5-k"
+                }
+            },
+            {
+                "id":"296908",
+                "name":"Caleo Platinum - 230 - 6",
+                "price":33412.0,
+                "image":"https://static.tildacdn.com/stor3632-6232-4361-a131-656634393063/79914832.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Удельная мощность":"18 Вт/м2"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. ",
+                "instructions":{
+                    "pdf":"https://caleo.ru/pdf/instr%20caleo%20platinum%20A3%20color%20web.pdf",
+                    "video":"https://youtu.be/a54qofdB5-k"
+                }
+            }
+        ]
+    },
+    {
+        "id":61,
+        "name":"Caleo Supermat",
+        "price":5078.0,
+        "image":"https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg",
+        "category":"warm_floor",
+        "description":"Кабельный теплый пол под плитку и керамогранит (нагревательный мат)",
+        "modifications":[
+            {
+                "id":"296910",
+                "name":"Caleo Supermat - 130 - 0,7",
+                "price":5078.0,
+                "image":"https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 200 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 130 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/G1p_9Gv_d8E"
+                }
+            },
+            {
+                "id":"296912",
+                "name":"Caleo Supermat - 130 - 1,2",
+                "price":7946.0,
+                "image":"https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 200 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 130 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/G1p_9Gv_d8E"
+                }
+            },
+            {
+                "id":"296914",
+                "name":"Caleo Supermat - 130 - 1,8",
+                "price":8602.0,
+                "image":"https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 200 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 130 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/G1p_9Gv_d8E"
+                }
+            },
+            {
+                "id":"296916",
+                "name":"Caleo Supermat - 130 - 2,4",
+                "price":10754.0,
+                "image":"https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 200 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 130 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/G1p_9Gv_d8E"
+                }
+            },
+            {
+                "id":"296918",
+                "name":"Caleo Supermat - 130 - 3",
+                "price":11503.0,
+                "image":"https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 200 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 130 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/G1p_9Gv_d8E"
+                }
+            },
+            {
+                "id":"296920",
+                "name":"Caleo Supermat - 130 - 3,6",
+                "price":13375.0,
+                "image":"https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 200 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 130 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/G1p_9Gv_d8E"
+                }
+            },
+            {
+                "id":"296922",
+                "name":"Caleo Supermat - 130 - 4,2",
+                "price":15622.0,
+                "image":"https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 200 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 130 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/G1p_9Gv_d8E"
+                }
+            },
+            {
+                "id":"296924",
+                "name":"Caleo Supermat - 130 - 5",
+                "price":16745.0,
+                "image":"https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 200 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 130 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/G1p_9Gv_d8E"
+                }
+            },
+            {
+                "id":"296926",
+                "name":"Caleo Supermat - 130 - 6",
+                "price":18710.0,
+                "image":"https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 200 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 130 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/G1p_9Gv_d8E"
+                }
+            },
+            {
+                "id":"296928",
+                "name":"Caleo Supermat - 130 - 7",
+                "price":21425.0,
+                "image":"https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 200 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 130 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/G1p_9Gv_d8E"
+                }
+            },
+            {
+                "id":"296930",
+                "name":"Caleo Supermat - 130 - 8",
+                "price":23858.0,
+                "image":"https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 200 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 130 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/G1p_9Gv_d8E"
+                }
+            },
+            {
+                "id":"296932",
+                "name":"Caleo Supermat - 130 - 10",
+                "price":30598.0,
+                "image":"https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 200 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 130 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/G1p_9Gv_d8E"
+                }
+            },
+            {
+                "id":"296934",
+                "name":"Caleo Supermat - 130 - 12",
+                "price":37056.0,
+                "image":"https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 200 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 130 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/G1p_9Gv_d8E"
+                }
+            },
+            {
+                "id":"296936",
+                "name":"Caleo Supermat - 200 - 0,7",
+                "price":5840.0,
+                "image":"https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 200 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 130 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/G1p_9Gv_d8E"
+                }
+            },
+            {
+                "id":"296938",
+                "name":"Caleo Supermat - 200 - 1,2",
+                "price":9138.0,
+                "image":"https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 200 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 130 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/G1p_9Gv_d8E"
+                }
+            },
+            {
+                "id":"296940",
+                "name":"Caleo Supermat - 200 - 1,8",
+                "price":9892.0,
+                "image":"https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 200 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 130 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/G1p_9Gv_d8E"
+                }
+            },
+            {
+                "id":"296942",
+                "name":"Caleo Supermat - 200 - 2,4",
+                "price":12368.0,
+                "image":"https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 200 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 130 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/G1p_9Gv_d8E"
+                }
+            },
+            {
+                "id":"296944",
+                "name":"Caleo Supermat - 200 - 3",
+                "price":13229.0,
+                "image":"https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 200 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 130 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/G1p_9Gv_d8E"
+                }
+            },
+            {
+                "id":"296946",
+                "name":"Caleo Supermat - 200 - 3,6",
+                "price":15382.0,
+                "image":"https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 200 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 130 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/G1p_9Gv_d8E"
+                }
+            },
+            {
+                "id":"296948",
+                "name":"Caleo Supermat - 200 - 4,2",
+                "price":17965.0,
+                "image":"https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 200 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 130 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/G1p_9Gv_d8E"
+                }
+            },
+            {
+                "id":"296950",
+                "name":"Caleo Supermat - 200 - 5",
+                "price":19257.0,
+                "image":"https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 200 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 130 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/G1p_9Gv_d8E"
+                }
+            },
+            {
+                "id":"296952",
+                "name":"Caleo Supermat - 200 - 6",
+                "price":21518.0,
+                "image":"https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 200 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 130 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/G1p_9Gv_d8E"
+                }
+            },
+            {
+                "id":"296954",
+                "name":"Caleo Supermat - 200 - 7",
+                "price":24638.0,
+                "image":"https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 200 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 130 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/G1p_9Gv_d8E"
+                }
+            },
+            {
+                "id":"296956",
+                "name":"Caleo Supermat - 200 - 8",
+                "price":27438.0,
+                "image":"https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 200 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 130 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/G1p_9Gv_d8E"
+                }
+            },
+            {
+                "id":"296958",
+                "name":"Caleo Supermat - 200 - 10",
+                "price":35187.0,
+                "image":"https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 200 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 130 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/G1p_9Gv_d8E"
+                }
+            },
+            {
+                "id":"296960",
+                "name":"Caleo Supermat - 200 - 12",
+                "price":42614.0,
+                "image":"https://static.tildacdn.com/stor3331-6130-4461-b863-323939656465/90783921.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 200 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 130 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/G1p_9Gv_d8E"
+                }
+            }
+        ]
+    },
+    {
+        "id":65,
+        "name":"Caleo Easymat",
+        "price":3211.0,
+        "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+        "category":"warm_floor",
+        "description":"Кабельный теплый пол под плитку и керамогранит (нагревательный мат)",
+        "modifications":[
+            {
+                "id":"297084",
+                "name":"Caleo Easymat - 140 - 0,5",
+                "price":3211.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297086",
+                "name":"Caleo Easymat - 140 - 0,7",
+                "price":3504.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297098",
+                "name":"Caleo Easymat - 140 - 1",
+                "price":3699.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297100",
+                "name":"Caleo Easymat - 140 - 1,2",
+                "price":3797.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297102",
+                "name":"Caleo Easymat - 140 - 1,5",
+                "price":4382.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297104",
+                "name":"Caleo Easymat - 140 - 1,8",
+                "price":5066.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297106",
+                "name":"Caleo Easymat - 140 - 2",
+                "price":5261.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297108",
+                "name":"Caleo Easymat - 140 - 2,4",
+                "price":5846.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297110",
+                "name":"Caleo Easymat - 140 - 3",
+                "price":7115.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297112",
+                "name":"Caleo Easymat - 140 - 3,6",
+                "price":8091.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297114",
+                "name":"Caleo Easymat - 140 - 4",
+                "price":8872.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297116",
+                "name":"Caleo Easymat - 140 - 4,2",
+                "price":9165.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297118",
+                "name":"Caleo Easymat - 140 - 5",
+                "price":10824.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297120",
+                "name":"Caleo Easymat - 140 - 6",
+                "price":12386.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297122",
+                "name":"Caleo Easymat - 140 - 7",
+                "price":13557.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297124",
+                "name":"Caleo Easymat - 140 - 8",
+                "price":15021.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297126",
+                "name":"Caleo Easymat - 140 - 10",
+                "price":20193.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297128",
+                "name":"Caleo Easymat - 140 - 12",
+                "price":24000.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297130",
+                "name":"Caleo Easymat - 180 - 0,5",
+                "price":3686.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297132",
+                "name":"Caleo Easymat - 180 - 1",
+                "price":4241.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297134",
+                "name":"Caleo Easymat - 180 - 1,5",
+                "price":5045.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297136",
+                "name":"Caleo Easymat - 180 - 2",
+                "price":6074.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297138",
+                "name":"Caleo Easymat - 180 - 2,5",
+                "price":6730.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297140",
+                "name":"Caleo Easymat - 180 - 3",
+                "price":8157.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297142",
+                "name":"Caleo Easymat - 180 - 3,5",
+                "price":9270.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297144",
+                "name":"Caleo Easymat - 180 - 4",
+                "price":10193.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297146",
+                "name":"Caleo Easymat - 180 - 5",
+                "price":12439.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297148",
+                "name":"Caleo Easymat - 180 - 6",
+                "price":14189.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297150",
+                "name":"Caleo Easymat - 180 - 7",
+                "price":15622.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297152",
+                "name":"Caleo Easymat - 180 - 8",
+                "price":17306.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297154",
+                "name":"Caleo Easymat - 180 - 10",
+                "price":23297.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297156",
+                "name":"Caleo Easymat - 180 - 12",
+                "price":27696.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            },
+            {
+                "id":"297158",
+                "name":"Caleo Easymat - 180 - 15",
+                "price":33967.0,
+                "image":"https://static.tildacdn.com/stor3839-3761-4739-a337-653636626163/82125507.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. Как выбрать мощность: 180 Вт/м² – для холодных помещений (балконы, лоджии и т.п.), 140 Вт/м² – для стандартных помещений.",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instr%20caleo%20mat%20A3%20super%20easy%20comfo%202022%201.pdf",
+                    "video":"https://youtu.be/LacbCc5hXRk"
+                }
+            }
+        ]
+    },
+    {
+        "id":63,
+        "name":"Caleo Supercable",
+        "price":4994.0,
+        "image":"https://static.tildacdn.com/stor3435-6333-4866-a231-323166666561/87021772.jpg",
+        "category":"warm_floor",
+        "description":"Сверхтонкий кабельный теплый пол в бухте на основе двухжильного экранированного резистивного кабеля повышенной надежности",
+        "modifications":[
+            {
+                "id":"297032",
+                "name":"Caleo Supercable - 10 - 180",
+                "price":4994.0,
+                "image":"https://static.tildacdn.com/stor3435-6333-4866-a231-323166666561/87021772.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм",
+                    "Удельная мощность":"18 Вт/м"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. ",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instrCaleoSuperCablebothoct2022A51.pdf",
+                    "video":"https://youtu.be/9gcuJ4wU3s8"
+                }
+            },
+            {
+                "id":"297034",
+                "name":"Caleo Supercable - 20 - 360",
+                "price":7170.0,
+                "image":"https://static.tildacdn.com/stor3435-6333-4866-a231-323166666561/87021772.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм",
+                    "Удельная мощность":"18 Вт/м"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. ",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instrCaleoSuperCablebothoct2022A51.pdf",
+                    "video":"https://youtu.be/9gcuJ4wU3s9"
+                }
+            },
+            {
+                "id":"297036",
+                "name":"Caleo Supercable - 30 - 540",
+                "price":10434.0,
+                "image":"https://static.tildacdn.com/stor3435-6333-4866-a231-323166666561/87021772.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм",
+                    "Удельная мощность":"18 Вт/м"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. ",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instrCaleoSuperCablebothoct2022A51.pdf",
+                    "video":"https://youtu.be/9gcuJ4wU3s10"
+                }
+            },
+            {
+                "id":"297038",
+                "name":"Caleo Supercable - 40 - 720",
+                "price":13698.0,
+                "image":"https://static.tildacdn.com/stor3435-6333-4866-a231-323166666561/87021772.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм",
+                    "Удельная мощность":"18 Вт/м"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. ",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instrCaleoSuperCablebothoct2022A51.pdf",
+                    "video":"https://youtu.be/9gcuJ4wU3s11"
+                }
+            },
+            {
+                "id":"297040",
+                "name":"Caleo Supercable - 50 - 900",
+                "price":15547.0,
+                "image":"https://static.tildacdn.com/stor3435-6333-4866-a231-323166666561/87021772.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм",
+                    "Удельная мощность":"18 Вт/м"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. ",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instrCaleoSuperCablebothoct2022A51.pdf",
+                    "video":"https://youtu.be/9gcuJ4wU3s12"
+                }
+            },
+            {
+                "id":"297042",
+                "name":"Caleo Supercable - 60 - 1080",
+                "price":16962.0,
+                "image":"https://static.tildacdn.com/stor3435-6333-4866-a231-323166666561/87021772.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм",
+                    "Удельная мощность":"18 Вт/м"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. ",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instrCaleoSuperCablebothoct2022A51.pdf",
+                    "video":"https://youtu.be/9gcuJ4wU3s13"
+                }
+            },
+            {
+                "id":"297044",
+                "name":"Caleo Supercable - 70 - 1260",
+                "price":19355.0,
+                "image":"https://static.tildacdn.com/stor3435-6333-4866-a231-323166666561/87021772.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм",
+                    "Удельная мощность":"18 Вт/м"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. ",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instrCaleoSuperCablebothoct2022A51.pdf",
+                    "video":"https://youtu.be/9gcuJ4wU3s14"
+                }
+            },
+            {
+                "id":"297046",
+                "name":"Caleo Supercable - 80 - 1440",
+                "price":23272.0,
+                "image":"https://static.tildacdn.com/stor3435-6333-4866-a231-323166666561/87021772.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм",
+                    "Удельная мощность":"18 Вт/м"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. ",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instrCaleoSuperCablebothoct2022A51.pdf",
+                    "video":"https://youtu.be/9gcuJ4wU3s15"
+                }
+            },
+            {
+                "id":"297048",
+                "name":"Caleo Supercable - 90 - 1620",
+                "price":26536.0,
+                "image":"https://static.tildacdn.com/stor3435-6333-4866-a231-323166666561/87021772.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм",
+                    "Удельная мощность":"18 Вт/м"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. ",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instrCaleoSuperCablebothoct2022A51.pdf",
+                    "video":"https://youtu.be/9gcuJ4wU3s16"
+                }
+            },
+            {
+                "id":"297050",
+                "name":"Caleo Supercable - 100 - 1800",
+                "price":27842.0,
+                "image":"https://static.tildacdn.com/stor3435-6333-4866-a231-323166666561/87021772.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм",
+                    "Удельная мощность":"18 Вт/м"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. ",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instrCaleoSuperCablebothoct2022A51.pdf",
+                    "video":"https://youtu.be/9gcuJ4wU3s17"
+                }
+            },
+            {
+                "id":"297052",
+                "name":"Caleo Supercable - 120 - 2160",
+                "price":35349.0,
+                "image":"https://static.tildacdn.com/stor3435-6333-4866-a231-323166666561/87021772.jpg",
+                "specifications":{
+                    "Питание":"230 В",
+                    "Ширина полотна":"500 мм",
+                    "Толщина кабеля":"2,8 мм",
+                    "Удельная мощность":"18 Вт/м"
+                },
+                "description":"Минимальный заказ 15 000 руб с учетом скидок. ",
+                "instructions":{
+                    "pdf":"https://www.caleo.ru/pdf/new/instrCaleoSuperCablebothoct2022A51.pdf",
+                    "video":"https://youtu.be/9gcuJ4wU3s18"
+                }
+            }
+        ]
+    },
+    {
+        "id":42,
+        "name":"Контактор модульный КМ 63А 2NО",
+        "price":3277.0,
+        "image":"https://static.tildacdn.com/tild6539-3532-4363-a166-656566656465/A25DE53A5D1ABF6D4182.jpg",
+        "category":"other",
+        "description":"Двухмодульный контактор",
+        "modifications":[
+            {
+                "id":"276872",
+                "name":"КМ 63А 2NО",
+                "price":3277.0,
+                "image":"https://static.tildacdn.com/tild6539-3532-4363-a166-656566656465/A25DE53A5D1ABF6D4182.jpg",
+                "specifications":{
+                    "Напряжение катушки":"230 В (АС)",
+                    "Номинальный рабочий ток":"63 А",
+                    "Номинальное рабочее напряжение":"230/400 В",
+                    "Длина":"36",
+                    "Ширина":"85",
+                    "Высота":"58"
+                },
+                "description":"",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/shop/goods/kontaktor-modulnyj-km-63a-2no-2-mod"
+                }
             }
         ]
     }
@@ -1920,7 +5005,9 @@ const detailsModal = document.getElementById('detailsModal');
 const closeDetailsModal = document.getElementById('closeDetailsModal');
 const detailsModalImage = document.getElementById('detailsModalImage');
 const detailsModalTitle = document.getElementById('detailsModalTitle');
-const detailsModalDescription = document.getElementById('detailsModalDescription');
+// --- Новые элементы для модального окна деталей ---
+const detailsModSelectorContainer = document.getElementById('details-mod-selector-container');
+const detailsModSelector = document.getElementById('details-mod-selector');
 
 // --- Инициализация ---
 document.addEventListener('DOMContentLoaded', () => {
@@ -1928,6 +5015,9 @@ document.addEventListener('DOMContentLoaded', () => {
     urlParams = getUrlParams();
     // Отображаем бонусы из URL-параметров
     bonusValue.textContent = urlParams.bonuses.toLocaleString('ru-RU');
+    // Отображаем бонусы и скидку из URL-параметров
+    bonusValue.textContent = urlParams.bonuses.toLocaleString('ru-RU');
+    discontValue.textContent = urlParams.discont.toLocaleString('ru-RU'); // Отображаем скидку
 
     renderCategories();
     renderProducts();
@@ -1947,6 +5037,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (event.target === cartModal) {
             cartModal.style.display = 'none';
+        }
+    });
+    
+    // --- Логика переключения вкладок в модальном окне деталей ---
+    document.querySelector('.tabs')?.addEventListener('click', (e) => {
+        if (e.target.classList.contains('tab-button')) {
+            // Получаем имя вкладки из data-атрибута
+            const tabName = e.target.dataset.tab;
+
+            // Убираем класс 'active' у всех кнопок и панелей
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+
+            // Добавляем класс 'active' к кликнутой кнопке и соответствующей панели
+            e.target.classList.add('active');
+            document.getElementById(`${tabName}-content`).classList.add('active');
         }
     });
 });
@@ -2018,23 +5124,27 @@ function handlePaymentMethodChange() {
 // --- Обработчик изменения переключателя КП/Заказ ---
 function handleOrderTypeToggleChange() {
     if (orderTypeToggle.checked) {
+        // Если переключено в положение "Оформить заказ"
         orderFieldsSection.style.display = 'block';
         generateKpButton.style.display = 'none';
         checkoutButton.style.display = 'block';
+        // Меняем стили меток
         kpLabel.style.fontWeight = 'normal';
         kpLabel.style.color = 'var(--tg-theme-hint-color)';
         orderLabel.style.fontWeight = 'bold';
         orderLabel.style.color = 'var(--tg-theme-text-color)';
     } else {
+        // Если переключено в положение "Сформировать КП"
         orderFieldsSection.style.display = 'none';
         generateKpButton.style.display = 'block';
         checkoutButton.style.display = 'none';
+        // Меняем стили меток
         kpLabel.style.fontWeight = 'bold';
         kpLabel.style.color = 'var(--tg-theme-text-color)';
         orderLabel.style.fontWeight = 'normal';
         orderLabel.style.color = 'var(--tg-theme-hint-color)';
     }
-    resetCartFormFields();
+    // resetCartFormFields(); // Убираем вызов сброса полей из обработчика
 }
 
 // --- Рендеринг категорий ---
@@ -2079,8 +5189,10 @@ function renderProducts() {
         productCard.className = 'product-card';
         productCard.dataset.productId = product.id;
 
+        // Генерация HTML для выбора модификации
+        // Отображаем выбор модификации только если их больше одной
         let modificationsHtml = '';
-        if (product.modifications && product.modifications.length > 0) {
+        if (product.modifications && product.modifications.length > 1) {
             modificationsHtml = `
                 <div class="modifications-section">
                     <label class="modification-label">Модификация:</label>
@@ -2093,13 +5205,15 @@ function renderProducts() {
             `;
         }
 
-        // Получаем изображение для первой модификации или основное изображение товара
-        const initialImageSrc = product.modifications && product.modifications.length > 0 
-            ? product.modifications[0].image 
-            : product.image;
-        const initialImageAlt = product.modifications && product.modifications.length > 0 
-            ? `${product.name} - ${product.modifications[0].name}` 
-            : product.name;
+        // Определяем начальное изображение: модификация (даже если она одна) или основное изображение
+        let initialImageSrc = product.image; // По умолчанию основное изображение
+        let initialImageAlt = product.name;  // По умолчанию основное имя
+        
+        if (product.modifications && product.modifications.length > 0) {
+            // Если есть модификации, используем изображение первой модификации
+            initialImageSrc = product.modifications[0].image;
+            initialImageAlt = `${product.name} - ${product.modifications[0].name}`;
+        }
 
         const detailsButtonHtml = `<button class="details-button" data-id="${product.id}">Подробнее</button>`;
 
@@ -2117,7 +5231,8 @@ function renderProducts() {
         `;
         productGrid.appendChild(productCard);
 
-        if (product.modifications && product.modifications.length > 0) {
+        // Добавляем обработчик изменения модификации только если их больше одной
+        if (product.modifications && product.modifications.length > 1) {
             const modSelect = document.getElementById(`mod-select-${product.id}`);
             modSelect.addEventListener('change', () => {
                 updateProductPrice(product.id);
@@ -2125,6 +5240,10 @@ function renderProducts() {
             });
             // Инициализируем цену и изображение для первой модификации
             updateProductPrice(product.id);
+        } else if (product.modifications && product.modifications.length === 1) {
+             // Если модификация одна, все равно нужно инициализировать правильное изображение и цену
+             // updateProductPrice обновит изображение на основе первой (и единственной) модификации
+             updateProductPrice(product.id);
         }
 
         const detailsButton = productCard.querySelector('.details-button');
@@ -2139,21 +5258,31 @@ function renderProducts() {
 // --- Обновление цены и изображения товара в зависимости от модификации ---
 function updateProductPrice(productId) {
     const product = products.find(p => p.id == productId);
-    if (!product || !product.modifications || product.modifications.length === 0) return;
+    if (!product || !product.modifications || product.modifications.length === 0) {
+        // Если модификаций нет, ничего не делаем, изображение и цена остаются базовыми
+        return;
+    }
 
+    let selectedMod = null;
+    
+    // Проверяем, есть ли селект (т.е. больше одной модификации)
     const selectElement = document.getElementById(`mod-select-${productId}`);
-    if (!selectElement) return;
+    if (selectElement) {
+        // Если селект есть, получаем выбранную модификацию
+        const selectedModId = selectElement.value;
+        selectedMod = product.modifications.find(mod => mod.id === selectedModId);
+    } else {
+        // Если селекта нет (одна модификация), используем первую
+        selectedMod = product.modifications[0];
+    }
 
-    const selectedModId = selectElement.value;
-    const selectedMod = product.modifications.find(mod => mod.id === selectedModId);
-
-    // Обновляем цену
+    // Обновляем цену, если модификация найдена
     const priceElement = document.getElementById(`price-${productId}`);
     if (priceElement && selectedMod) {
         priceElement.textContent = `${selectedMod.price.toLocaleString('ru-RU')} ₽`;
     }
 
-    // Обновляем изображение
+    // Обновляем изображение, если модификация найдена
     const imageElement = document.querySelector(`.product-card[data-product-id="${productId}"] .product-image`);
     if (imageElement && selectedMod) {
         imageElement.src = selectedMod.image;
@@ -2414,7 +5543,9 @@ closeModal.addEventListener('click', (e) => {
 
 // --- Сброс формы корзины ---
 function resetCartForm() {
-    orderTypeToggle.checked = false;
+    // Устанавливаем переключатель в положение "Оформить заказ" (true)
+    orderTypeToggle.checked = true;
+    // Вызываем обработчик, чтобы обновить видимость полей и кнопок
     handleOrderTypeToggleChange();
     resetCartFormFields();
     // Сброс радио-кнопок на значение по умолчанию
@@ -2570,7 +5701,7 @@ function handleGenerateKp(e) {
     }
     kpSummary += `Тип скидки: ${kpPayload.discountType}\n`;
     kpSummary += "\nКоммерческое предложение сформировано и отправлено в бот!";
-    alert(kpSummary);
+
 }
 
 // --- Обработчик кнопки "Оформить заказ" ---
@@ -2657,7 +5788,7 @@ function handleCheckout(e) {
         orderSummary += `Расчетный счет: ${orderPayload.organizationAccount}\n`;
     }
     orderSummary += "\nЗаказ оформлен и отправлен в бот!";
-    alert(orderSummary);
+
     
     // Очищаем корзину и форму
     cart = [];
@@ -2672,15 +5803,97 @@ function openProductDetailsModal(productId) {
     const product = products.find(p => p.id == productId);
     if (!product) return;
 
-    detailsModalImage.src = product.image;
-    detailsModalImage.alt = product.name;
-    detailsModalTitle.textContent = product.name;
-    detailsModalDescription.textContent = product.description;
+    // Получаем данные первой модификации или базовые данные товара
+    let modData = null;
+    if (product.modifications && product.modifications.length > 0) {
+        modData = product.modifications[0];
+    }
 
+    // Обновляем содержимое модального окна
+    detailsModalImage.src = modData ? modData.image : product.image;
+    detailsModalImage.alt = modData ? `${product.name} - ${modData.name}` : product.name;
+    detailsModalTitle.textContent = product.name;
+
+    // Заполняем вкладки данными первой модификации
+    if (modData) {
+        updateDetailsTabs(modData);
+    } else {
+        // Если модификаций нет, показываем базовое описание
+        document.getElementById('specifications-content').innerHTML = '<p>Характеристики не указаны.</p>';
+        document.getElementById('description-content').textContent = product.description || 'Описание отсутствует.';
+        document.getElementById('instructions-content').innerHTML = '<p>Инструкции не указаны.</p>';
+    }
+
+    // Если у товара больше одной модификации, показываем селектор
+    if (product.modifications && product.modifications.length > 1) {
+        detailsModSelector.innerHTML = ''; // Очищаем перед заполнением
+        product.modifications.forEach(mod => {
+            const option = document.createElement('option');
+            option.value = mod.id;
+            option.textContent = mod.name;
+            detailsModSelector.appendChild(option);
+        });
+        detailsModSelectorContainer.style.display = 'block';
+        
+        // Добавляем обработчик события изменения
+        detailsModSelector.onchange = () => {
+            const selectedModId = detailsModSelector.value;
+            const selectedMod = product.modifications.find(m => m.id === selectedModId);
+            if (selectedMod) {
+                detailsModalImage.src = selectedMod.image;
+                detailsModalImage.alt = `${product.name} - ${selectedMod.name}`;
+                updateDetailsTabs(selectedMod);
+            }
+        };
+    } else {
+        detailsModSelectorContainer.style.display = 'none';
+    }
+
+    // Показываем модальное окно
     detailsModal.style.display = 'block';
+}
+
+// --- Вспомогательная функция для обновления содержимого вкладок ---
+function updateDetailsTabs(modData) {
+    // Вкладка "Характеристики"
+    const specsContent = document.getElementById('specifications-content');
+    if (modData.specifications && Object.keys(modData.specifications).length > 0) {
+        let specsHtml = '<ul class="specs-list">';
+        for (const [key, value] of Object.entries(modData.specifications)) {
+            specsHtml += `<li><span class="spec-key">${key}:</span> <span class="spec-value">${value}</span></li>`;
+        }
+        specsHtml += '</ul>';
+        specsContent.innerHTML = specsHtml;
+    } else {
+        specsContent.innerHTML = '<p>Характеристики не указаны.</p>';
+    }
+
+    // Вкладка "Описание"
+    const descContent = document.getElementById('description-content');
+    descContent.textContent = modData.description || 'Описание отсутствует.';
+
+    // Вкладка "Инструкции"
+    const instContent = document.getElementById('instructions-content');
+    if (modData.instructions) {
+        let instHtml = '';
+        if (modData.instructions.pdf) {
+            instHtml += `<p><a href="${modData.instructions.pdf}" target="_blank" class="instruction-link">📄 Инструкция (PDF)</a></p>`;
+        }
+        if (modData.instructions.video) {
+            instHtml += `<p><a href="${modData.instructions.video}" target="_blank" class="instruction-link">📹 Видеоинструкция</a></p>`;
+        }
+        if (!instHtml) {
+            instHtml = '<p>Инструкции не указаны.</p>';
+        }
+        instContent.innerHTML = instHtml;
+    } else {
+        instContent.innerHTML = '<p>Инструкции не указаны.</p>';
+    }
 }
 
 // --- Функция закрытия модального окна с описанием товара ---
 function closeProductDetailsModal() {
     detailsModal.style.display = 'none';
+    // Сбрасываем активную вкладку на первую
+    document.querySelector('.tab-button[data-tab="specifications"]')?.click();
 }

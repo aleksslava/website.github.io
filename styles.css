@@ -44,12 +44,13 @@ body {
 .header {
     /* Фон шапки как основной фон */
     background-color: var(--tg-theme-bg-color);
-    /* Отступы сверху/снизу, по бокам уже есть от body */
-    padding: 12px 0;
+    /* Отступы сверху/снизу, по бокам теперь padding у внутренних элементов или самого header */
+    /* Используем padding для создания отступов от краев экрана */
+    padding: 12px 8px; /* Вертикальный padding 12px, горизонтальный 8px */
     /* Flexbox для выравнивания заголовка и кнопки корзины */
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: space-between; /* Заголовок слева, кнопка справа */
+    align-items: center; /* Выравнивание по центру по вертикали */
     /* Нижняя граница вместо тени */
     border-bottom: 1px solid var(--color-border);
     /* Закрепляем сверху */
@@ -59,13 +60,53 @@ body {
     z-index: 100;
     /* Убираем скругления, они не характерны */
     border-radius: 0;
+    /* Убираем margin, так как padding задает отступы от краев */
+    margin: 0;
 }
 
+/* Уточняем стиль для заголовка h1 в шапке */
 .header h1 {
     font-size: 1.25rem; /* 20px */
     font-weight: 700; /* Жирный заголовок */
-    margin: 0; /* Убираем стандартные отступы */
-    padding: 0 8px; /* Небольшие отступы слева/справа */
+    margin: 0; /* Сброс всех внешних отступов, включая margin-left */
+    padding: 0; /* Сброс внутренних отступов */
+    /* padding: 0 8px; - эту строку можно удалить или закомментировать,
+       так как отступ теперь задается контейнеру .header */
+}
+
+/* --- Стиль для отображения бонусов --- */
+.bonuses-display {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--tg-theme-link-color); /* Используем цвет ссылки для выделения */
+    /* margin-top: 4px; - отступ сверху можно оставить или убрать */
+    margin: 0; /* Сброс всех внешних отступов, включая margin-left */
+}
+
+/* --- Стиль для отображения скидки партнера --- */
+.discont-display {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--tg-theme-link-color); /* Используем цвет ссылки для выделения */
+    margin: 2px 0 0 0; /* Небольшой отступ сверху от бонусов */
+}
+
+/* Адаптация под мобильные устройства для скидки */
+@media (max-width: 480px) {
+    .discont-display {
+        font-size: 0.85rem;
+    }
+}
+
+/* Адаптация под мобильные устройства для бонусов */
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 1.1rem; /* При необходимости адаптируем размер */
+    }
+    .bonuses-display {
+        font-size: 0.85rem;
+         margin: 0; /* Убедиться, что margin сброшен */
+    }
 }
 
 /* --- Кнопка корзины --- */
@@ -1074,4 +1115,152 @@ input, textarea {
         height: 50px;
         margin-right: 10px;
     }
+}
+
+/* --- Стили для модального окна с деталями --- */
+
+/* Селектор модификаций в деталях */
+#details-mod-selector-container {
+    margin-bottom: 20px;
+}
+
+#details-mod-selector-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+/* Стили для вкладок */
+.tabs {
+    display: flex;
+    border-bottom: 1px solid var(--color-border);
+    margin: 20px 0 15px 0;
+    padding: 0;
+}
+
+.tab-button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 16px;
+    transition: color 0.3s;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--tg-theme-hint-color);
+    position: relative;
+}
+
+.tab-button:hover {
+    color: var(--tg-theme-text-color);
+}
+
+.tab-button.active {
+    color: var(--tg-theme-button-color);
+}
+
+.tab-button.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--tg-theme-button-color);
+}
+
+/* Содержимое вкладок */
+.tab-content {
+    /* Высота контента может варьироваться, поэтому не фиксируем */
+}
+
+.tab-pane {
+    display: none;
+    /* Добавим немного отступа сверху */
+    padding-top: 5px;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+/* Стили для списка характеристик */
+.specs-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Обновлённое правило для строки характеристики */
+.specs-list li {
+    padding: 6px 0;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    /* justify-content: space-between; - убираем это */
+    align-items: center; /* Выравнивание по центру по вертикали */
+}
+
+.specs-list li:last-child {
+    border-bottom: none;
+}
+
+/* Ключ (название) характеристики */
+.spec-key {
+    font-weight: 500;
+    /* Заставляем ключ занимать всё оставшееся пространство */
+    flex-grow: 1;
+    /* Выравнивание текста ключа по левому краю */
+    text-align: left;
+    /* Предотвращаем перенос текста ключа, если это необходимо, или позволяяем перенос */
+    /* white-space: nowrap; */
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
+}
+
+/* Значение характеристики */
+.spec-value {
+    /* Выравнивание текста значения по правому краю */
+    text-align: right;
+    /* Можно добавить небольшой левый отступ, если значение слишком близко к ключу */
+    /* margin-left: 10px; */
+    /* white-space: nowrap; */ /* Предотвращает перенос значения */
+}
+
+
+/* Стили для ссылок на инструкции */
+.instruction-link {
+    color: var(--tg-theme-link-color);
+    text-decoration: none;
+    display: inline-block;
+    margin: 5px 0;
+    font-weight: 500;
+}
+
+.instruction-link:hover {
+    text-decoration: underline;
+}
+
+/* Адаптация под мобильные устройства для деталей */
+@media (max-width: 480px) {
+    .tabs {
+        margin: 15px 0 12px 0;
+    }
+
+    .tab-button {
+        padding: 8px 12px;
+        font-size: 0.95rem;
+    }
+
+    #details-mod-selector-container {
+        margin-bottom: 15px;
+    }
+}
+
+/* Стиль для содержимого вкладки "Описание" */
+#description-content {
+    text-align: left; /* Выравнивание текста по левому краю */
+    line-height: 1.6; /* Улучшенная высота строки для читаемости */
+    /* Если description-content является параграфом <p>, margin может быть унаследован.
+       Если это div, можно добавить отступы */
+    /* padding: 5px 0; */
 }

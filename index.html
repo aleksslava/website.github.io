@@ -14,6 +14,7 @@
             <h1>Каталог товаров</h1>
             <!-- Элемент для отображения бонусов -->
             <div class="bonuses-display" id="bonusesDisplay">Ваши бонусы: <span id="bonusValue">0</span></div>
+            <div class="discont-display" id="discontDisplay">Скидка партнёра: <span id="discontValue">0</span>%</div>
         </div>
         <button class="cart-button" id="cartButton">
             Корзина (<span id="cartCount">0</span>)
@@ -99,7 +100,7 @@
 
                 <!-- Поле адреса, изначально скрыто -->
                 <div class="cart-form-section" id="deliveryAddressSection" style="display: none;">
-                    <label for="deliveryAddress">Адрес доставки/Пункт выдачи:</label>
+                    <label for="deliveryAddress">Адрес доставки:</label>
                     <input type="text" id="deliveryAddress" class="cart-input" placeholder="Введите адрес">
                     <div id="deliveryAddressNote" class="form-note"></div>
                 </div>
@@ -153,13 +154,38 @@
         </div>
     </div>
 
-    <!-- Модальное окно с описанием товара -->
+        <!-- Модальное окно с описанием товара -->
     <div class="modal" id="detailsModal">
         <div class="modal-content details-modal-content">
             <span class="close-button" id="closeDetailsModal">&times;</span>
             <img id="detailsModalImage" src="" alt="" class="details-modal-image">
             <h2 id="detailsModalTitle"></h2>
-            <p id="detailsModalDescription"></p>
+            
+            <!-- Селектор модификаций (показывается только если их > 1) -->
+            <div class="details-form-section" id="details-mod-selector-container" style="display: none;">
+                <label for="details-mod-selector">Модификация:</label>
+                <select id="details-mod-selector" class="cart-select"></select>
+            </div>
+
+            <!-- Вкладки -->
+            <div class="tabs">
+                <button class="tab-button active" data-tab="specifications">Характеристики</button>
+                <button class="tab-button" data-tab="description">Описание</button>
+                <button class="tab-button" data-tab="instructions">Инструкции</button>
+            </div>
+
+            <!-- Содержимое вкладок -->
+            <div class="tab-content">
+                <div id="specifications-content" class="tab-pane active">
+                    <!-- Характеристики будут заполнены скриптом -->
+                </div>
+                <div id="description-content" class="tab-pane">
+                    <!-- Описание будет заполнено скриптом -->
+                </div>
+                <div id="instructions-content" class="tab-pane">
+                    <!-- Инструкции будут заполнены скриптом -->
+                </div>
+            </div>
         </div>
     </div>
 
