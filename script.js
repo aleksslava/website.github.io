@@ -562,7 +562,7 @@ const products = [
                     "Вес":"43 г",
                     "Габариты":"47 × 17 × 37 мм"
                 },
-                "description":"Бесшумный блок Relay-1 на симисторных ключах (\"твердотельных реле\"), устанавливаемый в разрыв фазного и нулевого провода.",
+                "description":"Бесшумный блок Relay-1 (но мощность ниже) на симисторных ключах (\"твердотельных реле\"), устанавливаемый в разрыв фазного и нулевого провода.",
                 "instructions":{
                     "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/Relay1-2Q_220%D0%92_web.pdf"
                 }
@@ -589,7 +589,7 @@ const products = [
                     "Вес":"43 г",
                     "Габариты":"47 × 17 × 37 мм"
                 },
-                "description":"Бесшумный блок Relay-2 на симисторных ключах (\"твердотельных реле\"), устанавливаемый в разрыв фазного и нулевого провода.",
+                "description":"Бесшумный блок Relay-2 (но мощность ниже) на симисторных ключах (\"твердотельных реле\"), устанавливаемый в разрыв фазного и нулевого провода.",
                 "instructions":{
                     "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/Relay1-2Q_220%D0%92_web.pdf"
                 }
@@ -721,7 +721,7 @@ const products = [
                     "Вес":"43 г",
                     "Габариты":"47 × 17 × 37 мм"
                 },
-                "description":"Блок управления для управления питанием диодных ламп и ламп накаливания. ",
+                "description":"Блок для управления питанием диодных ламп и ламп накаливания. ",
                 "instructions":{
                     "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/Relay-DIM_115x105mm.pdf",
                     "video":"https://clck.ru/3CTaoD"
@@ -2486,7 +2486,7 @@ const products = [
         "modifications":[
             {
                 "id":"301066",
-                "name":"Комплект для защиты от протечек HiTE PRO на трубу 1/2 - Bugatti - 2",
+                "name":"2 шт Bugatti 220",
                 "price":25540.0,
                 "image":"https://static.tildacdn.com/stor6431-3834-4162-b133-653538656133/55102437.jpg",
                 "specifications":{},
@@ -2495,7 +2495,7 @@ const products = [
             },
             {
                 "id":"301068",
-                "name":"Комплект для защиты от протечек HiTE PRO на трубу 1/2 - Profi - 2",
+                "name":"2 шт Profi 220",
                 "price":23940.0,
                 "image":"https://static.tildacdn.com/stor6530-6464-4333-b036-643565356237/70060083.jpg",
                 "specifications":{},
@@ -2504,7 +2504,7 @@ const products = [
             },
             {
                 "id":"301062",
-                "name":"Комплект для защиты от протечек HiTE PRO на трубу 1/2 - Bugatti - 1",
+                "name":"1 шт Bugatti 220",
                 "price":16250.0,
                 "image":"https://static.tildacdn.com/stor6431-3834-4162-b133-653538656133/55102437.jpg",
                 "specifications":{},
@@ -2513,7 +2513,7 @@ const products = [
             },
             {
                 "id":"301064",
-                "name":"Комплект для защиты от протечек HiTE PRO на трубу 1/2 - Profi - 1",
+                "name":"1 шт Profi",
                 "price":15450.0,
                 "image":"https://static.tildacdn.com/stor6530-6464-4333-b036-643565356237/70060083.jpg",
                 "specifications":{},
