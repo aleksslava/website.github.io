@@ -1264,3 +1264,74 @@ input, textarea {
        Если это div, можно добавить отступы */
     /* padding: 5px 0; */
 }
+
+/* --- Стили для поиска --- */
+.search-section {
+    margin-bottom: 15px;
+    padding: 0 8px;
+}
+
+.search-container {
+    position: relative;
+    width: 100%;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px 40px 10px 15px; /* Отступ справа для кнопки очистки */
+    font-size: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background-color: var(--tg-theme-bg-color);
+    color: var(--tg-theme-text-color);
+    box-sizing: border-box;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--tg-theme-link-color);
+}
+
+.clear-search-button {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--tg-theme-hint-color);
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    line-height: 1;
+}
+
+.clear-search-button:hover {
+    color: var(--tg-theme-text-color);
+}
+
+/* Адаптация под мобильные устройства для поиска */
+@media (max-width: 480px) {
+    .search-section {
+        margin-bottom: 12px;
+        padding: 0 4px;
+    }
+
+    .search-input {
+        padding: 8px 35px 8px 12px;
+        font-size: 0.95rem;
+    }
+
+    .clear-search-button {
+        right: 8px;
+        font-size: 18px;
+        width: 20px;
+        height: 20px;
+    }
+}

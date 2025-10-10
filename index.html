@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Мой Магазин</title>
     <!-- Подключение Telegram Web App SDK -->
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js  "></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -21,6 +21,13 @@
         </button>
     </header>
     <main class="main-content">
+        <!-- Секция поиска -->
+        <section class="search-section">
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="Поиск товаров...">
+                <button id="clearSearch" class="clear-search-button" style="display: none;">&times;</button>
+            </div>
+        </section>
         <!-- Секция категорий -->
         <section class="categories-section">
             <h2 class="categories-title">Категории</h2>
@@ -59,7 +66,37 @@
                 </div>
             </div>
 
-                        <!-- --- Выбор типа скидки --- -->
+            <!-- --- Поля, обязательные для КП --- -->
+            <div class="cart-form-section">
+                <label for="recipientPhone">Телефон получателя:</label>
+                <input type="tel" id="recipientPhone" class="cart-input" placeholder="+7 (___) ___-__-__">
+            </div>
+
+            <div class="cart-form-section">
+                <label for="deliveryMethod">Способ доставки:</label>
+                <select id="deliveryMethod" class="cart-select">
+                    <option value="">-- Выберите способ --</option>
+                    <option value="pickup">Самовывоз</option>
+                    <option value="courier">Курьер</option>
+                    <option value="pickup_point">Пункт выдачи Сдэк \ Я. Доставка</option>
+                </select>
+            </div>
+
+            <!-- Поле адреса, изначально скрыто -->
+            <div class="cart-form-section" id="deliveryAddressSection" style="display: none;">
+                <label for="deliveryAddress">Адрес доставки:</label>
+                <input type="text" id="deliveryAddress" class="cart-input" placeholder="Введите адрес">
+                <div id="deliveryAddressNote" class="form-note"></div>
+            </div>
+
+            <!-- Адрес самовывоза, изначально скрыто -->
+            <div class="cart-form-section" id="pickupAddressSection" style="display: none;">
+                <div class="form-note pickup-address-note">
+                    Адрес самовывоза: г. Москва, ул. Берзарина, д.36, стр.10
+                </div>
+            </div>
+
+            <!-- --- Выбор типа скидки --- -->
             <div class="cart-form-section">
                 <label>Выберите тип скидки:</label>
                 <div class="radio-group" id="discountOptions">
@@ -84,35 +121,6 @@
             <!-- Секция полей заказа (изначально скрыта) -->
             <div id="orderFieldsSection" style="display: none;">
                 <div class="cart-form-section">
-                    <label for="recipientPhone">Телефон получателя:</label>
-                    <input type="tel" id="recipientPhone" class="cart-input" placeholder="+7 (___) ___-__-__">
-                </div>
-
-                <div class="cart-form-section">
-                    <label for="deliveryMethod">Способ доставки:</label>
-                    <select id="deliveryMethod" class="cart-select">
-                        <option value="">-- Выберите способ --</option>
-                        <option value="pickup">Самовывоз</option>
-                        <option value="courier">Курьер</option>
-                        <option value="pickup_point">Пункт выдачи Сдэк \ Я. Доставка</option>
-                    </select>
-                </div>
-
-                <!-- Поле адреса, изначально скрыто -->
-                <div class="cart-form-section" id="deliveryAddressSection" style="display: none;">
-                    <label for="deliveryAddress">Адрес доставки:</label>
-                    <input type="text" id="deliveryAddress" class="cart-input" placeholder="Введите адрес">
-                    <div id="deliveryAddressNote" class="form-note"></div>
-                </div>
-
-                <!-- Адрес самовывоза, изначально скрыто -->
-                <div class="cart-form-section" id="pickupAddressSection" style="display: none;">
-                    <div class="form-note pickup-address-note">
-                        Адрес самовывоза: г. Москва, ул. Берзарина, д.36, стр.10
-                    </div>
-                </div>
-
-                <div class="cart-form-section">
                     <label for="paymentMethod">Способ оплаты:</label>
                     <select id="paymentMethod" class="cart-select">
                         <option value="">-- Выберите способ --</option>
@@ -132,7 +140,7 @@
                 <!-- Поля для юридического лица, изначально скрыты -->
                 <div class="cart-form-section" id="legalInfoSection" style="display: none;">
                     <h3 style="margin-bottom: 10px; font-size: 1.1rem;">Данные организации для счета</h3>
-                    
+
                     <label for="organizationInn">ИНН организации:</label>
                     <input type="text" id="organizationInn" class="cart-input" placeholder="Введите ИНН">
 
@@ -160,7 +168,7 @@
             <span class="close-button" id="closeDetailsModal">&times;</span>
             <img id="detailsModalImage" src="" alt="" class="details-modal-image">
             <h2 id="detailsModalTitle"></h2>
-            
+
             <!-- Селектор модификаций (показывается только если их > 1) -->
             <div class="details-form-section" id="details-mod-selector-container" style="display: none;">
                 <label for="details-mod-selector">Модификация:</label>
