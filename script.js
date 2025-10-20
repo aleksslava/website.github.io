@@ -1,6 +1,6 @@
 // --- Инициализация Telegram Web App ---
 let tg = window.Telegram?.WebApp;
-let urlParams = { bonuses: 0, userId: null }; // Объект для хранения параметров из URL
+let urlParams = { bonuses: 0, userId: null, discont: 0 }; // Объект для хранения параметров из URL
 
 if (tg) {
     tg.expand();
@@ -12,17 +12,17 @@ if (tg) {
     console.warn("Telegram Web App SDK не найден. Работаем в обычном режиме.");
 }
 
-// --- Получение бонусов и ID из URL ---
+// --- Получение бонусов, ID и скидки из URL ---
 function getUrlParams() {
     const urlParams = new URLSearchParams(window.location.search);
     const bonusParam = urlParams.get('bonus');
     const idParam = urlParams.get('id');
     const discontParam = urlParams.get('discont'); // Новый параметр
-    
+
     return {
         bonuses: bonusParam ? parseInt(bonusParam, 10) : 0,
         userId: idParam || null, // ID будет строкой или null, если не задан
-         discont: discontParam ? parseFloat(discontParam) : 0 // Парсим как число с плавающей точкой
+        discont: discontParam ? parseFloat(discontParam) : 0 // Парсим как число с плавающей точкой
     };
 }
 
@@ -60,9 +60,8 @@ const categories = [
     { id: 'kran', name: 'Шаровые краны' },
     { id: 'other', name: 'Сопутствующее' },
 ];
-
-// --- Данные товаров с модификациями (без остатков), описанием, изображениями и деталями для модификаций ---
-const products = [
+let products =
+[
     {
         "id":3,
         "name":"Билет на живое обучение в офисе HiTE PRO — 01 ноября",
@@ -4961,12 +4960,12 @@ const products = [
             }
         ]
     }
-];
+]; // Предполагается, что товары будут загружены отдельно
 
 // --- Состояние ---
 let cart = [];
 let currentCategory = 'all';
-let currentSearchQuery = ''; // Новое: для хранения текущего поискового запроса
+let currentSearchQuery = '';
 
 // --- DOM элементы ---
 const categoriesList = document.getElementById('categoriesList');
@@ -4978,9 +4977,11 @@ const closeModal = document.getElementById('closeModal');
 const cartItems = document.getElementById('cartItems');
 const cartTotalPrice = document.getElementById('cartTotalPrice');
 
-// --- Элементы для отображения бонусов ---
+// --- Элементы для отображения бонусов и скидки ---
 const bonusesDisplay = document.getElementById('bonusesDisplay');
 const bonusValue = document.getElementById('bonusValue');
+const discontDisplay = document.getElementById('discontDisplay');
+const discontValue = document.getElementById('discontValue');
 
 // --- Новые DOM элементы для формы корзины ---
 // Переключатель
@@ -5007,6 +5008,23 @@ const organizationInn = document.getElementById('organizationInn');
 const organizationAddress = document.getElementById('organizationAddress');
 const organizationBik = document.getElementById('organizationBik');
 const organizationAccount = document.getElementById('organizationAccount');
+const deliveryAddressContainer = document.getElementById('deliveryAddressContainer');
+const legalInfoContainer = document.getElementById('legalInfoContainer');
+
+// --- НОВЫЕ DOM элементы для чекбокса "Заполнить по прошлому заказу" и контейнеров ---
+const usePreviousOrderCheckbox = document.getElementById('usePreviousOrderCheckbox');
+
+// --- Новые DOM элементы для полей КП ---
+const kpFieldsSection = document.getElementById('kpFieldsSection');
+const kpRecipientPhone = document.getElementById('kpRecipientPhone');
+// --- УДАЛЕНЫ НЕИСПОЛЬЗУЕМЫЕ ЭЛЕМЕНТЫ ДЛЯ КП ---
+// const kpDeliveryMethod = document.getElementById('kpDeliveryMethod');
+// const kpDeliveryAddressSection = document.getElementById('kpDeliveryAddressSection');
+// const kpDeliveryAddress = document.getElementById('kpDeliveryAddress');
+// const kpDeliveryAddressNote = document.getElementById('kpDeliveryAddressNote');
+// const kpPickupAddressSection = document.getElementById('kpPickupAddressSection');
+// const kpDeliveryAddressContainer = document.getElementById('kpDeliveryAddressContainer');
+// --- КОНЕЦ УДАЛЕННЫХ ЭЛЕМЕНТОВ ---
 
 // --- Новые DOM элементы для модального окна описания ---
 const detailsModal = document.getElementById('detailsModal');
@@ -5016,19 +5034,18 @@ const detailsModalTitle = document.getElementById('detailsModalTitle');
 // --- Новые элементы для модального окна деталей ---
 const detailsModSelectorContainer = document.getElementById('details-mod-selector-container');
 const detailsModSelector = document.getElementById('details-mod-selector');
+
 // --- Новые DOM элементы для поиска ---
 const searchInput = document.getElementById('searchInput');
 const clearSearchButton = document.getElementById('clearSearch');
 
 // --- Инициализация ---
 document.addEventListener('DOMContentLoaded', () => {
-    // Получаем параметры из URL (бонусы и ID пользователя)
+    // Получаем параметры из URL (бонусы, ID, скидка)
     urlParams = getUrlParams();
-    // Отображаем бонусы из URL-параметров
-    bonusValue.textContent = urlParams.bonuses.toLocaleString('ru-RU');
     // Отображаем бонусы и скидку из URL-параметров
     bonusValue.textContent = urlParams.bonuses.toLocaleString('ru-RU');
-    discontValue.textContent = urlParams.discont.toLocaleString('ru-RU'); // Отображаем скидку
+    discontValue.textContent = urlParams.discont.toLocaleString('ru-RU');
 
     renderCategories();
     renderProducts();
@@ -5042,6 +5059,13 @@ document.addEventListener('DOMContentLoaded', () => {
     checkoutButton.addEventListener('click', handleCheckout);
     closeDetailsModal.addEventListener('click', closeProductDetailsModal);
 
+    // --- Добавляем обработчики событий для поиска ---
+    searchInput.addEventListener('input', handleSearchInput);
+    clearSearchButton.addEventListener('click', clearSearch);
+
+    // --- Добавляем обработчик события для чекбокса "Заполнить по прошлому заказу" ---
+    usePreviousOrderCheckbox.addEventListener('change', handleUsePreviousOrderChange);
+
     window.addEventListener('click', (event) => {
         if (event.target === detailsModal) {
             closeProductDetailsModal();
@@ -5050,10 +5074,6 @@ document.addEventListener('DOMContentLoaded', () => {
             cartModal.style.display = 'none';
         }
     });
-
-    // --- Добавляем обработчики событий для поиска ---
-    searchInput.addEventListener('input', handleSearchInput);
-    clearSearchButton.addEventListener('click', clearSearch);
 
     // --- Логика переключения вкладок в модальном окне деталей ---
     document.querySelector('.tabs')?.addEventListener('click', (e) => {
@@ -5071,6 +5091,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// --- Обработчик ввода в поле поиска ---
+function handleSearchInput(e) {
+    const query = e.target.value.trim();
+    currentSearchQuery = query.toLowerCase();
+
+    // Показываем/скрываем кнопку очистки
+    clearSearchButton.style.display = query ? 'flex' : 'none';
+
+    // Перерисовываем товары с учетом поиска и категории
+    renderProducts();
+}
+
+// --- Очистка поиска ---
+function clearSearch() {
+    searchInput.value = '';
+    currentSearchQuery = '';
+    clearSearchButton.style.display = 'none';
+    renderProducts();
+}
 
 // --- Простая маска для телефона ---
 function formatPhoneNumber(e) {
@@ -5100,20 +5140,34 @@ function formatPhoneNumber(e) {
 // --- Обработчик изменения способа доставки ---
 function handleDeliveryMethodChange() {
     const selectedMethod = deliveryMethod.value;
+
+    // Всегда скрываем внутренние секции
     deliveryAddressSection.style.display = 'none';
     pickupAddressSection.style.display = 'none';
     deliveryAddressNote.textContent = '';
+
     if (selectedMethod === 'courier' || selectedMethod === 'pickup_point') {
-        deliveryAddressSection.style.display = 'block';
+        // Проверяем, не скрыт ли контейнер из-за чекбокса
+        if (!usePreviousOrderCheckbox.checked) {
+            deliveryAddressContainer.style.display = 'block'; // Показываем контейнер, если чекбокс не отмечен
+        }
+        deliveryAddressSection.style.display = 'block'; // Показываем само поле адреса
         if (selectedMethod === 'pickup_point') {
-            deliveryAddressNote.textContent = 'Введите адрес пункта выдачи СДЭК или Яндекс.';
+            deliveryAddressNote.textContent = 'Введите адрес пункта выдачи Сдек или Яндекс.';
         } else {
             deliveryAddressNote.textContent = '';
         }
         deliveryAddress.placeholder = selectedMethod === 'courier' ? 'Введите адрес доставки' : 'Введите адрес пункта выдачи';
         deliveryAddress.value = '';
     } else if (selectedMethod === 'pickup') {
+        // Проверяем, не скрыт ли контейнер из-за чекбокса
+        if (!usePreviousOrderCheckbox.checked) {
+            deliveryAddressContainer.style.display = 'block'; // Показываем контейнер, если чекбокс не отмечен
+        }
         pickupAddressSection.style.display = 'block';
+    } else {
+        // Если выбран другой способ (например, "Выберите способ"), скрываем контейнер
+        deliveryAddressContainer.style.display = 'none';
     }
 }
 
@@ -5123,14 +5177,20 @@ function handlePaymentMethodChange() {
 
     if (selectedMethod === 'card') {
         cardPaymentNote.style.display = 'block';
+        // Скрываем контейнер с реквизитами, так как это не счет
+        legalInfoContainer.style.display = 'none';
     } else {
         cardPaymentNote.style.display = 'none';
-    }
-
-    if (selectedMethod === 'invoice') {
-        legalInfoSection.style.display = 'block';
-    } else {
-        legalInfoSection.style.display = 'none';
+        if (selectedMethod === 'invoice') {
+            // Проверяем, не скрыт ли контейнер из-за чекбокса
+            if (!usePreviousOrderCheckbox.checked) {
+                legalInfoContainer.style.display = 'block'; // Показываем контейнер, если чекбокс не отмечен
+            }
+            legalInfoSection.style.display = 'block'; // Показываем само поле реквизитов
+        } else {
+            // Если выбран другой способ (например, "Выберите способ"), скрываем контейнер
+            legalInfoContainer.style.display = 'none';
+        }
     }
 }
 
@@ -5139,6 +5199,7 @@ function handleOrderTypeToggleChange() {
     if (orderTypeToggle.checked) {
         // Если переключено в положение "Оформить заказ"
         orderFieldsSection.style.display = 'block';
+        kpFieldsSection.style.display = 'none'; // Скрываем поля КП
         generateKpButton.style.display = 'none';
         checkoutButton.style.display = 'block';
         // Меняем стили меток
@@ -5149,6 +5210,7 @@ function handleOrderTypeToggleChange() {
     } else {
         // Если переключено в положение "Сформировать КП"
         orderFieldsSection.style.display = 'none';
+        kpFieldsSection.style.display = 'block'; // Показываем поля КП
         generateKpButton.style.display = 'block';
         checkoutButton.style.display = 'none';
         // Меняем стили меток
@@ -5157,7 +5219,34 @@ function handleOrderTypeToggleChange() {
         orderLabel.style.fontWeight = 'normal';
         orderLabel.style.color = 'var(--tg-theme-hint-color)';
     }
-    // resetCartFormFields(); // Убираем вызов сброса полей из обработчика
+    resetCartFormFields();
+}
+
+// --- Обработчик изменения чекбокса "Заполнить по прошлому заказу" ---
+function handleUsePreviousOrderChange() {
+    const isChecked = usePreviousOrderCheckbox.checked;
+
+    if (isChecked) {
+        // Если чекбокс отмечен, скрываем поля телефона и адреса
+        recipientPhone.closest('.cart-form-section').style.display = 'none';
+        deliveryAddressContainer.style.display = 'none'; // Скрываем весь контейнер адреса
+
+        // Если выбран способ оплаты "Счет на оплату", скрываем банковские реквизиты
+        if (paymentMethod.value === 'invoice') {
+            legalInfoContainer.style.display = 'none'; // Скрываем весь контейнер реквизитов
+        }
+    } else {
+        // Если чекбокс снят, показываем поля телефона
+        recipientPhone.closest('.cart-form-section').style.display = 'block';
+
+        // Показываем адрес, если он должен быть виден (в зависимости от способа доставки)
+        // Вызываем обработчик доставки, чтобы он сам решил, показывать адрес или нет
+        handleDeliveryMethodChange();
+
+        // Показываем банковские реквизиты, если они должны быть видны (в зависимости от способа оплаты)
+        // Вызываем обработчик оплаты, чтобы он сам решил, показывать реквизиты или нет
+        handlePaymentMethodChange();
+    }
 }
 
 // --- Рендеринг категорий ---
@@ -5183,39 +5272,14 @@ function selectCategory(categoryId) {
     renderProducts();
 }
 
-// --- Обработчик ввода в поле поиска ---
-function handleSearchInput(e) {
-    const query = e.target.value.trim();
-    currentSearchQuery = query.toLowerCase();
-
-    // Показываем/скрываем кнопку очистки
-    clearSearchButton.style.display = query ? 'flex' : 'none';
-
-    // Перерисовываем товары с учетом поиска и категории
-    renderProducts();
-}
-
-// --- Очистка поиска ---
-function clearSearch() {
-    searchInput.value = '';
-    currentSearchQuery = '';
-    clearSearchButton.style.display = 'none';
-    renderProducts();
-}
-
 // --- Рендеринг товаров ---
 function renderProducts() {
     productGrid.innerHTML = '';
 
-    // Фильтрация товаров: сначала по категории, затем по поисковому запросу
     let filteredProducts = products;
-
-    // Фильтр по категории
     if (currentCategory !== 'all') {
-        filteredProducts = filteredProducts.filter(product => product.category === currentCategory);
+        filteredProducts = products.filter(product => product.category === currentCategory);
     }
-
-    // Фильтр по поисковому запросу (по названию товара)
     if (currentSearchQuery) {
         filteredProducts = filteredProducts.filter(product =>
             product.name.toLowerCase().includes(currentSearchQuery)
@@ -5223,7 +5287,7 @@ function renderProducts() {
     }
 
     if (filteredProducts.length === 0) {
-        productGrid.innerHTML = '<p class="no-products-message">Товары в этой категории не найдены.</p>';
+        productGrid.innerHTML = '<p class="no-products-message">Товары не найдены.</p>';
         return;
     }
 
@@ -5232,8 +5296,6 @@ function renderProducts() {
         productCard.className = 'product-card';
         productCard.dataset.productId = product.id;
 
-        // Генерация HTML для выбора модификации
-        // Отображаем выбор модификации только если их больше одной
         let modificationsHtml = '';
         if (product.modifications && product.modifications.length > 1) {
             modificationsHtml = `
@@ -5248,23 +5310,12 @@ function renderProducts() {
             `;
         }
 
-        // Определяем начальное изображение: модификация (даже если она одна) или основное изображение
-        let initialImageSrc = product.image; // По умолчанию основное изображение
-        let initialImageAlt = product.name;  // По умолчанию основное имя
-        
-        if (product.modifications && product.modifications.length > 0) {
-            // Если есть модификации, используем изображение первой модификации
-            initialImageSrc = product.modifications[0].image;
-            initialImageAlt = `${product.name} - ${product.modifications[0].name}`;
-        }
-
         const detailsButtonHtml = `<button class="details-button" data-id="${product.id}">Подробнее</button>`;
 
         productCard.innerHTML = `
-            <img src="${initialImageSrc}" alt="${initialImageAlt}" class="product-image">
+            <img src="${product.image}" alt="${product.name}" class="product-image">
             <div class="product-info">
                 <div class="product-name">${product.name}</div>
-                <!-- Цена будет обновляться скриптом -->
                 <div class="product-price" id="price-${product.id}">${product.price.toLocaleString('ru-RU')} ₽</div>
                 ${modificationsHtml}
                 <div class="button-container" id="button-container-${product.id}">
@@ -5274,19 +5325,13 @@ function renderProducts() {
         `;
         productGrid.appendChild(productCard);
 
-        // Добавляем обработчик изменения модификации только если их больше одной
         if (product.modifications && product.modifications.length > 1) {
             const modSelect = document.getElementById(`mod-select-${product.id}`);
             modSelect.addEventListener('change', () => {
                 updateProductPrice(product.id);
                 updateProductButton(product.id);
             });
-            // Инициализируем цену и изображение для первой модификации
             updateProductPrice(product.id);
-        } else if (product.modifications && product.modifications.length === 1) {
-             // Если модификация одна, все равно нужно инициализировать правильное изображение и цену
-             // updateProductPrice обновит изображение на основе первой (и единственной) модификации
-             updateProductPrice(product.id);
         }
 
         const detailsButton = productCard.querySelector('.details-button');
@@ -5301,31 +5346,19 @@ function renderProducts() {
 // --- Обновление цены и изображения товара в зависимости от модификации ---
 function updateProductPrice(productId) {
     const product = products.find(p => p.id == productId);
-    if (!product || !product.modifications || product.modifications.length === 0) {
-        // Если модификаций нет, ничего не делаем, изображение и цена остаются базовыми
-        return;
-    }
+    if (!product || !product.modifications || product.modifications.length === 0) return;
 
-    let selectedMod = null;
-    
-    // Проверяем, есть ли селект (т.е. больше одной модификации)
     const selectElement = document.getElementById(`mod-select-${productId}`);
-    if (selectElement) {
-        // Если селект есть, получаем выбранную модификацию
-        const selectedModId = selectElement.value;
-        selectedMod = product.modifications.find(mod => mod.id === selectedModId);
-    } else {
-        // Если селекта нет (одна модификация), используем первую
-        selectedMod = product.modifications[0];
-    }
+    if (!selectElement) return;
 
-    // Обновляем цену, если модификация найдена
+    const selectedModId = selectElement.value;
+    const selectedMod = product.modifications.find(mod => mod.id === selectedModId);
+
     const priceElement = document.getElementById(`price-${productId}`);
     if (priceElement && selectedMod) {
         priceElement.textContent = `${selectedMod.price.toLocaleString('ru-RU')} ₽`;
     }
 
-    // Обновляем изображение, если модификация найдена
     const imageElement = document.querySelector(`.product-card[data-product-id="${productId}"] .product-image`);
     if (imageElement && selectedMod) {
         imageElement.src = selectedMod.image;
@@ -5377,8 +5410,8 @@ function renderQuantityOrAddButton(container, productId, modificationId, quantit
         addLocalButtonListeners(productId, modificationId);
     } else {
         container.innerHTML = `
-            <button class="add-to-cart-button" 
-                    data-id="${productId}" 
+            <button class="add-to-cart-button"
+                    data-id="${productId}"
                     data-mod-id="${modificationId || ''}">
                 В корзину
             </button>
@@ -5420,6 +5453,11 @@ function updateAllProductButtons() {
     if (currentCategory !== 'all') {
         filteredProducts = products.filter(product => product.category === currentCategory);
     }
+    if (currentSearchQuery) {
+        filteredProducts = filteredProducts.filter(product =>
+            product.name.toLowerCase().includes(currentSearchQuery)
+        );
+    }
 
     filteredProducts.forEach(product => {
         updateProductButton(product.id);
@@ -5439,16 +5477,14 @@ function addToCart(productId, modificationId = null) {
         cart[existingItemIndex].quantity += 1;
     } else {
         const selectedMod = modificationId ? product.modifications.find(m => m.id === modificationId) : null;
-        // Получаем изображение модификации или основное изображение товара
         const itemImage = selectedMod ? selectedMod.image : product.image;
-        
-        // Создаем новый элемент корзины с информацией о модификации
+
         const newItem = {
             productId: product.id,
             modificationId: modificationId,
             name: product.name,
             price: selectedMod ? selectedMod.price : product.price,
-            image: itemImage, // Используем изображение модификации
+            image: itemImage,
             quantity: 1,
             modificationName: selectedMod ? selectedMod.name : null
         };
@@ -5465,10 +5501,10 @@ function removeFromCart(productId, modificationId = null) {
     cart = cart.filter(item =>
         !(item.productId == productId && item.modificationId === modificationId)
     );
-    
+
     if (cart.length !== initialLength) {
         updateCartUI();
-        updateAllProductButtons(); 
+        updateAllProductButtons();
     }
 }
 
@@ -5476,7 +5512,7 @@ function changeQuantity(productId, modificationId, amount) {
     const itemIndex = cart.findIndex(item =>
         item.productId == productId && item.modificationId === modificationId
     );
-    
+
     if (itemIndex !== -1) {
         const item = cart[itemIndex];
         const newQuantity = item.quantity + amount;
@@ -5586,30 +5622,13 @@ closeModal.addEventListener('click', (e) => {
 
 // --- Сброс формы корзины ---
 function resetCartForm() {
-    // Устанавливаем переключатель в положение "Оформить заказ" (true)
-    orderTypeToggle.checked = true;
-    // Вызываем обработчик, чтобы обновить видимость полей и кнопок
+    orderTypeToggle.checked = false;
     handleOrderTypeToggleChange();
     resetCartFormFields();
-    // Сброс радио-кнопок на значение по умолчанию
-    const defaultOption = document.querySelector('input[name="discountType"][value="discount_only"]');
-    if (defaultOption) defaultOption.checked = true;
-}
-
-function resetCartFormFields() {
-    recipientPhone.value = '';
-    deliveryMethod.value = '';
-    deliveryAddress.value = '';
-    deliveryAddressNote.textContent = '';
-    pickupAddressSection.style.display = 'none';
-    deliveryAddressSection.style.display = 'none';
-    paymentMethod.value = '';
-    cardPaymentNote.style.display = 'none';
-    legalInfoSection.style.display = 'none';
-    organizationInn.value = '';
-    organizationAddress.value = '';
-    organizationBik.value = '';
-    organizationAccount.value = '';
+    document.querySelector('input[name="discountType"][value="discount_only"]').checked = true;
+    searchInput.value = '';
+    currentSearchQuery = '';
+    clearSearchButton.style.display = 'none';
 }
 
 // --- Вспомогательная функция: получение выбранного типа скидки ---
@@ -5625,146 +5644,255 @@ function getSelectedDiscountType() {
     return selectedValue;
 }
 
-// --- Валидация формы корзины ---
-function validateCartForm(isKp = false) {
-    // Валидация теперь нужна и для КП
-    // if (isKp) return true; // Убираем эту строку
-    let isValid = true;
-    let errorMessage = '';
-    const phone = recipientPhone.value.trim();
-    const delivery = deliveryMethod.value;
-    // Убираем условие "if (!isKp)" перед проверками
-    if (!phone) {
-        isValid = false;
-        errorMessage += 'Укажите телефон получателя.\n';
-    } else if (phone.replace(/\D/g, '').length !== 11 || !phone.startsWith('+7')) {
-         isValid = false;
-         errorMessage += 'Введите корректный номер телефона (+7 ...).\n';
-    }
-    if (!delivery) {
-        isValid = false;
-        errorMessage += 'Выберите способ доставки.\n';
-    } else if ((delivery === 'courier' || delivery === 'pickup_point') && !deliveryAddress.value.trim()) {
-        // Проверяем адрес доставки или пункт выдачи, если выбраны соответствующие способы
-        isValid = false;
-        errorMessage += 'Укажите адрес доставки или пункт выдачи.\n';
-    }
-
-    // Остальные проверки (оплата, юр. данные) остаются только для заказа (isKp = false)
-    if (!isKp) { // Добавляем условие для остальных полей
-        const payment = paymentMethod.value;
-        if (!payment) {
-            isValid = false;
-            errorMessage += 'Выберите способ оплаты.\n';
-        }
-        if (payment === 'invoice') {
-            const inn = organizationInn.value.trim();
-            const address = organizationAddress.value.trim();
-            const bik = organizationBik.value.trim();
-            const account = organizationAccount.value.trim();
-            if (!inn) {
-                isValid = false;
-                errorMessage += 'Укажите ИНН организации.\n';
-            }
-            if (!address) {
-                isValid = false;
-                errorMessage += 'Укажите юридический адрес организации.\n';
-            }
-            if (!bik) {
-                isValid = false;
-                errorMessage += 'Укажите БИК банка.\n';
-            }
-            if (!account) {
-                isValid = false;
-                errorMessage += 'Укажите расчетный счет.\n';
-            }
-        }
-    }
-
-    if (!isValid) {
-        alert('Пожалуйста, исправьте следующие ошибки:\n' + errorMessage);
-    }
-    return isValid;
+// --- Вспомогательная функция: получение выбранного типа скидки ---
+function getSelectedDiscountType() {
+    return document.querySelector('input[name="discountType"]:checked')?.value || 'discount_only';
 }
 
 // --- Валидация формы корзины ---
 function validateCartForm(isKp = false) {
     let isValid = true;
     let errorMessage = '';
-    const phone = recipientPhone.value.trim();
-    const delivery = deliveryMethod.value;
 
-    // Проверки для КП и Заказа (телефон и доставка)
-    if (!phone) {
-        isValid = false;
-        errorMessage += 'Укажите телефон получателя.\n';
-    } else if (phone.replace(/\D/g, '').length !== 11 || !phone.startsWith('+7')) {
-         isValid = false;
-         errorMessage += 'Введите корректный номер телефона (+7 ...).\n';
-    }
-    if (!delivery) {
-        isValid = false;
-        errorMessage += 'Выберите способ доставки.\n';
-    } else if ((delivery === 'courier' || delivery === 'pickup_point') && !deliveryAddress.value.trim()) {
-        // Проверяем адрес доставки или пункт выдачи, если выбраны соответствующие способы
-        isValid = false;
-        errorMessage += 'Укажите адрес доставки или пункт выдачи.\n';
-    }
+    // --- Проверки для КП ---
+    if (isKp) {
+        // Для КП валидируем ТОЛЬКО его собственные поля (теперь только телефон)
+        const phone = kpRecipientPhone.value.trim();
 
-    // Проверки только для заказа (оплата, юр. данные)
-    if (!isKp) {
+        if (!phone) {
+            isValid = false;
+            errorMessage += '\n- Укажите телефон получателя (для КП).';
+        } else if (phone.replace(/\D/g, '').length !== 11 || !phone.startsWith('+7')) {
+             isValid = false;
+             errorMessage += '\n- Введите корректный номер телефона (+7 ...) (для КП).';
+        }
+        // Больше никаких проверок для КП не требуется
+
+    } else {
+        // --- Проверки для Заказа ---
+        // Определяем, используется ли "прошлый заказ"
+        const usePrevious = usePreviousOrderCheckbox.checked;
+
+        // Проверки телефона и адреса (если НЕ используется "прошлый заказ")
+        if (!usePrevious) {
+            const phone = recipientPhone.value.trim();
+            if (!phone) {
+                isValid = false;
+                errorMessage += '\n- Укажите телефон получателя.';
+            } else if (phone.replace(/\D/g, '').length !== 11 || !phone.startsWith('+7')) {
+                 isValid = false;
+                 errorMessage += '\n- Введите корректный номер телефона (+7 ...).';
+            }
+
+            const delivery = deliveryMethod.value;
+            const address = deliveryAddress.value.trim();
+
+            if (!delivery) {
+                isValid = false;
+                errorMessage += '\n- Выберите способ доставки.';
+            } else if ((delivery === 'courier' || delivery === 'pickup_point') && !address) {
+                isValid = false;
+                errorMessage += '\n- Укажите адрес доставки или пункт выдачи.';
+            }
+        } // Конец проверок, зависящих от "прошлого заказа"
+
+        // Проверки оплаты и юр. данных (всегда, если выбран способ оплаты)
         const payment = paymentMethod.value;
+
         if (!payment) {
             isValid = false;
-            errorMessage += 'Выберите способ оплаты.\n';
+            errorMessage += '\n- Выберите способ оплаты.';
         }
-        if (payment === 'invoice') {
+
+        // Проверки юр. данных (если НЕ используется "прошлый заказ" И выбран счет)
+        if (!usePrevious && payment === 'invoice') {
             const inn = organizationInn.value.trim();
             const address = organizationAddress.value.trim();
             const bik = organizationBik.value.trim();
             const account = organizationAccount.value.trim();
+
             if (!inn) {
                 isValid = false;
-                errorMessage += 'Укажите ИНН организации.\n';
+                errorMessage += '\n- Укажите ИНН организации.';
             }
             if (!address) {
                 isValid = false;
-                errorMessage += 'Укажите юридический адрес организации.\n';
+                errorMessage += '\n- Укажите юридический адрес организации.';
             }
             if (!bik) {
                 isValid = false;
-                errorMessage += 'Укажите БИК банка.\n';
+                errorMessage += '\n- Укажите БИК банка.';
             }
             if (!account) {
                 isValid = false;
-                errorMessage += 'Укажите расчетный счет.\n';
+                errorMessage += '\n- Укажите расчетный счет.';
             }
         }
     }
 
     if (!isValid) {
-        alert('Пожалуйста, исправьте следующие ошибки:\n' + errorMessage);
+        alert('Пожалуйста, исправьте следующие ошибки:' + errorMessage);
     }
+
+    return isValid;
+}
+
+
+function resetCartFormFields() {
+    // Сброс чекбокса "прошлый заказ"
+    usePreviousOrderCheckbox.checked = false;
+    handleUsePreviousOrderChange(); // Это вызовет показ полей, если они были скрыты
+
+    // Сброс общих полей
+    [recipientPhone, deliveryAddress, kpRecipientPhone,
+     organizationInn, organizationAddress, organizationBik, organizationAccount]
+        .forEach(el => el.value = '');
+
+    [deliveryAddressNote].forEach(el => el.textContent = '');
+
+    [pickupAddressSection, cardPaymentNote, legalInfoSection,
+     deliveryAddressContainer, legalInfoContainer]
+        .forEach(el => el.style.display = 'none');
+
+    [deliveryMethod, paymentMethod]
+        .forEach(el => el.value = '');
+
+    // Сброс полей КП
+    kpRecipientPhone.value = '';
+
+
+    // Сброс чекбокса "прошлый заказ" и показ полей
+    usePreviousOrderCheckbox.checked = false;
+    recipientPhone.closest('.cart-form-section').style.display = 'block'; // Показать телефон по умолчанию
+    handleDeliveryMethodChange(); // Сбросить видимость адреса заказа
+    handlePaymentMethodChange(); // Сбросить видимость реквизитов заказа
+
+}
+
+// --- Вспомогательная функция: получение выбранного типа скидки ---
+if (orderFieldsSection.style.display !== 'none') {
+        function getSelectedDiscountType() {
+    return document.querySelector('input[name="discountType"]:checked')?.value || 'discount_only';}
+    }
+
+
+// --- Валидация формы корзины ---
+// isKpMode = true означает валидацию для КП
+// isKpMode = false означает валидацию для Заказа
+function validateCartForm(isKpMode = false) {
+    let isValid = true;
+    let errorMessage = '';
+
+    // --- Проверки для КП ---
+    if (isKpMode) {
+        // Для КП валидируем ТОЛЬКО телефон покупателя
+        const phone = kpRecipientPhone.value.trim();
+
+        if (!phone) {
+            isValid = false;
+            errorMessage += '\n- Укажите телефон покупателя.';
+        } else if (phone.replace(/\D/g, '').length !== 11 || !phone.startsWith('+7')) {
+             isValid = false;
+             errorMessage += '\n- Введите корректный номер телефона (+7 ...) (для КП).';
+        }
+        // Больше никаких проверок для КП не требуется
+    } else {
+        // --- Проверки для Заказа ---
+        // Определяем, используется ли "прошлый заказ"
+        const usePrevious = usePreviousOrderCheckbox.checked;
+
+        // Проверки телефона и адреса (если НЕ используется "прошлый заказ")
+        if (!usePrevious) {
+            const phone = recipientPhone.value.trim();
+            if (!phone) {
+                isValid = false;
+                errorMessage += '\n- Укажите телефон получателя.';
+            } else if (phone.replace(/\D/g, '').length !== 11 || !phone.startsWith('+7')) {
+                 isValid = false;
+                 errorMessage += '\n- Введите корректный номер телефона (+7 ...).';
+            }
+
+            const delivery = deliveryMethod.value;
+            const address = deliveryAddress.value.trim();
+
+            if (!delivery) {
+                isValid = false;
+                errorMessage += '\n- Выберите способ доставки.';
+            } else if ((delivery === 'courier' || delivery === 'pickup_point') && !address) {
+                isValid = false;
+                errorMessage += '\n- Укажите адрес доставки или пункт выдачи.';
+            }
+        } // Конец проверок, зависящих от "прошлого заказа"
+
+        // Проверки оплаты и юр. данных (всегда, если выбран способ оплаты)
+        const payment = paymentMethod.value;
+
+        if (!payment) {
+            isValid = false;
+            errorMessage += '\n- Выберите способ оплаты.';
+        }
+
+        // Проверки юр. данных (если НЕ используется "прошлый заказ" И выбран счет)
+        if (!usePrevious && payment === 'invoice') {
+            const inn = organizationInn.value.trim();
+            const address = organizationAddress.value.trim();
+            const bik = organizationBik.value.trim();
+            const account = organizationAccount.value.trim();
+
+            if (!inn) {
+                isValid = false;
+                errorMessage += '\n- Укажите ИНН организации.';
+            }
+            if (!address) {
+                isValid = false;
+                errorMessage += '\n- Укажите юридический адрес организации.';
+            }
+            if (!bik) {
+                isValid = false;
+                errorMessage += '\n- Укажите БИК банка.';
+            }
+            if (!account) {
+                isValid = false;
+                errorMessage += '\n- Укажите расчетный счет.';
+            }
+        }
+    }
+
+    if (!isValid) {
+        alert('Пожалуйста, исправьте следующие ошибки:' + errorMessage);
+    }
+
     return isValid;
 }
 
 // --- Обработчик кнопки "Сформировать КП" ---
 function handleGenerateKp(e) {
     e.preventDefault();
+
     if (cart.length === 0) {
         alert('Корзина пуста!');
         return;
     }
-    // Теперь валидация требуется и для КП
-    if (!validateCartForm(true)) { // Передаем true, чтобы валидация знала, что это КП
-        return; // Выходим, если валидация не пройдена
+
+    if (!validateCartForm(true)) return;
+
+    // --- Вспомогательная функция: получение выбранного типа скидки ---
+    function getSelectedDiscountType() {
+        let selectedValue = 'discount_only';
+        return selectedValue;
     }
+
     // Подготавливаем данные для отправки
     const kpPayload = {
         type: "commercial_offer", // Тип запроса
         bonuses: urlParams.bonuses, // Бонусы из URL
         userId: urlParams.userId,   // ID пользователя из URL
+        discont: urlParams.discont, // Скидка из URL
         discountType: getSelectedDiscountType(), // Выбранный тип скидки
+        // --- НОВОЕ: Только телефон покупателя для КП ---
+        phone: kpRecipientPhone.value,
+        // deliveryMethod, deliveryAddress, pickupAddress удалены для КП
+        // --- КОНЕЦ НОВОГО ---
         items: cart.map(item => ({
             productId: item.productId,
             modificationId: item.modificationId,
@@ -5776,15 +5904,12 @@ function handleGenerateKp(e) {
             image: item.image // Добавляем изображение
         })),
         total: getCartTotal(),
-        itemCount: getCartItemCount(),
-        // Добавляем информацию из формы в КП
-        phone: recipientPhone.value,
-        deliveryMethod: deliveryMethod.options[deliveryMethod.selectedIndex].text,
-        deliveryAddress: (deliveryMethod.value === 'courier' || deliveryMethod.value === 'pickup_point') ? deliveryAddress.value : '',
-        pickupAddress: deliveryMethod.value === 'pickup' ? 'г. Москва, ул. Берзарина, д.36, стр.10' : ''
+        itemCount: getCartItemCount()
     };
+
     // Отправляем данные в Telegram бот
     sendToTelegramBot(kpPayload);
+
     // Для демонстрации также показываем alert
     let itemsList = "Товары в коммерческом предложении:\n";
     kpPayload.items.forEach(item => {
@@ -5797,26 +5922,23 @@ function handleGenerateKp(e) {
     let kpSummary = `${itemsList}\n---\n`;
     kpSummary += `Итого: ${kpPayload.itemCount} товар(ов) на сумму ${kpPayload.total.toLocaleString('ru-RU')} ₽\n`;
     kpSummary += `Ваши бонусы: ${kpPayload.bonuses.toLocaleString('ru-RU')}\n`;
+    kpSummary += `Скидка партнёра: ${kpPayload.discont.toLocaleString('ru-RU')}%\n`;
     if (kpPayload.userId) {
         kpSummary += `ID пользователя: ${kpPayload.userId}\n`;
     }
     kpSummary += `Тип скидки: ${kpPayload.discountType}\n`;
-    kpSummary += `Телефон получателя: ${kpPayload.phone}\n`;
-    kpSummary += `Способ доставки: ${kpPayload.deliveryMethod}\n`;
-    if (kpPayload.deliveryAddress) {
-        kpSummary += `Адрес: ${kpPayload.deliveryAddress}\n`;
-    }
-    if (kpPayload.pickupAddress) {
-        kpSummary += `Адрес самовывоза: ${kpPayload.pickupAddress}\n`;
-    }
+    // --- НОВОЕ: Добавляем информацию из КП ---
+    kpSummary += `\nТелефон покупателя: ${kpPayload.customerPhone}\n`;
+    kpSummary += "\nБот отправит КП с розничными ценами.\n";
+    // --- КОНЕЦ НОВОГО ---
     kpSummary += "\nКоммерческое предложение сформировано и отправлено в бот!";
-}
 
+}
 
 // --- Обработчик кнопки "Оформить заказ" ---
 function handleCheckout(e) {
     e.preventDefault();
-    
+
     if (cart.length === 0) {
         alert('Корзина пуста!');
         return;
@@ -5832,6 +5954,7 @@ function handleCheckout(e) {
         type: "order", // Тип запроса
         bonuses: urlParams.bonuses, // Бонусы из URL
         userId: urlParams.userId,   // ID пользователя из URL
+        discont: urlParams.discont, // Скидка из URL
         discountType: getSelectedDiscountType(), // Выбранный тип скидки
         items: cart.map(item => ({
             productId: item.productId,
@@ -5859,7 +5982,7 @@ function handleCheckout(e) {
 
     // Отправляем данные в Telegram бот
     sendToTelegramBot(orderPayload);
-    
+
     // Для демонстрации также показываем alert
     let itemsList = "Товары в заказе:\n";
     orderPayload.items.forEach(item => {
@@ -5869,10 +5992,11 @@ function handleCheckout(e) {
         }
         itemsList += `- ${displayName} x ${item.quantity} = ${item.total.toLocaleString('ru-RU')} ₽\n`;
     });
-    
+
     let orderSummary = `${itemsList}\n---\n`;
     orderSummary += `Итого: ${orderPayload.itemCount} товар(ов) на сумму ${orderPayload.total.toLocaleString('ru-RU')} ₽\n`;
     orderSummary += `Ваши бонусы: ${orderPayload.bonuses.toLocaleString('ru-RU')}\n`;
+    orderSummary += `Скидка партнёра: ${orderPayload.discont.toLocaleString('ru-RU')}%\n`;
     if (orderPayload.userId) {
         orderSummary += `ID пользователя: ${orderPayload.userId}\n`;
     }
@@ -5896,9 +6020,9 @@ function handleCheckout(e) {
         orderSummary += `БИК: ${orderPayload.organizationBik}\n`;
         orderSummary += `Расчетный счет: ${orderPayload.organizationAccount}\n`;
     }
-    orderSummary += "\nЗаказ оформлен и отправлен в бот!";
+    orderSummary += "\nЗаказ оформлен и отправлен менеджеру!";
+    ;
 
-    
     // Очищаем корзину и форму
     cart = [];
     updateCartUI();
@@ -5943,7 +6067,7 @@ function openProductDetailsModal(productId) {
             detailsModSelector.appendChild(option);
         });
         detailsModSelectorContainer.style.display = 'block';
-        
+
         // Добавляем обработчик события изменения
         detailsModSelector.onchange = () => {
             const selectedModId = detailsModSelector.value;

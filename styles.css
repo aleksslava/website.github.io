@@ -1335,3 +1335,89 @@ input, textarea {
         height: 20px;
     }
 }
+
+/* --- Стили для чекбоксов --- */
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--tg-theme-text-color);
+    position: relative;
+    padding-left: 30px; /* Место для кастомного чекбокса */
+    user-select: none; /* Запрет выделения текста */
+    margin-bottom: 0; /* Убираем нижний отступ у лейбла */
+}
+
+/* Скрываем оригинальный чекбокс */
+.checkbox-label input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Кастомный квадратик для чекбокса */
+.checkbox-custom {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 20px;
+    width: 20px;
+    background-color: var(--tg-theme-bg-color);
+    border: 1px solid var(--color-border);
+    border-radius: 4px; /* Немного скругленные углы */
+    transition: all 0.2s ease;
+}
+
+/* Галочка внутри при выборе */
+.checkbox-custom::after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 7px;
+    top: 3px;
+    width: 6px;
+    height: 10px;
+    border: solid var(--tg-theme-button-color);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* При наведении */
+.checkbox-label:hover input ~ .checkbox-custom {
+    border-color: var(--tg-theme-link-color);
+}
+
+/* При выборе */
+.checkbox-label input:checked ~ .checkbox-custom {
+    background-color: var(--tg-theme-bg-color);
+    border-color: var(--tg-theme-button-color);
+}
+
+.checkbox-label input:checked ~ .checkbox-custom::after {
+    display: block;
+}
+
+/* Адаптация под мобильные устройства для чекбоксов */
+@media (max-width: 480px) {
+    .checkbox-label {
+        font-size: 0.9rem;
+        padding-left: 28px;
+    }
+
+    .checkbox-custom {
+        height: 18px;
+        width: 18px;
+    }
+
+    .checkbox-custom::after {
+        left: 6px;
+        top: 2px;
+        width: 5px;
+        height: 9px;
+    }
+}
