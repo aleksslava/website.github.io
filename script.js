@@ -163,7 +163,7 @@ let products =
         "modifications":[
             {
                 "id":"296440",
-                "name":"Белый с датчиком Smart Water",
+                "name":"Белый выкл с датчиком Smart Water",
                 "price":9980.0,
                 "image":"https://static.tildacdn.com/stor3962-3036-4835-a135-313733316161/41887660.png",
                 "specifications":{
@@ -178,7 +178,7 @@ let products =
             },
             {
                 "id":"296442",
-                "name":"Бежевый с датчиком Smart Water",
+                "name":"Бежевый выкл  с датчиком Smart Water",
                 "price":9980.0,
                 "image":"https://static.tildacdn.com/stor3962-3036-4835-a135-313733316161/41887660.png",
                 "specifications":{
@@ -193,7 +193,7 @@ let products =
             },
             {
                 "id":"296720",
-                "name":"Белый с датчиком Smart Air",
+                "name":"Белый выкл  с датчиком Smart Air",
                 "price":9980.0,
                 "image":"https://static.tildacdn.com/stor3962-3036-4835-a135-313733316161/41887660.png",
                 "specifications":{
@@ -208,7 +208,7 @@ let products =
             },
             {
                 "id":"296714",
-                "name":"Бежевый с датчиком Smart Air",
+                "name":"Бежевый выкл  с датчиком Smart Air",
                 "price":9980.0,
                 "image":"https://static.tildacdn.com/stor3962-3036-4835-a135-313733316161/41887660.png",
                 "specifications":{
@@ -223,7 +223,7 @@ let products =
             },
             {
                 "id":"296724",
-                "name":"Белый с датчиком Smart Checker",
+                "name":"Белый выкл  с датчиком Smart Checker",
                 "price":9980.0,
                 "image":"https://static.tildacdn.com/stor3962-3036-4835-a135-313733316161/41887660.png",
                 "specifications":{
@@ -238,7 +238,7 @@ let products =
             },
             {
                 "id":"296718",
-                "name":"Бежевый с датчиком Smart Checker",
+                "name":"Бежевый выкл с датчиком Smart Checker",
                 "price":9980.0,
                 "image":"https://static.tildacdn.com/stor3962-3036-4835-a135-313733316161/41887660.png",
                 "specifications":{
@@ -253,7 +253,7 @@ let products =
             },
             {
                 "id":"296722",
-                "name":"Белый с датчиком Smart Motion",
+                "name":"Белый выкл  с датчиком Smart Motion",
                 "price":9980.0,
                 "image":"https://static.tildacdn.com/stor3962-3036-4835-a135-313733316161/41887660.png",
                 "specifications":{
@@ -268,7 +268,7 @@ let products =
             },
             {
                 "id":"296716",
-                "name":"Бежевый с датчиком Smart Motion",
+                "name":"Бежевый выкл  с датчиком Smart Motion",
                 "price":9980.0,
                 "image":"https://static.tildacdn.com/stor3962-3036-4835-a135-313733316161/41887660.png",
                 "specifications":{
