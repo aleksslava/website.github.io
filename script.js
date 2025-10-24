@@ -5956,6 +5956,7 @@ function handleCheckout(e) {
         userId: urlParams.userId,   // ID пользователя из URL
         discont: urlParams.discont, // Скидка из URL
         discountType: getSelectedDiscountType(), // Выбранный тип скидки
+        usePreviousOrder: usePreviousOrderCheckbox.checked, // Значение чекбокса заполнить по прошлому заказу
         items: cart.map(item => ({
             productId: item.productId,
             modificationId: item.modificationId,
