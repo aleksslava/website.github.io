@@ -5945,9 +5945,10 @@ function handleGenerateKp(e) {
         userId: urlParams.userId,   // ID пользователя из URL
         discont: urlParams.discont, // Скидка из URL
         discountType: getSelectedDiscountType(), // Выбранный тип скидки
+        HelpManagerNeed: HelpManagerNeed.checked,
         // --- НОВОЕ: Только телефон покупателя для КП ---
         phone: kpRecipientPhone.value,
-        // deliveryMethod, deliveryAddress, pickupAddress удалены для КП
+
         // --- КОНЕЦ НОВОГО ---
         items: cart.map(item => ({
             productId: item.productId,
