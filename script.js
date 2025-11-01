@@ -286,7 +286,7 @@ let products = [
     },
     {
         "id":80,
-        "name":"Сервер умного дома DIN-Gateway",
+        "name":"DIN-Gateway",
         "price":10980.0,
         "image":"https://static.tildacdn.com/stor3339-3961-4332-b035-343761386533/78041260.png",
         "category":"server",
@@ -312,7 +312,7 @@ let products = [
     },
     {
         "id":81,
-        "name":"Блок управления DIN-4.RELAY",
+        "name":"DIN-4.RELAY",
         "price":9980.0,
         "image":"https://static.tildacdn.com/stor6133-6231-4230-a433-653462396132/28820715.png",
         "category":"relay",
