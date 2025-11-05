@@ -295,7 +295,7 @@ let products = [
             {
                 "id":"312771",
                 "name":"DIN-Gateway",
-                "price":9980.0,
+                "price":10980.0,
                 "image":"https://static.tildacdn.com/stor3339-3961-4332-b035-343761386533/78041260.png",
                 "specifications":{
                     "Варианты подключения к интернету":"WiFi 2.4, RJ-45, USB 3G/4G hilink",
