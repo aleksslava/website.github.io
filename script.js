@@ -5207,11 +5207,11 @@ function handleDeliveryMethodChange() {
         }
         deliveryAddressSection.style.display = 'block'; // Показываем само поле адреса
         if (selectedMethod === 'pickup_point') {
-            deliveryAddressNote.textContent = 'Введите адрес пункта выдачи Сдек или Яндекс.';
+            deliveryAddressNote.textContent = 'Введите адрес пункта выдачи Сдек или Яндекс вместе с городом.';
         } else {
             deliveryAddressNote.textContent = '';
         }
-        deliveryAddress.placeholder = selectedMethod === 'courier' ? 'Введите адрес доставки' : 'Введите адрес пункта выдачи';
+        deliveryAddress.placeholder = selectedMethod === 'courier' ? 'Введите адрес доставки с указанием города' : 'Введите адрес пункта выдач с указанием города';
         deliveryAddress.value = '';
     } else if (selectedMethod === 'pickup') {
         // Проверяем, не скрыт ли контейнер из-за чекбокса
