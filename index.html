@@ -89,6 +89,14 @@
 
             <!-- Секция полей заказа (изначально скрыта) -->
             <div id="orderFieldsSection" style="display: none;">
+                <!-- --- НОВОЕ: Чекбокс "Заполнить по прошлому заказу" --- -->
+                <div class="cart-form-section">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="usePreviousOrderCheckbox">
+                    <span class="checkbox-custom"></span>
+                    Заполнить поля по прошлому заказу!
+                </label>
+                </div>
 
                 <!-- --- Выбор типа скидки --- -->
                 <div class="cart-form-section">
@@ -112,15 +120,8 @@
                     </div>
                 </div>
 
-                <!-- --- НОВОЕ: Чекбокс "Заполнить по прошлому заказу" --- -->
-                <div class="cart-form-section">
-                    <label class="checkbox-label">
-                        <input type="checkbox" id="usePreviousOrderCheckbox">
-                        <span class="checkbox-custom"></span>
-                        Заполнить по прошлому заказу
-                    </label>
-                </div>
-                <!-- --- КОНЕЦ НОВОГО --- -->
+
+
 
                 <div class="cart-form-section">
                     <label for="recipientPhone">Телефон получателя:</label>
