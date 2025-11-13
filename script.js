@@ -5019,8 +5019,8 @@ const discontValue = document.getElementById('discontValue');
 // --- Новые DOM элементы для формы корзины ---
 // Переключатель
 const orderTypeToggle = document.getElementById('orderTypeToggle');
-const kpLabel = document.getElementById('kpLabel');
-const orderLabel = document.getElementById('orderLabel');
+//const kpLabel = document.getElementById('kpLabel');
+//const orderLabel = document.getElementById('orderLabel');
 // Секция полей заказа
 const orderFieldsSection = document.getElementById('orderFieldsSection');
 // Кнопки
@@ -5050,14 +5050,6 @@ const usePreviousOrderCheckbox = document.getElementById('usePreviousOrderCheckb
 // --- Новые DOM элементы для полей КП ---
 const kpFieldsSection = document.getElementById('kpFieldsSection');
 const kpRecipientPhone = document.getElementById('kpRecipientPhone');
-// --- УДАЛЕНЫ НЕИСПОЛЬЗУЕМЫЕ ЭЛЕМЕНТЫ ДЛЯ КП ---
-// const kpDeliveryMethod = document.getElementById('kpDeliveryMethod');
-// const kpDeliveryAddressSection = document.getElementById('kpDeliveryAddressSection');
-// const kpDeliveryAddress = document.getElementById('kpDeliveryAddress');
-// const kpDeliveryAddressNote = document.getElementById('kpDeliveryAddressNote');
-// const kpPickupAddressSection = document.getElementById('kpPickupAddressSection');
-// const kpDeliveryAddressContainer = document.getElementById('kpDeliveryAddressContainer');
-// --- КОНЕЦ УДАЛЕННЫХ ЭЛЕМЕНТОВ ---
 
 // --- Новые DOM элементы для модального окна описания ---
 const detailsModal = document.getElementById('detailsModal');
@@ -5229,28 +5221,34 @@ function handlePaymentMethodChange() {
 
 // --- Обработчик изменения переключателя КП/Заказ ---
 function handleOrderTypeToggleChange() {
-    if (orderTypeToggle.checked) {
+    const selectedOrderMethod = orderTypeToggle.value;
+    if (selectedOrderMethod === 'orderLabel') {
         // Если переключено в положение "Оформить заказ"
         orderFieldsSection.style.display = 'block';
         kpFieldsSection.style.display = 'none'; // Скрываем поля КП
         generateKpButton.style.display = 'none';
         checkoutButton.style.display = 'block';
         // Меняем стили меток
-        kpLabel.style.fontWeight = 'normal';
-        kpLabel.style.color = 'var(--tg-theme-hint-color)';
-        orderLabel.style.fontWeight = 'bold';
-        orderLabel.style.color = 'var(--tg-theme-text-color)';
-    } else {
+//        kpLabel.style.fontWeight = 'normal';
+//        kpLabel.style.color = 'var(--tg-theme-hint-color)';
+//        orderLabel.style.fontWeight = 'bold';
+//        orderLabel.style.color = 'var(--tg-theme-text-color)';
+    } else if  (selectedOrderMethod === 'kpLabel') {
         // Если переключено в положение "Сформировать КП"
         orderFieldsSection.style.display = 'none';
         kpFieldsSection.style.display = 'block'; // Показываем поля КП
         generateKpButton.style.display = 'block';
         checkoutButton.style.display = 'none';
         // Меняем стили меток
-        kpLabel.style.fontWeight = 'bold';
-        kpLabel.style.color = 'var(--tg-theme-text-color)';
-        orderLabel.style.fontWeight = 'normal';
-        orderLabel.style.color = 'var(--tg-theme-hint-color)';
+//        kpLabel.style.fontWeight = 'bold';
+//        kpLabel.style.color = 'var(--tg-theme-text-color)';
+//        orderLabel.style.fontWeight = 'normal';
+//        orderLabel.style.color = 'var(--tg-theme-hint-color)';
+    } else {
+        kpFieldsSection.style.display = 'none'; // Скрываем все поля
+        generateKpButton.style.display = 'none';
+        orderFieldsSection.style.display = 'none';
+        checkoutButton.style.display = 'none';
     }
     resetCartFormFields();
 }
@@ -5655,7 +5653,7 @@ closeModal.addEventListener('click', (e) => {
 
 // --- Сброс формы корзины ---
 function resetCartForm() {
-    orderTypeToggle.checked = false;
+    orderTypeToggle.value = "empty";
     handleOrderTypeToggleChange();
     resetCartFormFields();
     document.querySelector('input[name="discountType"][value="discount_only"]').checked = true;

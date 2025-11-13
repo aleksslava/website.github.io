@@ -54,16 +54,13 @@
                 Итого: <span id="cartTotalPrice">0</span> ₽
             </div>
 
-            <!-- --- Переключатель КП/Заказ и поля --- -->
             <div class="cart-form-section">
-                <div class="toggle-switch-container">
-                    <span class="toggle-label" id="kpLabel">Оформить КП</span>
-                    <label class="switch">
-                        <input type="checkbox" id="orderTypeToggle">
-                        <span class="slider"></span>
-                    </label>
-                    <span class="toggle-label" id="orderLabel">Оформить заказ</span>
-                </div>
+                    <label>Тип заказа:</label>
+                    <select id="orderTypeToggle" class="cart-select">
+                        <option value="empty">-- !!!Выберите тип заказа!!! --</option>
+                        <option value="kpLabel">Оформить КП</option>
+                        <option value="orderLabel">Оформить Заказ</option>
+                    </select>
             </div>
 
 
