@@ -2540,7 +2540,7 @@ let products = [
     {
         "id":4,
         "name":"Каталог HiTE PRO",
-        "price":1.0,
+        "price":200.0,
         "image":"https://static.tildacdn.com/stor3335-3962-4232-a163-353032383535/78693873.jpg",
         "category":"komplekt",
         "description":"Печатный каталог альбомной ориентации. Дарим 1 каталог за каждые 5000 руб суммы заказа.",
