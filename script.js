@@ -367,6 +367,40 @@ let products = [
         ]
     },
     {
+        "id":83,
+        "name":"Умный замок KEYWAY с установкой",
+        "price":34800.0,
+        "image":"https://static.tildacdn.com/stor3039-3664-4234-b432-336265323635/58aacb4eac0d7871865b732d38beed52.jpg",
+        "category":"lock",
+        "description":"Точную цену учтоняйте у менеджера.",
+        "modifications":[
+            {
+                "id":"314667",
+                "name":"KEYWAY SL300 с установкой",
+                "price":34800.0,
+                "image":"https://static.tildacdn.com/stor3039-3664-4234-b432-336265323635/58aacb4eac0d7871865b732d38beed52.jpg",
+                "specifications":{},
+                "description":"Оставьте заявку, если ваш клиент хочет поставить себе умный замок SL300. \n\nМы рассчитаем точную стоимость установки и найдем мастера. Установка и гарантия с нас. С вас — фото и замеры двери.\n\nВам выплатим комиссию за продажу замка.\n\nТолько Москва, СПБ, Казань, Краснодар, Екатеринбург",
+                "instructions":{
+                    "pdf":"https://drive.google.com/file/d/1I2OxV8hd3vXxrodRGgrLQvby_q5lMIG8/view?usp=drive_link",
+                    "video":"https://keyway.online/"
+                }
+            },
+            {
+                "id":"314669",
+                "name":"KEYWAY SL500 с установкой",
+                "price":48800.0,
+                "image":"https://static.tildacdn.com/stor3039-3664-4234-b432-336265323635/58aacb4eac0d7871865b732d38beed52.jpg",
+                "specifications":{},
+                "description":"Оставьте заявку, если ваш клиент хочет поставить себе умный замок SL300. \n\nМы рассчитаем точную стоимость установки и найдем мастера. Установка и гарантия с нас. С вас — фото и замеры двери.\n\nВам выплатим комиссию за продажу замка.\n\nТолько Москва, СПБ, Казань, Краснодар, Екатеринбург",
+                "instructions":{
+                    "pdf":"https://drive.google.com/file/d/1jgRz6uyu0KIlZzOpJ6t6kyWb4RJk2tUm/view",
+                    "video":"https://keyway.online/"
+                }
+            }
+        ]
+    },
+    {
         "id":75,
         "name":"Взломостойкий умный замок KEYWAY SL300",
         "price":24800.0,
