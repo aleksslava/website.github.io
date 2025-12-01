@@ -2595,7 +2595,7 @@ let products = [
     {
         "id":73,
         "name":"Футболка HiTE PRO темно-синяя",
-        "price":1600.0,
+        "price":1880.0,
         "image":"https://static.tildacdn.com/stor3933-6134-4531-b262-343332666463/42512992.png",
         "category":"Merch",
         "description":"Хлопковая футболка в стиле oversize",
@@ -2603,7 +2603,7 @@ let products = [
             {
                 "id":"301122",
                 "name":"темно-синяя - S",
-                "price":1600.0,
+                "price":1880.0,
                 "image":"https://static.tildacdn.com/stor3933-6134-4531-b262-343332666463/42512992.png",
                 "specifications":{},
                 "description":"Хлопковая футболка в стиле oversize с логотипами HiTE PRO.",
@@ -2612,7 +2612,7 @@ let products = [
             {
                 "id":"301124",
                 "name":"темно-синяя - M",
-                "price":1600.0,
+                "price":1880.0,
                 "image":"https://static.tildacdn.com/stor3933-6134-4531-b262-343332666463/42512992.png",
                 "specifications":{},
                 "description":"Хлопковая футболка в стиле oversize с логотипами HiTE PRO.",
@@ -2621,7 +2621,7 @@ let products = [
             {
                 "id":"301126",
                 "name":"темно-синяя - L",
-                "price":1600.0,
+                "price":1880.0,
                 "image":"https://static.tildacdn.com/stor3933-6134-4531-b262-343332666463/42512992.png",
                 "specifications":{},
                 "description":"Хлопковая футболка в стиле oversize с логотипами HiTE PRO.",
@@ -2630,7 +2630,7 @@ let products = [
             {
                 "id":"301128",
                 "name":"темно-синяя - XL",
-                "price":1600.0,
+                "price":1880.0,
                 "image":"https://static.tildacdn.com/stor3933-6134-4531-b262-343332666463/42512992.png",
                 "specifications":{},
                 "description":"Хлопковая футболка в стиле oversize с логотипами HiTE PRO.",
@@ -2639,7 +2639,7 @@ let products = [
             {
                 "id":"301130",
                 "name":"темно-синяя - XXL",
-                "price":1600.0,
+                "price":1880.0,
                 "image":"https://static.tildacdn.com/stor3933-6134-4531-b262-343332666463/42512992.png",
                 "specifications":{},
                 "description":"Хлопковая футболка в стиле oversize с логотипами HiTE PRO.",
