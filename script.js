@@ -314,7 +314,7 @@ let products = [
     },
     {
         "id":80,
-        "name":"DIN-Gateway",
+        "name":"DIN-Gateway\n(Появится в продаже с февраля 2026г.)",
         "price":10980.0,
         "image":"https://static.tildacdn.com/stor3339-3961-4332-b035-343761386533/78041260.png",
         "category":"server",
@@ -340,7 +340,7 @@ let products = [
     },
     {
         "id":81,
-        "name":"DIN-4.Relay",
+        "name":"DIN-4.Relay\n(Появится в продаже с февраля 2026г.)",
         "price":9980.0,
         "image":"https://static.tildacdn.com/stor6133-6231-4230-a433-653462396132/28820715.png",
         "category":"relay",
