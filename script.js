@@ -63,7 +63,7 @@ const categories = [
 let products = [
     {
         "id":3,
-        "name":"Билет на живое обучение в офисе HiTE PRO — 10 декабря",
+        "name":"Билет на живое обучение в офисе HiTE PRO — 20 декабря",
         "price":10000.0,
         "image":"https://static.tildacdn.com/stor6639-6335-4539-a130-343937363366/99732103.png",
         "category":"other",
