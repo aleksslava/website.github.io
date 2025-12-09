@@ -377,7 +377,12 @@ let products = [
                 "name":"Умный замок KEYWAY SL300 с установкой",
                 "price":34800.0,
                 "image":"https://static.tildacdn.com/stor3039-3664-4234-b432-336265323635/58aacb4eac0d7871865b732d38beed52.jpg",
-                "specifications":{},
+                "specifications": { "Кто устанавливает": "Мастер KEYWAY",
+                                   "Кто дает гарантию": "Компания KEYWAY",
+                                   "Что получает партнер": "Комиссию за продажу",
+                                   "В каких городах": "Москва, СПБ, Казань, Краснодар, Екатеринбург",
+                                   "Что нужно сделать": "Сделать замеры и прислать фото двери"
+                },
                 "description":"Оставьте заявку, если ваш клиент хочет поставить себе умный замок SL300. \n\nМы рассчитаем точную стоимость установки и найдем мастера. Установка и гарантия с нас. С вас — фото и замеры двери.\n\nВам выплатим комиссию за продажу замка.\n\nТолько Москва, СПБ, Казань, Краснодар, Екатеринбург",
                 "instructions":{
                     "pdf":"https://drive.google.com/file/d/1I2OxV8hd3vXxrodRGgrLQvby_q5lMIG8/view?usp=drive_link",
@@ -389,7 +394,12 @@ let products = [
                 "name":"Умный замок KEYWAY SL500 с установкой",
                 "price":48800.0,
                 "image":"https://static.tildacdn.com/stor3039-3664-4234-b432-336265323635/58aacb4eac0d7871865b732d38beed52.jpg",
-                "specifications":{},
+                "specifications": { "Кто устанавливает": "Мастер KEYWAY",
+                                   "Кто дает гарантию": "Компания KEYWAY",
+                                   "Что получает партнер": "Комиссию за продажу",
+                                   "В каких городах": "Москва, СПБ, Казань, Краснодар, Екатеринбург",
+                                   "Что нужно сделать": "Сделать замеры и прислать фото двери"
+                },
                 "description":"Оставьте заявку, если ваш клиент хочет поставить себе умный замок SL300. \n\nМы рассчитаем точную стоимость установки и найдем мастера. Установка и гарантия с нас. С вас — фото и замеры двери.\n\nВам выплатим комиссию за продажу замка.\n\nТолько Москва, СПБ, Казань, Краснодар, Екатеринбург",
                 "instructions":{
                     "pdf":"https://drive.google.com/file/d/1jgRz6uyu0KIlZzOpJ6t6kyWb4RJk2tUm/view",
@@ -2666,8 +2676,8 @@ let products = [
     },
     {
         "id":72,
-        "name":"Комплект для защиты от протечек HiTE PRO на трубу 1/2",
-        "price":25540.0,
+        "name":"Комплект для защиты от протечек HiTE PRO на трубу 1/2\n(Скидка уже применена)",
+        "price":20432.0,
         "image":"https://static.tildacdn.com/stor6431-3834-4162-b133-653538656133/55102437.jpg",
         "category":"kran",
         "description":"Сборный комплект устройств: 1-2 шаровых крана, блок управления, датчик протечки",
@@ -2675,7 +2685,7 @@ let products = [
             {
                 "id":"301066",
                 "name":"2 шт Bugatti 220",
-                "price":25540.0,
+                "price":20432.0,
                 "image":"https://static.tildacdn.com/stor6431-3834-4162-b133-653538656133/55102437.jpg",
                 "specifications":{},
                 "description":"2 крана Bugatti Pro 220 1/2\n1 датчик протечки Smart Water\n1 блок Relay-Drive",
@@ -2684,7 +2694,7 @@ let products = [
             {
                 "id":"301068",
                 "name":"2 шт Profi 220",
-                "price":23940.0,
+                "price":3152.0,
                 "image":"https://static.tildacdn.com/stor6530-6464-4333-b036-643565356237/70060083.jpg",
                 "specifications":{},
                 "description":"2 крана Profi 220 1/2\n1 датчик протечки Smart Water\n1 блок Relay-Drive",
@@ -2693,7 +2703,7 @@ let products = [
             {
                 "id":"301062",
                 "name":"1 шт Bugatti 220",
-                "price":16250.0,
+                "price":13000.0,
                 "image":"https://static.tildacdn.com/stor6431-3834-4162-b133-653538656133/55102437.jpg",
                 "specifications":{},
                 "description":"1 кран Bugatti Pro 220 1/2\n1 датчик протечки Smart Water\n1 блок Relay-Drive",
@@ -2702,7 +2712,7 @@ let products = [
             {
                 "id":"301064",
                 "name":"1 шт Profi",
-                "price":15450.0,
+                "price":12360.0,
                 "image":"https://static.tildacdn.com/stor6530-6464-4333-b036-643565356237/70060083.jpg",
                 "specifications":{},
                 "description":"1 кран Profi 220 1/2\n1 датчик протечки Smart Water\n1 блок Relay-Drive",
@@ -2712,8 +2722,8 @@ let products = [
     },
     {
         "id":29,
-        "name":"Шаровой кран с электроприводом Bugatti Pro 220В",
-        "price":8361.0,
+        "name":"Шаровой кран с электроприводом Bugatti Pro 220В\n(Скидка уже применена)",
+        "price":7525.0,
         "image":"https://static.tildacdn.com/tild3539-3032-4536-b632-643838323039/1.png",
         "category":"kran",
         "description":"Шаровой кран марки Neptun с электроприводом серии Buggati PRO для блокировки водоснабжения",
@@ -2721,7 +2731,7 @@ let products = [
             {
                 "id":"224584",
                 "name":"Bugatti Pro 220В - 1/2",
-                "price":8361.0,
+                "price":7525.0,
                 "image":"https://static.tildacdn.com/tild3539-3032-4536-b632-643838323039/1.png",
                 "specifications":{
                     "Питание":"230 В, 50 Гц",
@@ -2740,7 +2750,7 @@ let products = [
             {
                 "id":"224586",
                 "name":"Bugatti Pro 220В - 3/4",
-                "price":8991.0,
+                "price":8092.0,
                 "image":"https://static.tildacdn.com/tild3539-3032-4536-b632-643838323039/1.png",
                 "specifications":{
                     "Питание":"230 В, 50 Гц",
@@ -2759,7 +2769,7 @@ let products = [
             {
                 "id":"224598",
                 "name":"Bugatti Pro 220В - 1",
-                "price":11961.0,
+                "price":10765.0,
                 "image":"https://static.tildacdn.com/tild3539-3032-4536-b632-643838323039/1.png",
                 "specifications":{
                     "Питание":"230 В, 50 Гц",
@@ -2779,8 +2789,8 @@ let products = [
     },
     {
         "id":30,
-        "name":"Шаровой кран с электроприводом Bugatti Pro 12В",
-        "price":8991.0,
+        "name":"Шаровой кран с электроприводом Bugatti Pro 12В\n(Скидка уже применена)",
+        "price":8092.0,
         "image":"https://static.tildacdn.com/tild6234-6135-4731-b334-393033633335/2.png",
         "category":"kran",
         "description":"Шаровой кран марки Neptun с электроприводом серии Buggati PRO для блокировки водоснабжения",
@@ -2788,7 +2798,7 @@ let products = [
             {
                 "id":"224594",
                 "name":"Bugatti Pro 12В - 1/2",
-                "price":8991.0,
+                "price":8092.0,
                 "image":"https://static.tildacdn.com/tild6234-6135-4731-b334-393033633335/2.png",
                 "specifications":{
                     "Питание":"12 В, 50 Гц",
@@ -2807,7 +2817,7 @@ let products = [
             {
                 "id":"224586",
                 "name":"Bugatti Pro 12В - 3/4",
-                "price":9531.0,
+                "price":8578.0,
                 "image":"https://static.tildacdn.com/tild6234-6135-4731-b334-393033633335/2.png",
                 "specifications":{
                     "Питание":"12 В, 50 Гц",
@@ -2826,7 +2836,7 @@ let products = [
             {
                 "id":"224596",
                 "name":"Bugatti Pro 12В - 1",
-                "price":10791.0,
+                "price":9712.0,
                 "image":"https://static.tildacdn.com/tild6234-6135-4731-b334-393033633335/2.png",
                 "specifications":{
                     "Питание":"12 В, 50 Гц",
@@ -2846,8 +2856,8 @@ let products = [
     },
     {
         "id":31,
-        "name":"Шаровой кран с электроприводом PROFI 220В",
-        "price":7641.0,
+        "name":"Шаровой кран с электроприводом PROFI 220В\n(Скидка уже применена)",
+        "price":6877.0,
         "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
         "category":"kran",
         "description":"Шаровой кран марки Neptun с электроприводом серии PROFI для блокировки водоснабжения",
@@ -2855,7 +2865,7 @@ let products = [
             {
                 "id":"224608",
                 "name":"PROFI 220В - 1/2",
-                "price":7641.0,
+                "price":6877.0,
                 "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
                 "specifications":{
                     "Питание":"230 В, 50 Гц",
@@ -2874,7 +2884,7 @@ let products = [
             {
                 "id":"224606",
                 "name":"PROFI 220В - 3/4",
-                "price":8451.0,
+                "price":7606.0,
                 "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
                 "specifications":{
                     "Питание":"230 В, 50 Гц",
@@ -2893,7 +2903,7 @@ let products = [
             {
                 "id":"224592",
                 "name":"PROFI 220В - 1",
-                "price":9531.0,
+                "price":8578.0,
                 "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
                 "specifications":{
                     "Питание":"230 В, 50 Гц",
@@ -2912,7 +2922,7 @@ let products = [
             {
                 "id":"224612",
                 "name":"PROFI 220В - 1 1/4",
-                "price":10161.0,
+                "price":9145.0,
                 "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
                 "specifications":{
                     "Питание":"230 В, 50 Гц",
@@ -2932,8 +2942,8 @@ let products = [
     },
     {
         "id":32,
-        "name":"Шаровой кран с электроприводом PROFI 12В",
-        "price":7191.0,
+        "name":"Шаровой кран с электроприводом PROFI 12В\n(Скидка уже применена)",
+        "price":6472.0,
         "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
         "category":"kran",
         "description":"Шаровой кран марки Neptun с электроприводом серии PROFI для блокировки водоснабжения",
@@ -2941,7 +2951,7 @@ let products = [
             {
                 "id":"224616",
                 "name":"PROFI 12В - 1/2",
-                "price":7191.0,
+                "price":6472.0,
                 "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
                 "specifications":{
                     "Питание":"12 В, 50 Гц",
@@ -2960,7 +2970,7 @@ let products = [
             {
                 "id":"224590",
                 "name":"PROFI 12В - 3/4",
-                "price":7641.0,
+                "price":6877.0,
                 "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
                 "specifications":{
                     "Питание":"12 В, 50 Гц",
@@ -2979,7 +2989,7 @@ let products = [
             {
                 "id":"224614",
                 "name":"PROFI 12В - 1",
-                "price":9531.0,
+                "price":8578.0,
                 "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
                 "specifications":{
                     "Питание":"12 В, 50 Гц",
@@ -2998,7 +3008,7 @@ let products = [
             {
                 "id":"224600",
                 "name":"PROFI 12В - 1 1/4",
-                "price":10161.0,
+                "price":9145.0,
                 "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
                 "specifications":{
                     "Питание":"12 В, 50 Гц",
@@ -3018,8 +3028,8 @@ let products = [
     },
     {
         "id":33,
-        "name":"Шаровой кран с электроприводом MK 220В",
-        "price":5481.0,
+        "name":"Шаровой кран с электроприводом MK 220В\n(Скидка уже применена)",
+        "price":4933.0,
         "image":"https://static.tildacdn.com/tild6135-6133-4166-b563-363938353635/---65-455x455.png",
         "category":"kran",
         "description":"Шаровой кран марки Neptun с электроприводом серии МК для блокировки водоснабжения",
@@ -3085,8 +3095,8 @@ let products = [
     },
     {
         "id":34,
-        "name":"Шаровой кран с электроприводом MK 12В",
-        "price":5481.0,
+        "name":"Шаровой кран с электроприводом MK 12В\n(Скидка уже применена)",
+        "price":4933.0,
         "image":"https://static.tildacdn.com/tild6135-6133-4166-b563-363938353635/---65-455x455.png",
         "category":"kran",
         "description":"Шаровой кран марки Neptun с электроприводом серии МК для блокировки водоснабжения",
@@ -5075,6 +5085,7 @@ let products = [
             }
         ]
     }
+
 ]
 ;
 
@@ -5311,22 +5322,14 @@ function handleOrderTypeToggleChange() {
         kpFieldsSection.style.display = 'none'; // Скрываем поля КП
         generateKpButton.style.display = 'none';
         checkoutButton.style.display = 'block';
-        // Меняем стили меток
-//        kpLabel.style.fontWeight = 'normal';
-//        kpLabel.style.color = 'var(--tg-theme-hint-color)';
-//        orderLabel.style.fontWeight = 'bold';
-//        orderLabel.style.color = 'var(--tg-theme-text-color)';
+
     } else if  (selectedOrderMethod === 'kpLabel') {
         // Если переключено в положение "Сформировать КП"
         orderFieldsSection.style.display = 'none';
         kpFieldsSection.style.display = 'block'; // Показываем поля КП
         generateKpButton.style.display = 'block';
         checkoutButton.style.display = 'none';
-        // Меняем стили меток
-//        kpLabel.style.fontWeight = 'bold';
-//        kpLabel.style.color = 'var(--tg-theme-text-color)';
-//        orderLabel.style.fontWeight = 'normal';
-//        orderLabel.style.color = 'var(--tg-theme-hint-color)';
+
     } else {
         kpFieldsSection.style.display = 'none'; // Скрываем все поля
         generateKpButton.style.display = 'none';
