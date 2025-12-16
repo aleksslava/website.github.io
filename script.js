@@ -3667,7 +3667,7 @@ let products = [
     },
     {
         "id":64,
-        "name":"Терморегулятор Caleo С927",
+        "name":"Терморегулятор Caleo С927\nЦена окончательная, скидка уже применена.",
         "price":10392.0,
         "image":"https://static.tildacdn.com/stor3138-3266-4264-b464-653536363464/67235715.jpg",
         "category":"warm_floor",
@@ -3709,7 +3709,7 @@ let products = [
     },
     {
         "id":66,
-        "name":"Терморегулятор Caleo С430",
+        "name":"Терморегулятор Caleo С430\nЦена окончательная, скидка уже применена.",
         "price":1813.0,
         "image":"https://static.tildacdn.com/stor6433-3931-4063-b931-663539353731/26813793.jpg",
         "category":"warm_floor",
