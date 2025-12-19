@@ -2723,7 +2723,7 @@ let products = [
     {
         "id":29,
         "name":"Шаровой кран с электроприводом Bugatti Pro 220В\n(Скидка уже применена)",
-        "price":7525.0,
+        "price":8361.0,
         "image":"https://static.tildacdn.com/tild3539-3032-4536-b632-643838323039/1.png",
         "category":"kran",
         "description":"Шаровой кран марки Neptun с электроприводом серии Buggati PRO для блокировки водоснабжения",
@@ -2731,7 +2731,7 @@ let products = [
             {
                 "id":"224584",
                 "name":"Bugatti Pro 220В - 1/2",
-                "price":7525.0,
+                "price":8361.0,
                 "image":"https://static.tildacdn.com/tild3539-3032-4536-b632-643838323039/1.png",
                 "specifications":{
                     "Питание":"230 В, 50 Гц",
@@ -2750,7 +2750,7 @@ let products = [
             {
                 "id":"224586",
                 "name":"Bugatti Pro 220В - 3/4",
-                "price":8092.0,
+                "price":8991.0,
                 "image":"https://static.tildacdn.com/tild3539-3032-4536-b632-643838323039/1.png",
                 "specifications":{
                     "Питание":"230 В, 50 Гц",
@@ -2769,7 +2769,7 @@ let products = [
             {
                 "id":"224598",
                 "name":"Bugatti Pro 220В - 1",
-                "price":10765.0,
+                "price":11961.0,
                 "image":"https://static.tildacdn.com/tild3539-3032-4536-b632-643838323039/1.png",
                 "specifications":{
                     "Питание":"230 В, 50 Гц",
@@ -2790,7 +2790,7 @@ let products = [
     {
         "id":30,
         "name":"Шаровой кран с электроприводом Bugatti Pro 12В\n(Скидка уже применена)",
-        "price":8092.0,
+        "price":8991.0,
         "image":"https://static.tildacdn.com/tild6234-6135-4731-b334-393033633335/2.png",
         "category":"kran",
         "description":"Шаровой кран марки Neptun с электроприводом серии Buggati PRO для блокировки водоснабжения",
@@ -2798,7 +2798,7 @@ let products = [
             {
                 "id":"224594",
                 "name":"Bugatti Pro 12В - 1/2",
-                "price":8092.0,
+                "price":8991.0,
                 "image":"https://static.tildacdn.com/tild6234-6135-4731-b334-393033633335/2.png",
                 "specifications":{
                     "Питание":"12 В, 50 Гц",
@@ -2817,7 +2817,7 @@ let products = [
             {
                 "id":"224586",
                 "name":"Bugatti Pro 12В - 3/4",
-                "price":8578.0,
+                "price":9531.0,
                 "image":"https://static.tildacdn.com/tild6234-6135-4731-b334-393033633335/2.png",
                 "specifications":{
                     "Питание":"12 В, 50 Гц",
@@ -2836,7 +2836,7 @@ let products = [
             {
                 "id":"224596",
                 "name":"Bugatti Pro 12В - 1",
-                "price":9712.0,
+                "price":10791.0,
                 "image":"https://static.tildacdn.com/tild6234-6135-4731-b334-393033633335/2.png",
                 "specifications":{
                     "Питание":"12 В, 50 Гц",
@@ -2857,7 +2857,7 @@ let products = [
     {
         "id":31,
         "name":"Шаровой кран с электроприводом PROFI 220В\n(Скидка уже применена)",
-        "price":6877.0,
+        "price":7641.0,
         "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
         "category":"kran",
         "description":"Шаровой кран марки Neptun с электроприводом серии PROFI для блокировки водоснабжения",
@@ -2865,7 +2865,7 @@ let products = [
             {
                 "id":"224608",
                 "name":"PROFI 220В - 1/2",
-                "price":6877.0,
+                "price":7641.0,
                 "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
                 "specifications":{
                     "Питание":"230 В, 50 Гц",
@@ -2884,7 +2884,7 @@ let products = [
             {
                 "id":"224606",
                 "name":"PROFI 220В - 3/4",
-                "price":7606.0,
+                "price":7758.0,
                 "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
                 "specifications":{
                     "Питание":"230 В, 50 Гц",
@@ -2903,7 +2903,7 @@ let products = [
             {
                 "id":"224592",
                 "name":"PROFI 220В - 1",
-                "price":8578.0,
+                "price":9531.0,
                 "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
                 "specifications":{
                     "Питание":"230 В, 50 Гц",
@@ -2922,7 +2922,7 @@ let products = [
             {
                 "id":"224612",
                 "name":"PROFI 220В - 1 1/4",
-                "price":9145.0,
+                "price":10160.0,
                 "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
                 "specifications":{
                     "Питание":"230 В, 50 Гц",
@@ -2943,7 +2943,7 @@ let products = [
     {
         "id":32,
         "name":"Шаровой кран с электроприводом PROFI 12В\n(Скидка уже применена)",
-        "price":6472.0,
+        "price":7191.0,
         "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
         "category":"kran",
         "description":"Шаровой кран марки Neptun с электроприводом серии PROFI для блокировки водоснабжения",
@@ -2951,7 +2951,7 @@ let products = [
             {
                 "id":"224616",
                 "name":"PROFI 12В - 1/2",
-                "price":6472.0,
+                "price":7191.0,
                 "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
                 "specifications":{
                     "Питание":"12 В, 50 Гц",
@@ -2970,7 +2970,7 @@ let products = [
             {
                 "id":"224590",
                 "name":"PROFI 12В - 3/4",
-                "price":6877.0,
+                "price":7641.0,
                 "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
                 "specifications":{
                     "Питание":"12 В, 50 Гц",
@@ -2989,7 +2989,7 @@ let products = [
             {
                 "id":"224614",
                 "name":"PROFI 12В - 1",
-                "price":8578.0,
+                "price":9531.0,
                 "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
                 "specifications":{
                     "Питание":"12 В, 50 Гц",
@@ -3008,7 +3008,7 @@ let products = [
             {
                 "id":"224600",
                 "name":"PROFI 12В - 1 1/4",
-                "price":9145.0,
+                "price":10161.0,
                 "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
                 "specifications":{
                     "Питание":"12 В, 50 Гц",
@@ -3029,7 +3029,7 @@ let products = [
     {
         "id":33,
         "name":"Шаровой кран с электроприводом MK 220В\n(Скидка уже применена)",
-        "price":4933.0,
+        "price":5482.0,
         "image":"https://static.tildacdn.com/tild6135-6133-4166-b563-363938353635/---65-455x455.png",
         "category":"kran",
         "description":"Шаровой кран марки Neptun с электроприводом серии МК для блокировки водоснабжения",
@@ -3037,7 +3037,7 @@ let products = [
             {
                 "id":"224604",
                 "name":"MK 220В - 1/2",
-                "price":5481.0,
+                "price":5482.0,
                 "image":"https://static.tildacdn.com/tild6135-6133-4166-b563-363938353635/---65-455x455.png",
                 "specifications":{
                     "Питание":"230 В",
@@ -3096,7 +3096,7 @@ let products = [
     {
         "id":34,
         "name":"Шаровой кран с электроприводом MK 12В\n(Скидка уже применена)",
-        "price":4933.0,
+        "price":5481.0,
         "image":"https://static.tildacdn.com/tild6135-6133-4166-b563-363938353635/---65-455x455.png",
         "category":"kran",
         "description":"Шаровой кран марки Neptun с электроприводом серии МК для блокировки водоснабжения",
