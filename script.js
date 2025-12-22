@@ -2685,7 +2685,7 @@ let products = [
             {
                 "id":"301066",
                 "name":"2 шт Bugatti 220",
-                "price":20432.0,
+                "price":25540.0,
                 "image":"https://static.tildacdn.com/stor6431-3834-4162-b133-653538656133/55102437.jpg",
                 "specifications":{},
                 "description":"2 крана Bugatti Pro 220 1/2\n1 датчик протечки Smart Water\n1 блок Relay-Drive",
@@ -2694,7 +2694,7 @@ let products = [
             {
                 "id":"301068",
                 "name":"2 шт Profi 220",
-                "price":3152.0,
+                "price":23940.0,
                 "image":"https://static.tildacdn.com/stor6530-6464-4333-b036-643565356237/70060083.jpg",
                 "specifications":{},
                 "description":"2 крана Profi 220 1/2\n1 датчик протечки Smart Water\n1 блок Relay-Drive",
@@ -2703,7 +2703,7 @@ let products = [
             {
                 "id":"301062",
                 "name":"1 шт Bugatti 220",
-                "price":13000.0,
+                "price":16250.0,
                 "image":"https://static.tildacdn.com/stor6431-3834-4162-b133-653538656133/55102437.jpg",
                 "specifications":{},
                 "description":"1 кран Bugatti Pro 220 1/2\n1 датчик протечки Smart Water\n1 блок Relay-Drive",
@@ -2712,7 +2712,7 @@ let products = [
             {
                 "id":"301064",
                 "name":"1 шт Profi",
-                "price":12360.0,
+                "price":15450.0,
                 "image":"https://static.tildacdn.com/stor6530-6464-4333-b036-643565356237/70060083.jpg",
                 "specifications":{},
                 "description":"1 кран Profi 220 1/2\n1 датчик протечки Smart Water\n1 блок Relay-Drive",
