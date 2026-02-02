@@ -340,7 +340,7 @@ let products = [
     },
     {
         "id":81,
-        "name":"DIN-4.Relay\n(Появится в продаже с февраля 2026г.)",
+        "name":"DIN-4.Relay\n(Появится в продаже с марта 2026г.)",
         "price":9980.0,
         "image":"https://static.tildacdn.com/stor6133-6231-4230-a433-653462396132/28820715.png",
         "category":"relay",
