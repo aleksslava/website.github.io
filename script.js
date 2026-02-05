@@ -71,7 +71,7 @@ let products = [
         "modifications":[
             {
                 "id":"312761",
-                "name":"Билет на живое обучение в офисе HiTE PRO — 14 февраля (суббота)",
+                "name":"14 февраля",
                 "price":12500.0,
                 "image":"https://static.tildacdn.com/stor6639-6335-4539-a130-343937363366/99732103.png",
                 "specifications":{
@@ -84,7 +84,7 @@ let products = [
             },
             {
                 "id":"312761",
-                "name":"Билет на живое обучение в офисе HiTE PRO — 28 февраля (суббота)",
+                "name":"28 февраля",
                 "price":12500.0,
                 "image":"https://static.tildacdn.com/stor6639-6335-4539-a130-343937363366/99732103.png",
                 "specifications":{
