@@ -353,6 +353,57 @@ let products = [
         ]
     },
     {
+        "id":85,
+        "name":"Механизм замка KEYWAY с бэксетом 70 мм ",
+        "price":6000.0,
+        "image":"https://static.tildacdn.com/stor3561-6335-4131-a362-356335626264/68d4b851a6d8ca518ba16a6836710a8c.png",
+        "category":"lock",
+        "description":"На случай, если механизм с бэксетом 60 мм не подходит",
+        "modifications":[
+            {
+                "id":"319614",
+                "name":"SL300",
+                "price":6000.0,
+                "image":"https://static.tildacdn.com/stor3561-6335-4131-a362-356335626264/68d4b851a6d8ca518ba16a6836710a8c.png",
+                "specifications":{
+                    "Бэксет":"70 мм"
+                },
+                "description":"На случай, если механизм с бэксетом 60 мм не подходит",
+                "instructions":{}
+            },
+            {
+                "id":"319616",
+                "name":"SL500",
+                "price":6000.0,
+                "image":"https://static.tildacdn.com/stor3561-6335-4131-a362-356335626264/68d4b851a6d8ca518ba16a6836710a8c.png",
+                "specifications":{
+                    "Бэксет":"70 мм"
+                },
+                "description":"На случай, если механизм с бэксетом 60 мм не подходит",
+                "instructions":{}
+            }
+        ]
+    },
+    {
+        "id":84,
+        "name":"Ключ-карта KEYWAY",
+        "price":230.0,
+        "image":"https://static.tildacdn.com/stor3039-3530-4631-a139-376366333933/10a0abde88e7e66d1825fd70c093d5fa.png",
+        "category":"other",
+        "description":"Дополнительная ключ-карта доступа (по умолчанию в комплекте к замкам KEYWAY идут 2 ключ-карты)",
+        "modifications":[
+            {
+                "id":"319584",
+                "name":"Ключ-карта KEYWAY",
+                "price":230.0,
+                "image":"https://static.tildacdn.com/stor3039-3530-4631-a139-376366333933/10a0abde88e7e66d1825fd70c093d5fa.png",
+                "specifications":{},
+                "description":"Дополнительная ключ-карта доступа (по умолчанию в комплекте к замкам KEYWAY идут 2 ключ-карты)",
+                "instructions":{}
+            }
+        ]
+    },
+    {
         "id":82,
         "name":"Адаптер внешних каналов CROSS-F",
         "price":1780.0,
@@ -431,59 +482,6 @@ let products = [
                 "instructions":{
                     "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/Relay-4M%2074x105mm.pdf"
                 }
-            }
-        ]
-    },
-    {
-        "id":83,
-        "name":"Умный замок KEYWAY с установкой",
-        "price":34800.0,
-        "image":"https://static.tildacdn.com/stor3039-3664-4234-b432-336265323635/58aacb4eac0d7871865b732d38beed52.jpg",
-        "category":"lock",
-        "description":"Точную цену учтоняйте у менеджера.",
-        "modifications":[
-            {
-                "id":"314667",
-                "name":"Умный замок KEYWAY SL300 с установкой",
-                "price":34800.0,
-                "image":"https://static.tildacdn.com/stor3039-3664-4234-b432-336265323635/58aacb4eac0d7871865b732d38beed52.jpg",
-                "specifications":{},
-                "description":"Оставьте заявку, если ваш клиент хочет поставить себе умный замок SL300. \n\nМы рассчитаем точную стоимость установки и найдем мастера. Установка и гарантия с нас. С вас — фото и замеры двери.\n\nВам выплатим комиссию за продажу замка.\n\nТолько Москва, СПБ, Казань, Краснодар, Екатеринбург",
-                "instructions":{
-                    "pdf":"https://drive.google.com/file/d/1I2OxV8hd3vXxrodRGgrLQvby_q5lMIG8/view?usp=drive_link",
-                    "video":"https://keyway.online/"
-                }
-            },
-            {
-                "id":"314669",
-                "name":"Умный замок KEYWAY SL500 с установкой",
-                "price":48800.0,
-                "image":"https://static.tildacdn.com/stor3039-3664-4234-b432-336265323635/58aacb4eac0d7871865b732d38beed52.jpg",
-                "specifications":{},
-                "description":"Оставьте заявку, если ваш клиент хочет поставить себе умный замок SL300. \n\nМы рассчитаем точную стоимость установки и найдем мастера. Установка и гарантия с нас. С вас — фото и замеры двери.\n\nВам выплатим комиссию за продажу замка.\n\nТолько Москва, СПБ, Казань, Краснодар, Екатеринбург",
-                "instructions":{
-                    "pdf":"https://drive.google.com/file/d/1jgRz6uyu0KIlZzOpJ6t6kyWb4RJk2tUm/view",
-                    "video":"https://keyway.online/"
-                }
-            }
-        ]
-    },
-    {
-        "id":84,
-        "name":"Ключ-карта KEYWAY",
-        "price":230.0,
-        "image":"https://static.tildacdn.com/stor3039-3530-4631-a139-376366333933/10a0abde88e7e66d1825fd70c093d5fa.png",
-        "category":"other",
-        "description":"Дополнительная ключ-карта доступа (по умолчанию в комплекте к замкам KEYWAY идут 2 ключ-карты)",
-        "modifications":[
-            {
-                "id":"319584",
-                "name":"Ключ-карта KEYWAY",
-                "price":230.0,
-                "image":"https://static.tildacdn.com/stor3039-3530-4631-a139-376366333933/10a0abde88e7e66d1825fd70c093d5fa.png",
-                "specifications":{},
-                "description":"Дополнительная ключ-карта доступа (по умолчанию в комплекте к замкам KEYWAY идут 2 ключ-карты)",
-                "instructions":{}
             }
         ]
     },
@@ -3725,38 +3723,6 @@ let products = [
                 "instructions":{
                     "pdf":"https://www.hite-pro.ru/shop/goods/kontaktor-modulnyj-km-63a-2no-2-mod"
                 }
-            }
-        ]
-    },
-    {
-        "id":85,
-        "name":"Механизм замка KEYWAY с бэксетом 70 мм ",
-        "price":6000.0,
-        "image":"https://static.tildacdn.com/stor3561-6335-4131-a362-356335626264/68d4b851a6d8ca518ba16a6836710a8c.png",
-        "category":"lock",
-        "description":"На случай, если механизм с бэксетом 60 мм не подходит",
-        "modifications":[
-            {
-                "id":"319614",
-                "name":"SL300",
-                "price":6000.0,
-                "image":"https://static.tildacdn.com/stor3561-6335-4131-a362-356335626264/68d4b851a6d8ca518ba16a6836710a8c.png",
-                "specifications":{
-                    "Бэксет":"70 мм"
-                },
-                "description":"На случай, если механизм с бэксетом 60 мм не подходит",
-                "instructions":{}
-            },
-            {
-                "id":"319616",
-                "name":"SL500",
-                "price":6000.0,
-                "image":"https://static.tildacdn.com/stor3561-6335-4131-a362-356335626264/68d4b851a6d8ca518ba16a6836710a8c.png",
-                "specifications":{
-                    "Бэксет":"70 мм"
-                },
-                "description":"На случай, если механизм с бэксетом 60 мм не подходит",
-                "instructions":{}
             }
         ]
     }
