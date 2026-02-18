@@ -294,7 +294,7 @@ let products = [
         "modifications":[
             {
                 "id":"306210",
-                "name":"SL300 (бексет 60мм)",
+                "name":"бэксет 60мм",
                 "price":24800.0,
                 "image":"https://static.tildacdn.com/stor6166-3234-4233-b464-366337636437/99455674.jpg",
                 "specifications":{},
@@ -306,7 +306,7 @@ let products = [
             },
             {
                 "id":"319622",
-                "name":"SL300 (бексет 70мм)",
+                "name":"бэксет 70мм",
                 "price":26800.0,
                 "image":"https://static.tildacdn.com/stor6166-3234-4233-b464-366337636437/99455674.jpg",
                 "specifications":{},
@@ -328,7 +328,7 @@ let products = [
         "modifications":[
             {
                 "id":"306212",
-                "name":"SL500 бэксет 60 мм",
+                "name":"бэксет 60 мм",
                 "price":38800.0,
                 "image":"https://static.tildacdn.com/stor3466-6330-4939-a461-353530623633/88944724.jpg",
                 "specifications":{},
@@ -340,7 +340,7 @@ let products = [
             },
             {
                 "id":"319626",
-                "name":"SL500 бэксет 70 мм",
+                "name":"бэксет 70 мм",
                 "price":40800.0,
                 "image":"https://static.tildacdn.com/stor3466-6330-4939-a461-353530623633/88944724.jpg",
                 "specifications":{},
