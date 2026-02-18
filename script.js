@@ -3727,6 +3727,38 @@ let products = [
                 }
             }
         ]
+    },
+    {
+        "id":85,
+        "name":"Механизм замка KEYWAY с бэксетом 70 мм ",
+        "price":6000.0,
+        "image":"https://static.tildacdn.com/stor3561-6335-4131-a362-356335626264/68d4b851a6d8ca518ba16a6836710a8c.png",
+        "category":"lock",
+        "description":"На случай, если механизм с бэксетом 60 мм не подходит",
+        "modifications":[
+            {
+                "id":"319614",
+                "name":"SL300",
+                "price":6000.0,
+                "image":"https://static.tildacdn.com/stor3561-6335-4131-a362-356335626264/68d4b851a6d8ca518ba16a6836710a8c.png",
+                "specifications":{
+                    "Бэксет":"70 мм"
+                },
+                "description":"На случай, если механизм с бэксетом 60 мм не подходит",
+                "instructions":{}
+            },
+            {
+                "id":"319616",
+                "name":"SL500",
+                "price":6000.0,
+                "image":"https://static.tildacdn.com/stor3561-6335-4131-a362-356335626264/68d4b851a6d8ca518ba16a6836710a8c.png",
+                "specifications":{
+                    "Бэксет":"70 мм"
+                },
+                "description":"На случай, если механизм с бэксетом 60 мм не подходит",
+                "instructions":{}
+            }
+        ]
     }
 ]
 ;
