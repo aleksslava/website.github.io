@@ -50,6 +50,7 @@ function sendToTelegramBot(data) {
 const categories = [
     { id: 'all', name: 'Все товары' },
     { id: 'Merch', name: 'Мерч'},
+    { id: 'frames and sockets', name: 'Рамки и розетки'},
     { id: 'relay', name: 'Блоки управления' },
     { id: 'switch', name: 'Выключатели' },
     { id: 'komplekt', name: 'Комплекты' },
@@ -1735,55 +1736,415 @@ let products = [
         ]
     },
     {
-        "id":78,
-        "name":"Рамка для Base",
+        "id":86,
+        "name":"Розетка Systeme Electric AtlasDesign | без шторок, с/з, 16А, механизм",
+        "price":202.0,
+        "image":"https://static.tildacdn.com/stor3935-3934-4537-b834-313661633031/b8e561e854d4f6f5c79efea76bc1530f.jpg",
+        "category":"frames and sockets",
+        "description":"",
+        "modifications":[
+            {
+                "id":"319756",
+                "name":"белый",
+                "price":202.0,
+                "image":"https://static.tildacdn.com/stor3935-3934-4537-b834-313661633031/b8e561e854d4f6f5c79efea76bc1530f.jpg",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"319772",
+                "name":"бежевый",
+                "price":202.0,
+                "image":"https://static.tildacdn.com/stor6130-3263-4430-a637-373731633034/7c99a433218f0e158284ed909fffc5ac.jpg",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"319788",
+                "name":"грифель (серый)",
+                "price":424.0,
+                "image":"https://static.tildacdn.com/stor3530-6137-4838-b634-336663336566/f2f140634aecb7ff98167e766c5390a5.jpg",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"319804",
+                "name":"карбон (черный)",
+                "price":424.0,
+                "image":"https://static.tildacdn.com/stor6633-3230-4138-b838-396530633232/4815bcb3600139b91f41e088a7b5fd05.jpg",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            }
+        ]
+    },
+    {
+        "id":87,
+        "name":"Розетка Systeme Electric AtlasDesign | со шторками, с/з, 16А, механизм",
+        "price":241.0,
+        "image":"https://static.tildacdn.com/stor6434-3763-4436-a265-666562636436/2fd0e4f6fce4367fa318c8f31e6caf89.png",
+        "category":"frames and sockets",
+        "description":"",
+        "modifications":[
+            {
+                "id":"319758",
+                "name":"белый",
+                "price":241.0,
+                "image":"https://static.tildacdn.com/stor6434-3763-4436-a265-666562636436/2fd0e4f6fce4367fa318c8f31e6caf89.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"319774",
+                "name":"бежевый",
+                "price":241.0,
+                "image":"https://static.tildacdn.com/stor3230-3733-4331-b933-656539363061/d3787fc8bb992f87e670d4ff4c24cc8f.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"319790",
+                "name":"грифель (серый)",
+                "price":510.0,
+                "image":"https://static.tildacdn.com/stor3637-6363-4530-a230-623734663331/60aea54ee5c010c8547eaacd7e3f5bbe.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"319806",
+                "name":"карбон (черный)",
+                "price":510.0,
+                "image":"https://static.tildacdn.com/stor6262-6333-4165-b261-333535343732/047a685e78569c12b401365e811fb489.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            }
+        ]
+    },
+    {
+        "id":88,
+        "name":"Розетка Systeme Electric AtlasDesign | без шторок, с/з, 16А, механизм, быстрозажим. клем.",
+        "price":206.0,
+        "image":"https://static.tildacdn.com/stor3563-3430-4362-b766-316465396436/f24bb404eb501521c54adf287a725b9e.png",
+        "category":"frames and sockets",
+        "description":"",
+        "modifications":[
+            {
+                "id":"319760",
+                "name":"белый",
+                "price":206.0,
+                "image":"https://static.tildacdn.com/stor3563-3430-4362-b766-316465396436/f24bb404eb501521c54adf287a725b9e.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"319776",
+                "name":"бежевый",
+                "price":206.0,
+                "image":"https://static.tildacdn.com/stor3666-3035-4834-b136-663337396263/726b568c9ee9934e4413ae2c456ff77c.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"319792",
+                "name":"грифель (серый)",
+                "price":432.0,
+                "image":"https://static.tildacdn.com/stor6261-3761-4232-b537-326166373030/5522a7b39ae4aa9029f59c237acf22cc.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"319808",
+                "name":"карбон (черный)",
+                "price":432.0,
+                "image":"https://static.tildacdn.com/stor3263-3439-4939-a266-363337636165/494d5dfdc7a6f431a1330968b6310467.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            }
+        ]
+    },
+    {
+        "id":89,
+        "name":"Розетка Systeme Electric AtlasDesign | со шторками, с/з, 16А, механизм, быстрозажим. клем.",
+        "price":246.0,
+        "image":"https://static.tildacdn.com/stor6434-3763-4436-a265-666562636436/2fd0e4f6fce4367fa318c8f31e6caf89.png",
+        "category":"frames and sockets",
+        "description":"",
+        "modifications":[
+            {
+                "id":"319762",
+                "name":"белый",
+                "price":246.0,
+                "image":"https://static.tildacdn.com/stor6434-3763-4436-a265-666562636436/2fd0e4f6fce4367fa318c8f31e6caf89.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"319778",
+                "name":"бежевый",
+                "price":246.0,
+                "image":"https://static.tildacdn.com/stor3230-3733-4331-b933-656539363061/d3787fc8bb992f87e670d4ff4c24cc8f.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"319794",
+                "name":"грифель (серый)",
+                "price":520.0,
+                "image":"https://static.tildacdn.com/stor3637-6363-4530-a230-623734663331/60aea54ee5c010c8547eaacd7e3f5bbe.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"319810",
+                "name":"карбон (черный)",
+                "price":520.0,
+                "image":"https://static.tildacdn.com/stor6262-6333-4165-b261-333535343732/047a685e78569c12b401365e811fb489.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            }
+        ]
+    },
+    {
+        "id":90,
+        "name":"Рамка Systeme Electric AtlasDesign | 1-постовая, универсальная",
         "price":100.0,
-        "image":"https://static.tildacdn.com/stor3666-3862-4530-a664-653931663534/96158079.webp",
-        "category":"switch",
-        "description":"Рамка для выключателя Base",
+        "image":"https://static.tildacdn.com/stor6134-3730-4937-a666-383234623564/dd1f4f45cf2053f4f61bf82bf5d35410.png",
+        "category":"frames and sockets",
+        "description":"",
         "modifications":[
             {
                 "id":"291760",
-                "name":"Белая",
+                "name":"белый",
                 "price":100.0,
-                "image":"https://static.tildacdn.com/stor3666-3862-4530-a664-653931663534/96158079.webp",
-                "specifications":{
-                    "Производитель":"Systeme Electric"
-                },
-                "description":"Рамка для выключателя Base в стиле Schneider Atlas Design или IEK Brite",
+                "image":"https://static.tildacdn.com/stor6134-3730-4937-a666-383234623564/dd1f4f45cf2053f4f61bf82bf5d35410.png",
+                "specifications":{},
+                "description":"",
                 "instructions":{}
             },
             {
                 "id":"291758",
-                "name":"Бежевая",
+                "name":"бежевый",
                 "price":100.0,
-                "image":"https://static.tildacdn.com/stor3635-3863-4337-a330-633239613362/64811909.webp",
-                "specifications":{
-                    "Производитель":"Systeme Electric"
-                },
-                "description":"Рамка для выключателя Base в стиле Schneider Atlas Design или IEK Brite",
+                "image":"https://static.tildacdn.com/stor6337-3633-4936-b033-356261363136/ebff77273e5ba3c11a6050baf8e9f235.png",
+                "specifications":{},
+                "description":"",
                 "instructions":{}
             },
             {
                 "id":"293044",
-                "name":"Серая (грифель)",
+                "name":"грифель (серый)",
                 "price":200.0,
-                "image":"https://static.tildacdn.com/stor3031-6566-4434-b237-656364343566/70237950.webp",
-                "specifications":{
-                    "Производитель":"Systeme Electric"
-                },
-                "description":"Рамка для выключателя Base в стиле Schneider Atlas Design или IEK Brite",
+                "image":"https://static.tildacdn.com/stor3030-6132-4730-b330-373764373266/3834e62285b6ec01df4a8511d51be337.png",
+                "specifications":{},
+                "description":"",
                 "instructions":{}
             },
             {
                 "id":"293046",
-                "name":"Черная (карбон)",
+                "name":"карбон (черный)",
                 "price":200.0,
-                "image":"https://static.tildacdn.com/stor3866-6462-4065-a462-613238663439/39266808.webp",
-                "specifications":{
-                    "Производитель":"Systeme Electric"
-                },
-                "description":"Рамка для выключателя Base в стиле Schneider Atlas Design или IEK Brite",
+                "image":"https://static.tildacdn.com/stor3339-6236-4533-a261-383563653236/ce0ec96bda31edd8cd401a91f85b747b.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            }
+        ]
+    },
+    {
+        "id":91,
+        "name":"Рамка Systeme Electric AtlasDesign | 2-постовая, универсальная",
+        "price":100.0,
+        "image":"https://static.tildacdn.com/stor3563-6664-4262-b339-633233656434/33ceb7f4c426b6bf5cb1119cf130776f.png",
+        "category":"frames and sockets",
+        "description":"",
+        "modifications":[
+            {
+                "id":"319748",
+                "name":"белый",
+                "price":100.0,
+                "image":"https://static.tildacdn.com/stor3563-6664-4262-b339-633233656434/33ceb7f4c426b6bf5cb1119cf130776f.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"319764",
+                "name":"бежевый",
+                "price":100.0,
+                "image":"https://static.tildacdn.com/stor3664-3963-4565-a436-323535396164/d1e8ec5cca6c7c4ef474096d0eefc9c4.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"319780",
+                "name":"грифель (серый)",
+                "price":326.0,
+                "image":"https://static.tildacdn.com/stor6535-3262-4639-a439-316362393830/8ceca7183ae8cd251db9dfd10131c5bc.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"319796",
+                "name":"карбон (черный)",
+                "price":326.0,
+                "image":"https://static.tildacdn.com/stor3331-6334-4336-b234-356362323732/8a2463ed73870c848452157a0ecb09d7.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            }
+        ]
+    },
+    {
+        "id":92,
+        "name":"Рамка Systeme Electric AtlasDesign | 3-постовая, универсальная",
+        "price":190.0,
+        "image":"https://static.tildacdn.com/stor3731-3737-4738-a562-643133323462/bbfeab6208aec4907c61d71ed80b0940.png",
+        "category":"frames and sockets",
+        "description":"",
+        "modifications":[
+            {
+                "id":"319750",
+                "name":"белый",
+                "price":190.0,
+                "image":"https://static.tildacdn.com/stor3731-3737-4738-a562-643133323462/bbfeab6208aec4907c61d71ed80b0940.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"319766",
+                "name":"бежевый",
+                "price":190.0,
+                "image":"https://static.tildacdn.com/stor3865-3537-4534-b963-326662393563/aefe5c3653f3b103d8c472fca2cca06c.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"319782",
+                "name":"грифель (серый)",
+                "price":574.0,
+                "image":"https://static.tildacdn.com/stor3833-3335-4238-b336-366666666666/87d8ec8fc8f221eb858cd6365440444e.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"319798",
+                "name":"карбон (черный)",
+                "price":574.0,
+                "image":"https://static.tildacdn.com/stor3865-6566-4263-b666-343534396265/9fbd2da2f8d8725fe7662915a9de2c46.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            }
+        ]
+    },
+    {
+        "id":93,
+        "name":"Рамка Systeme Electric AtlasDesign | 4-постовая, универсальная",
+        "price":294.0,
+        "image":"https://static.tildacdn.com/stor3865-3661-4235-b763-396665623364/9c40ae4099931898bf9f1d695d845704.png",
+        "category":"frames and sockets",
+        "description":"",
+        "modifications":[
+            {
+                "id":"319752",
+                "name":"белый",
+                "price":294.0,
+                "image":"https://static.tildacdn.com/stor3865-3661-4235-b763-396665623364/9c40ae4099931898bf9f1d695d845704.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"319768",
+                "name":"бежевый",
+                "price":294.0,
+                "image":"https://static.tildacdn.com/stor3038-3438-4865-a561-616535323536/183592cbbe86ee6069460c014df8ff1a.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"319784",
+                "name":"грифель (серый)",
+                "price":884.0,
+                "image":"https://static.tildacdn.com/stor3535-3738-4832-a136-313337636434/08b5a7d5ab7c093a2c5600be2e871c98.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"319800",
+                "name":"карбон (черный)",
+                "price":884.0,
+                "image":"https://static.tildacdn.com/stor6161-3764-4231-b963-373966643264/7d8d9d823d26ff18409179b4c7e1f005.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            }
+        ]
+    },
+    {
+        "id":94,
+        "name":"Рамка Systeme Electric AtlasDesign | 5-постовая, универсальная",
+        "price":390.0,
+        "image":"https://static.tildacdn.com/stor6238-6331-4737-b565-363733326163/57e112258adaa7781be0bf84e8cee6c0.png",
+        "category":"frames and sockets",
+        "description":"",
+        "modifications":[
+            {
+                "id":"319754",
+                "name":"белый",
+                "price":390.0,
+                "image":"https://static.tildacdn.com/stor6238-6331-4737-b565-363733326163/57e112258adaa7781be0bf84e8cee6c0.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"319770",
+                "name":"бежевый",
+                "price":390.0,
+                "image":"https://static.tildacdn.com/stor6232-6462-4836-a531-356537643935/80106271937b0f83865d5cb5d71ad6ec.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"319786",
+                "name":"грифель (серый)",
+                "price":1174.0,
+                "image":"https://static.tildacdn.com/stor6133-6661-4765-b434-373030656161/21132a77b79ea459b3627c21376237f5.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"319802",
+                "name":"карбон (черный)",
+                "price":1174.0,
+                "image":"https://static.tildacdn.com/stor3735-6637-4061-b262-383962633334/49d72e0b4d8c9bbc3d8e780211e4f529.png",
+                "specifications":{},
+                "description":"",
                 "instructions":{}
             }
         ]
