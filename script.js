@@ -50,7 +50,7 @@ function sendToTelegramBot(data) {
 const categories = [
     { id: 'all', name: 'Все товары' },
     { id: 'Merch', name: 'Мерч'},
-    { id: 'frames and sockets', name: 'Рамки и розетки'},
+    { id: 'frames and sockets', name: 'Розетки и рамки'},
     { id: 'relay', name: 'Блоки управления' },
     { id: 'switch', name: 'Выключатели' },
     { id: 'komplekt', name: 'Комплекты' },
@@ -1739,7 +1739,7 @@ let products = [
         "id":86,
         "name":"Розетка Systeme Electric AtlasDesign | без шторок, с/з, 16А, механизм",
         "price":202.0,
-        "image":"https://static.tildacdn.com/stor3935-3934-4537-b834-313661633031/b8e561e854d4f6f5c79efea76bc1530f.jpg",
+        "image":"https://static.tildacdn.com/stor3563-3430-4362-b766-316465396436/f24bb404eb501521c54adf287a725b9e.png",
         "category":"frames and sockets",
         "description":"",
         "modifications":[
@@ -1747,7 +1747,7 @@ let products = [
                 "id":"319756",
                 "name":"белый",
                 "price":202.0,
-                "image":"https://static.tildacdn.com/stor3935-3934-4537-b834-313661633031/b8e561e854d4f6f5c79efea76bc1530f.jpg",
+                "image":"https://static.tildacdn.com/stor3563-3430-4362-b766-316465396436/f24bb404eb501521c54adf287a725b9e.png",
                 "specifications":{},
                 "description":"",
                 "instructions":{}
