@@ -515,7 +515,7 @@ let products = [
     },
     {
         "id":98,
-        "name":"DIN-RGBW",
+        "name":"DIN-1.RGBW",
         "price":10980.0,
         "image":"https://static.tildacdn.com/stor6133-6231-4230-a433-653462396132/28820715.png",
         "category":"relay",
@@ -523,7 +523,7 @@ let products = [
         "modifications":[
             {
                 "id":"320772",
-                "name":"DIN-RGBW",
+                "name":"DIN-1.RGBW",
                 "price":10980.0,
                 "image":"https://static.tildacdn.com/stor6133-6231-4230-a433-653462396132/28820715.png",
                 "specifications":{
