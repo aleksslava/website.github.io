@@ -488,7 +488,7 @@ let products = [
     {
         "id":97,
         "name":"DIN-4.LED",
-        "price":9980.0,
+        "price":10980.0,
         "image":"https://static.tildacdn.com/stor6133-6231-4230-a433-653462396132/28820715.png",
         "category":"relay",
         "description":"",
@@ -516,7 +516,7 @@ let products = [
     {
         "id":98,
         "name":"DIN-RGBW",
-        "price":9980.0,
+        "price":10980.0,
         "image":"https://static.tildacdn.com/stor6133-6231-4230-a433-653462396132/28820715.png",
         "category":"relay",
         "description":"",
