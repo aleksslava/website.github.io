@@ -2903,7 +2903,44 @@ let products = [
         "image":"https://static.tildacdn.com/stor3761-3065-4465-b664-653531633764/ede75c46ee00b350232929e7fbfa5be2.png",
         "category":"frames and sockets",
         "description":"Самая современная USB-зарядка позволяет заряжать ноутбук, а также смартфоны последнего поколения, которые поддерживают функцию быстрой зарядки. Мощность: тип-С - 65Вт. Поддерживает современные протоколы быстрой зарядки QC, PD, последних версий.",
-        "modifications":[]
+        "modifications":[
+            {
+                "id":"320844",
+                "name":"белый",
+                "price":5143.0,
+                "image":"https://static.tildacdn.com/stor3761-3065-4465-b664-653531633764/ede75c46ee00b350232929e7fbfa5be2.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"320846",
+                "name":"бежевый",
+                "price":5143.0,
+                "image":"https://static.tildacdn.com/stor3964-3961-4262-a537-653862643738/311672e91a573d755acabb2886cd28b8.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"320848",
+                "name":"грифель (серый)",
+                "price":6771.0,
+                "image":"https://static.tildacdn.com/stor3035-6630-4337-b763-393266663230/4b0062690e986c5a3c2e87aa54749ae6.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"320850",
+                "name":"карбон (черный)",
+                "price":6771.0,
+                "image":"https://static.tildacdn.com/stor3065-3539-4839-b430-346465373132/d4dab5e958714bb691ed8294801df546.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            }
+        ]
     },
     {
         "id":100,
@@ -2912,7 +2949,44 @@ let products = [
         "image":"https://static.tildacdn.com/stor3936-3735-4262-a631-616231373334/daeaed0879ecd981eb2df036a4b26545.png",
         "category":"frames and sockets",
         "description":"Розетка силовая 16А с заземлением и шторками с розеткой USB с двумя разъемами тип А и тип С. Розетка совмещает в себе сразу 3 функции в одном изделии. Одно устройство позволяет как подключить бытовые приборы, так и зарядить мобильные устройства.",
-        "modifications":[]
+        "modifications":[
+            {
+                "id":"320852",
+                "name":"белый",
+                "price":6588.0,
+                "image":"https://static.tildacdn.com/stor3936-3735-4262-a631-616231373334/daeaed0879ecd981eb2df036a4b26545.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"320854",
+                "name":"бежевый",
+                "price":6588.0,
+                "image":"https://static.tildacdn.com/stor3936-3264-4636-b236-616230386466/18a9359ebec9270d623804f97df9f7e8.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"320856",
+                "name":"грифель (серый)",
+                "price":8540.0,
+                "image":"https://static.tildacdn.com/stor3437-3038-4931-a439-373763393836/3c353eb9ba5677b0734205c3aacb346b.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"320858",
+                "name":"карбон (черный)",
+                "price":8540.0,
+                "image":"https://static.tildacdn.com/stor3437-3038-4931-a439-373763393836/3c353eb9ba5677b0734205c3aacb346b.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            }
+        ]
     },
     {
         "id":101,
@@ -2921,7 +2995,26 @@ let products = [
         "image":"https://static.tildacdn.com/stor6337-3539-4238-a131-343036643238/2d0ab09cb994e95963e233b03e5931db.png",
         "category":"frames and sockets",
         "description":"Механизм двойной розетки разъёмами RJ45 категория 5е и HDMI предназначен для удобного и быстрого подключения вашего компьютера и телевизора к соответствующим сетям.",
-        "modifications":[]
+        "modifications":[
+            {
+                "id":"320860",
+                "name":"белый",
+                "price":1837.0,
+                "image":"https://static.tildacdn.com/stor6337-3539-4238-a131-343036643238/2d0ab09cb994e95963e233b03e5931db.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"320862",
+                "name":"карбон (черный)",
+                "price":2593.0,
+                "image":"https://static.tildacdn.com/stor3732-3664-4531-b861-396538633530/de3b5bbfc995a8a4624f89d41a175c72.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            }
+        ]
     },
     {
         "id":102,
@@ -2930,7 +3023,44 @@ let products = [
         "image":"https://static.tildacdn.com/stor3235-3363-4966-b037-326534303234/4ba413ccae14ea48d1bb788bf6702cc5.jpg",
         "category":"frames and sockets",
         "description":"Механизм розетки компьютерной с разъёмом RJ45 категории 6А предназначен для удобного и быстрого подключения вашего компьютера к локальной вычислительной сети. Обладает высокой скоростью передачи данных до 10 Гбит/с, диапазон частоты до 500 МГц.",
-        "modifications":[]
+        "modifications":[
+            {
+                "id":"320864",
+                "name":"белый",
+                "price":1434.0,
+                "image":"https://static.tildacdn.com/stor3235-3363-4966-b037-326534303234/4ba413ccae14ea48d1bb788bf6702cc5.jpg",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"320866",
+                "name":"бежевый",
+                "price":1434.0,
+                "image":"https://static.tildacdn.com/stor3134-6264-4434-b663-656262373564/74052d49d24086d1629fc6379bd302d8.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"320868",
+                "name":"грифель (серый)",
+                "price":2135.0,
+                "image":"https://static.tildacdn.com/stor3133-6263-4537-a438-366465333137/47a07270ca194e29b931a240f45316c3.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"320870",
+                "name":"карбон (черный)",
+                "price":2135.0,
+                "image":"https://static.tildacdn.com/stor3562-3136-4064-a635-653637613164/9ccd60ddb4781b4471da8fced8651b89.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            }
+        ]
     },
     {
         "id":103,
@@ -2939,7 +3069,44 @@ let products = [
         "image":"https://static.tildacdn.com/stor6436-6161-4439-b832-626531383436/0d93160907190b712e6d83d541874994.png",
         "category":"frames and sockets",
         "description":"Механизм двойной розетки с разъёмами RJ45 категории 5е и TV предназначен для удобного и быстрого подключения вашего компьютера и телевизора к соответствующим сетям.",
-        "modifications":[]
+        "modifications":[
+            {
+                "id":"320872",
+                "name":"белый",
+                "price":1010.0,
+                "image":"https://static.tildacdn.com/stor6436-6161-4439-b832-626531383436/0d93160907190b712e6d83d541874994.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"320874",
+                "name":"бежевый",
+                "price":1010.0,
+                "image":"https://static.tildacdn.com/stor6135-3534-4136-b034-643134313164/1ce12c6e771fbc3c5f8a308a7e1b9ed4.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"320876",
+                "name":"грифель (серый)",
+                "price":1568.0,
+                "image":"https://static.tildacdn.com/stor6337-3061-4338-b063-336630666530/20fcd0ecc522e26e5e7e5f90617833cf.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"320878",
+                "name":"карбон (черный)",
+                "price":1568.0,
+                "image":"https://static.tildacdn.com/stor3564-3639-4232-b239-363632376230/c522d24bc60cac8de0246a02452c8c68.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            }
+        ]
     },
     {
         "id":104,
@@ -2948,7 +3115,44 @@ let products = [
         "image":"https://static.tildacdn.com/stor3737-3661-4836-b732-303662333232/17a325e5996b46aad81bd682af397c0c.png",
         "category":"frames and sockets",
         "description":"",
-        "modifications":[]
+        "modifications":[
+            {
+                "id":"320880",
+                "name":"белый",
+                "price":582.0,
+                "image":"https://static.tildacdn.com/stor3737-3661-4836-b732-303662333232/17a325e5996b46aad81bd682af397c0c.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"320882",
+                "name":"бежевый",
+                "price":582.0,
+                "image":"https://static.tildacdn.com/stor6235-3831-4663-a466-623365653161/932afa5d90bb19f4e943a52573790738.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"320884",
+                "name":"грифель (серый)",
+                "price":883.0,
+                "image":"https://static.tildacdn.com/stor6134-3835-4666-b933-346532663532/b6c55ceb0e919cbdae63cc321596c931.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"320886",
+                "name":"карбон (черный)",
+                "price":883.0,
+                "image":"https://static.tildacdn.com/stor3463-3162-4736-b637-396662333366/33616843e45b7c3ac25f2689bd71a76c.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            }
+        ]
     },
     {
         "id":105,
@@ -2957,7 +3161,44 @@ let products = [
         "image":"https://static.tildacdn.com/stor3737-3661-4836-b732-303662333232/17a325e5996b46aad81bd682af397c0c.png",
         "category":"frames and sockets",
         "description":"",
-        "modifications":[]
+        "modifications":[
+            {
+                "id":"320888",
+                "name":"белый",
+                "price":638.0,
+                "image":"https://static.tildacdn.com/stor3737-3661-4836-b732-303662333232/17a325e5996b46aad81bd682af397c0c.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"320890",
+                "name":"бежевый",
+                "price":638.0,
+                "image":"https://static.tildacdn.com/stor6235-3831-4663-a466-623365653161/932afa5d90bb19f4e943a52573790738.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"320892",
+                "name":"грифель (серый)",
+                "price":970.0,
+                "image":"https://static.tildacdn.com/stor6134-3835-4666-b933-346532663532/b6c55ceb0e919cbdae63cc321596c931.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"320894",
+                "name":"карбон (черный)",
+                "price":970.0,
+                "image":"https://static.tildacdn.com/stor3463-3162-4736-b637-396662333366/33616843e45b7c3ac25f2689bd71a76c.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            }
+        ]
     },
     {
         "id":106,
@@ -2966,7 +3207,44 @@ let products = [
         "image":"https://static.tildacdn.com/stor6561-6638-4237-b765-316538333565/5ffc6f8c85a7278c14ad8a19b8527061.png",
         "category":"frames and sockets",
         "description":"",
-        "modifications":[]
+        "modifications":[
+            {
+                "id":"320896",
+                "name":"белый",
+                "price":224.0,
+                "image":"https://static.tildacdn.com/stor6561-6638-4237-b765-316538333565/5ffc6f8c85a7278c14ad8a19b8527061.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"320898",
+                "name":"бежевый",
+                "price":224.0,
+                "image":"https://static.tildacdn.com/stor3365-6635-4462-a566-353638393061/ea817a633aff08d06e1fbacae4787902.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"320900",
+                "name":"грифель (серый)",
+                "price":453.0,
+                "image":"https://static.tildacdn.com/stor6139-3764-4237-b563-326233633731/66b7c570779a8c90e168722f1a2416ce.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            },
+            {
+                "id":"320902",
+                "name":"карбон (черный)",
+                "price":453.0,
+                "image":"https://static.tildacdn.com/stor6261-6531-4966-b262-376331323738/0a85e0990f0e366206833927b0a29e49.png",
+                "specifications":{},
+                "description":"",
+                "instructions":{}
+            }
+        ]
     },
     {
         "id":23,
