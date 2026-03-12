@@ -64,7 +64,7 @@ const categories = [
 let products = [
     {
         "id":3,
-        "name":"Билет на живое обучение в офисе HiTE PRO — 28 марта",
+        "name":"Билет на живое обучение в офисе HiTE PRO",
         "price":12500.0,
         "image":"https://static.tildacdn.com/stor6639-6335-4539-a130-343937363366/99732103.png",
         "category":"other",
@@ -72,7 +72,7 @@ let products = [
         "modifications":[
             {
                 "id":"312761",
-                "name":"Билет на живое обучение в офисе HiTE PRO — 28 марта (суббота)",
+                "name":"28 марта (суббота)",
                 "price":12500.0,
                 "image":"https://static.tildacdn.com/stor6639-6335-4539-a130-343937363366/99732103.png",
                 "specifications":{
@@ -85,7 +85,7 @@ let products = [
             },
             {
                 "id":"312761",
-                "name":"Билет на живое обучение в офисе HiTE PRO — 11 апреля (суббота)",
+                "name":"11 апреля (суббота)",
                 "price":12500.0,
                 "image":"https://static.tildacdn.com/stor6639-6335-4539-a130-343937363366/99732103.png",
                 "specifications":{
@@ -2895,6 +2895,78 @@ let products = [
                 "instructions":{}
             }
         ]
+    },
+    {
+        "id":99,
+        "name":"Розетка Systeme Electric AtlasDesign | USB тип-С 65Вт высокоскор.заряд. QC, PD, механизм",
+        "price":5143.0,
+        "image":"https://static.tildacdn.com/stor3761-3065-4465-b664-653531633764/ede75c46ee00b350232929e7fbfa5be2.png",
+        "category":"frames and sockets",
+        "description":"Самая современная USB-зарядка позволяет заряжать ноутбук, а также смартфоны последнего поколения, которые поддерживают функцию быстрой зарядки. Мощность: тип-С - 65Вт. Поддерживает современные протоколы быстрой зарядки QC, PD, последних версий.",
+        "modifications":[]
+    },
+    {
+        "id":100,
+        "name":"Розетка Systeme Electric AtlasDesign | 16А с 2 USB A+C, 5В/2,4А/3,0А, 2х5В/1,5А, механизм",
+        "price":6588.0,
+        "image":"https://static.tildacdn.com/stor3936-3735-4262-a631-616231373334/daeaed0879ecd981eb2df036a4b26545.png",
+        "category":"frames and sockets",
+        "description":"Розетка силовая 16А с заземлением и шторками с розеткой USB с двумя разъемами тип А и тип С. Розетка совмещает в себе сразу 3 функции в одном изделии. Одно устройство позволяет как подключить бытовые приборы, так и зарядить мобильные устройства.",
+        "modifications":[]
+    },
+    {
+        "id":101,
+        "name":"Розетка Systeme Electric AtlasDesign | двойная HDMI+RJ45, кат. 5е, механизм",
+        "price":1837.0,
+        "image":"https://static.tildacdn.com/stor6337-3539-4238-a131-343036643238/2d0ab09cb994e95963e233b03e5931db.png",
+        "category":"frames and sockets",
+        "description":"Механизм двойной розетки разъёмами RJ45 категория 5е и HDMI предназначен для удобного и быстрого подключения вашего компьютера и телевизора к соответствующим сетям.",
+        "modifications":[]
+    },
+    {
+        "id":102,
+        "name":"Розетка Systeme Electric AtlasDesign | компьютерная RJ45 кат. 6A, механизм",
+        "price":1434.0,
+        "image":"https://static.tildacdn.com/stor3235-3363-4966-b037-326534303234/4ba413ccae14ea48d1bb788bf6702cc5.jpg",
+        "category":"frames and sockets",
+        "description":"Механизм розетки компьютерной с разъёмом RJ45 категории 6А предназначен для удобного и быстрого подключения вашего компьютера к локальной вычислительной сети. Обладает высокой скоростью передачи данных до 10 Гбит/с, диапазон частоты до 500 МГц.",
+        "modifications":[]
+    },
+    {
+        "id":103,
+        "name":"Розетка Systeme Electric AtlasDesign | двойная ТВ + компьютерная RJ45 кат. 5e, механизм",
+        "price":1010.0,
+        "image":"https://static.tildacdn.com/stor6436-6161-4439-b832-626531383436/0d93160907190b712e6d83d541874994.png",
+        "category":"frames and sockets",
+        "description":"Механизм двойной розетки с разъёмами RJ45 категории 5е и TV предназначен для удобного и быстрого подключения вашего компьютера и телевизора к соответствующим сетям.",
+        "modifications":[]
+    },
+    {
+        "id":104,
+        "name":"Розетка Systeme Electric AtlasDesign | TV оконечная 1дБ, механизм",
+        "price":582.0,
+        "image":"https://static.tildacdn.com/stor3737-3661-4836-b732-303662333232/17a325e5996b46aad81bd682af397c0c.png",
+        "category":"frames and sockets",
+        "description":"",
+        "modifications":[]
+    },
+    {
+        "id":105,
+        "name":"Розетка Systeme Electric AtlasDesign | TV проходная 4дБ, механизм",
+        "price":638.0,
+        "image":"https://static.tildacdn.com/stor3737-3661-4836-b732-303662333232/17a325e5996b46aad81bd682af397c0c.png",
+        "category":"frames and sockets",
+        "description":"",
+        "modifications":[]
+    },
+    {
+        "id":106,
+        "name":"Вывод кабеля Systeme Electric AtlasDesign | механизм",
+        "price":224.0,
+        "image":"https://static.tildacdn.com/stor6561-6638-4237-b765-316538333565/5ffc6f8c85a7278c14ad8a19b8527061.png",
+        "category":"frames and sockets",
+        "description":"",
+        "modifications":[]
     },
     {
         "id":23,
