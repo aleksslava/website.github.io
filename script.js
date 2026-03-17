@@ -3578,52 +3578,6 @@ let products = [
         ]
     },
     {
-        "id":72,
-        "name":"Комплект для защиты от протечек HiTE PRO на трубу 1/2",
-        "price":20432.0,
-        "image":"https://static.tildacdn.com/stor6431-3834-4162-b133-653538656133/55102437.jpg",
-        "category":"kran",
-        "description":"Сборный комплект устройств: 1-2 шаровых крана, блок управления, датчик протечки",
-        "modifications":[
-            {
-                "id":"301066",
-                "name":"2 шт Bugatti 220",
-                "price":25540.0,
-                "image":"https://static.tildacdn.com/stor6431-3834-4162-b133-653538656133/55102437.jpg",
-                "specifications":{},
-                "description":"2 крана Bugatti Pro 220 1/2\n1 датчик протечки Smart Water\n1 блок Relay-Drive",
-                "instructions":{}
-            },
-            {
-                "id":"301068",
-                "name":"2 шт Profi 220",
-                "price":23940.0,
-                "image":"https://static.tildacdn.com/stor6530-6464-4333-b036-643565356237/70060083.jpg",
-                "specifications":{},
-                "description":"2 крана Profi 220 1/2\n1 датчик протечки Smart Water\n1 блок Relay-Drive",
-                "instructions":{}
-            },
-            {
-                "id":"301062",
-                "name":"1 шт Bugatti 220",
-                "price":16250.0,
-                "image":"https://static.tildacdn.com/stor6431-3834-4162-b133-653538656133/55102437.jpg",
-                "specifications":{},
-                "description":"1 кран Bugatti Pro 220 1/2\n1 датчик протечки Smart Water\n1 блок Relay-Drive",
-                "instructions":{}
-            },
-            {
-                "id":"301064",
-                "name":"1 шт Profi",
-                "price":15450.0,
-                "image":"https://static.tildacdn.com/stor6530-6464-4333-b036-643565356237/70060083.jpg",
-                "specifications":{},
-                "description":"1 кран Profi 220 1/2\n1 датчик протечки Smart Water\n1 блок Relay-Drive",
-                "instructions":{}
-            }
-        ]
-    },
-    {
         "id":29,
         "name":"Шаровой кран с электроприводом Bugatti Pro 220В",
         "price":7525.0,
@@ -3634,7 +3588,7 @@ let products = [
             {
                 "id":"224584",
                 "name":"Bugatti Pro 220В - 1/2",
-                "price":9290.0,
+                "price":9990.0,
                 "image":"https://static.tildacdn.com/tild3539-3032-4536-b632-643838323039/1.png",
                 "specifications":{
                     "Питание":"230 В, 50 Гц",
@@ -3672,7 +3626,7 @@ let products = [
             {
                 "id":"224598",
                 "name":"Bugatti Pro 220В - 1",
-                "price":13290.0,
+                "price":12490.0,
                 "image":"https://static.tildacdn.com/tild3539-3032-4536-b632-643838323039/1.png",
                 "specifications":{
                     "Питание":"230 В, 50 Гц",
@@ -3720,7 +3674,7 @@ let products = [
             {
                 "id":"224586",
                 "name":"Bugatti Pro 12В - 3/4",
-                "price":10590.0,
+                "price":9990.0,
                 "image":"https://static.tildacdn.com/tild6234-6135-4731-b334-393033633335/2.png",
                 "specifications":{
                     "Питание":"12 В, 50 Гц",
@@ -3739,7 +3693,7 @@ let products = [
             {
                 "id":"224596",
                 "name":"Bugatti Pro 12В - 1",
-                "price":11990.0,
+                "price":12490.0,
                 "image":"https://static.tildacdn.com/tild6234-6135-4731-b334-393033633335/2.png",
                 "specifications":{
                     "Питание":"12 В, 50 Гц",
@@ -3768,7 +3722,7 @@ let products = [
             {
                 "id":"224608",
                 "name":"PROFI 220В - 1/2",
-                "price":8490.0,
+                "price":8990.0,
                 "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
                 "specifications":{
                     "Питание":"230 В, 50 Гц",
@@ -3787,7 +3741,7 @@ let products = [
             {
                 "id":"224606",
                 "name":"PROFI 220В - 3/4",
-                "price":9390.0,
+                "price":8990.0,
                 "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
                 "specifications":{
                     "Питание":"230 В, 50 Гц",
@@ -3806,7 +3760,7 @@ let products = [
             {
                 "id":"224592",
                 "name":"PROFI 220В - 1",
-                "price":10590.0,
+                "price":11490.0,
                 "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
                 "specifications":{
                     "Питание":"230 В, 50 Гц",
@@ -3825,7 +3779,7 @@ let products = [
             {
                 "id":"224612",
                 "name":"PROFI 220В - 1 1/4",
-                "price":11290.0,
+                "price":12990.0,
                 "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
                 "specifications":{
                     "Питание":"230 В, 50 Гц",
@@ -3854,7 +3808,7 @@ let products = [
             {
                 "id":"224616",
                 "name":"PROFI 12В - 1/2",
-                "price":7990.0,
+                "price":8990.0,
                 "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
                 "specifications":{
                     "Питание":"12 В, 50 Гц",
@@ -3873,7 +3827,7 @@ let products = [
             {
                 "id":"224590",
                 "name":"PROFI 12В - 3/4",
-                "price":8490.0,
+                "price":8990.0,
                 "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
                 "specifications":{
                     "Питание":"12 В, 50 Гц",
@@ -3892,7 +3846,7 @@ let products = [
             {
                 "id":"224614",
                 "name":"PROFI 12В - 1",
-                "price":10590.0,
+                "price":11490.0,
                 "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
                 "specifications":{
                     "Питание":"12 В, 50 Гц",
@@ -3911,7 +3865,7 @@ let products = [
             {
                 "id":"224600",
                 "name":"PROFI 12В - 1 1/4",
-                "price":11290.0,
+                "price":12990.0,
                 "image":"https://static.tildacdn.com/tild6133-3133-4631-b033-336137323166/---64-455x455.png",
                 "specifications":{
                     "Питание":"12 В, 50 Гц",
@@ -3940,7 +3894,7 @@ let products = [
             {
                 "id":"224604",
                 "name":"MK 220В - 1/2",
-                "price":6090.0,
+                "price":6990.0,
                 "image":"https://static.tildacdn.com/tild6135-6133-4166-b563-363938353635/---65-455x455.png",
                 "specifications":{
                     "Питание":"230 В",
@@ -3959,7 +3913,7 @@ let products = [
             {
                 "id":"224588",
                 "name":"MK 220В - 3/4",
-                "price":6590.0,
+                "price":6990.0,
                 "image":"https://static.tildacdn.com/tild6135-6133-4166-b563-363938353635/---65-455x455.png",
                 "specifications":{
                     "Питание":"230 В",
@@ -4007,7 +3961,7 @@ let products = [
             {
                 "id":"224618",
                 "name":"MK 12В - 1/2",
-                "price":6090.0,
+                "price":6990.0,
                 "image":"https://static.tildacdn.com/tild6135-6133-4166-b563-363938353635/---65-455x455.png",
                 "specifications":{
                     "Питание":"12 В",
@@ -4026,7 +3980,7 @@ let products = [
             {
                 "id":"224620",
                 "name":"MK 12В - 3/4",
-                "price":6590.0,
+                "price":6990.0,
                 "image":"https://static.tildacdn.com/tild6135-6133-4166-b563-363938353635/---65-455x455.png",
                 "specifications":{
                     "Питание":"12 В",
