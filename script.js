@@ -554,6 +554,62 @@ let products = [
         ]
     },
     {
+        "id":107,
+        "name":"DIN-8.DI.12-24",
+        "price":10980.0,
+        "image":"https://static.tildacdn.com/stor6133-6231-4230-a433-653462396132/28820715.png",
+        "category":"relay",
+        "description":"",
+        "modifications":[
+            {
+                "id":"322014",
+                "name":"DIN-8.DI.12-24",
+                "price":10980.0,
+                "image":"https://static.tildacdn.com/stor6133-6231-4230-a433-653462396132/28820715.png",
+                "specifications":{
+                    "Кол-во дискретных входов":"8",
+                    "Входной сигнал":"10 - 28 В DC",
+                    "Входной ток":"10 мА на канал",
+                    "Питание":"12 В DC или 85-265 В, 50 Гц AC",
+                    "Вес":"150 г",
+                    "Габариты":"90 х 36 х 61 мм"
+                },
+                "description":"Блок предназначен для приёма сигналов от внешних устройств, работающих от постоянного тока 12 В или 24 В (например: кнопок, концевых выключателей, реле, датчиков с транзисторным/релейным выходом). Каждый вход фиксирует наличие или отсутствие напряжения 12/24 В постоянного тока.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/DIN-8.DI.12-24_74x105mm.pdf"
+                }
+            }
+        ]
+    },
+    {
+        "id":108,
+        "name":"DIN-8.DI.220",
+        "price":10980.0,
+        "image":"https://static.tildacdn.com/stor6133-6231-4230-a433-653462396132/28820715.png",
+        "category":"relay",
+        "description":"",
+        "modifications":[
+            {
+                "id":"322016",
+                "name":"DIN-8.DI.220",
+                "price":10980.0,
+                "image":"https://static.tildacdn.com/stor6133-6231-4230-a433-653462396132/28820715.png",
+                "specifications":{
+                    "Кол-во дискретных входов":"8",
+                    "Входной сигнал":"85-265 В AC, 50 Гц",
+                    "Входной ток":"10 мА на канал",
+                    "Питание":"12 В DC или 85-265 В AC, 50 Гц",
+                    "Вес":"150 г",
+                    "Габариты":"90 х 36 х 61 мм"
+                },
+                "description":"Блок дискретных входов предназначен для приёма сигналов от внешних устройств, работающих от сети переменного тока 220 В (например: кнопок, концевых выключателей, реле, контакторов, датчиков с релейным выходом). Каждый вход блока фиксирует наличие или отсутствие напряжения 220 В переменного тока.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/DIN-8.DI.220_74x105mm.pdf"
+                }
+            }
+        ]
+    },
+    {
         "id":95,
         "name":"Многофункциональное реле Welrok VIP 63A",
         "price":4509.0,
@@ -3573,6 +3629,52 @@ let products = [
                 "image":"https://static.tildacdn.com/stor6436-3830-4866-a562-663532633337/28196858.jpg",
                 "specifications":{},
                 "description":"Кепка, регулируемая по размеру и с логотипом HiTE PRO.",
+                "instructions":{}
+            }
+        ]
+    },
+    {
+        "id":72,
+        "name":"Комплект для защиты от протечек HiTE PRO на трубу 1/2",
+        "price":20432.0,
+        "image":"https://static.tildacdn.com/stor6431-3834-4162-b133-653538656133/55102437.jpg",
+        "category":"kran",
+        "description":"Сборный комплект устройств: 1-2 шаровых крана, блок управления, датчик протечки",
+        "modifications":[
+            {
+                "id":"301066",
+                "name":"2 шт Bugatti 220",
+                "price":25540.0,
+                "image":"https://static.tildacdn.com/stor6431-3834-4162-b133-653538656133/55102437.jpg",
+                "specifications":{},
+                "description":"2 крана Bugatti Pro 220 1/2\n1 датчик протечки Smart Water\n1 блок Relay-Drive",
+                "instructions":{}
+            },
+            {
+                "id":"301068",
+                "name":"2 шт Profi 220",
+                "price":24940.0,
+                "image":"https://static.tildacdn.com/stor6530-6464-4333-b036-643565356237/70060083.jpg",
+                "specifications":{},
+                "description":"2 крана Profi 220 1/2\n1 датчик протечки Smart Water\n1 блок Relay-Drive",
+                "instructions":{}
+            },
+            {
+                "id":"301062",
+                "name":"1 шт Bugatti 220",
+                "price":16950.0,
+                "image":"https://static.tildacdn.com/stor6431-3834-4162-b133-653538656133/55102437.jpg",
+                "specifications":{},
+                "description":"1 кран Bugatti Pro 220 1/2\n1 датчик протечки Smart Water\n1 блок Relay-Drive",
+                "instructions":{}
+            },
+            {
+                "id":"301064",
+                "name":"1 шт Profi",
+                "price":15950.0,
+                "image":"https://static.tildacdn.com/stor6530-6464-4333-b036-643565356237/70060083.jpg",
+                "specifications":{},
+                "description":"1 кран Profi 220 1/2\n1 датчик протечки Smart Water\n1 блок Relay-Drive",
                 "instructions":{}
             }
         ]
