@@ -557,7 +557,7 @@ let products = [
         "id":107,
         "name":"DIN-8.DI.12-24",
         "price":10980.0,
-        "image":"https://static.tildacdn.com/stor6133-6231-4230-a433-653462396132/28820715.png",
+        "image":"https://static.tildacdn.com/stor3939-3365-4338-a632-383337643732/eb8a327605534a79553b9f62ef25fa3e.png",
         "category":"relay",
         "description":"",
         "modifications":[
@@ -565,7 +565,7 @@ let products = [
                 "id":"322014",
                 "name":"DIN-8.DI.12-24",
                 "price":10980.0,
-                "image":"https://static.tildacdn.com/stor6133-6231-4230-a433-653462396132/28820715.png",
+                "image":"https://static.tildacdn.com/stor3939-3365-4338-a632-383337643732/eb8a327605534a79553b9f62ef25fa3e.png",
                 "specifications":{
                     "Кол-во дискретных входов":"8",
                     "Входной сигнал":"10 - 28 В DC",
@@ -585,7 +585,7 @@ let products = [
         "id":108,
         "name":"DIN-8.DI.220",
         "price":10980.0,
-        "image":"https://static.tildacdn.com/stor6133-6231-4230-a433-653462396132/28820715.png",
+        "image":"https://static.tildacdn.com/stor3939-3365-4338-a632-383337643732/eb8a327605534a79553b9f62ef25fa3e.png",
         "category":"relay",
         "description":"",
         "modifications":[
@@ -593,7 +593,7 @@ let products = [
                 "id":"322016",
                 "name":"DIN-8.DI.220",
                 "price":10980.0,
-                "image":"https://static.tildacdn.com/stor6133-6231-4230-a433-653462396132/28820715.png",
+                "image":"https://static.tildacdn.com/stor3939-3365-4338-a632-383337643732/eb8a327605534a79553b9f62ef25fa3e.png",
                 "specifications":{
                     "Кол-во дискретных входов":"8",
                     "Входной сигнал":"85-265 В AC, 50 Гц",
