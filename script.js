@@ -64,7 +64,7 @@ const categories = [
 let products = [
     {
         "id":3,
-        "name":"Билет на живое обучение в офисе HiTE PRO - 25 апреля",
+        "name":"Билет на живое обучение в офисе HiTE PRO - 18 апреля",
         "price":12500.0,
         "image":"https://static.tildacdn.com/stor6639-6335-4539-a130-343937363366/99732103.png",
         "category":"other",
@@ -72,7 +72,7 @@ let products = [
         "modifications":[
             {
                 "id":"312761",
-                "name":"25 апреля (суббота)",
+                "name":"18 апреля (суббота)",
                 "price":12500.0,
                 "image":"https://static.tildacdn.com/stor6639-6335-4539-a130-343937363366/99732103.png",
                 "specifications":{
