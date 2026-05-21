@@ -526,6 +526,27 @@ let products = [
         ]
     },
     {
+        "id":23,
+        "name":"DIN-4.DIM",
+        "price":10980.0,
+        "image":"https://static.tildacdn.com/stor6133-6231-4230-a433-653462396132/28820715.png",
+        "category":"relay",
+        "description":"Устройство предназначено для управления осветительными приборами с функцией диммирования.",
+        "modifications":[
+            {
+                "id":"325464",
+                "name":"DIN-4.DIM",
+                "price":10980.0,
+                "image":"https://static.tildacdn.com/stor6133-6231-4230-a433-653462396132/28820715.png",
+                "specifications":{},
+                "description":"Устройство предназначено для управления осветительными\nприборами (включение \\ выключение и регулировка яркости),\nподдерживает лампы с функцией диммирования. Монтируется на\nDIN-рейку имеет 4 канала управления и оснащено интерфейсом для\nобмена данными с другими устройствами по шине DATA.",
+                "instructions":{
+                    "pdf":"https://profi-shop.hite-pro.ru/products/products/DIN-4.DIM_74x105mm.pdf"
+                }
+            }
+        ]
+    },
+    {
         "id":97,
         "name":"DIN-4.LED",
         "price":10980.0,
