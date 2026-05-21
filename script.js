@@ -3828,33 +3828,6 @@ let products = [
         ]
     },
     {
-        "id":23,
-        "name":"Датчик протечки Smart Water",
-        "price":2980.0,
-        "image":"https://static.tildacdn.com/tild6134-3834-4832-b163-323039653438/Smart_Water1.png",
-        "category":"datchiki",
-        "description":"Позволяет определять наличие и отсутствие протечки воды.\n\nПри отсутствии протечки датчик отправляет радиосигнал, подтверждающий, что он находится в рабочем состоянии, 1 раз в 2 часа. Если обнаружена протечка воды, датчик начинает отправлять радиосигнал 1 раз в минуту.",
-        "modifications":[
-            {
-                "id":"210496",
-                "name":"Smart Water",
-                "price":2980.0,
-                "image":"https://static.tildacdn.com/tild6134-3834-4832-b163-323039653438/Smart_Water1.png",
-                "specifications":{
-                    "Питание":"3 В (CR2450)",
-                    "Расчетное время службы батарейки":"до 5 лет",
-                    "Вес":"50 г",
-                    "Габариты":"60 × 60 × 25 мм"
-                },
-                "description":"Датчик протечки.",
-                "instructions":{
-                    "pdf":"https://www.hite-pro.ru/wp-content/uploads/manual/SmartPower_Checker_Water_115x105mm.pdf",
-                    "video":"https://clck.ru/3CTaqW"
-                }
-            }
-        ]
-    },
-    {
         "id":16,
         "name":"Датчик движения и освещенности Smart Motion",
         "price":3280.0,
