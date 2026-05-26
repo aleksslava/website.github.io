@@ -164,8 +164,8 @@ let products = [
         "description":"Комплект для первого знакомства с устройствами HiTE PRO",
         "modifications":[
             {
-                "id":"296440",
-                "name":"Белый выкл с датчиком Smart Water",
+                "id":"325740",
+                "name":"Белый выкл с датчиком Smart Water черным",
                 "price":9980.0,
                 "image":"https://static.tildacdn.com/stor3962-3036-4835-a135-313733316161/41887660.png",
                 "specifications":{
@@ -179,8 +179,38 @@ let products = [
                 }
             },
             {
-                "id":"296442",
-                "name":"Бежевый выкл  с датчиком Smart Water",
+                "id":"325738",
+                "name":"Белый выкл с датчиком Smart Water белым",
+                "price":9980.0,
+                "image":"https://static.tildacdn.com/stor3962-3036-4835-a135-313733316161/41887660.png",
+                "specifications":{
+                    "Датчик":"Smart Water",
+                    "Выключатель":"Base-2 (белый)"
+                },
+                "description":"Протестируйте устройства HiTE PRO у себя дома!\n\nПорядок подключения набора:\n1. Установите Relay-F2 за проводной выключатель;\n2. Свяжите радиовыключатель Base-2 и радиомодуль UNI с блоком Relay-F2;\n3. Подключите сервер умного дома, создайте учетную запись;\n4. Добавьте в сервер выключатель, реле, радиомодуль и датчик.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/shop/goods/server-umnogo-doma-gateway",
+                    "video":"https://vk.com/video-140176277_456239585?list=ln-zCmQvFQGm9f2f4pwOI"
+                }
+            },
+            {
+                "id":"325736",
+                "name":"Бежевый выкл  с датчиком Smart Water черным",
+                "price":9980.0,
+                "image":"https://static.tildacdn.com/stor3962-3036-4835-a135-313733316161/41887660.png",
+                "specifications":{
+                    "Датчик":"Smart Water",
+                    "Выключатель":"Base-2 (бежевый)"
+                },
+                "description":"Протестируйте устройства HiTE PRO у себя дома!\n\nПорядок подключения набора:\n1. Установите Relay-F2 за проводной выключатель;\n2. Свяжите радиовыключатель Base-2 и радиомодуль UNI с блоком Relay-F2;\n3. Подключите сервер умного дома, создайте учетную запись;\n4. Добавьте в сервер выключатель, реле, радиомодуль и датчик.",
+                "instructions":{
+                    "pdf":"https://www.hite-pro.ru/shop/goods/server-umnogo-doma-gateway",
+                    "video":"https://vk.com/video-140176277_456239585?list=ln-zCmQvFQGm9f2f4pwOI"
+                }
+            },
+            {
+                "id":"325734",
+                "name":"Бежевый выкл  с датчиком Smart Water белым",
                 "price":9980.0,
                 "image":"https://static.tildacdn.com/stor3962-3036-4835-a135-313733316161/41887660.png",
                 "specifications":{
@@ -5158,7 +5188,7 @@ let products = [
                 }
             }
         ]
-    },
+    }
 ];
 
 // --- Состояние ---
